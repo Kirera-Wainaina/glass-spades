@@ -1,0 +1,13 @@
+{
+  "name": "glass-spades",
+  "version": "0.0.1",
+  "description": "The Glass Spades Real Estate Agency Website",
+  "main": "index.js",
+  "repository": "https://github.com/Kirera-Wainaina/glass-spades.git",
+  "author": "Kirera Wainaina <richardwainainak@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
