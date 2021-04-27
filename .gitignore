@@ -1,0 +1,8 @@
+# emacs files
+*~
+
+# downloaded packages in node modules
+node_modules/
+
+# ignore the .env file
+.env
