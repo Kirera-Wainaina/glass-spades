@@ -1,7 +1,11 @@
 const http2 = require("http2");
 const http = require("http");
 const fs = require("fs");
+const zlib = require("zlib");
+const path = require("path");
 const dotenv = require("dotenv");
+const MIMES = require("./utils/MIMETypes.js");
+
 dotenv.config()
 
 const httpPort = 80;
@@ -17,11 +21,17 @@ const options = {
 const server = http2.createSecureServer(options);
 
 server.on("request", (request, response) => {
-    console.log("A HTTPS request was received");
-    response.writeHead(200, {
-	"content-type": "text/plain"
-    });
-    response.end("I'm glad you asked");
+    console.log(`Date: ${new Date()}, Path: ${request.url} http: ${request.httpVersion}`)
+    const url = request.url;
+    const cwd = ".";
+
+    if (url == "/") {
+	const filePath = `${cwd}/frontend/html/home.html`;
+	readFileAndRespond(filePath, response)
+    } else {
+	const filePath = `${cwd}${url}`;
+	readFileAndRespond(filePath, response);
+    }
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
@@ -31,7 +41,7 @@ server.listen(port, () => console.log(`Listening on port ${port}`));
 const httpServer = http.createServer();
 
 httpServer.on("request", (request, response) => {
-    console.log("A request was received");
+    console.log("A request was received on HTTP server");
     response
 	.writeHead(301, {
 	    "location": `${process.env.URL}${request.url}`
@@ -46,3 +56,36 @@ httpServer.listen(httpPort, () =>
 httpServer.on("error", error => {
     console.log(error);
 })
+
+
+//////////////////////////////////////////////////////////////////////////
+
+function readFileAndRespond(filePath, response, statusCode=null) {
+    fs.stat(filePath, (error, stats) => {
+	if (error) {
+	    handleError(error, response)
+	} else {
+	    const mime = MIMES.findMIMETypeFromExtension(path.extname(filePath));
+
+	    response.writeHead(statusCode || 200, {
+		"content-type": mime,
+		"content-encoding": "gzip"
+	    });
+	    
+	    fs.createReadStream(filePath)
+		.pipe(zlib.createGzip())
+		.pipe(response)
+	}
+    })
+    
+}
+
+function handleError(error, response) {
+    if (error.code == "ENOENT") {
+	const filePath = "./frontend/html/error.html";
+	const errorCode = 404;
+	legacyReadFileAndRespond(filePath, response, errorCode)
+    } else {
+	console.log(error);
+    }
+}
