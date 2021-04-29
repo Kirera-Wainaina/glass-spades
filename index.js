@@ -28,6 +28,9 @@ server.on("request", (request, response) => {
     if (url == "/") {
 	const filePath = `${cwd}/frontend/html/home.html`;
 	readFileAndRespond(filePath, response)
+    } else if(!path.extname(url)) {
+	const filePath = `${cwd}/frontend/html${url}.html`;
+	readFileAndRespond(filePath, response)
     } else {
 	const filePath = `${cwd}${url}`;
 	readFileAndRespond(filePath, response);
