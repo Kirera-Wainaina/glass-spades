@@ -84,7 +84,7 @@ function handleError(error, response) {
     if (error.code == "ENOENT") {
 	const filePath = "./frontend/html/error.html";
 	const errorCode = 404;
-	legacyReadFileAndRespond(filePath, response, errorCode)
+	readFileAndRespond(filePath, response, errorCode)
     } else {
 	console.log(error);
     }
