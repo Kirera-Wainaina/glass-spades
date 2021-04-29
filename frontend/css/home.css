@@ -1,2 +1,44 @@
+* {
+    margin: 0;
+}
+
+.page {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
 header {
+    border-bottom: 1px solid lightgrey;
+    grid-column: 1 / 13;
+    height: 4em;
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+header #logo-container {
+    grid-column: 1 / 7;
+
+    display: flex;
+    align-items: center;
+}
+
+header h1 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+
+
+@media (max-width: 500px) {
+    .page {
+	grid-template-columns: repeat(5, 1fr);
+    }
+    
+    header {
+	grid-column: 1 / 6;
+    }
+    
+    header h1 {
+	
+    }
 }
