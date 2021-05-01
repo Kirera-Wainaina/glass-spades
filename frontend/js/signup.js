@@ -34,3 +34,15 @@ function confirmPasswords(formdata) {
 function checkPasswordsMatch(password, repeatPassword) {
     return password == repeatPassword ? true : false;
 }
+
+const passwordInput = document.querySelector("#password");
+passwordInput.addEventListener("focus", () => {
+    const passwordError = document.querySelector("#password-error");
+    const repeatPasswordInput = document.querySelector("#repeat-password");
+    if (passwordError.classList.contains("show-error")) {
+	passwordError.classList.remove("show-error");
+	passwordError.classList.add("hide-error");
+	passwordInput.value = "";
+	repeatPasswordInput.value = "";
+    }
+});
