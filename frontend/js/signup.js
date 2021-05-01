@@ -6,11 +6,8 @@ form.addEventListener("submit", event => {
 
     if (confirmPasswords(formdata)) {
 	formdata.delete("repeat-password");
-	// handleSignupProcess(formdata)
+	createUser(formdata);
     }
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/signup/createUser");
-    xhr.send(formdata);
 });
 
 function confirmPasswords(formdata) {
@@ -46,3 +43,9 @@ passwordInput.addEventListener("focus", () => {
 	repeatPasswordInput.value = "";
     }
 });
+
+function createUser(formdata) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/signup/createUser");
+    xhr.send(formdata);
+}
