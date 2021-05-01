@@ -18,7 +18,6 @@ form p {
 form input, form label {
     margin-left: 2em;
     margin-right: 2em;
-
 }
 
 form input {
@@ -31,6 +30,22 @@ form input[type="submit"] {
     height: 3em;
     font-weight: 600;
     border-radius: 10px;
+}
+
+form .show-error {
+    font-size: 1em;
+    font-weight: 400;
+    background-color: pink;
+    color: red;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-bottom: 2em;
+}
+
+.hide-error {
+    display: none;
 }
 
 @media (max-width: 500px) {
