@@ -1,1 +1,7 @@
 @import url("./home.css");
+
+form {
+    grid-column: 3 / 11;
+    display: flex;
+    flex-direction: column;
+}
