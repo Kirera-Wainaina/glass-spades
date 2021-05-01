@@ -39,6 +39,10 @@ picture {
     grid-column: 1 / 13;
 }
 
+footer {
+    grid-column: 1 / 13;
+}
+
 @media (max-width: 500px) {
     .page {
 	grid-template-columns: repeat(5, 1fr);
