@@ -28,6 +28,11 @@ server.on("request", (request, response) => {
     if (url == "/") {
 	const filePath = `${cwd}/frontend/html/home.html`;
 	readFileAndRespond(filePath, response)
+    } else if (findTopDir(url) == "/api"){
+	// has to come before browser requests
+	const file = require(`${cwd}${path.dirname(url)}`);
+	const execute = path.basename(url);
+	file[execute](request, response);
     } else if(!path.extname(url)) {
 	const filePath = `${cwd}/frontend/html${url}.html`;
 	readFileAndRespond(filePath, response)
@@ -91,4 +96,17 @@ function handleError(error, response) {
     } else {
 	console.log(error);
     }
+}
+
+
+function findTopDir(route) {
+    let dir = route;
+    let top;
+    while (dir != "/") {
+	if (path.dirname(dir) == "/") {
+	    top = dir;
+	}
+	dir = path.dirname(dir);
+    }
+    return top
 }
