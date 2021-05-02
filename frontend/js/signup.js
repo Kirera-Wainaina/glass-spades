@@ -60,10 +60,12 @@ function createUser(formdata) {
     xhr.send(formdata);
 
     xhr.onreadystatechange = function() {
-	if (this.readyState == 4 && this.response == "notAdmin") {
-	    showAdminError()
-	} else if (this.readyState == 4 && this.response == "emailExists") {
-	    showEmailError()
+	if (this.readyState == 4) {
+	    if (this.response == "notAdmin") {
+		showAdminError()
+	    } else if (this.response == "emailExists"){
+		showEmailError()
+	    }
 	}
     }
 }
