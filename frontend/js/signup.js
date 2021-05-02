@@ -44,6 +44,15 @@ passwordInput.addEventListener("focus", () => {
     }
 });
 
+const emailInput = document.querySelector("#email");
+emailInput.addEventListener("focus", () => {
+    const emailError = document.querySelector("#email-error");
+    if (emailError.classList.contains("show-error")) {
+	emailError.classList.remove("show-error");
+	emailError.classList.add("hide-error");
+	emailInput.value = "";
+    }
+});
 
 function createUser(formdata) {
     const xhr = new XMLHttpRequest();
