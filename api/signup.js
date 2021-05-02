@@ -26,6 +26,7 @@ function createUser(request, response) {
 			    if (emailExists) {
 				handleEmailExists(response);
 			    } else {
+				saveUser(userData)
 			    }
 			})
 		} else {
@@ -72,6 +73,20 @@ function handleEmailExists(response) {
 	    "content-type": "text/plain"
 	})
 	.end("emailExists")
+}
+
+function saveUser(doc) {
+    delete doc["admin-password"];
+    const user = new database.User(doc);
+    user.generatePassword()
+	.then(hash => {
+	    user.password = hash;
+	    user.save()
+	    // response
+	    // 	.writeHead(200, {
+		    
+	    // 	})
+	})
 }
 
 exports.createUser = createUser;
