@@ -48,4 +48,13 @@ function createUser(formdata) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/signup/createUser");
     xhr.send(formdata);
+
+    xhr.onreadystatechange = function() {
+	if (this.readyState == 4 && this.response == "notAdmin") {
+	    const adminError = document.querySelector("#admin-error");
+	    adminError.classList.remove("hide-error");
+	    adminError.classList.add("show-error");
+	    adminError.value = "";
+	}
+    }
 }
