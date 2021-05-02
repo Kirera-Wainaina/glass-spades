@@ -21,7 +21,13 @@ function createUser(request, response) {
 			     process.env.ENCRYPTED_ADMIN_PASSWORD)
 	    .then(result => {
 		if (result) {
-		    checkEmailExists(userData["email"], response)
+		    confirmEmailExists(userData["email"])
+			.then(emailExists => {
+			    if (emailExists) {
+				handleEmailExists(response);
+			    } else {
+			    }
+			})
 		} else {
 		    handleWrongAdmin(response);
 		}
@@ -42,10 +48,12 @@ function verifyAdminPassword(plain, encrypt) {
     })
 }
 
-function checkEmailExists(email, response) {
-    database.User.exists({ email })
-	.then(result => console.log(result))
-	.catch(error => console.log(error))
+function confirmEmailExists(email) {
+    return new Promise((resolve, reject) => {
+	database.User.exists({ email })
+	    .then(result => resolve(result))
+	    .catch(error => reject(error))
+    })
 }
 
 function handleWrongAdmin(response) {
@@ -55,6 +63,15 @@ function handleWrongAdmin(response) {
 	})
 	.end("notAdmin")
     
+}
+
+
+function handleEmailExists(response) {
+    response
+	.writeHead(200, {
+	    "content-type": "text/plain"
+	})
+	.end("emailExists")
 }
 
 exports.createUser = createUser;
