@@ -2,6 +2,8 @@ const Busboy = require("busboy");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 
+const database = require("../database/models");
+
 dotenv.config()
 
 
@@ -17,7 +19,13 @@ function createUser(request, response) {
     busboy.on("finish", () => {
 	verifyAdminPassword(userData["admin-password"],
 			     process.env.ENCRYPTED_ADMIN_PASSWORD)
-	    .then(result => console.log(result))
+	    .then(result => {
+		if (result) {
+		    checkEmailExists(userData["email"], response)
+		} else {
+		    handleWrongAdmin(response);
+		}
+	    })
 	    .catch(error => console.error())
 
     })
@@ -33,5 +41,12 @@ function verifyAdminPassword(plain, encrypt) {
 	})
     })
 }
+
+function checkEmailExists(email, response) {
+    database.User.exists({ email })
+	.then(result => console.log(result))
+	.catch(error => console.log(error))
+}
+
 
 exports.createUser = createUser;
