@@ -44,6 +44,7 @@ passwordInput.addEventListener("focus", () => {
     }
 });
 
+
 function createUser(formdata) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/signup/createUser");
@@ -51,10 +52,24 @@ function createUser(formdata) {
 
     xhr.onreadystatechange = function() {
 	if (this.readyState == 4 && this.response == "notAdmin") {
-	    const adminError = document.querySelector("#admin-error");
-	    adminError.classList.remove("hide-error");
-	    adminError.classList.add("show-error");
-	    adminError.value = "";
+	    showAdminError()
+	} else if (this.readyState == 4 && this.response == "emailExists") {
+	    showEmailError()
 	}
     }
 }
+
+function showAdminError() {
+    const adminError = document.querySelector("#admin-error");
+    adminError.classList.remove("hide-error");
+    adminError.classList.add("show-error");
+    adminError.value = "";
+}
+
+function showEmailError() {
+    const emailError = document.querySelector("#email-error");
+    emailError.classList.remove("hide-error");
+    emailError.classList.add("show-error");
+    emailError.value = "";
+}
+
