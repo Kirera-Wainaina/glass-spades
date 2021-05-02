@@ -48,5 +48,13 @@ function checkEmailExists(email, response) {
 	.catch(error => console.log(error))
 }
 
+function handleWrongAdmin(response) {
+    response
+	.writeHead(401, {
+	    "content-type": "text/plain"
+	})
+	.end("notAdmin")
+    
+}
 
 exports.createUser = createUser;
