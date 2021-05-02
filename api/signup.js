@@ -21,6 +21,7 @@ function createUser(request, response) {
 	    .catch(error => console.error())
 
     })
+
     request.pipe(busboy);
 }
 
@@ -34,4 +35,3 @@ function verifyAdminPassword(plain, encrypt) {
 }
 
 exports.createUser = createUser;
-
