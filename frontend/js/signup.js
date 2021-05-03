@@ -1,3 +1,15 @@
+window.addEventListener("load", () => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/api/signup/checkLogin");
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4) {
+	    location.href = this.response
+	}
+    }
+});
+
 const form = document.querySelector("form");
 form.addEventListener("submit", event => {
     event.preventDefault();
@@ -67,6 +79,8 @@ function createUser(formdata) {
 		showAdminError()
 	    } else if (this.response == "emailExists"){
 		showEmailError()
+	    } else if (this.response == "success") {
+		location.reload();
 	    }
 	}
     }
