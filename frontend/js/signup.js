@@ -59,6 +59,8 @@ function createUser(formdata) {
     xhr.open("POST", "/api/signup/createUser");
     xhr.send(formdata);
 
+    showLoadingPage();
+    
     xhr.onreadystatechange = function() {
 	if (this.readyState == 4) {
 	    if (this.response == "notAdmin") {
@@ -68,6 +70,8 @@ function createUser(formdata) {
 	    }
 	}
     }
+
+    xhr.onload = hideLoadingPage;
 }
 
 function showAdminError() {
@@ -84,3 +88,12 @@ function showEmailError() {
     emailError.value = "";
 }
 
+function showLoadingPage() {
+    const loadingPage = document.getElementById("loading-page");
+    loadingPage.style.display = "flex";
+}
+
+function hideLoadingPage() {
+    const loadingPage = document.getElementById("loading-page");
+    loadingPage.style.display = "none";
+}
