@@ -26,7 +26,7 @@ function createUser(request, response) {
 			    if (emailExists) {
 				handleEmailExists(response);
 			    } else {
-				saveUser(userData)
+				saveUser(userData, response)
 			    }
 			})
 		} else {
@@ -75,17 +75,20 @@ function handleEmailExists(response) {
 	.end("emailExists")
 }
 
-function saveUser(doc) {
+function saveUser(doc, response) {
     delete doc["admin-password"];
     const user = new database.User(doc);
     user.generatePassword()
 	.then(hash => {
 	    user.password = hash;
+	    const token = user.generateToken()
 	    user.save()
-	    // response
-	    // 	.writeHead(200, {
-		    
-	    // 	})
+	    response
+		.writeHead(200, {
+		    "content-type": "text/plain",
+		    "set-cookie": `auth=${user.generateToken()}; path=/; HttpOnly;`
+		})
+		.end("success")
 	})
 }
 
