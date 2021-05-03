@@ -1,3 +1,5 @@
+const querystring = require("querystring");
+
 const Busboy = require("busboy");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
@@ -11,7 +13,7 @@ function createUser(request, response) {
     const busboy = new Busboy({ headers: request.headers });
     const saltRounds = 10;
     const userData = {}
-    
+        
     busboy.on("field", (fieldname, value) => {
 	userData[fieldname] = value;
     })
@@ -92,4 +94,18 @@ function saveUser(doc, response) {
 	})
 }
 
+function checkLogin(request, response) {
+    if (request.headers.cookie) {
+	const cookies = querystring.parse(request.headers.cookie, "; ");
+	if (cookies.auth) {
+	    response
+		.writeHead(200, {
+		    "content-type": "text/plain"
+		})
+		.end("/admin/listings")
+	}
+    }
+}
+
 exports.createUser = createUser;
+exports.checkLogin = checkLogin;
