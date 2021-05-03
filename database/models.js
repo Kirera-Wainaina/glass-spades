@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const { Schema } = mongoose;
 
@@ -27,6 +28,10 @@ userSchema.methods.generatePassword = function() {
 	    resolve(hash)
 	});
     })
+}
+
+userSchema.methods.generateToken = function() {
+    return jwt.sign({ _id: this._id }, process.env.TOKEN_KEY)
 }
 
 const User = mongoose.model("user", userSchema);
