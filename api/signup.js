@@ -102,7 +102,7 @@ function checkLogin(request, response) {
 		.writeHead(200, {
 		    "content-type": "text/plain"
 		})
-		.end("/admin/listings")
+		.end("/admin/home")
 	}
     }
 }
