@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+document.addEventListener("load", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/api/signup/checkLogin");
     xhr.send();
