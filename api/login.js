@@ -13,10 +13,14 @@ function loginUser(request, response) {
 
     busboy.on("finish", () => {
 	console.log(credentials["email"])
-	database.User.exists({ "email": credentials["email"] })
-	    .then(emailExists => {
-		if (emailExists) {
-		    confirmPassword(password, response)
+	database.User.find({ "email": credentials["email"] })
+	    .then(doc => {
+		if (doc[0]) {
+		    confirmPassword(credentials["password"],
+				    doc[0].password,
+				    response)
+		} else {
+		    console.log("email does not exist")
 		}
 	    })
 	    .catch(error => console.error())
@@ -25,8 +29,16 @@ function loginUser(request, response) {
     request.pipe(busboy)
 }
 
-function confirmPassword(password, response) {
-    
+function confirmPassword(loginPassword, dbPassword, response) {
+    bcrypt.compare(loginPassword, dbPassword)
+	.then(result => {
+	    console.log(result)
+	    // if (result) {
+	    // 	confirmLogin()
+	    // } else {
+	    // 	disallowLogin()
+	    // }
+	})
 }
 
 exports.loginUser = loginUser;
