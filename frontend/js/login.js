@@ -7,6 +7,7 @@ form.addEventListener("submit", (event) => {
 })
 
 function loginUser(formdata) {
-    console.log(formdata.get("email"));
-    console.log(formdata.get("password"))
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/login/loginUser");
+    xhr.send(formdata);
 }
