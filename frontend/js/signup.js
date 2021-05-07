@@ -93,14 +93,12 @@ function showAdminError() {
     const adminError = document.querySelector("#admin-error");
     adminError.classList.remove("hide-error");
     adminError.classList.add("show-error");
-    adminError.value = "";
 }
 
 function showEmailError() {
     const emailError = document.querySelector("#email-error");
     emailError.classList.remove("hide-error");
     emailError.classList.add("show-error");
-    emailError.value = "";
 }
 
 function showLoadingPage() {
