@@ -1,10 +1,11 @@
-document.addEventListener("load", () => {
+window.addEventListener("load", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/api/signup/checkLogin");
     xhr.send();
 
     xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
+	    console.log(this.response)
 	    location.href = this.response
 	}
     }
