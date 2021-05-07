@@ -12,15 +12,12 @@ function loginUser(request, response) {
     })
 
     busboy.on("finish", () => {
-	console.log(credentials["email"])
 	database.User.find({ "email": credentials["email"] })
 	    .then(doc => {
 		if (doc[0]) {
-		    confirmPassword(credentials["password"],
-				    doc[0].password,
-				    response)
+		    confirmPassword(credentials["password"], doc[0], response)
 		} else {
-		    console.log("email does not exist")
+		    disallowLogin(response)
 		}
 	    })
 	    .catch(error => console.error())
@@ -29,16 +26,33 @@ function loginUser(request, response) {
     request.pipe(busboy)
 }
 
-function confirmPassword(loginPassword, dbPassword, response) {
-    bcrypt.compare(loginPassword, dbPassword)
+function confirmPassword(loginPassword, user, response) {
+    bcrypt.compare(loginPassword, user.password)
 	.then(result => {
-	    console.log(result)
-	    // if (result) {
-	    // 	confirmLogin()
-	    // } else {
-	    // 	disallowLogin()
-	    // }
+	    if (result) {
+		confirmLogin(user, response)
+	    } else {
+		disallowLogin(response)
+	    }
 	})
 }
+
+function confirmLogin(user, response) {
+    response
+	.writeHead(200, {
+	    "content-type": "text/plain",
+	    "set-cookie": `auth=${user.generateToken()}; path=/; HttpOnly;`
+	})
+	.end("success")
+}
+
+function disallowLogin(response) {
+    response
+	.writeHead(401, {
+	    "content-type": "text/plain"
+	})
+	.end("error")
+}
+    
 
 exports.loginUser = loginUser;
