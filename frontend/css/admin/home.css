@@ -29,5 +29,12 @@ div#category-holder {
     div#category-holder {
 	grid-column: 1 / 6;
 	flex-direction: column;
+	align-items: center;
+    }
+
+    #category-holder .category {
+	font-size: 1em;
+	height: 5em;
+	width: 80vw;
     }
 }
