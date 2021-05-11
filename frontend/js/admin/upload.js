@@ -93,8 +93,21 @@ page.addEventListener("click", (event) => {
     const element = event.target;
 
     if (element.tagName == "BUTTON") {
-	element.classList.contains("clicked-button") ?
-	    element.classList.remove("clicked-button") :
-	    element.classList.add("clicked-button")
+	if (element.name == "Mandate" || element.name == "Category"
+	    || element.name == "Bedrooms" || element.name == "Bathrooms")
+	{
+	    // only one element can be colored
+	    const buttons = document
+		  .querySelectorAll(`button[name=${element.name}]`);
+	    // remove the coloring for all buttons in one category
+	    buttons.forEach(button => {
+		if (button.classList.contains("clicked-button")) {
+		    button.classList.remove("clicked-button");
+		};
+	    })
+	    element.classList.add("clicked-button");
+	} else if (element.name == "External Features"
+		   || element.name == "Internal Features") {
+	}
     }
 })
