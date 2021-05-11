@@ -108,6 +108,9 @@ page.addEventListener("click", (event) => {
 	    element.classList.add("clicked-button");
 	} else if (element.name == "External Features"
 		   || element.name == "Internal Features") {
+	    element.classList.contains("clicked-button") ?
+		element.classList.remove("clicked-button") :
+		element.classList.add("clicked-button")
 	}
     }
 })
