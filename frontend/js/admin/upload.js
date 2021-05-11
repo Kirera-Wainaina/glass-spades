@@ -60,6 +60,7 @@ function createButtons(key, data) {
 
 const page = document.querySelector(".page");
 page.addEventListener("click", (event) => {
+    // add or remove from house info
     const element = event.target;
     
     if (element.tagName == "BUTTON") {
@@ -85,4 +86,15 @@ page.addEventListener("click", (event) => {
     }
 
     console.log(houseInfo)
+})
+
+page.addEventListener("click", (event) => {
+    // change the colors of the buttons when clicked
+    const element = event.target;
+
+    if (element.tagName == "BUTTON") {
+	element.classList.contains("clicked-button") ?
+	    element.classList.remove("clicked-button") :
+	    element.classList.add("clicked-button")
+    }
 })
