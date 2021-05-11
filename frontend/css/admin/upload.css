@@ -15,6 +15,7 @@ h2 {
     grid-template-columns: repeat(3, 1fr);
     border: 1px solid lightgrey;
     padding: 1em;
+    margin-bottom: 1em;
 }
 
 .container p.label {
