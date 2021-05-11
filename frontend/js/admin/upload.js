@@ -6,16 +6,20 @@ window.addEventListener("load", () => {
     xhr.onreadystatechange = function() {
 	if (this.readyState == 4) {
 	    const model = JSON.parse(this.response);
+	    constructPage(model);
 
-	    const containerFragment = createContainers(model);
-	    const parentContainer = document.querySelector(".page");
-	    parentContainer.appendChild(containerFragment)
-
-	    // Take footer to bottom position
-	    parentContainer.appendChild(document.querySelector("footer"))
 	}
     }
 });
+
+function constructPage(model) {
+    const containerFragment = createContainers(model);
+    const parentContainer = document.querySelector(".page");
+    parentContainer.appendChild(containerFragment)
+
+    // Take footer to bottom position
+    parentContainer.appendChild(document.querySelector("footer"))
+}    
 
 function createContainers(model) {
     const keys = Object.keys(model);
