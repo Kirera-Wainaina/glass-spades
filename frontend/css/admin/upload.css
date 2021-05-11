@@ -31,6 +31,11 @@ button {
     margin-bottom: 0.75em;
 }
 
+.clicked-button {
+    background-color: black;
+    color: white;
+}
+
 @media (orientation: portrait) {
     .container {
 	grid-column: 2 / 12;
