@@ -1,3 +1,5 @@
+var houseInfo = {};
+
 window.addEventListener("load", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/admin/upload/sendModelData");
@@ -56,14 +58,31 @@ function createButtons(key, data) {
     return fragment
 }
 
-const containerList = document.getElementsByClassName("container");
-for (let i = 0; i < containerList.length; i++) {
-    containerList[i].addEventListener("click", (event) => {
-	console.log(`${event.target.name}: ${event.target.value}`)
-    })
-}
-
 const page = document.querySelector(".page");
 page.addEventListener("click", (event) => {
-    console.log(`${event.target.name}: ${event.target.value}`)
+    const element = event.target;
+    
+    if (element.tagName == "BUTTON") {
+	if (element.name == "Mandate" || element.name == "Category"
+	    || element.name == "Bedrooms" || element.name == "Bathrooms")
+	{
+	    // The properties that are ENUMS
+	    houseInfo[element.name] = element.value;
+	} else if (element.name == "External Features"
+		   || element.name == "Internal Features") {
+	    // these keys can hold more than one value
+	    if (houseInfo[element.name]
+		&& houseInfo[element.name].includes(element.value)) {
+		//remove that element from the array and change the color
+		const index = houseInfo[element.name].indexOf(element.value);
+		houseInfo[element.name].splice(index, 1);
+	    } else if (houseInfo[element.name]) {
+		houseInfo[element.name].push(element.value)
+	    } else {
+		houseInfo[element.name] = [element.value];
+	    }
+	}
+    }
+
+    console.log(houseInfo)
 })
