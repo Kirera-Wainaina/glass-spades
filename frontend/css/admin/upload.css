@@ -28,6 +28,7 @@ button {
     width: 20em;
     height: 3em;
     background-color: white;
+    margin-bottom: 0.75em;
 }
 
 @media (max-width: 500px) {
@@ -41,11 +42,12 @@ button {
 	grid-template-columns: repeat(2, 1fr)
     }
 
-    .container .label {
+    .container p.label {
 	grid-column: 1 / 3;
     }
 
     button {
 	width: 12em;
+	height: 3.3em;
     }
 }
