@@ -36,6 +36,10 @@ button {
     color: white;
 }
 
+input[name="Heading"] {
+    grid-column: 1 / 4;
+}
+
 @media (orientation: portrait) {
     .container {
 	grid-column: 2 / 12;
@@ -64,5 +68,9 @@ button {
     button {
 	width: 12em;
 	height: 3.3em;
+    }
+
+    input[name="Heading"] {
+	height: 2.5em;
     }
 }
