@@ -40,6 +40,10 @@ input[name="Heading"] {
     grid-column: 1 / 4;
 }
 
+textarea {
+    grid-column: 1 / 4;
+}
+
 @media (orientation: portrait) {
     .container {
 	grid-column: 2 / 12;
