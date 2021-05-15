@@ -89,4 +89,9 @@ input#invisible-file-upload {
     input[name="Heading"] {
 	height: 2.5em;
     }
+
+    button#file-upload {
+	grid-column: 1 / 6;
+	width: 100vw;;
+    }
 }
