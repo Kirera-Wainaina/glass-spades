@@ -44,6 +44,18 @@ textarea {
     grid-column: 1 / 4;
 }
 
+button#file-upload {
+    grid-column: 2 / 12;
+    width: 80vw;
+    height: 10vh;
+    color: black;
+    background-color: #e6e6e6;
+}
+
+input#invisible-file-upload {
+    display: none;
+}
+
 @media (orientation: portrait) {
     .container {
 	grid-column: 2 / 12;
