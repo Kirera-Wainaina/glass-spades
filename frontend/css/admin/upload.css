@@ -55,11 +55,17 @@ button#file-upload {
 input#invisible-file-upload {
     display: none;
 }
+
 div#drop-zone {
     grid-column: 2 / 12;
     width: 100%;
     height: 100vh;
     border: 3px dashed lightgrey;
+}
+
+p#info {
+    grid-column: 2 / 12;
+    font-size: 0.9em;
 }
 
 @media (orientation: portrait) {
@@ -109,5 +115,10 @@ div#drop-zone {
     div#drop-zone {
 	grid-column: 1 / 6;
 	width: 98%;
+    }
+
+    p#info {
+	grid-column: 1 / 6;
+	font-size: 0.6em;
     }
 }
