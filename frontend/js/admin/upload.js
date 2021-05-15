@@ -17,10 +17,9 @@ window.addEventListener("load", () => {
 function constructPage(model) {
     const containerFragment = createContainers(model);
     const parentContainer = document.querySelector(".page");
-    parentContainer.appendChild(containerFragment)
+    const footer = document.querySelector("footer");
 
-    // Take footer to bottom position
-    parentContainer.appendChild(document.querySelector("footer"))
+    parentContainer.insertBefore(containerFragment, footer);
 }    
 
 function createContainers(model) {
