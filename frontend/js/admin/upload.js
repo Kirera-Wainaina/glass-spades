@@ -113,3 +113,9 @@ page.addEventListener("click", (event) => {
 	}
     }
 })
+
+const fileUpload = document.getElementById("file-upload");
+fileUpload.addEventListener("click", event => {
+    const fileInput = document.getElementById("invisible-file-upload");
+    fileInput.click();
+})
