@@ -17,9 +17,9 @@ window.addEventListener("load", () => {
 function constructPage(model) {
     const containerFragment = createContainers(model);
     const parentContainer = document.querySelector(".page");
-    const footer = document.querySelector("footer");
+    const fileUpload = document.getElementById("file-upload");
 
-    parentContainer.insertBefore(containerFragment, footer);
+    parentContainer.insertBefore(containerFragment, fileUpload);
 }    
 
 function createContainers(model) {
