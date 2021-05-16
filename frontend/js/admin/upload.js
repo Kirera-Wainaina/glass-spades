@@ -119,3 +119,22 @@ fileUpload.addEventListener("click", event => {
     const fileInput = document.getElementById("invisible-file-upload");
     fileInput.click();
 })
+
+const fileInput = document.getElementById("invisible-file-upload");
+fileInput.addEventListener("change", (event) => {
+    const files = event.target.files;
+    const fragment = new DocumentFragment();
+    const dropZone = document.getElementById("drop-zone");
+
+    for(let i = 0; i < files.length; i++) {
+	const url = URL.createObjectURL(files[i]);
+	const img = document.createElement("img");
+	img.src = url;
+	img.alt = files[i].name;
+	img.classList.add("images");
+	img.name = "laptop";
+	fragment.append(img);
+    }
+
+    dropZone.appendChild(fragment);
+});
