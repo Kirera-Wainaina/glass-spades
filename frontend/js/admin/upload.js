@@ -155,6 +155,30 @@ function displayImage(image) {
     img.src = url;
     img.alt = image.name;
     img.classList.add("images");
+    img.id = Math.random();
     img.name = "laptop";
+
+    img.addEventListener("dragstart", startImageDrag);
+    img.addEventListener("dragover", dragOverImage);
+    img.addEventListener("drop", dropImage);
+
     return img
+}
+
+function startImageDrag(event) {
+    event.dataTransfer.setData("text/plain", event.target.id);
+}
+
+function dragOverImage (event) {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+}
+
+function dropImage(event) {
+    const draggedImgId = event.dataTransfer.getData("text");
+    const draggedImgElement = document.getElementById(draggedImgId);
+
+    const dropImg = event.target;
+
+    dropImg.insertAdjacentElement("beforebegin", draggedImgElement);
 }
