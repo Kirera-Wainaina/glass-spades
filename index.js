@@ -30,9 +30,13 @@ server.on("request", (request, response) => {
 	readFileAndRespond(filePath, response)
     } else if (findTopDir(url) == "/api"){
 	// has to come before browser requests
-	const file = require(`${cwd}${path.dirname(url)}`);
-	const execute = path.basename(url);
-	file[execute](request, response);
+	try {
+	    const file = require(`${cwd}${path.dirname(url)}`);
+	    const execute = path.basename(url);
+	    file[execute](request, response);
+	} catch(error) {
+	    handleError(error, response);
+	}
     } else if(!path.extname(url)) {
 	const filePath = `${cwd}/frontend/html${url}.html`;
 	readFileAndRespond(filePath, response)
@@ -95,6 +99,9 @@ function handleError(error, response) {
 	readFileAndRespond(filePath, response, errorCode)
     } else {
 	console.log(error);
+	const filePath = "./frontend/html/error.html";
+	const errorCode = 404;
+	readFileAndRespond(filePath, response, errorCode)
     }
 }
 
