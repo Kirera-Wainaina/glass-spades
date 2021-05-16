@@ -126,13 +126,7 @@ fileInput.addEventListener("change", (event) => {
     const dropZone = document.getElementById("drop-zone");
 
     for(let i = 0; i < files.length; i++) {
-	const url = URL.createObjectURL(files[i]);
-	const img = document.createElement("img");
-	img.src = url;
-	img.alt = files[i].name;
-	img.classList.add("images");
-	img.name = "laptop";
-	fragment.append(img);
+	fragment.append(displayImage(files[i]));
     }
 
     dropZone.appendChild(fragment);
@@ -150,13 +144,17 @@ dropZone.addEventListener("drop", event => {
     
     const files = event.dataTransfer.files;
     for(let i = 0; i < files.length; i++) {
-	const url = URL.createObjectURL(files[i]);
-	const img = document.createElement("img");
-	img.src = url;
-	img.alt = files[i].name;
-	img.classList.add("images");
-	img.name = "laptop";
-	fragment.append(img);
+	fragment.append(displayImage(files[i]));
     }
     dropZone.appendChild(fragment);
 })
+
+function displayImage(image) {
+    const url = URL.createObjectURL(image);
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = image.name;
+    img.classList.add("images");
+    img.name = "laptop";
+    return img
+}
