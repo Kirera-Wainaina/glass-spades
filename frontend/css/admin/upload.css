@@ -63,7 +63,8 @@ div#drop-zone {
     border: 3px dashed lightgrey;
 
     display: grid;
-    grid-template-columns: repeat(4, 1fr)
+    grid-template-columns: repeat(4, 1fr);
+    overflow-y: auto;
 }
 
 p#info {
