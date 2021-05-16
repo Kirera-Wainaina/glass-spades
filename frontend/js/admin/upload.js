@@ -156,7 +156,7 @@ function displayImage(image) {
     img.alt = image.name;
     img.classList.add("images");
     img.id = Math.random();
-    img.name = "laptop";
+    img.name = "landscape";
 
     img.addEventListener("dragstart", startImageDrag);
     img.addEventListener("dragover", dragOverImage);
