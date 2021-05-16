@@ -62,8 +62,9 @@ div#drop-zone {
     height: 100vh;
     border: 3px dashed lightgrey;
 
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     overflow-y: auto;
 }
 
@@ -73,6 +74,10 @@ p#info {
 }
 
 .images {
+    width: 30%;
+    height: max-content;
+    margin-left: 1em;
+    margin-top: 1em;
 }
 
 @media (orientation: portrait) {
