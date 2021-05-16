@@ -84,7 +84,6 @@ page.addEventListener("click", (event) => {
 	}
     }
 
-    console.log(houseInfo)
 })
 
 page.addEventListener("click", (event) => {
@@ -138,3 +137,26 @@ fileInput.addEventListener("change", (event) => {
 
     dropZone.appendChild(fragment);
 });
+
+const dropZone = document.getElementById("drop-zone");
+dropZone.addEventListener("dragover", event => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+})
+
+dropZone.addEventListener("drop", event => {
+    event.preventDefault();
+    const fragment = new DocumentFragment();
+    
+    const files = event.dataTransfer.files;
+    for(let i = 0; i < files.length; i++) {
+	const url = URL.createObjectURL(files[i]);
+	const img = document.createElement("img");
+	img.src = url;
+	img.alt = files[i].name;
+	img.classList.add("images");
+	img.name = "laptop";
+	fragment.append(img);
+    }
+    dropZone.appendChild(fragment);
+})
