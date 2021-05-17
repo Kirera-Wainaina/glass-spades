@@ -218,3 +218,21 @@ function dropImage(event) {
 
     dropImg.insertAdjacentElement("beforebegin", draggedImgElement);
 }
+
+// const heading = document.querySelector("input[name='Heading']");
+
+const submit = document.getElementById("submit");
+submit.addEventListener("click", event => {
+    console.log(houseInfo)
+    const formdata = new FormData();
+
+    Object.keys(houseInfo).forEach(key => {
+	if (Array.isArray(houseInfo[key])) {
+	    houseInfo[key].forEach(value => formdata.append(key, value));
+	} else {
+	    formdata.set(key, houseInfo[key])
+	}
+    })
+    console.log(formdata.getAll("External Features"));
+    console.log(formdata.get("Bedrooms"))
+});
