@@ -132,6 +132,25 @@ fileInput.addEventListener("change", (event) => {
     dropZone.appendChild(fragment);
 });
 
+const portraitUpload = document.getElementById("portrait-upload");
+portraitUpload.addEventListener("click", event => {
+    const fileInput = document.getElementById("invisible-portrait-upload");
+    fileInput.click();
+})
+
+const portraitInput = document.getElementById("invisible-portrait-upload");
+portraitInput.addEventListener("change", (event) => {
+    const files = event.target.files;
+    const fragment = new DocumentFragment();
+    const dropZone = document.getElementById("drop-zone");
+
+    for(let i = 0; i < files.length; i++) {
+	fragment.append(displayImage(files[i]));
+    }
+
+    dropZone.appendChild(fragment);
+});
+
 const dropZone = document.getElementById("drop-zone");
 dropZone.addEventListener("dragover", event => {
     event.preventDefault();
