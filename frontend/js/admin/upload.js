@@ -126,7 +126,7 @@ fileInput.addEventListener("change", (event) => {
     const dropZone = document.getElementById("drop-zone");
 
     for(let i = 0; i < files.length; i++) {
-	fragment.append(displayImage(files[i]));
+	fragment.append(displayImage(files[i], "landscape"));
     }
 
     dropZone.appendChild(fragment);
@@ -145,7 +145,7 @@ portraitInput.addEventListener("change", (event) => {
     const dropZone = document.getElementById("portrait-drop-zone");
 
     for(let i = 0; i < files.length; i++) {
-	fragment.append(displayImage(files[i]));
+	fragment.append(displayImage(files[i], "portrait"));
     }
 
     dropZone.appendChild(fragment);
@@ -163,7 +163,7 @@ dropZone.addEventListener("drop", event => {
     
     const files = event.dataTransfer.files;
     for(let i = 0; i < files.length; i++) {
-	fragment.append(displayImage(files[i]));
+	fragment.append(displayImage(files[i], "landscape"));
     }
     dropZone.appendChild(fragment);
 })
@@ -180,19 +180,19 @@ portraitZone.addEventListener("drop", event => {
     
     const files = event.dataTransfer.files;
     for(let i = 0; i < files.length; i++) {
-	fragment.append(displayImage(files[i]));
+	fragment.append(displayImage(files[i], "portrait"));
     }
     portraitZone.appendChild(fragment);
 })
 
-function displayImage(image) {
+function displayImage(image, type) {
     const url = URL.createObjectURL(image);
     const img = document.createElement("img");
     img.src = url;
     img.alt = image.name;
     img.classList.add("images");
     img.id = Math.random();
-    img.name = "landscape";
+    img.name = `${type}-${Date.now()}-${Math.trunc(Math.random() * 1e6)}-`;
 
     img.addEventListener("dragstart", startImageDrag);
     img.addEventListener("dragover", dragOverImage);
