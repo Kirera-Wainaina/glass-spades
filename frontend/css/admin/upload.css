@@ -56,7 +56,7 @@ input#invisible-file-upload, input#invisible-portrait-upload {
     display: none;
 }
 
-div#drop-zone {
+div#drop-zone, div#portrait-drop-zone {
     grid-column: 2 / 12;
     width: 100%;
     height: 100vh;
