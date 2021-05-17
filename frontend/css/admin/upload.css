@@ -44,7 +44,7 @@ textarea {
     grid-column: 1 / 4;
 }
 
-button#file-upload {
+button#file-upload, button#portrait-upload {
     grid-column: 2 / 12;
     width: 100%;
     height: 10vh;
@@ -78,6 +78,10 @@ p#info {
     height: max-content;
     margin-left: 1em;
     margin-top: 1em;
+}
+
+button#portrait-upload {
+    margin-top: 2em;
 }
 
 @media (orientation: portrait) {
