@@ -219,7 +219,15 @@ function dropImage(event) {
     dropImg.insertAdjacentElement("beforebegin", draggedImgElement);
 }
 
-// const heading = document.querySelector("input[name='Heading']");
+const heading = document.querySelector("input[name='Heading']");
+heading.addEventListener("input", event => {
+    houseInfo[event.target.name] = event.target.value;
+})
+
+const description = document.querySelector("textarea");
+description.addEventListener("input", event => {
+    houseInfo[event.target.name] = event.target.value;
+})
 
 const submit = document.getElementById("submit");
 submit.addEventListener("click", event => {
