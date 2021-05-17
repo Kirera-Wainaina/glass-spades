@@ -133,4 +133,8 @@ p#info {
 	grid-column: 1 / 6;
 	font-size: 0.6em;
     }
+
+    .image {
+	width: 50%;
+    }
 }
