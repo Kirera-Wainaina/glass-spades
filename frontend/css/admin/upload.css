@@ -52,7 +52,7 @@ button#file-upload, button#portrait-upload {
     background-color: #e6e6e6;
 }
 
-input#invisible-file-upload {
+input#invisible-file-upload, input#invisible-portrait-upload {
     display: none;
 }
 
