@@ -93,7 +93,7 @@ button#portrait-upload {
 	width: 15em;
     }
 
-    button#file-upload {
+    button#file-upload, button#portrait-upload {
 	grid-column: 2 / 12;
 	width: 100%;
     }
@@ -123,12 +123,12 @@ button#portrait-upload {
 	height: 2.5em;
     }
 
-    button#file-upload {
+    button#file-upload, button#portrait-upload {
 	grid-column: 1 / 6;
 	width: 100%;
     }
 
-    div#drop-zone {
+    div#drop-zone, div#portrait-drop-zone {
 	grid-column: 1 / 6;
 	width: 98%;
     }
@@ -138,7 +138,7 @@ button#portrait-upload {
 	font-size: 0.6em;
     }
 
-    .image {
-	width: 50%;
+    .images {
+	width: 45%;
     }
 }
