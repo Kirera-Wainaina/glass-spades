@@ -142,7 +142,7 @@ const portraitInput = document.getElementById("invisible-portrait-upload");
 portraitInput.addEventListener("change", (event) => {
     const files = event.target.files;
     const fragment = new DocumentFragment();
-    const dropZone = document.getElementById("drop-zone");
+    const dropZone = document.getElementById("portrait-drop-zone");
 
     for(let i = 0; i < files.length; i++) {
 	fragment.append(displayImage(files[i]));
@@ -166,6 +166,23 @@ dropZone.addEventListener("drop", event => {
 	fragment.append(displayImage(files[i]));
     }
     dropZone.appendChild(fragment);
+})
+
+const portraitZone = document.getElementById("portrait-drop-zone");
+portraitZone.addEventListener("dragover", event => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+})
+
+portraitZone.addEventListener("drop", event => {
+    event.preventDefault();
+    const fragment = new DocumentFragment();
+    
+    const files = event.dataTransfer.files;
+    for(let i = 0; i < files.length; i++) {
+	fragment.append(displayImage(files[i]));
+    }
+    portraitZone.appendChild(fragment);
 })
 
 function displayImage(image) {
