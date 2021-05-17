@@ -188,15 +188,18 @@ portraitZone.addEventListener("drop", event => {
 function displayImage(image, type) {
     const url = URL.createObjectURL(image);
     const img = document.createElement("img");
+    const name = `${type}-${Date.now()}-${Math.trunc(Math.random() * 1e6)}-`;
     img.src = url;
     img.alt = image.name;
     img.classList.add("images");
-    img.id = Math.random();
-    img.name = `${type}-${Date.now()}-${Math.trunc(Math.random() * 1e6)}-`;
+    img.id = name;
+    img.name = name;
 
     img.addEventListener("dragstart", startImageDrag);
     img.addEventListener("dragover", dragOverImage);
     img.addEventListener("drop", dropImage);
+
+    
 
     return img
 }
@@ -231,7 +234,6 @@ description.addEventListener("input", event => {
 
 const submit = document.getElementById("submit");
 submit.addEventListener("click", event => {
-    console.log(houseInfo)
     const formdata = new FormData();
 
     Object.keys(houseInfo).forEach(key => {
@@ -241,6 +243,39 @@ submit.addEventListener("click", event => {
 	    formdata.set(key, houseInfo[key])
 	}
     })
-    console.log(formdata.getAll("External Features"));
-    console.log(formdata.get("Bedrooms"))
+
+    getImages()
 });
+
+function getImages() {
+    const dropZone = document.getElementById("drop-zone");
+    const imageElements = dropZone.children;
+    const imgSrcs = []
+    for(let i = 0; i < imageElements.length; i++) {
+	const imageElement = imageElements[i];
+	imgSrcs.push(imageElement.src);
+    }
+
+    Promise.all(imgSrcs.map(src => getBlobFromImgSrc(src)))
+	.then(blobs => (console.log(blobs)))
+}
+
+function getBlobFromImgSrc(src) {
+    return new Promise ((resolve, reject) => {
+	const xhr = new XMLHttpRequest();
+	xhr.open("GET", src);
+	xhr.responseType = "blob";
+	xhr.send()
+
+	xhr.onreadystatechange = function() {
+	    if (this.readyState == 4) {
+		resolve(this.response)
+	    }
+	}
+
+	xhr.onerror = function() {
+	    reject(error)
+	}
+    })
+}
+
