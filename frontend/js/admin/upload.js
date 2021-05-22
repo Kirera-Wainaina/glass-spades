@@ -208,10 +208,9 @@ async function setData(event) {
 	}
     })
 
-    const name = `${Date.now()}-${Math.trunc(Math.random() * 1e6)}-`;
-
     const images = await getImages();
     images.forEach((image, index) => {
+	let name = `${Date.now()}-${Math.trunc(Math.random() * 1e6)}-`;
 	formdata.set(name + index, image)
     })
 
