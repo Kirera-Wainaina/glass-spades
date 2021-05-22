@@ -18,7 +18,6 @@ function uploadListing(request, response) {
     const listing = {};
 
     busboy.on("field", (fieldname, value) => {
-	console.log(`${fieldname}: ${value}`)
 	if (fieldname == "Mandate" || fieldname == "Category"
 	    || fieldname == "Bedrooms" || fieldname == "Bathrooms") {
 	    listing[fieldname] = value;
@@ -32,6 +31,12 @@ function uploadListing(request, response) {
 	    }
 	}
 
+    })
+
+    busboy.on("file", (fieldname, file, filename, encoding) => {
+	const imageFolder = path.dirname(path.dirname(__dirname));
+	const route = path.join(imageFolder, "images", filename);
+	file.pipe(fs.createWriteStream(route))
     })
 
     busboy.on("finish", () => {
