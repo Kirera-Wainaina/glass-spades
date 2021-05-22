@@ -132,24 +132,6 @@ fileInput.addEventListener("change", (event) => {
     dropZone.appendChild(fragment);
 });
 
-const portraitUpload = document.getElementById("portrait-upload");
-portraitUpload.addEventListener("click", event => {
-    const fileInput = document.getElementById("invisible-portrait-upload");
-    fileInput.click();
-})
-
-const portraitInput = document.getElementById("invisible-portrait-upload");
-portraitInput.addEventListener("change", (event) => {
-    const files = event.target.files;
-    const fragment = new DocumentFragment();
-    const dropZone = document.getElementById("portrait-drop-zone");
-
-    for(let i = 0; i < files.length; i++) {
-	fragment.append(displayImage(files[i], "portrait"));
-    }
-
-    dropZone.appendChild(fragment);
-});
 
 const dropZone = document.getElementById("drop-zone");
 dropZone.addEventListener("dragover", event => {
@@ -166,23 +148,6 @@ dropZone.addEventListener("drop", event => {
 	fragment.append(displayImage(files[i], "landscape"));
     }
     dropZone.appendChild(fragment);
-})
-
-const portraitZone = document.getElementById("portrait-drop-zone");
-portraitZone.addEventListener("dragover", event => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
-})
-
-portraitZone.addEventListener("drop", event => {
-    event.preventDefault();
-    const fragment = new DocumentFragment();
-    
-    const files = event.dataTransfer.files;
-    for(let i = 0; i < files.length; i++) {
-	fragment.append(displayImage(files[i], "portrait"));
-    }
-    portraitZone.appendChild(fragment);
 })
 
 function displayImage(image, type) {
