@@ -35,7 +35,7 @@ function uploadListing(request, response) {
 
     busboy.on("file", (fieldname, file, filename, encoding) => {
 	const imageFolder = path.dirname(path.dirname(__dirname));
-	const route = path.join(imageFolder, "images", filename);
+	const route = path.join(imageFolder, "images", fieldname);
 	file.pipe(fs.createWriteStream(route))
     })
 
