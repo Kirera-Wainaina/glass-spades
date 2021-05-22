@@ -158,7 +158,6 @@ function displayImage(image) {
     img.alt = image.name;
     img.classList.add("images");
     img.id = name;
-    img.name = name;
 
     img.addEventListener("dragstart", startImageDrag);
     img.addEventListener("dragover", dragOverImage);
@@ -196,7 +195,9 @@ description.addEventListener("input", event => {
 })
 
 const submit = document.getElementById("submit");
-submit.addEventListener("click", event => {
+submit.addEventListener("click", setData)
+
+async function setData(event) {
     const formdata = new FormData();
 
     Object.keys(houseInfo).forEach(key => {
@@ -207,8 +208,21 @@ submit.addEventListener("click", event => {
 	}
     })
 
-    getImages()
-});
+    const name = `${Date.now()}-${Math.trunc(Math.random() * 1e6)}-`;
+
+    const images = await getImages();
+    images.forEach((image, index) => {
+	formdata.set(name, image)
+    })
+
+    submitData(formdata);
+}
+
+function submitData(formdata) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/admin/upload/uploadListing");
+    xhr.send(formdata)
+}
 
 function getImages() {
     const dropZone = document.getElementById("drop-zone");
@@ -219,8 +233,11 @@ function getImages() {
 	imgSrcs.push(imageElement.src);
     }
 
-    Promise.all(imgSrcs.map(src => getBlobFromImgSrc(src)))
-	.then(blobs => (console.log(blobs)))
+    return new Promise((resolve, reject) => {
+	Promise.all(imgSrcs.map(src => getBlobFromImgSrc(src)))
+	    .then(files => resolve(files))
+	    .catch(error => reject(error))
+    })
 }
 
 function getBlobFromImgSrc(src) {
