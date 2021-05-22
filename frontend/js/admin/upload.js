@@ -212,7 +212,7 @@ async function setData(event) {
 
     const images = await getImages();
     images.forEach((image, index) => {
-	formdata.set(name, image)
+	formdata.set(name + index, image)
     })
 
     submitData(formdata);
