@@ -10,3 +10,6 @@ node_modules/
 # ignore the current house wallpapers
 house-vert.jpg
 house-1920.jpg
+
+# ignore images in the converted folder
+converted/*.webp
