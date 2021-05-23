@@ -46,6 +46,7 @@ function uploadListing(request, response) {
 	    .on("finish", async () => {
 		const file = await images.minifyImage(route);
 		console.log(file)
+		fs.unlink(route, error => console.log(error));
 	    })
     })
 
