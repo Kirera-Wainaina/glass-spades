@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const Busboy = require("busboy");
 
+const images = require("../../utils/images.js");
+
 function sendModelData(request, response) {
     const modelPath = `${path.dirname(path.dirname(__dirname))}/utils/model.json`;
 
@@ -35,8 +37,16 @@ function uploadListing(request, response) {
 
     busboy.on("file", (fieldname, file, filename, encoding) => {
 	const imageFolder = path.dirname(path.dirname(__dirname));
-	const route = path.join(imageFolder, "images", fieldname);
+	const route = path.join(imageFolder, "uploaded", fieldname);
 	file.pipe(fs.createWriteStream(route))
+	    .on("error", error => {
+		console.log("Error When writing image to file")
+		console.log(error)
+	    })
+	    .on("finish", async () => {
+		const file = await images.minifyImage(route);
+		console.log(file)
+	    })
     })
 
     busboy.on("finish", () => {
