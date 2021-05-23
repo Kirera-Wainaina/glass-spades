@@ -13,3 +13,6 @@ house-1920.jpg
 
 # ignore images in the converted folder
 converted/*.webp
+
+# service account
+glass-spades-service-account.json
