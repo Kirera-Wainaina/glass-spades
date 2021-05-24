@@ -24,11 +24,22 @@ function saveImage(filepath) {
     const filename = path.basename(filepath)
 
     const file = bucket.file(filename);
-    fs.createReadStream(filepath)
-	.pipe(file.createWriteStream())
-	.on("error", error => console.log(error))
-	.on("finish", () => console.log("Finished uploading to google"))
+
+    return new Promise((resolve, reject) => {
+	fs.createReadStream(filepath)
+	    .pipe(file.createWriteStream())
+	    .on("error", error => reject(error))
+	    .on("finish", () => {
+		console.log("Finished uploading to google")
+		resolve(file)
+	    })
+    })
+}
+
+function getFileMetadata(cloudFile) {
+    return cloudFile.getMetadata()
 }
 
 exports.minifyImage = minifyImage;
 exports.saveImage = saveImage;
+exports.getFileMetadata = getFileMetadata;

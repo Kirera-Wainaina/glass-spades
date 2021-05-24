@@ -47,7 +47,9 @@ function uploadListing(request, response) {
 		const file = await images.minifyImage(route);
 		// console.log(file)
 		fs.unlink(route, error => console.log(error));
-		images.saveImage(file[0].destinationPath)
+		const cloudFile = await images.saveImage(file[0].destinationPath);
+		const [ metadata ] = await images.getFileMetadata(cloudFile)
+		console.log(metadata)
 	    })
     })
 
