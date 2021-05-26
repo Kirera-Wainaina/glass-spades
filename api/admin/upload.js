@@ -5,6 +5,8 @@ const EventEmitter = require("events");
 const Busboy = require("busboy");
 
 const images = require("../../utils/images.js");
+const db = require("../../database/models.js");
+
 class Emitter extends EventEmitter {};
 const emitter = new Emitter();
 
@@ -75,9 +77,15 @@ function uploadListing(request, response) {
     request.pipe(busboy);
 }
 
-emitter.on("uploaded", (listing, imageMetadata) => {
-    console.log(listing);
-    console.log(imageMetadata);
+emitter.on("uploaded", async (listing, imageMetadata) => {
+
+    if (listing.imageNum == imageMetadata.length) {
+	delete listing.imageNum;
+	const newListing = new db.Listing(listing);
+	await newListing.save()
+	console.log("Finished saving to db")
+    }
+
 })
 
 exports.sendModelData = sendModelData;
