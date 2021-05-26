@@ -65,7 +65,7 @@ function uploadListing(request, response) {
 		    contentType: metadata["contentType"]
 		};
 		imageMetadata.push(imageInfo);
-		emitter.emit("uploaded", listing, imageMetadata);
+		emitter.emit("uploaded", listing, imageMetadata, response);
 	    })
     })
 
@@ -77,16 +77,37 @@ function uploadListing(request, response) {
     request.pipe(busboy);
 }
 
-emitter.on("uploaded", async (listing, imageMetadata) => {
+emitter.on("uploaded", async (listing, imageMetadata, response) => {
 
     if (listing.imageNum == imageMetadata.length) {
 	delete listing.imageNum;
 	const newListing = new db.Listing(listing);
 	await newListing.save()
 	console.log("Finished saving to db")
+	saveImageMetadata(imageMetadata, newListing._id)
+	    .then(results => {
+		response.writeHead(200, {
+		    "content-type": "text/plain",
+		})
+		    .end("success")
+	    })
     }
-
 })
+
+function saveImageMetadata(imageMetadata, listingId) {
+
+    const promiseArray = imageMetadata.map(data => {
+	data[listingId] = listingId;
+	const newImage = new db.Image(data);
+	return new Promise((resolve, reject) => {
+	    newImage.save()
+		.then(doc => resolve(doc))
+		.catch(error => console.error());
+	})
+    });
+
+    return Promise.all(promiseArray)
+}
 
 exports.sendModelData = sendModelData;
 exports.uploadListing = uploadListing;
