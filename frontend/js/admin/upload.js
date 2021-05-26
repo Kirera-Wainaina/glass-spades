@@ -209,6 +209,8 @@ async function setData(event) {
     })
 
     const images = await getImages();
+    formdata.set("imageNum", images.length);
+    
     images.forEach((image, index) => {
 	let name = `${Date.now()}-${Math.trunc(Math.random() * 1e6)}-`;
 	formdata.set(name + index, image)
@@ -227,6 +229,7 @@ function getImages() {
     const dropZone = document.getElementById("drop-zone");
     const imageElements = dropZone.children;
     const imgSrcs = []
+    
     for(let i = 0; i < imageElements.length; i++) {
 	const imageElement = imageElements[i];
 	imgSrcs.push(imageElement.src);
