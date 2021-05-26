@@ -34,6 +34,18 @@ userSchema.methods.generateToken = function() {
     return jwt.sign({ _id: this._id }, process.env.TOKEN_KEY)
 }
 
+const listingSchema = new Schema({
+    Heading: String,
+    Description: String,
+    Category: String,
+    Bedrooms: Number,
+    Bathrooms: Number,
+    "Internal Features": [String],
+    "External Features": [String]
+});
+
 const User = mongoose.model("user", userSchema);
+const Listing = mongoose.model("listing", listingSchema);
 
 exports.User = User;
+exports.Listing = Listing;
