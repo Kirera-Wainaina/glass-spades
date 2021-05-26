@@ -18,10 +18,12 @@ function sendModelData(request, response) {
 function uploadListing(request, response) {
     const busboy = new Busboy({ headers: request.headers });
     const listing = {};
+    const imageMetadata = [];
 
     busboy.on("field", (fieldname, value) => {
 	if (fieldname == "Mandate" || fieldname == "Category"
-	    || fieldname == "Bedrooms" || fieldname == "Bathrooms") {
+	    || fieldname == "Bedrooms" || fieldname == "Bathrooms"
+	    || fieldname == "imageNum") {
 	    listing[fieldname] = value;
 	} else if (fieldname == "External Features"
 		   || fieldname == "Internal Features") {
@@ -45,20 +47,34 @@ function uploadListing(request, response) {
 	    })
 	    .on("finish", async () => {
 		const file = await images.minifyImage(route);
-		// console.log(file)
-		fs.unlink(route, error => console.log(error));
+		fs.unlink(route, error => console.error());
 		const cloudFile = await images.saveImage(file[0].destinationPath);
-		fs.unlink(file[0].destinationPath, error => console.log(error));
+		fs.unlink(file[0].destinationPath, error => console.error());
 		const [ metadata ] = await images.getFileMetadata(cloudFile)
-		console.log(metadata)
+		// console.log(metadata)
+		const imageInfo = {
+		    googleId: metadata["id"],
+		    link: metadata["mediaLink"],
+		    name: metadata["name"],
+		    contentType: metadata["contentType"]
+		};
+		imageMetadata.push[imageInfo]
+		if (imageMetadata.length == listing.imageNum) {
+		    console.log(images);
+		}
 	    })
     })
 
     busboy.on("finish", () => {
 	console.log(listing)
+	// Let the program know all the data is in
     })
     
     request.pipe(busboy);
+}
+
+function saveData(listing) {
+
 }
 
 exports.sendModelData = sendModelData;
