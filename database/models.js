@@ -44,8 +44,17 @@ const listingSchema = new Schema({
     "External Features": [String]
 });
 
+const imageSchema = new Schema({
+    googleId: String,
+    link: String,
+    name: String,
+    contentType: String
+});
+
 const User = mongoose.model("user", userSchema);
 const Listing = mongoose.model("listing", listingSchema);
+const Image = mongoose.model("image", imageSchema);
 
 exports.User = User;
 exports.Listing = Listing;
+exports.Image = Image;
