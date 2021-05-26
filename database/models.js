@@ -45,6 +45,7 @@ const listingSchema = new Schema({
 });
 
 const imageSchema = new Schema({
+    listingId: mongoose.ObjectId,
     googleId: String,
     link: String,
     name: String,
