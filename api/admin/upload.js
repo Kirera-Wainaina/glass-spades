@@ -1,8 +1,12 @@
 const fs = require("fs");
 const path = require("path");
+const EventEmitter = require("events");
+
 const Busboy = require("busboy");
 
 const images = require("../../utils/images.js");
+class Emitter extends EventEmitter {};
+const emitter = new Emitter();
 
 function sendModelData(request, response) {
     const modelPath = `${path.dirname(path.dirname(__dirname))}/utils/model.json`;
@@ -58,24 +62,23 @@ function uploadListing(request, response) {
 		    name: metadata["name"],
 		    contentType: metadata["contentType"]
 		};
-		imageMetadata.push[imageInfo]
-		if (imageMetadata.length == listing.imageNum) {
-		    console.log(images);
-		}
+		imageMetadata.push(imageInfo);
+		emitter.emit("uploaded", listing, imageMetadata);
 	    })
     })
 
     busboy.on("finish", () => {
-	console.log(listing)
+	console.log("All the data is received")
 	// Let the program know all the data is in
     })
     
     request.pipe(busboy);
 }
 
-function saveData(listing) {
-
-}
+emitter.on("uploaded", (listing, imageMetadata) => {
+    console.log(listing);
+    console.log(imageMetadata);
+})
 
 exports.sendModelData = sendModelData;
 exports.uploadListing = uploadListing;
