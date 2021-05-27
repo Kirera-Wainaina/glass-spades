@@ -71,7 +71,6 @@ function uploadListing(request, response) {
     })
 
     busboy.on("finish", () => {
-	console.log(listing)
 	console.log("All the data is received")
 	// Let the program know all the data is in
     })
@@ -99,7 +98,7 @@ emitter.on("uploaded", async (listing, imageMetadata, response) => {
 function saveImageMetadata(imageMetadata, listingId) {
 
     const promiseArray = imageMetadata.map(data => {
-	data[listingId] = listingId;
+	data["listingId"] = listingId;
 	const newImage = new db.Image(data);
 	return new Promise((resolve, reject) => {
 	    newImage.save()
