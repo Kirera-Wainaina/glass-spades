@@ -200,7 +200,8 @@ price.addEventListener("input", event => {
 })
 
 const submit = document.getElementById("submit");
-submit.addEventListener("click", setData)
+submit.addEventListener("click", setData);
+submit.addEventListener("click", showLoadingPage);
 
 async function setData(event) {
     const formdata = new FormData();
@@ -232,6 +233,7 @@ function submitData(formdata) {
     xhr.onreadystatechange = function() {
 	if(xhr.readyState == 4) {
 	    console.log(xhr.response)
+	    hideLoadingPage();
 	}
     }
 }
@@ -272,3 +274,12 @@ function getBlobFromImgSrc(src) {
     })
 }
 
+function showLoadingPage() {
+    const loadingPage = document.getElementById("loading-page");
+    loadingPage.style.display = "flex";
+}
+
+function hideLoadingPage() {
+    const loadingPage = document.getElementById("loading-page");
+    loadingPage.style.display = "none";
+}
