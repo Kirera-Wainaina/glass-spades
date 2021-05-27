@@ -27,21 +27,15 @@ function uploadListing(request, response) {
     const imageMetadata = [];
 
     busboy.on("field", (fieldname, value) => {
-	if (fieldname == "Mandate" || fieldname == "Category"
-	    || fieldname == "Bedrooms" || fieldname == "Bathrooms"
-	    || fieldname == "imageNum" || fieldname == "Heading"
-	    || fieldname == "Description" ) {
-	    listing[fieldname] = value;
-	} else if (fieldname == "External Features"
-		   || fieldname == "Internal Features") {
-	    
+	if (fieldname == "External Features" || fieldname == "Internal Features") {
 	    if (listing[fieldname]) {
 		listing[fieldname].push(value);
 	    } else {
 		listing[fieldname] = [value];
 	    }
+	} else {
+	    listing[fieldname] = value;
 	}
-
     })
 
     busboy.on("file", (fieldname, file, filename, encoding) => {
@@ -58,7 +52,6 @@ function uploadListing(request, response) {
 		const cloudFile = await images.saveImage(file[0].destinationPath);
 		fs.unlink(file[0].destinationPath, error => console.error());
 		const [ metadata ] = await images.getFileMetadata(cloudFile)
-		// console.log(metadata)
 		const imageInfo = {
 		    googleId: metadata["id"],
 		    link: metadata["mediaLink"],
@@ -81,7 +74,6 @@ function uploadListing(request, response) {
 emitter.on("uploaded", async (listing, imageMetadata, response) => {
 
     if (listing.imageNum == imageMetadata.length) {
-	delete listing.imageNum;
 	const newListing = new db.Listing(listing);
 	await newListing.save()
 	console.log("Finished saving to db")
