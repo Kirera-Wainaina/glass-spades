@@ -194,6 +194,11 @@ description.addEventListener("input", event => {
     houseInfo[event.target.name] = event.target.value;
 })
 
+const price = document.querySelector("input[name='Price']");
+price.addEventListener("input", event => {
+    houseInfo[event.target.name] = event.target.value;
+})
+
 const submit = document.getElementById("submit");
 submit.addEventListener("click", setData)
 
