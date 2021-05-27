@@ -29,7 +29,8 @@ function uploadListing(request, response) {
     busboy.on("field", (fieldname, value) => {
 	if (fieldname == "Mandate" || fieldname == "Category"
 	    || fieldname == "Bedrooms" || fieldname == "Bathrooms"
-	    || fieldname == "imageNum") {
+	    || fieldname == "imageNum" || fieldname == "Heading"
+	    || fieldname == "Description" ) {
 	    listing[fieldname] = value;
 	} else if (fieldname == "External Features"
 		   || fieldname == "Internal Features") {
@@ -70,6 +71,7 @@ function uploadListing(request, response) {
     })
 
     busboy.on("finish", () => {
+	console.log(listing)
 	console.log("All the data is received")
 	// Let the program know all the data is in
     })
