@@ -222,7 +222,13 @@ async function setData(event) {
 function submitData(formdata) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/admin/upload/uploadListing");
-    xhr.send(formdata)
+    xhr.send(formdata);
+
+    xhr.onreadystatechange = function() {
+	if(xhr.readyState == 4) {
+	    console.log(xhr.response)
+	}
+    }
 }
 
 function getImages() {
