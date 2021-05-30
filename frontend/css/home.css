@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap"); */
 
 * {
     margin: 0;
@@ -32,17 +32,12 @@ header {
     grid-template-columns: repeat(12, 1fr);
 }
 
-header #logo-container {
+header a {
     grid-column: 1 / 7;
-
-    display: flex;
-    align-items: center;
 }
 
-header h1 {
-    font-family: "Great Vibes", cursive;
-    font-weight: 400;
-    margin-left: 0.5em;
+header img {
+    height: 26%;
 }
 
 picture {
@@ -84,6 +79,12 @@ footer a, footer p {
     color: white;
 }
 
+@media(orientation: portrait) {
+    header img {
+	height: 40%;
+    }
+}
+
 @media (max-width: 500px) {
     .page {
 	grid-template-columns: repeat(5, 1fr);
@@ -95,11 +96,7 @@ footer a, footer p {
 	grid-template-columns: repeat(5, 1fr);
     }
     
-    header #logo-container {
-	grid-column: 1 / 4;
-    }
-    
-    header h1 {
-	font-size: 1.75em;
+    header img {
+	height: 40%;
     }
 }
