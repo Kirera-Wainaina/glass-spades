@@ -34,10 +34,13 @@ header {
 
 header a {
     grid-column: 1 / 7;
+    /* border: 1px solid black; */
+    height: inherit;
+    margin-left: 1em;
 }
 
 header img {
-    height: 26%;
+    height: 90%;
 }
 
 picture {
@@ -79,12 +82,6 @@ footer a, footer p {
     color: white;
 }
 
-@media(orientation: portrait) {
-    header img {
-	height: 40%;
-    }
-}
-
 @media (max-width: 500px) {
     .page {
 	grid-template-columns: repeat(5, 1fr);
@@ -92,11 +89,7 @@ footer a, footer p {
     
     header {
 	grid-column: 1 / 6;
-
 	grid-template-columns: repeat(5, 1fr);
     }
     
-    header img {
-	height: 40%;
-    }
 }
