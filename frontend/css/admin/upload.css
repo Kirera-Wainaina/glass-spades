@@ -80,6 +80,12 @@ p#info {
     margin-top: 1em;
 }
 
+div#map {
+    grid-column: 2 / 12;
+    height: 75vh;
+    border: 1px solid black;
+}
+
 button#portrait-upload {
     margin-top: 2em;
 }

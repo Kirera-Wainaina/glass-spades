@@ -17,9 +17,9 @@ window.addEventListener("load", () => {
 function constructPage(model) {
     const containerFragment = createContainers(model);
     const parentContainer = document.querySelector(".page");
-    const fileUpload = document.getElementById("file-upload");
+    const map = document.getElementById("map");
 
-    parentContainer.insertBefore(containerFragment, fileUpload);
+    parentContainer.insertBefore(containerFragment, map);
 }    
 
 function createContainers(model) {
@@ -282,4 +282,14 @@ function showLoadingPage() {
 function hideLoadingPage() {
     const loadingPage = document.getElementById("loading-page");
     loadingPage.style.display = "none";
+}
+
+
+function initMap() {
+    const mapEl = document.getElementById("map");
+    const nairobi = { lat: -1.230287, lng: 36.848492 };
+    const map = new google.maps.Map(mapEl, {
+	center: nairobi,
+	zoom: 15
+    })
 }
