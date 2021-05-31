@@ -83,7 +83,9 @@ p#info {
 div#map {
     grid-column: 2 / 12;
     height: 75vh;
-    border: 1px solid black;
+    border: 1px solid lightgrey;
+    margin-bottom: 2em;
+    margin-top: 2em;
 }
 
 button#portrait-upload {
