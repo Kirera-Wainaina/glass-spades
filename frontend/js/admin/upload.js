@@ -302,4 +302,9 @@ function createMarker(map, position) {
 	draggable: true,
 	position
     });
+
+    marker.addListener("dragend", (event) => {
+	console.log(`Latitude: ${event.latLng.lat()}, 
+Longitude: ${event.latLng.lng()}`)
+    });
 }
