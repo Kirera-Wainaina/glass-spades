@@ -292,4 +292,14 @@ function initMap() {
 	center: nairobi,
 	zoom: 15
     })
+
+    createMarker(map, nairobi);
+}
+
+function createMarker(map, position) {
+    const marker = new google.maps.Marker({
+	map,
+	draggable: true,
+	position
+    });
 }
