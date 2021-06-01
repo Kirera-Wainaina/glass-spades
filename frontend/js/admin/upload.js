@@ -232,7 +232,6 @@ function submitData(formdata) {
 
     xhr.onreadystatechange = function() {
 	if(xhr.readyState == 4) {
-	    console.log(xhr.response)
 	    hideLoadingPage();
 	}
     }
@@ -310,6 +309,6 @@ function createMarker(map, position) {
 		event.latLng.lng(), event.latLng.lat()
 	    ]
 	}
-	houseInfo["Location"] = location;
+	houseInfo["Location"] = JSON.stringify(location);
     });
 }
