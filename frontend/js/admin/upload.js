@@ -193,7 +193,6 @@ function dropImage(event) {
 
 const submit = document.getElementById("submit");
 submit.addEventListener("click", setData);
-submit.addEventListener("click", showLoadingPage);
 
 async function setData(event) {
     const formdata = new FormData();
@@ -222,8 +221,9 @@ async function setData(event) {
 	formdata.set(name + index, image)
     })
 
-    confirmValues(formdata);
-    // submitData(formdata);
+    if (confirmValues(formdata)) {
+	submitData(formdata);
+    }
     // console.log(houseInfo)
 }
 
@@ -276,11 +276,9 @@ function getBlobFromImgSrc(src) {
 }
 
 function showLoadingPage() {
-    const emptyError = document.getElementById("empty-error");
-    if (emptyError.style.display == "none") {
-	const loadingPage = document.getElementById("loading-page");
-	loadingPage.style.display = "flex";
-    }
+    const loadingPage = document.getElementById("loading-page");
+    loadingPage.style.display = "flex";
+
 }
 
 function hideLoadingPage() {
@@ -328,9 +326,11 @@ function confirmValues(formdata) {
 	}
     })
 
-    if (blanks) {
+    if (blanks.length) {
 	displayError(blanks)
+	return false
     } else {
+	showLoadingPage();
 	return true
     }
 }
