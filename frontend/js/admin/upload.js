@@ -304,7 +304,12 @@ function createMarker(map, position) {
     });
 
     marker.addListener("dragend", (event) => {
-	console.log(`Latitude: ${event.latLng.lat()}, 
-Longitude: ${event.latLng.lng()}`)
+	const location = {
+	    type: "Point",
+	    coordinates:[
+		event.latLng.lng(), event.latLng.lat()
+	    ]
+	}
+	houseInfo["Location"] = location;
     });
 }
