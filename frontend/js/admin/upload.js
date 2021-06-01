@@ -341,4 +341,5 @@ function displayError(blanks) {
     blanks.forEach(key => {
 	emptyError.textContent += `${key}, `;
     })
+    window.scrollTo(0, 0);
 }
