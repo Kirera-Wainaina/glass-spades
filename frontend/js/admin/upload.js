@@ -337,6 +337,7 @@ function confirmValues(formdata) {
 
 function displayError(blanks) {
     const emptyError = document.getElementById("empty-error");
+    emptyError.textContent = "The following fields do not have values: "
     emptyError.style.display = "inline-block"
     blanks.forEach(key => {
 	if (key == "imageNum") {
