@@ -286,6 +286,14 @@ function hideLoadingPage() {
     loadingPage.style.display = "none";
 }
 
+function appendMapsScript() {
+    const head = document.querySelector("head");
+    const script = document.createElement("script");
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVByoterVaoQyeLZ_ZmFvDBHcJJInQ84&callback=initMap&libraries=&v=weekly";
+    head.append(script)
+}
+
+appendMapsScript()
 
 function initMap() {
     const mapEl = document.getElementById("map");
