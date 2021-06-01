@@ -13,6 +13,9 @@ window.addEventListener("load", () => {
 		sessionStorage.setItem("model", JSON.stringify(model));
 	    }
 	}
+    } else {
+	const model = JSON.parse(sessionStorage.getItem("model"));
+	constructPage(model);
     }
 });
 
@@ -188,21 +191,6 @@ function dropImage(event) {
     dropImg.insertAdjacentElement("beforebegin", draggedImgElement);
 }
 
-const heading = document.querySelector("input[name='Heading']");
-heading.addEventListener("input", event => {
-    houseInfo[event.target.name] = event.target.value;
-})
-
-const description = document.querySelector("textarea");
-description.addEventListener("input", event => {
-    houseInfo[event.target.name] = event.target.value;
-})
-
-const price = document.querySelector("input[name='Price']");
-price.addEventListener("input", event => {
-    houseInfo[event.target.name] = event.target.value;
-})
-
 const submit = document.getElementById("submit");
 submit.addEventListener("click", setData);
 submit.addEventListener("click", showLoadingPage);
@@ -210,6 +198,14 @@ submit.addEventListener("click", showLoadingPage);
 async function setData(event) {
     const formdata = new FormData();
 
+    const heading = document.querySelector("input[name='Heading']");
+    const description = document.querySelector("textarea");
+    const price = document.querySelector("input[name='Price']");
+
+    houseInfo[heading.name] = heading.value;
+    houseInfo[description.name] = description.value;
+    houseInfo[price.name] = price.value;
+    
     Object.keys(houseInfo).forEach(key => {
 	if (Array.isArray(houseInfo[key])) {
 	    houseInfo[key].forEach(value => formdata.append(key, value));
@@ -226,7 +222,8 @@ async function setData(event) {
 	formdata.set(name + index, image)
     })
 
-    submitData(formdata);
+    // submitData(formdata);
+    console.log(houseInfo)
 }
 
 function submitData(formdata) {
@@ -311,3 +308,5 @@ function createMarker(map, position) {
 	houseInfo["Longitude"] = event.latLng.lng();
     });
 }
+
+
