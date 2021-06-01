@@ -339,7 +339,13 @@ function displayError(blanks) {
     const emptyError = document.getElementById("empty-error");
     emptyError.style.display = "inline-block"
     blanks.forEach(key => {
-	emptyError.textContent += `${key}, `;
+	if (key == "imageNum") {
+	    emptyError.textContent += "Images, ";
+	} else if (key == "Longitude") {
+	    emptyError.textContent += "Map Coordinates,  ";
+	} else {
+	    emptyError.textContent += `${key}, `;
+	}
     })
     window.scrollTo(0, 0);
 }
