@@ -42,7 +42,11 @@ const listingSchema = new Schema({
     Bathrooms: Number,
     Price: Number,
     "Internal Features": [String],
-    "External Features": [String]
+    "External Features": [String],
+    Location: {
+	type: { type: String, enum: ["Point"] },
+	coordinates: { type: [Number] }
+    }
 });
 
 const imageSchema = new Schema({
