@@ -1,18 +1,22 @@
 var houseInfo = {};
 
 window.addEventListener("load", () => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/admin/upload/sendModelData");
-    xhr.send();
+    if (!sessionStorage.getItem("model")) {
+	const xhr = new XMLHttpRequest();
+	xhr.open("POST", "/api/admin/upload/sendModelData");
+	xhr.send();
 
-    xhr.onreadystatechange = function() {
-	if (this.readyState == 4) {
-	    const model = JSON.parse(this.response);
-	    constructPage(model);
-
+	xhr.onreadystatechange = function() {
+	    if (this.readyState == 4) {
+		const model = JSON.parse(this.response);
+		constructPage(model);
+		sessionStorage.setItem("model", JSON.stringify(model));
+	    }
 	}
     }
 });
+
+
 
 function constructPage(model) {
     const containerFragment = createContainers(model);
