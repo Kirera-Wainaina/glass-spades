@@ -64,6 +64,7 @@ function uploadListing(request, response) {
     })
 
     busboy.on("finish", () => {
+	// console.log(listing);
 	console.log("All the data is received")
 	// Let the program know all the data is in
     })
