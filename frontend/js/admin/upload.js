@@ -222,8 +222,9 @@ async function setData(event) {
 	formdata.set(name + index, image)
     })
 
+    confirmValues(formdata);
     // submitData(formdata);
-    console.log(houseInfo)
+    // console.log(houseInfo)
 }
 
 function submitData(formdata) {
@@ -309,4 +310,32 @@ function createMarker(map, position) {
     });
 }
 
+function confirmValues(formdata) {
+    const model = JSON.parse(sessionStorage.getItem("model"));
+    const keys = Object.keys(model);
+    const otherKeys = ["Heading", "Description", "Price", "Longitude", "imageNum"];
+    const allKeys = keys.concat(otherKeys);
+    const blanks = [];
 
+    allKeys.forEach(key => {
+	if (!formdata.get(key)) {
+	    blanks.push(key);
+	} else if (key == "imageNum") {
+	    formdata.get(key) == 0 && blanks.push(key);
+	}
+    })
+
+    if (blanks) {
+	displayError(blanks)
+    } else {
+	return true
+    }
+}
+
+function displayError(blanks) {
+    const emptyError = document.getElementById("empty-error");
+    emptyError.style.display = "inline-block"
+    blanks.forEach(key => {
+	emptyError.textContent += `${key}, `;
+    })
+}
