@@ -178,4 +178,8 @@ p#empty-error {
 	grid-column: 1 / 6;
 	height: 75vh;
     }
+
+    p#empty-error {
+	grid-column: 1 / 6;
+    }
 }
