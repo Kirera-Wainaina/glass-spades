@@ -34,7 +34,11 @@ function uploadListing(request, response) {
 		listing[fieldname] = [value];
 	    }
 	} else {
-	    listing[fieldname] = value;
+	    if (fieldname == "Location") {
+		listing[fieldname] = JSON.parse(value);
+	    } else {
+		listing[fieldname] = value;
+	    }
 	}
     })
 
@@ -64,6 +68,7 @@ function uploadListing(request, response) {
     })
 
     busboy.on("finish", () => {
+	console.log(listing);
 	console.log("All the data is received")
 	// Let the program know all the data is in
     })
