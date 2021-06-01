@@ -34,11 +34,7 @@ function uploadListing(request, response) {
 		listing[fieldname] = [value];
 	    }
 	} else {
-	    if (fieldname == "Location") {
-		listing[fieldname] = JSON.parse(value);
-	    } else {
-		listing[fieldname] = value;
-	    }
+	    listing[fieldname] = value;	    
 	}
     })
 
@@ -68,7 +64,6 @@ function uploadListing(request, response) {
     })
 
     busboy.on("finish", () => {
-	console.log(listing);
 	console.log("All the data is received")
 	// Let the program know all the data is in
     })
@@ -79,6 +74,9 @@ function uploadListing(request, response) {
 emitter.on("uploaded", async (listing, imageMetadata, response) => {
 
     if (listing.imageNum == imageMetadata.length) {
+	listing["Location"] = {
+	    coordinates: [ listing.Longitude, listing.Latitude ]
+	};
 	const newListing = new db.Listing(listing);
 	await newListing.save()
 	console.log("Finished saving to db")
