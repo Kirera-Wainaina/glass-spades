@@ -303,12 +303,7 @@ function createMarker(map, position) {
     });
 
     marker.addListener("dragend", (event) => {
-	const location = {
-	    type: "Point",
-	    coordinates:[
-		event.latLng.lng(), event.latLng.lat()
-	    ]
-	}
-	houseInfo["Location"] = JSON.stringify(location);
+	houseInfo["Latitude"] = event.latLng.lat();
+	houseInfo["Longitude"] = event.latLng.lng();
     });
 }
