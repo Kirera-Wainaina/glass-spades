@@ -104,6 +104,9 @@ function checkLogin(request, response) {
 		})
 		.end("/admin/home")
 	}
+    } else {
+	response.writeHead(200, { "content-type": "text/plain" })
+	    .end("")
     }
 }
 
