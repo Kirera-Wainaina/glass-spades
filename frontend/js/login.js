@@ -4,7 +4,7 @@ window.addEventListener("load", () => {
     xhr.send();
 
     xhr.onreadystatechange = function() {
-	if (xhr.readyState == 4) {
+	if (xhr.readyState == 4 && this.response) {
 	    console.log(this.response)
 	    location.href = this.response
 	}
