@@ -44,7 +44,7 @@ const listingSchema = new Schema({
     "Internal Features": [String],
     "External Features": [String],
     Location: {
-	type: { type: String, enum: ["Point"] },
+	type: { type: String, enum: ["Point"], default: "Point" },
 	coordinates: { type: [Number] }
     }
 });
