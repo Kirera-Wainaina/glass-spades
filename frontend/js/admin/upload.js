@@ -276,8 +276,11 @@ function getBlobFromImgSrc(src) {
 }
 
 function showLoadingPage() {
-    const loadingPage = document.getElementById("loading-page");
-    loadingPage.style.display = "flex";
+    const emptyError = document.getElementById("empty-error");
+    if (emptyError.style.display == "none") {
+	const loadingPage = document.getElementById("loading-page");
+	loadingPage.style.display = "flex";
+    }
 }
 
 function hideLoadingPage() {
