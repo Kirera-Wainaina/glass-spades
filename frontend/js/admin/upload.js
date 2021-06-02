@@ -235,6 +235,7 @@ function submitData(formdata) {
     xhr.onreadystatechange = function() {
 	if(xhr.readyState == 4) {
 	    hideLoadingPage();
+	    location.href="/admin/home";
 	}
     }
 }
