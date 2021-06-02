@@ -46,6 +46,14 @@ picture {
     grid-column: 1 / 13;
 }
 
+h3 {
+    grid-column: 1 / 13;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 100;
+    margin-top: 1em;
+}
+
 footer {
     grid-column: 1 / 13;
     display: flex;
