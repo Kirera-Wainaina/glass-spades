@@ -79,14 +79,25 @@ function readFileAndRespond(filePath, response, statusCode=null) {
 	} else {
 	    const mime = MIMES.findMIMETypeFromExtension(path.extname(filePath));
 
-	    response.writeHead(statusCode || 200, {
-		"content-type": mime,
-		"content-encoding": "gzip"
-	    });
-	    
-	    fs.createReadStream(filePath)
-		.pipe(zlib.createGzip())
-		.pipe(response)
+	    if (mime.split("/")[0] == "image") {
+		// images should not be compressed
+		response.writeHead(statusCode || 200, {
+		    "content-type": mime
+		})
+
+		fs.createReadStream(filePath)
+		    .pipe(response)
+	    } else {
+		response.writeHead(statusCode || 200, {
+		    "content-type": mime,
+		    "content-encoding": "gzip"
+		})
+		
+		fs.createReadStream(filePath)
+		    .pipe(zlib.createGzip())
+		    .pipe(response)
+	    }
+
 	}
     })
     
