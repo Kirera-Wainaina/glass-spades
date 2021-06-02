@@ -54,6 +54,23 @@ h3 {
     margin-top: 1em;
 }
 
+div#listings {
+    width: 95vw;
+
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+}
+
+.house-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.house-card img {
+    width: 30vw;
+}
+
 footer {
     grid-column: 1 / 13;
     display: flex;
