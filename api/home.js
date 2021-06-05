@@ -9,7 +9,8 @@ async function getListings(request, response) {
 		if (error) reject(error);
 		resolve({
 		    "imageSrc": overview.link,
-		    "price": docs.Price
+		    "price": docs.Price,
+		    "id": docs._id
 		});
 	    })
 	})
