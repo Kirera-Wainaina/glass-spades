@@ -3,6 +3,9 @@ const http = require("http");
 const fs = require("fs");
 const zlib = require("zlib");
 const path = require("path");
+const url = require("url");
+const qs = require("querystring");
+
 const dotenv = require("dotenv");
 const MIMES = require("./utils/MIMETypes.js");
 
@@ -22,26 +25,33 @@ const server = http2.createSecureServer(options);
 
 server.on("request", (request, response) => {
     console.log(`Date: ${new Date()}, Path: ${request.url} http: ${request.httpVersion}`)
-    const url = request.url;
+    // const url = request.url;
+    const parsed_url = url.parse(request.url);
     const cwd = ".";
 
     if (url == "/") {
 	const filePath = `${cwd}/frontend/html/home.html`;
 	readFileAndRespond(filePath, response)
-    } else if (findTopDir(url) == "/api"){
+    } else if (findTopDir(request.url) == "/api"){
 	// has to come before browser requests
 	try {
-	    const file = require(`${cwd}${path.dirname(url)}`);
-	    const execute = path.basename(url);
+	    const file = require(`${cwd}${path.dirname(request.url)}`);
+	    const execute = path.basename(request.url);
 	    file[execute](request, response);
 	} catch(error) {
 	    handleError(error, response);
 	}
-    } else if(!path.extname(url)) {
-	const filePath = `${cwd}/frontend/html${url}.html`;
+    } else if(!path.extname(parsed_url.pathname)) {
+	let filePath;
+	if (parsed_url.query) {
+	    filePath = `${cwd}/frontend/html${parsed_url.pathname}.html`;
+	} else {
+	    filePath = `${cwd}/frontend/html${request.url}.html`;
+	}
 	readFileAndRespond(filePath, response)
+
     } else {
-	const filePath = `${cwd}${url}`;
+	const filePath = `${cwd}${request.url}`;
 	readFileAndRespond(filePath, response);
     }
 });
