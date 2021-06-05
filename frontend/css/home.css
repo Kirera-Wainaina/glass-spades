@@ -60,7 +60,7 @@ div#listings {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 1em;
 }
 
@@ -68,6 +68,7 @@ div#listings {
     display: flex;
     flex-direction: column;
     border: 1px solid lightgrey;
+    margin-left: 2em;
 }
 
 .house-card img {
