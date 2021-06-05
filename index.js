@@ -29,7 +29,7 @@ server.on("request", (request, response) => {
     const parsed_url = url.parse(request.url);
     const cwd = ".";
 
-    if (url == "/") {
+    if (request.url == "/") {
 	const filePath = `${cwd}/frontend/html/home.html`;
 	readFileAndRespond(filePath, response)
     } else if (findTopDir(request.url) == "/api"){
