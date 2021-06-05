@@ -7,7 +7,7 @@ function getListings() {
 
     xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
-	    console.log(this.response);
+	    console.log(JSON.parse(this.response));
 	    const houseDetails = JSON.parse(this.response);
 	    displayHouseDetails(houseDetails);
 	}
@@ -27,7 +27,8 @@ function displayHouseDetails(houseDetails) {
 }
 
 function createHouseCard(houseDetail) {
-    const houseCard = document.createElement("div");
+    const houseCard = document.createElement("a");
+    houseCard.href = `/listing?id=${houseDetail.id}`;
     houseCard.classList.add("house-card");
 
     const overviewImg = document.createElement("img");
