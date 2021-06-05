@@ -36,7 +36,7 @@ function createHouseCard(houseDetail) {
     houseCard.append(overviewImg);
 
     const housePrice = document.createElement("p");
-    housePrice.textContent = houseDetail.price;
+    housePrice.textContent = `Kes. ${houseDetail.price}`;
     houseCard.append(housePrice);
 
     return houseCard

@@ -61,16 +61,24 @@ div#listings {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-top: 1em;
 }
 
 .house-card {
     display: flex;
     flex-direction: column;
-
+    border: 1px solid lightgrey;
 }
 
 .house-card img {
     width: 40vw;
+}
+
+.house-card p {
+    font-size: 1.3em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    padding-left: .5em;
 }
 
 footer {
