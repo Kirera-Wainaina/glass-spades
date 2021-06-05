@@ -59,16 +59,18 @@ div#listings {
 
     display: flex;
     flex-direction: row;
-    overflow: scroll;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .house-card {
     display: flex;
     flex-direction: column;
+
 }
 
 .house-card img {
-    width: 30vw;
+    width: 40vw;
 }
 
 footer {
