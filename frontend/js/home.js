@@ -7,7 +7,6 @@ function getListings() {
 
     xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
-	    console.log(JSON.parse(this.response));
 	    const houseDetails = JSON.parse(this.response);
 	    displayHouseDetails(houseDetails);
 	}
