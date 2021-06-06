@@ -29,5 +29,19 @@ div#images img:nth-child(3) {
 @media(max-width: 500px) {
     div#images {
 	grid-column: 1 / 6;
+
     }
+
+    div#images img:nth-child(1) {
+	grid-column: 1 / 13;
+    }
+
+    div#images img:nth-child(2) {
+	grid-column: 1 / 7;
+    }
+
+    div#images img:nth-child(3) {
+	grid-column: 7 / 13;
+    }
+
 }
