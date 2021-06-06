@@ -135,7 +135,9 @@ footer a, footer p {
     }
 
     .house-card {
+	grid-column: 1 / 6;
 	margin-bottom: 1em;
+	margin-left: 0;
     }
     
     .house-card img {
