@@ -1,1 +1,32 @@
 @import url("home.css");
+
+div#images {
+    grid-column: 1 / 13;
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+div#images img {
+    border: 1px solid black;
+    width: 100%;
+}
+
+div#images img:nth-child(1) {
+    grid-column: 3 / 11;
+}
+
+div#images img:nth-child(2) {
+    grid-column: 3 / 7;
+}
+
+div#images img:nth-child(3) {
+    grid-column: 7 / 11;
+}
+
+
+@media(max-width: 500px) {
+    div#images {
+	grid-column: 1 / 6;
+    }
+}

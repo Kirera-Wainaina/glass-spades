@@ -26,7 +26,17 @@ function getListingImages() {
 
     xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
-	    console.log(this.response)
+	    const images = JSON.parse(this.response);
+	    console.log(images);
+	    displayFirstImages(images);
 	}
+    }
+}
+
+function displayFirstImages(images) {
+    const imageDiv = document.getElementById("images");
+
+    for (let i = 0; i < imageDiv.children.length; i++) {
+	imageDiv.children[i].src = images[i]
     }
 }
