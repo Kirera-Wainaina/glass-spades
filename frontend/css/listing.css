@@ -25,6 +25,20 @@ div#images img:nth-child(3) {
     grid-column: 7 / 11;
 }
 
+@media(orientation: portrait) {
+    div#images img:nth-child(1) {
+	grid-column: 2 / 12;
+    }
+
+    div#images img:nth-child(2) {
+	grid-column: 2 / 7;
+    }
+
+    div#images img:nth-child(3) {
+	grid-column: 7 / 12;
+    }
+}
+
 
 @media(max-width: 500px) {
     div#images {
