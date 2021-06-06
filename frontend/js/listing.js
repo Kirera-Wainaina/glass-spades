@@ -35,8 +35,9 @@ function getListingImages() {
 
 function displayFirstImages(images) {
     const imageDiv = document.getElementById("images");
+    const imageElements = document.querySelectorAll("div#images > img");
     sessionStorage.setItem("mainImage", 0)
-    for (let i = 0; i < imageDiv.children.length; i++) {
-	imageDiv.children[i].src = images[i]
+    for (let i = 0; i < imageElements.length; i++) {
+	imageElements[i].src = images[i]
     }
 }
