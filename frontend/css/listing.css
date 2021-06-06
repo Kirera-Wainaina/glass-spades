@@ -8,12 +8,13 @@ div#images {
 }
 
 div#images img {
-    border: 1px solid black;
     width: 100%;
 }
 
 div#images img:nth-child(1) {
     grid-column: 3 / 11;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 div#images img:nth-child(2) {
