@@ -1,6 +1,7 @@
 getListingDetails();
 getListingImages();
 setHeading();
+setTitle()
 
 function retrieveListingId() {
     const url = new URL(location);
@@ -89,4 +90,10 @@ function setHeading() {
     console.log(details);
     const heading = document.getElementById("heading");
     heading.textContent = details.Heading;
+}
+
+function setTitle() {
+    const details = JSON.parse(sessionStorage.getItem("details"));
+    const title = document.querySelector("title");
+    title.textContent += details.Heading;
 }
