@@ -103,16 +103,17 @@ function createBody() {
     const fragment = new DocumentFragment();
     const page = document.querySelector(".page");
     const footer = document.querySelector("footer");
+    const details = JSON.parse(sessionStorage.getItem("details"));
 
-    fragment.append(createDescription());
+    fragment.append(createDescription(details.Description));
+    fragment.append(createCategory(details.Category));
     page.insertBefore(fragment, footer);
 }
 
-function createDescription() {
-    const details = JSON.parse(sessionStorage.getItem("details"));
+function createDescription(description) {
     const fragment = new DocumentFragment();
 
-    details.Description.split("\r\n").forEach(paragraph => {
+    description.split("\r\n").forEach(paragraph => {
 	const pEl = document.createElement("p");
 	pEl.classList.add("description");
 	pEl.textContent = paragraph;
@@ -120,4 +121,30 @@ function createDescription() {
     })
 
     return fragment
+}
+
+function createCategory(category) {
+    const fragment = new DocumentFragment();
+
+    fragment.append(createSubheading("Category"));
+    fragment.append(createContent(category));
+    return fragment
+}
+
+function createSubheading(text) {
+    const hEl = document.createElement("h3");
+    hEl.classList.add("subheading");
+    hEl.textContent = text;
+
+    return hEl
+}
+
+function createContent(content) {
+    if (Array.isArray(content)) {
+    } else {
+	const pEl = document.createElement("p");
+	pEl.classList.add("content");
+	pEl.textContent = content;
+	return pEl
+    }
 }
