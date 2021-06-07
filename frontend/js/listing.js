@@ -2,6 +2,7 @@ getListingDetails();
 getListingImages();
 setHeading();
 setTitle()
+createBody();
 
 function retrieveListingId() {
     const url = new URL(location);
@@ -96,4 +97,27 @@ function setTitle() {
     const details = JSON.parse(sessionStorage.getItem("details"));
     const title = document.querySelector("title");
     title.textContent += details.Heading;
+}
+
+function createBody() {
+    const fragment = new DocumentFragment();
+    const page = document.querySelector(".page");
+    const footer = document.querySelector("footer");
+
+    fragment.append(createDescription());
+    page.insertBefore(fragment, footer);
+}
+
+function createDescription() {
+    const details = JSON.parse(sessionStorage.getItem("details"));
+    const fragment = new DocumentFragment();
+
+    details.Description.split("\r\n").forEach(paragraph => {
+	const pEl = document.createElement("p");
+	pEl.classList.add("description");
+	pEl.textContent = paragraph;
+	fragment.append(pEl);
+    })
+
+    return fragment
 }
