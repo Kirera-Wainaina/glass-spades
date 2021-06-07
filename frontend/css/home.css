@@ -69,6 +69,7 @@ div#listings {
     flex-direction: column;
     border: 1px solid lightgrey;
     margin-left: 2em;
+    margin-bottom: 1em;
 }
 
 .house-card img {
