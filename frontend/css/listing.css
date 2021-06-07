@@ -45,6 +45,13 @@ div#images img.arrow {
     width: 2em;
 }
 
+h2#heading {
+    grid-column: 1 / 13;
+    margin-top: 1em;
+    text-align: center;
+    font-weight: 100;
+}
+
 @media(orientation: portrait) {
     div#images img:nth-of-type(1) {
 	grid-column: 2 / 12;
@@ -98,4 +105,8 @@ div#images img.arrow {
 	width: 1.5em;
     }
 
+    h2#heading {
+	margin-left: .5em;
+	margin-right: .5em;
+    }
 }
