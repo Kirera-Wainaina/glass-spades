@@ -106,7 +106,11 @@ function createBody() {
     const details = JSON.parse(sessionStorage.getItem("details"));
 
     fragment.append(createDescription(details.Description));
-    fragment.append(createCategory(details.Category));
+
+    fragment.append(createSection("Category", details.Category));
+    fragment.append(createSection("Bedrooms", details.Bedrooms));
+    fragment.append(createSection("Bathrooms", details.Bathrooms));
+
     page.insertBefore(fragment, footer);
 }
 
@@ -122,12 +126,11 @@ function createDescription(description) {
 
     return fragment
 }
-
-function createCategory(category) {
+function createSection(name, value) {
     const fragment = new DocumentFragment();
 
-    fragment.append(createSubheading("Category"));
-    fragment.append(createContent(category));
+    fragment.append(createSubheading(name));
+    fragment.append(createContent(value));
     return fragment
 }
 
