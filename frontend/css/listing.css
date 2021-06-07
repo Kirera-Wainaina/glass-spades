@@ -46,10 +46,15 @@ div#images img.arrow {
 }
 
 h2#heading {
-    grid-column: 1 / 13;
+    grid-column: 5 / 9;
     margin-top: 1em;
     text-align: center;
     font-weight: 100;
+}
+
+p.description {
+    grid-column: 3 / 11;
+    margin-top: .5em;
 }
 
 @media(orientation: portrait) {
@@ -71,6 +76,10 @@ h2#heading {
 
     div#images div:nth-of-type(2) {
 	grid-column: 10 / 12;
+    }
+
+    h2#heading {
+	grid-column: 3 / 11;
     }
 }
 
@@ -106,7 +115,16 @@ h2#heading {
     }
 
     h2#heading {
+	grid-column: 1 / 6;
 	margin-left: .5em;
 	margin-right: .5em;
     }
+
+    p.description {
+	grid-column: 1 / 6;
+	margin-top: .8em;
+	margin-left: .3em;
+	margin-right: .3em;
+    }
+
 }
