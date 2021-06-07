@@ -28,7 +28,6 @@ function getListingImages() {
 	if (xhr.readyState == 4) {
 	    sessionStorage.setItem("images", this.response);
 	    const images = JSON.parse(this.response);
-	    console.log(images);
 	    displayFirstImages(images);
 	}
     }
@@ -83,3 +82,4 @@ function backPhoto() {
 	imgElements[i].src = images[mainIndex++];
     }
 }
+
