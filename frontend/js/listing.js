@@ -51,12 +51,14 @@ forwardArrow.addEventListener("click", forwardPhoto);
 function forwardPhoto() {
     const images = JSON.parse(sessionStorage.getItem("images"));
     const imgElements = document.querySelectorAll("div#images > img");
-    let mainIndex = sessionStorage.getItem("mainIndex");
+    let mainIndex = Number(sessionStorage.getItem("mainIndex"));
+    mainIndex += 1;
 
     for (let i = 0; i < imgElements.length; i++) {
-	if (mainIndex >= imgElements.length) mainIndex %= imgElements.length;
-	imgElements[i].src = images[++mainIndex];
+	if (mainIndex >= images.length) mainIndex = mainIndex % images.length;
+
 	if (i == 0) sessionStorage.setItem("mainIndex", mainIndex);
+	imgElements[i].src = images[mainIndex++];
     }
 }
 
