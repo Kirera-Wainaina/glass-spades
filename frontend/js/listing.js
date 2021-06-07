@@ -1,5 +1,6 @@
 getListingDetails();
 getListingImages();
+setHeading();
 
 function retrieveListingId() {
     const url = new URL(location);
@@ -14,7 +15,7 @@ function getListingDetails() {
 
     xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
-	    console.log(this.response)
+	    sessionStorage.setItem("details", this.response);
 	}
     }
 }
@@ -83,3 +84,9 @@ function backPhoto() {
     }
 }
 
+function setHeading() {
+    const details = JSON.parse(sessionStorage.getItem("details"));
+    console.log(details);
+    const heading = document.getElementById("heading");
+    heading.textContent = details.Heading;
+}
