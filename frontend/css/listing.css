@@ -58,12 +58,26 @@ p.description {
 }
 
 h3.subheading {
-    grid-column: 3 / 11;
-    font-size: 1.3em;
+    font-size: 1.1em;
+    margin-top: 0;
+    border-right: 1px solid lightgrey;
+    padding-right: 2em;
+    flex: 1;
 }
 
 p.content {
-    grid-column: 4 / 11;
+    flex: 3;
+    padding-left: 2em;
+}
+
+section {
+    grid-column: 3 / 11;
+    margin-top: 1em;
+    padding: 1em;
+
+    display: flex;
+    flex-direction: row;
+    border: 1px solid lightgrey;
 }
 
 @media(orientation: portrait) {
@@ -136,13 +150,21 @@ p.content {
 	margin-right: .3em;
     }
 
-    h3.subheading {
+    section {
 	grid-column: 1 / 6;
-	margin-left: .3em;
+	margin-left: 1em;
+	margin-right: 1em;
+    }
+
+    h3.subheading {
+	flex: 1;
+	padding-right: 0;
+	text-align: center;
     }
 
     p.content {
-	grid-column: 1 / 6;
-	margin-left: 1.5em;	
+	flex: 2;
+	padding-left: 0;
+	text-align: center;
     }
 }

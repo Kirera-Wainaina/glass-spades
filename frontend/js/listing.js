@@ -128,9 +128,11 @@ function createDescription(description) {
 }
 function createSection(name, value) {
     const fragment = new DocumentFragment();
+    const section = document.createElement("section");
 
-    fragment.append(createSubheading(name));
-    fragment.append(createContent(value));
+    section.append(createSubheading(name));
+    section.append(createContent(value));
+    fragment.append(section);
     return fragment
 }
 
