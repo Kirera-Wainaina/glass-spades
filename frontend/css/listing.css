@@ -61,12 +61,11 @@ h3.subheading {
     font-size: 1.1em;
     margin-top: 0;
     border-right: 1px solid lightgrey;
-    padding-right: 2em;
     flex: 1;
 }
 
 p.content {
-    flex: 3;
+    flex: 2;
     padding-left: 2em;
 }
 
@@ -154,17 +153,16 @@ section {
 	grid-column: 1 / 6;
 	margin-left: 1em;
 	margin-right: 1em;
+	padding-left: 0;
     }
 
     h3.subheading {
 	flex: 1;
-	padding-right: 0;
-	text-align: center;
     }
 
     p.content {
-	flex: 2;
 	padding-left: 0;
 	text-align: center;
+	flex: 1.5;
     }
 }
