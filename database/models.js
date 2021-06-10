@@ -54,7 +54,8 @@ const imageSchema = new Schema({
     googleId: String,
     link: String,
     name: String,
-    contentType: String
+    contentType: String,
+    position: Number
 });
 
 const User = mongoose.model("user", userSchema);
