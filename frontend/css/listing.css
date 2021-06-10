@@ -182,7 +182,6 @@ section {
 
     p.content {
 	padding-left: 0;
-	text-align: center;
 	flex: 1.5;
     }
 }

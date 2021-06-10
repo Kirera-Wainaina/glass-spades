@@ -93,7 +93,6 @@ function backPhoto() {
 
 function setHeading() {
     const details = JSON.parse(sessionStorage.getItem("details"));
-    console.log(details);
     const heading = document.getElementById("heading");
     heading.textContent = details.Heading;
 }
