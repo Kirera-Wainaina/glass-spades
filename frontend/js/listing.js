@@ -78,20 +78,19 @@ backArrow.addEventListener("click", backPhoto);
 function backPhoto() {
     const images = JSON.parse(sessionStorage.getItem("images"));
     const imgElements = document.querySelectorAll("div#images > img");
-    let mainIndex = sessionStorage.getItem("mainIndex");
-
-    mainIndex -= 1;
+    const mainPhotoLink = imgElements[0].src;
+    const mainPhotoPosition = images
+	  .filter(image => mainPhotoLink == image.link)[0].position;
 
     for (let i = 0; i < imgElements.length; i++) {
-	if (mainIndex < 0) {
-	    mainIndex = images.length - 1;
-	} else if (mainIndex >= images.length) {
-	    mainIndex = mainIndex % images.length;
+	let indexPosition = mainPhotoPosition + i - 1;
+	if (indexPosition < 0) {
+	    indexPosition += images.length;
+	} else if (indexPosition >= images.length) {
+	    indexPosition = images.length % indexPosition;
 	}
-
-	if (i == 0) sessionStorage.setItem("mainIndex", mainIndex);
-
-	imgElements[i].src = images[mainIndex++];
+	imgElements[i].src = images
+	    .filter(image => image.position == indexPosition)[0].link;
     }
 }
 
