@@ -39,15 +39,17 @@ function uploadListing(request, response) {
     })
 
     busboy.on("file", (fieldname, file, filename, encoding) => {
+	const nameSplit = fieldname.split("-");
+	const name = `${nameSplit[0]}-${nameSplit[1]}`;
 	const imageFolder = path.dirname(path.dirname(__dirname));
-	const route = path.join(imageFolder, "uploaded", fieldname);
+	const route = path.join(imageFolder, "uploaded", name);
 	file.pipe(fs.createWriteStream(route))
 	    .on("error", error => {
 		console.log("Error When writing image to file")
 		console.log(error)
 	    })
 	    .on("finish", async () => {
-		const file = await images.minifyImage(route);
+ 		const file = await images.minifyImage(route);
 		fs.unlink(route, error => console.error());
 		const cloudFile = await images.saveImage(file[0].destinationPath);
 		fs.unlink(file[0].destinationPath, error => console.error());
@@ -56,7 +58,8 @@ function uploadListing(request, response) {
 		    googleId: metadata["id"],
 		    link: metadata["mediaLink"],
 		    name: metadata["name"],
-		    contentType: metadata["contentType"]
+		    contentType: metadata["contentType"],
+		    position: nameSplit[2]
 		};
 		imageMetadata.push(imageInfo);
 		emitter.emit("uploaded", listing, imageMetadata, response);
