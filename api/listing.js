@@ -20,7 +20,12 @@ function getListingImages(request, response) {
 	try {
 	    const info = JSON.parse(String(data));
 	    const images = await db.Image.find({ listingId: info.id });
-	    const imageLinks = images.map(imageDetails => imageDetails.link);
+	    const imageLinks = images.map(imageDetails => {
+		return {
+		    link: imageDetails.link,
+		    position: imageDetails.position
+		}
+	    });
 	    response.writeHead(200, {
 		"content-type": "application/json"
 	    })
