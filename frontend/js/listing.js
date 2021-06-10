@@ -121,6 +121,7 @@ function createBody() {
 				  details["Internal Features"]));
     fragment.append(createSection("External Features",
 				  details["External Features"]));
+    fragment.append(createSection("Price", details.Price));
 
     page.insertBefore(fragment, footer);
 }
