@@ -59,14 +59,17 @@ forwardArrow.addEventListener("click", forwardPhoto);
 function forwardPhoto() {
     const images = JSON.parse(sessionStorage.getItem("images"));
     const imgElements = document.querySelectorAll("div#images > img");
-    let mainIndex = Number(sessionStorage.getItem("mainIndex"));
-    mainIndex += 1;
+    const mainPhotoLink = imgElements[0].src;
+    const mainPhotoPosition = images
+	  .filter(image => mainPhotoLink == image.link)[0].position;
 
     for (let i = 0; i < imgElements.length; i++) {
-	if (mainIndex >= images.length) mainIndex = mainIndex % images.length;
-
-	if (i == 0) sessionStorage.setItem("mainIndex", mainIndex);
-	imgElements[i].src = images[mainIndex++];
+	let indexPosition = mainPhotoPosition + 1 + i;
+	if (indexPosition >= images.length) {
+	    indexPosition = indexPosition % images.length;
+	};
+	imgElements[i].src = images
+	    .filter(image => image.position == indexPosition)[0].link;
     }
 }
 
