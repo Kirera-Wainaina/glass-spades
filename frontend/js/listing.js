@@ -1,8 +1,5 @@
 getListingDetails();
 getListingImages();
-setHeading();
-setTitle()
-createBody();
 
 function retrieveListingId() {
     const url = new URL(location);
@@ -18,6 +15,8 @@ function getListingDetails() {
     xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
 	    sessionStorage.setItem("details", this.response);
+
+	    runBodyFunctions()
 	}
     }
 }
@@ -35,6 +34,13 @@ function getListingImages() {
 	}
     }
 }
+
+function runBodyFunctions() {
+    setTitle()
+    setHeading();
+    createBody();
+}
+
 
 function displayFirstImages(images) {
     const imageDiv = document.getElementById("images");
