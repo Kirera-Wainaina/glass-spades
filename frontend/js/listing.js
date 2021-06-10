@@ -46,7 +46,8 @@ function displayFirstImages(images) {
     const imageDiv = document.getElementById("images");
     const imageElements = document.querySelectorAll("div#images > img");
     for (let i = 0; i < imageElements.length; i++) {
-	imageElements[i].src = images[i]
+	const image = images.filter(imageObject => imageObject.position == i)[0];
+	imageElements[i].src = image.link;
     }
 }
 
