@@ -1,7 +1,7 @@
 const db = require("../database/models");
 
 async function getListings(request, response) {
-    const overviews = await db.Image.find({ name: /-0.webp/ })
+    const overviews = await db.Image.find({ position: 0 })
 
     Promise.all(overviews.map(overview => {
 	return new Promise((resolve, reject) => {
