@@ -106,7 +106,7 @@ function setTitle(details) {
     title.textContent += details.Heading;
 }
 
-function createBody(details) {
+async function createBody(details) {
     const fragment = new DocumentFragment();
     const page = document.querySelector(".page");
     const footer = document.querySelector("footer");
@@ -121,6 +121,12 @@ function createBody(details) {
     fragment.append(createSection("External Features",
 				  details["External Features"]));
     fragment.append(createSection("Price", details.Price));
+
+    if(await confirmLogin()) {
+	const coordinates = [details.Location.coordinates[1],
+			     details.Location.coordinates[0]]
+	fragment.append(createSection("Location", coordinates));
+    }
 
     page.insertBefore(fragment, footer);
 }
@@ -181,4 +187,18 @@ function createContent(content) {
 	pEl.textContent = content;
 	return pEl
     }
+}
+
+function confirmLogin() {
+    return new Promise((resolve, reject) => {
+	const xhr = new XMLHttpRequest();
+	xhr.open("GET", "/api/signup/checkLogin");
+	xhr.send()
+
+	xhr.onreadystatechange = function() {
+	    if (this.readyState == 4) {
+		resolve(this.response)
+	    }
+	}
+    })
 }
