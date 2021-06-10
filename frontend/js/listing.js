@@ -36,9 +36,11 @@ function getListingImages() {
 }
 
 function runBodyFunctions() {
-    setTitle()
-    setHeading();
-    createBody();
+    const details = JSON.parse(sessionStorage.getItem("details"));
+    setTitle(details)
+    setHeading(details);
+    setMetaDescription(details);
+    createBody(details);
 }
 
 
@@ -94,23 +96,20 @@ function backPhoto() {
     }
 }
 
-function setHeading() {
-    const details = JSON.parse(sessionStorage.getItem("details"));
+function setHeading(details) {
     const heading = document.getElementById("heading");
     heading.textContent = details.Heading;
 }
 
-function setTitle() {
-    const details = JSON.parse(sessionStorage.getItem("details"));
+function setTitle(details) {
     const title = document.querySelector("title");
     title.textContent += details.Heading;
 }
 
-function createBody() {
+function createBody(details) {
     const fragment = new DocumentFragment();
     const page = document.querySelector(".page");
     const footer = document.querySelector("footer");
-    const details = JSON.parse(sessionStorage.getItem("details"));
 
     fragment.append(createDescription(details.Description));
 
@@ -138,6 +137,12 @@ function createDescription(description) {
 
     return fragment
 }
+
+function setMetaDescription(details) {
+    const description = document.querySelector("meta[name='description']");
+    description.content = details.Description.split("\r\n")[0];
+}
+
 function createSection(name, value) {
     const fragment = new DocumentFragment();
     const section = document.createElement("section");
