@@ -115,6 +115,10 @@ function createBody() {
     fragment.append(createSection("Category", details.Category));
     fragment.append(createSection("Bedrooms", details.Bedrooms));
     fragment.append(createSection("Bathrooms", details.Bathrooms));
+    fragment.append(createSection("Internal Features",
+				  details["Internal Features"]));
+    fragment.append(createSection("External Features",
+				  details["External Features"]));
 
     page.insertBefore(fragment, footer);
 }
@@ -145,12 +149,24 @@ function createSubheading(text) {
     const hEl = document.createElement("h3");
     hEl.classList.add("subheading");
     hEl.textContent = text;
-
     return hEl
 }
 
 function createContent(content) {
     if (Array.isArray(content)) {
+	const fragment = new DocumentFragment();
+	const divEl = document.createElement("div");
+	divEl.classList.add("features");
+
+	content.forEach(subcontent => {
+	    const pEl = document.createElement("p");
+	    pEl.classList.add("content");
+	    pEl.textContent = subcontent;
+	    divEl.append(pEl);
+	})
+	fragment.append(divEl);
+	return fragment
+
     } else {
 	const pEl = document.createElement("p");
 	pEl.classList.add("content");
