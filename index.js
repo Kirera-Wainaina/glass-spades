@@ -7,6 +7,7 @@ const url = require("url");
 const qs = require("querystring");
 
 const dotenv = require("dotenv");
+const puppeteer = require("puppeteer");
 const MIMES = require("./utils/MIMETypes.js");
 
 dotenv.config()
@@ -20,6 +21,7 @@ const options = {
     ca: fs.readFileSync(`${process.env.CERTPATH}/chain.pem`, "utf8"),
     allowHTTP1: true
 };
+
 
 const server = http2.createSecureServer(options);
 
@@ -55,6 +57,13 @@ server.on("request", (request, response) => {
 	readFileAndRespond(filePath, response);
     }
 });
+
+let browser, wsEndpoint;
+server.on("listening", async () => {
+    browser = await puppeteer
+ 	.launch({ args: ["--no-sandbox", "--disable-setuid-sandbox"] });
+    wsEndpoint = browser.wsEndpoint();
+})
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
 
