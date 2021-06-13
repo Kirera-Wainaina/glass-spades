@@ -14,15 +14,17 @@ function getListings() {
 }
 
 function displayHouseDetails(houseDetails) {
-    const listings = document.getElementById("listings");
-    const fragment = new DocumentFragment();
+    if (!document.querySelector(".house-card")) {
+	const listings = document.getElementById("listings");
+	const fragment = new DocumentFragment();
 
-    houseDetails.forEach(houseDetail => {
-	const houseCard = createHouseCard(houseDetail);
-	fragment.append(houseCard);
-    })
+	houseDetails.forEach(houseDetail => {
+	    const houseCard = createHouseCard(houseDetail);
+	    fragment.append(houseCard);
+	})
 
-    listings.appendChild(fragment);
+	listings.appendChild(fragment);
+    }
 }
 
 function createHouseCard(houseDetail) {
