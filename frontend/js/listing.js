@@ -118,6 +118,7 @@ async function createBody(details) {
     fragment.append(createDescription(details.Description));
 
     fragment.append(createSection("Category", details.Category));
+    fragment.append(createSection("Mandate", details.Mandate));
     fragment.append(createSection("Bedrooms", details.Bedrooms));
     fragment.append(createSection("Bathrooms", details.Bathrooms));
     fragment.append(createSection("Internal Features",
