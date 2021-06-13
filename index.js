@@ -28,13 +28,10 @@ const server = http2.createSecureServer(options);
 
 server.on("request", async (request, response) => {
     console.log(`Date: ${new Date()}, Path: ${request.url} http: ${request.httpVersion}`)
-    // const url = request.url;
     const parsed_url = url.parse(request.url);
-    // console.log(parsed_url);
     const cwd = ".";
 
     if (request.url == "/") {
-	console.log(request.headers["user-agent"])
 	serverSideRender(request, response);
     } else if (findTopDir(request.url) == "/api"){
 	// has to come before browser requests
@@ -45,6 +42,9 @@ server.on("request", async (request, response) => {
 	} catch(error) {
 	    handleError(error, response);
 	}
+    } else if (!path.extname(parsed_url.pathname) ){
+	// browser paths
+	serverSideRender(request, response);
     } else {
 	const filePath = createFilePath(request.url);
 	readFileAndRespond(filePath, response);
@@ -145,7 +145,6 @@ async function serverSideRender(request, response) {
     const parsed_url = url.parse(request.url);
     const cwd = "."
     if (routeCache.has(parsed_url.pathname)) {
-	// console.log(routeCache.get(request.url))
 	response.writeHead(200, { "content-type": "text/html" })
 	    .end(routeCache.get(parsed_url.pathname))
     } else {
@@ -180,7 +179,7 @@ function createFilePath(urlPath) {
 	filePath = `${cwd}/frontend/html${parsed_url.pathname}.html`;
     } else {
 	// etc files e.g favicon
-	filePath = `${cwd}${request.url}`;
+	filePath = `${cwd}${parsed_url.pathname}`;
     }
 
     return filePath
