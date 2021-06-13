@@ -126,10 +126,20 @@ section {
 
     div#images div:nth-of-type(1) {
 	grid-column: 2 / 4;
+	position: relative;
+	top: 0;
+	right: 0;
+	width: inherit;
+	height: inherit;
     }
 
     div#images div:nth-of-type(2) {
 	grid-column: 10 / 12;
+	position: relative;
+	top: 0;
+	left: 0;
+	width: inherit;
+	height: inherit;
     }
 
     h2#heading {
