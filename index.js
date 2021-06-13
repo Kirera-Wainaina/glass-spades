@@ -35,31 +35,7 @@ server.on("request", async (request, response) => {
 
     if (request.url == "/") {
 	console.log(request.headers["user-agent"])
-
-	if (routeCache.has(request.url)) {
-	    console.log("called");
-	    console.log(routeCache.get(request.url))
-	    response.writeHead(200, { "content-type": "text/html" })
-		.end(routeCache.get(request.url))
-	} else {
-	    if (request.headers["user-agent"] == "glassspades-headless-chromium") {
-		console.log("Chromium made a call")
-		const filePath = `${cwd}/frontend/html/home.html`;
-		readFileAndRespond(filePath, response)
-	    } else {
-		const browser = await puppeteer.connect({ browserWSEndpoint: wsEndpoint });
-		const page = await browser.newPage();
-		await page.setUserAgent("glassspades-headless-chromium")
-		await page.goto(`${process.env.URL}${request.url}`,
-				{ waitUntil: "networkidle0" });
-		const html = await page.content();
-		routeCache.set(request.url, html);
-		response.writeHead(200, {
-		    "content-type": "text/html"
-		})
-		    .end(html)
-	    }
-	}
+	serverSideRender(request, response);
     } else if (findTopDir(request.url) == "/api"){
 	// has to come before browser requests
 	try {
@@ -173,3 +149,32 @@ function findTopDir(route) {
     }
     return top
 }
+
+async function serverSideRender(request, response) {
+    const parsed_url = url.parse(request.url);
+    const cwd = "."
+    if (routeCache.has(parsed_url.pathname)) {
+	// console.log(routeCache.get(request.url))
+	response.writeHead(200, { "content-type": "text/html" })
+	    .end(routeCache.get(parsed_url.pathname))
+    } else {
+	if (request.headers["user-agent"] == "glassspades-headless-chromium") {
+	    const filePath = `${cwd}/frontend/html/home.html`;
+	    readFileAndRespond(filePath, response)
+	} else {
+	    const browser = await puppeteer.connect({ browserWSEndpoint: wsEndpoint });
+	    const page = await browser.newPage();
+	    await page.setUserAgent("glassspades-headless-chromium")
+	    await page.goto(`${process.env.URL}${request.url}`,
+			    { waitUntil: "networkidle0" });
+	    const html = await page.content();
+	    routeCache.set(parsed_url.pathname, html);
+	    response.writeHead(200, {
+		"content-type": "text/html"
+	    })
+		.end(html)
+	}
+    }
+}
+
+// function createFilePath
