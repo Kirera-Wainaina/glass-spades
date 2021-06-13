@@ -37,10 +37,6 @@ function createHouseCard(houseDetail) {
     overviewImg.alt = "Glass Spades Houses";
     houseCard.append(overviewImg);
 
-    // const housePrice = document.createElement("p");
-    // housePrice.textContent = `Kes. ${houseDetail.price}`;
-    // houseCard.append(housePrice);
-
     houseCard.append(createBedrooms(houseDetail.bedrooms,
 				    "/frontend/images/bed-icon.svg"))
     houseCard.append(createBedrooms(houseDetail.bathrooms,
