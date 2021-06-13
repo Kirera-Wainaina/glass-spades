@@ -37,6 +37,7 @@ userSchema.methods.generateToken = function() {
 const listingSchema = new Schema({
     Heading: String,
     Description: String,
+    Mandate: String,
     Category: String,
     Bedrooms: Number,
     Bathrooms: Number,
