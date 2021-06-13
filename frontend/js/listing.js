@@ -36,13 +36,14 @@ function getListingImages() {
 }
 
 function runBodyFunctions() {
-    const details = JSON.parse(sessionStorage.getItem("details"));
-    setTitle(details)
-    setHeading(details);
-    setMetaDescription(details);
-    createBody(details);
+    if (!document.querySelector(".description")) {
+	const details = JSON.parse(sessionStorage.getItem("details"));
+	setTitle(details)
+	setHeading(details);
+	setMetaDescription(details);
+	createBody(details);
+    }
 }
-
 
 function displayFirstImages(images) {
     const imageDiv = document.getElementById("images");
