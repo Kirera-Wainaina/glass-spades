@@ -37,9 +37,30 @@ function createHouseCard(houseDetail) {
     overviewImg.alt = "Glass Spades Houses";
     houseCard.append(overviewImg);
 
-    const housePrice = document.createElement("p");
-    housePrice.textContent = `Kes. ${houseDetail.price}`;
-    houseCard.append(housePrice);
+    // const housePrice = document.createElement("p");
+    // housePrice.textContent = `Kes. ${houseDetail.price}`;
+    // houseCard.append(housePrice);
+
+    houseCard.append(createBedrooms(houseDetail.bedrooms,
+				    "/frontend/images/bed-icon.svg"))
+    houseCard.append(createBedrooms(houseDetail.bathrooms,
+				    "/frontend/images/bath-icon.svg"))
 
     return houseCard
+}
+
+function createBedrooms(value, icon) {
+    const div = document.createElement("div");
+    div.classList.add("card-details");
+
+    const img = document.createElement("img");
+    img.alt = `icon`;
+    img.src = icon;
+    div.append(img);
+
+    const p = document.createElement("p");
+    p.textContent = value;
+    div.append(p);
+
+    return div
 }
