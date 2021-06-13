@@ -10,6 +10,8 @@ async function getListings(request, response) {
 		resolve({
 		    "imageSrc": overview.link,
 		    "price": docs.Price,
+		    "bedrooms": docs.Bedrooms,
+		    "bathrooms": docs.Bathrooms,
 		    "id": docs._id
 		});
 	    })
