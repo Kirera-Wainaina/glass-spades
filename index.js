@@ -45,17 +45,8 @@ server.on("request", async (request, response) => {
 	} catch(error) {
 	    handleError(error, response);
 	}
-    } else if(!path.extname(parsed_url.pathname)) {
-	let filePath;
-	if (parsed_url.query) {
-	    filePath = `${cwd}/frontend/html${parsed_url.pathname}.html`;
-	} else {
-	    filePath = `${cwd}/frontend/html${request.url}.html`;
-	}
-	readFileAndRespond(filePath, response)
-
     } else {
-	const filePath = `${cwd}${request.url}`;
+	const filePath = createFilePath(request.url);
 	readFileAndRespond(filePath, response);
     }
 });
@@ -159,7 +150,7 @@ async function serverSideRender(request, response) {
 	    .end(routeCache.get(parsed_url.pathname))
     } else {
 	if (request.headers["user-agent"] == "glassspades-headless-chromium") {
-	    const filePath = `${cwd}/frontend/html/home.html`;
+   	    const filePath = createFilePath(request.url);
 	    readFileAndRespond(filePath, response)
 	} else {
 	    const browser = await puppeteer.connect({ browserWSEndpoint: wsEndpoint });
@@ -177,4 +168,20 @@ async function serverSideRender(request, response) {
     }
 }
 
-// function createFilePath
+function createFilePath(urlPath) {
+    const cwd = ".";
+    const parsed_url = url.parse(urlPath);
+    let filePath;
+
+    if (urlPath == "/") {
+	filePath = `${cwd}/frontend/html/home.html`;
+    } else if (!path.extname(parsed_url.pathname) ){
+	// browser paths
+	filePath = `${cwd}/frontend/html${parsed_url.pathname}.html`;
+    } else {
+	// etc files e.g favicon
+	filePath = `${cwd}${request.url}`;
+    }
+
+    return filePath
+}
