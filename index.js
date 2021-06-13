@@ -9,6 +9,7 @@ const qs = require("querystring");
 const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 const MIMES = require("./utils/MIMETypes.js");
+let wsEndpoint, routeCache;
 
 dotenv.config()
 
@@ -25,15 +26,40 @@ const options = {
 
 const server = http2.createSecureServer(options);
 
-server.on("request", (request, response) => {
+server.on("request", async (request, response) => {
     console.log(`Date: ${new Date()}, Path: ${request.url} http: ${request.httpVersion}`)
     // const url = request.url;
     const parsed_url = url.parse(request.url);
+    // console.log(parsed_url);
     const cwd = ".";
 
     if (request.url == "/") {
-	const filePath = `${cwd}/frontend/html/home.html`;
-	readFileAndRespond(filePath, response)
+	console.log(request.headers["user-agent"])
+
+	if (routeCache.has(request.url)) {
+	    console.log("called");
+	    console.log(routeCache.get(request.url))
+	    response.writeHead(200, { "content-type": "text/html" })
+		.end(routeCache.get(request.url))
+	} else {
+	    if (request.headers["user-agent"] == "glassspades-headless-chromium") {
+		console.log("Chromium made a call")
+		const filePath = `${cwd}/frontend/html/home.html`;
+		readFileAndRespond(filePath, response)
+	    } else {
+		const browser = await puppeteer.connect({ browserWSEndpoint: wsEndpoint });
+		const page = await browser.newPage();
+		await page.setUserAgent("glassspades-headless-chromium")
+		await page.goto(`${process.env.URL}${request.url}`,
+				{ waitUntil: "networkidle0" });
+		const html = await page.content();
+		routeCache.set(request.url, html);
+		response.writeHead(200, {
+		    "content-type": "text/html"
+		})
+		    .end(html)
+	    }
+	}
     } else if (findTopDir(request.url) == "/api"){
 	// has to come before browser requests
 	try {
@@ -58,11 +84,11 @@ server.on("request", (request, response) => {
     }
 });
 
-let browser, wsEndpoint;
 server.on("listening", async () => {
-    browser = await puppeteer
+    const browser = await puppeteer
  	.launch({ args: ["--no-sandbox", "--disable-setuid-sandbox"] });
     wsEndpoint = browser.wsEndpoint();
+    routeCache = new Map();
 })
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
