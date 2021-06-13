@@ -111,6 +111,9 @@ async function createBody(details) {
     const fragment = new DocumentFragment();
     const page = document.querySelector(".page");
     const footer = document.querySelector("footer");
+    const price = new Intl
+	  .NumberFormat("sw-ke", { style: "currency", currency: "Kes"})
+	  .format(details.Price);
 
     fragment.append(createDescription(details.Description));
 
@@ -121,7 +124,7 @@ async function createBody(details) {
 				  details["Internal Features"]));
     fragment.append(createSection("External Features",
 				  details["External Features"]));
-    fragment.append(createSection("Price", details.Price));
+    fragment.append(createSection("Price", price));
 
     if(await confirmLogin()) {
 	const coordinates = [details.Location.coordinates[1],
