@@ -9,7 +9,6 @@ async function getListings(request, response) {
 		if (error) reject(error);
 		resolve({
 		    "imageSrc": overview.link,
-		    "price": docs.Price,
 		    "bedrooms": docs.Bedrooms,
 		    "bathrooms": docs.Bathrooms,
 		    "id": docs._id
