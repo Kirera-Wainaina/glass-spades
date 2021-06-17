@@ -112,24 +112,24 @@ section {
 }
 
 form {
-    grid-column: 3 / 11;
-    background-color: black;
+    grid-column: 4 / 10;
+    border: 2px ridge lightgrey;
+    margin-top: 2em;
+    padding: 2em;
 }
 
 form p {
-    color: white;
     text-align: center;
 }
 
 form a {
-    color: gray;
     font-size: 1em;
-    text-decoration: white;
+    text-decoration: black;
     text-decoration-line: underline;
 }
 
-form:hover {
-    color: white;
+form a:hover {
+    color: grey;
 }
 
 @media(orientation: portrait) {
