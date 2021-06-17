@@ -111,6 +111,27 @@ section {
     border: 1px solid lightgrey;
 }
 
+form {
+    grid-column: 3 / 11;
+    background-color: black;
+}
+
+form p {
+    color: white;
+    text-align: center;
+}
+
+form a {
+    color: gray;
+    font-size: 1em;
+    text-decoration: white;
+    text-decoration-line: underline;
+}
+
+form:hover {
+    color: white;
+}
+
 @media(orientation: portrait) {
     div#images img:nth-of-type(1) {
 	grid-column: 2 / 12;
