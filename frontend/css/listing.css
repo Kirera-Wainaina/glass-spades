@@ -135,6 +135,11 @@ form a:hover {
 
 form input {
     width: 70%;
+    margin-bottom: .75em;
+}
+
+form label {
+    display: block
 }
 
 @media(orientation: portrait) {
@@ -246,5 +251,6 @@ form input {
     form input {
 	height: 2em;
 	width: 100%;
+	margin-bottom: .5em;
     }
 }
