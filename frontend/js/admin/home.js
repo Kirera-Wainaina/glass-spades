@@ -4,7 +4,7 @@ xhr.send()
 
 xhr.onreadystatechange = function() {
     if (xhr.readyState == 4 && xhr.response != "/admin/home") {
-	location.href = "/login"
+	// location.href = "/login"
     }
 
 }
