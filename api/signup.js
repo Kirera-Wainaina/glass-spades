@@ -106,7 +106,7 @@ function checkLogin(request, response) {
 	}
     } else {
 	response.writeHead(200, { "content-type": "text/plain" })
-	    .end("")
+	    .end()
     }
 }
 
