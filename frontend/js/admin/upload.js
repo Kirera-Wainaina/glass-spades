@@ -4,11 +4,10 @@ window.addEventListener("load", () => {
     if (!document.getElementById("Mandate-container")) {
 	runPage();
     }
-    if (!document.getElementById("map")) {
-	appendMapsScript()
-    }
+    const page = document.querySelector(".page");
+    page.addEventListener("click", addDataToHouseInfo);
+    page.addEventListener("click", changeButtonColorOnClick);
 });
-
 
 function runPage() {
     if (!sessionStorage.getItem("model")) {
@@ -73,8 +72,8 @@ function createButtons(key, data) {
 }
 
 const page = document.querySelector(".page");
-page.addEventListener("click", (event) => {
-    // add or remove from house info
+function addDataToHouseInfo(event) {
+   // add or remove from house info
     const element = event.target;
     
     if (element.tagName == "BUTTON") {
@@ -98,10 +97,10 @@ page.addEventListener("click", (event) => {
 	    }
 	}
     }
+}
 
-})
 
-page.addEventListener("click", (event) => {
+function changeButtonColorOnClick(event) {
     // change the colors of the buttons when clicked
     const element = event.target;
 
@@ -126,7 +125,7 @@ page.addEventListener("click", (event) => {
 		element.classList.add("clicked-button")
 	}
     }
-})
+}
 
 const fileUpload = document.getElementById("file-upload");
 fileUpload.addEventListener("click", event => {
@@ -297,9 +296,12 @@ function hideLoadingPage() {
 
 function appendMapsScript() {
     const head = document.querySelector("head");
+    const body = document.querySelector("body");
     const script = document.createElement("script");
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVByoterVaoQyeLZ_ZmFvDBHcJJInQ84&callback=initMap&libraries=&v=weekly";
-    head.append(script)
+    script.id = "google-maps-script";
+    // head.append(script)
+    body.append(script)
 }
 
 
