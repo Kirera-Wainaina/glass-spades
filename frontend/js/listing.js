@@ -110,7 +110,8 @@ function setTitle(details) {
 async function createBody(details) {
     const fragment = new DocumentFragment();
     const page = document.querySelector(".page");
-    const form = document.querySelector("form");
+    // const form = document.querySelector("form");
+    const footer = document.querySelector("footer");
     const price = new Intl
 	  .NumberFormat("sw-ke", { style: "currency", currency: "Kes"})
 	  .format(details.Price);
@@ -133,7 +134,8 @@ async function createBody(details) {
 	fragment.append(createSection("Location", coordinates));
     }
 
-    page.insertBefore(fragment, form);
+    // page.insertBefore(fragment, form);
+    page.insertBefore(fragment, footer);
 }
 
 function createDescription(description) {
