@@ -303,13 +303,17 @@ function hideLoadingPage() {
     loadingPage.style.display = "none";
 }
 
+window.addEventListener("load", () => {
+    if (navigator.userAgent != "glassspades-headless-chromium") {
+	appendMapsScript();
+    }
+})
+
 function appendMapsScript() {
-    const head = document.querySelector("head");
     const body = document.querySelector("body");
     const script = document.createElement("script");
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVByoterVaoQyeLZ_ZmFvDBHcJJInQ84&callback=initMap&libraries=&v=weekly";
     script.id = "google-maps-script";
-    // head.append(script)
     body.append(script)
 }
 
