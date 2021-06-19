@@ -22,11 +22,14 @@ window.addEventListener("load", () => {
 
 
 function constructPage(model) {
-    const containerFragment = createContainers(model);
-    const parentContainer = document.querySelector(".page");
-    const map = document.getElementById("map");
+    if (!document.getElementById("Mandate-container")) {
+	// Without mandate container, JS has not run
+	const containerFragment = createContainers(model);
+	const parentContainer = document.querySelector(".page");
+	const map = document.getElementById("map");
 
-    parentContainer.insertBefore(containerFragment, map);
+	parentContainer.insertBefore(containerFragment, map);
+    }
 }    
 
 function createContainers(model) {
