@@ -1,12 +1,9 @@
 var houseInfo = {};
 
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
     if (!document.getElementById("Mandate-container")) {
 	runPage();
     }
-    const page = document.querySelector(".page");
-    page.addEventListener("click", addDataToHouseInfo);
-    page.addEventListener("click", changeButtonColorOnClick);
 });
 
 function runPage() {
@@ -71,7 +68,11 @@ function createButtons(key, data) {
     return fragment
 }
 
-const page = document.querySelector(".page");
+window.addEventListener("DOMContentLoaded", () => {
+    const page = document.querySelector(".page");
+    page.addEventListener("click", addDataToHouseInfo);
+    page.addEventListener("click", changeButtonColorOnClick);
+})
 function addDataToHouseInfo(event) {
    // add or remove from house info
     const element = event.target;
@@ -127,41 +128,47 @@ function changeButtonColorOnClick(event) {
     }
 }
 
-const fileUpload = document.getElementById("file-upload");
-fileUpload.addEventListener("click", event => {
+
+window.addEventListener("DOMContentLoaded", () => {
+    const fileUpload = document.getElementById("file-upload");
+    fileUpload.addEventListener("click", event => {
+	const fileInput = document.getElementById("invisible-file-upload");
+	fileInput.click();
+    })
+
     const fileInput = document.getElementById("invisible-file-upload");
-    fileInput.click();
-})
+    fileInput.addEventListener("change", (event) => {
+	const files = event.target.files;
+	const fragment = new DocumentFragment();
+	const dropZone = document.getElementById("drop-zone");
 
-const fileInput = document.getElementById("invisible-file-upload");
-fileInput.addEventListener("change", (event) => {
-    const files = event.target.files;
-    const fragment = new DocumentFragment();
-    const dropZone = document.getElementById("drop-zone");
+	for(let i = 0; i < files.length; i++) {
+	    fragment.append(displayImage(files[i]));
+	}
 
-    for(let i = 0; i < files.length; i++) {
-	fragment.append(displayImage(files[i]));
-    }
+	dropZone.appendChild(fragment);
+    });
 
-    dropZone.appendChild(fragment);
 });
 
 
-const dropZone = document.getElementById("drop-zone");
-dropZone.addEventListener("dragover", event => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
-})
+window.addEventListener("DOMContentLoaded", () => {
+    const dropZone = document.getElementById("drop-zone");
+    dropZone.addEventListener("dragover", event => {
+	event.preventDefault();
+	event.dataTransfer.dropEffect = "move";
+    })
 
-dropZone.addEventListener("drop", event => {
-    event.preventDefault();
-    const fragment = new DocumentFragment();
-    
-    const files = event.dataTransfer.files;
-    for(let i = 0; i < files.length; i++) {
-	fragment.append(displayImage(files[i]));
-    }
-    dropZone.appendChild(fragment);
+    dropZone.addEventListener("drop", event => {
+	event.preventDefault();
+	const fragment = new DocumentFragment();
+	
+	const files = event.dataTransfer.files;
+	for(let i = 0; i < files.length; i++) {
+	    fragment.append(displayImage(files[i]));
+	}
+	dropZone.appendChild(fragment);
+    })
 })
 
 function displayImage(image) {
@@ -198,8 +205,10 @@ function dropImage(event) {
     dropImg.insertAdjacentElement("beforebegin", draggedImgElement);
 }
 
-const submit = document.getElementById("submit");
-submit.addEventListener("click", setData);
+window.addEventListener("DOMContentLoaded", () => {
+    const submit = document.getElementById("submit");
+    submit.addEventListener("click", setData);
+})
 
 async function setData(event) {
     const formdata = new FormData();
