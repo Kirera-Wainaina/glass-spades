@@ -1,6 +1,13 @@
 var houseInfo = {};
 
-window.addEventListener("load", () => {
+if (!document.getElementById("Mandate-container")) {
+    runPage();
+}
+if (!document.getElementById("map")) {
+    appendMapsScript()
+}
+
+function runPage() {
     if (!sessionStorage.getItem("model")) {
 	const xhr = new XMLHttpRequest();
 	xhr.open("POST", "/api/admin/upload/sendModelData");
@@ -17,19 +24,38 @@ window.addEventListener("load", () => {
 	const model = JSON.parse(sessionStorage.getItem("model"));
 	constructPage(model);
     }
-});
+}
+// window.addEventListener("load", () => {
+//     if (!sessionStorage.getItem("model")) {
+// 	const xhr = new XMLHttpRequest();
+// 	xhr.open("POST", "/api/admin/upload/sendModelData");
+// 	xhr.send();
+
+// 	xhr.onreadystatechange = function() {
+// 	    if (this.readyState == 4) {
+// 		const model = JSON.parse(this.response);
+// 		constructPage(model);
+// 		sessionStorage.setItem("model", JSON.stringify(model));
+// 	    }
+// 	}
+//     } else {
+// 	const model = JSON.parse(sessionStorage.getItem("model"));
+// 	constructPage(model);
+//     }
+// });
+
 
 
 
 function constructPage(model) {
-    if (!document.getElementById("Mandate-container")) {
+    // if (!document.getElementById("Mandate-container")) {
 	// Without mandate container, JS has not run
 	const containerFragment = createContainers(model);
 	const parentContainer = document.querySelector(".page");
 	const map = document.getElementById("map");
 
 	parentContainer.insertBefore(containerFragment, map);
-    }
+    // }
 }    
 
 function createContainers(model) {
@@ -297,7 +323,6 @@ function appendMapsScript() {
     head.append(script)
 }
 
-appendMapsScript()
 
 function initMap() {
     const mapEl = document.getElementById("map");
