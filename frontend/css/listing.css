@@ -144,7 +144,9 @@ form input {
 }
 
 form label {
-    display: block
+    display: block;
+    align-self: flex-start;
+    padding-left: inherit;
 }
 
 form input[type="submit"] {
