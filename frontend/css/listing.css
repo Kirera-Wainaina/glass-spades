@@ -116,6 +116,7 @@ form {
     border: 2px ridge lightgrey;
     margin-top: 2em;
     padding: 2em;
+
 }
 
 form p {
@@ -141,6 +142,13 @@ form input {
 
 form label {
     display: block
+}
+
+form input[type="submit"] {
+    margin-top: 1em;
+    background: black;
+    color: white;
+    height: 3em;
 }
 
 @media(orientation: portrait) {
