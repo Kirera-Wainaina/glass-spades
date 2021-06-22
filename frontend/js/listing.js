@@ -132,7 +132,8 @@ async function createBody(details) {
 			     details.Location.coordinates[0]]
 	fragment.append(createSection("Location", coordinates));
     }
-
+    // fragment.append(createSection("Location", coordinates));
+    
     page.insertBefore(fragment, form);
 }
 
@@ -207,3 +208,8 @@ function confirmLogin() {
 	}
     })
 }
+
+const form = document.querySelector("form");
+form.addEventListener("submit", event => {
+    event.preventDefault();
+});
