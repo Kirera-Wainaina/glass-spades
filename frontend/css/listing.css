@@ -136,6 +136,7 @@ form a:hover {
 form input {
     width: 70%;
     margin-bottom: .75em;
+    height: 2em;
 }
 
 form label {
@@ -179,6 +180,10 @@ form label {
 
     form p {
 	text-align: left;
+    }
+
+    form input {
+	width: 90%;
     }
 }
 
