@@ -137,7 +137,7 @@ footer a, footer p {
     color: white;
 }
 
-#snackbar {
+.snackbar {
     position: fixed;
     bottom: 10vh;
     left: 35vw;
