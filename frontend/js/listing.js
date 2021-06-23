@@ -214,6 +214,7 @@ form.addEventListener("submit", event => {
     event.preventDefault();
 
     const formdata = new FormData(form);
+    formdata.append("link", location.href);
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/listing/handleLeadInfo");
