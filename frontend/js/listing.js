@@ -226,8 +226,14 @@ form.addEventListener("submit", event => {
 	    if (this.response == "success") {
 		const loadingPage = document.getElementById("loading-page");
 		loadingPage.style.display = "none";
+		const snackbar = document.getElementById("snackbar-success");
+		snackbar.style.display = "block";
+		snackbar.classList.add("slide");
+		snackbar.addEventListener("animationend", (event) => {
+		    event.target.style.display = "none";
+		})
 	    } else {
-		const snackbar = document.getElementById("snackbar");
+		const snackbar = document.getElementById("snackbar-error");
 		snackbar.style.display = "block";
 		snackbar.classList.add("slide");
 		snackbar.addEventListener("animationend", (event) => {
