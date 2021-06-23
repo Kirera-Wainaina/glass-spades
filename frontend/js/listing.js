@@ -108,6 +108,7 @@ function setTitle(details) {
 }
 
 async function createBody(details) {
+    console.log(details);
     const fragment = new DocumentFragment();
     const page = document.querySelector(".page");
     const form = document.querySelector("form");
