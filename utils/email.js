@@ -14,9 +14,9 @@ function emailLead(leadDetails) {
 	html: createLeadHTML(leadDetails),
 	text: createPlainText(leadDetails),
 	attachments: [{
-	    path: dir + "/frontend/images/GS-logo.webp",
-	    filename: "GS-logo.webp",
-	    cid: "GS-logo.webp"
+	    path: dir + "/frontend/images/GS-logo.png",
+	    filename: "GS-logo.png",
+	    cid: "GS-logo.png"
 	}]
     };
     const transporter = nodemailer.createTransport({
@@ -37,12 +37,74 @@ function emailLead(leadDetails) {
 
 function createLeadHTML(leadDetails) {
     const htmlText = `
+  <head>
+    <style>
+    .page {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+    }
+    
+    #header-block {
+        border-bottom: 1px solid lightgrey;
+        grid-column: 1 / 13;
+        height: 4em;
+    
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+    }
+    
+    #header-anchor {
+        grid-column: 1 / 7;
+        height: inherit;
+        margin-left: 1em;
+    }
+    
+    #header-img {
+        height: 90%;
+    }
+
+    #logo-p {
+        font-size: 1.5em;
+    }
+    
+    #lead-card {
+        grid-column: 4 / 10;
+        border: 1px ridge lightgrey;
+        margin: 2em;
+        padding: 1em;
+    }
+    
+    .footer-anchors {
+        display: block;
+        text-align: center;
+        margin-bottom: 1em;
+        font-size: 0.7em;
+    }
+    
+    @media(max-width: 500px) {
+        .page {
+    	    grid-template-columns: repeat(5, 1fr);
+        }
+    
+        header {
+    	    grid-column: 1 / 6;
+    	    grid-template-columns: repeat(5, 1fr);
+        }
+    
+        #lead-card {
+    	    grid-column: 1 / 6;
+        }
+    }
+    </style>
+  </head>
+
   <body>
-    <noscript>You need to enable Javascript to run this app</noscript>
     <div class="page">
-      <header>
-	<a href="/"><img src='cid:GS-logo.webp'/></a>
-      </header>
+      <div id="header-block">
+	<a id="header-anchor" href="https://glassspades.com/" >
+            <img id="header-img" src='cid:GS-logo.png'/>
+        </a>
+      </div>
 
       <div id="lead-card">
 	<p>Name: ${leadDetails["first-name"]}</p>
@@ -51,11 +113,11 @@ function createLeadHTML(leadDetails) {
 	<p>Listing Link: <a href=${leadDetails["link"]}>Listing of interest</a></p>
       </div>
 
-      <footer>
-	<a href="/terms">Terms of service</a>
-	<a href="/privacy-policy">Privacy Policy</a>
-	<a href="/contacts">Contact Us</a>
-	<p>&copy Glass Spades. All rights reserved.</p>
+      <footer id="footer-block">
+	<a class="footer-anchors" href="/terms">Terms of service</a>
+	<a class="footer-anchors" href="/privacy-policy">Privacy Policy</a>
+	<a class="footer-anchors" href="/contacts">Contact Us</a>
+	<p class="footer-anchors">&copy Glass Spades. All rights reserved.</p>
       </footer>
     </div>
 
@@ -65,54 +127,6 @@ function createLeadHTML(leadDetails) {
     return htmlText
 }
 
-// const htmlText = `
-// <!DOCTYPE html>
-
-// <html lang="en">
-//   <head>
-//     <meta charset="utf-8">
-//     <meta name="author" content="Kirera-Wainaina">
-//     <meta name="description"
-// 	  content="Finding a home should be an enjoyable journey and
-// 	  the crowning moment is when you find a home that you and
-// 	  your family love. We are a property agency that will help
-// 	  you find your next home a lot quicker. We deal with other
-// 	  property types as well and whatever your need, we will help
-// 	  you find it. ">
-//     <meta name="viewport" content="width=device-width, initial-scale=1">
-//     <link rel="shortcut icon" href="/frontend/images/GS-tiny-icon.png">    
-//     <link rel="apple-touch-icon" href="/frontend/images/GS-tiny-icon.png">
-//     <link rel="stylesheet" href="/frontend/css/email-template.css">
-//     <script type="module" async="async" src="/frontend/js/home.js"></script>
-//     <title>Glass Spades | Find the property that fits your needs</title>
-//   </head>
-
-//   <body>
-//     <noscript>You need to enable Javascript to run this app</noscript>
-//     <div class="page">
-//       <header>
-// 	<a href="/"><img src="/frontend/images/GS-logo.webp"/></a>
-//       </header>
-
-//       <div id="lead-card">
-// 	<p>Name: ${leadDetails["first-name"]}</p>
-// 	<p>Email: ${leadDetails["email"]}</p>
-// 	<p>Phone Number: ${leadDetails["phone-number"]}</p>
-// 	<p>Listing Link: <a href=${leadDetails["link"]}>Listing of interest</a></p>
-//       </div>
-
-//       <footer>
-// 	<a href="/terms">Terms of service</a>
-// 	<a href="/privacy-policy">Privacy Policy</a>
-// 	<a href="/contacts">Contact Us</a>
-// 	<p>&copy Glass Spades. All rights reserved.</p>
-//       </footer>
-//     </div>
-
-//   </body>
-  
-// </html>
-// `;
 
 function createPlainText(leadDetails) {
     const plain = `
