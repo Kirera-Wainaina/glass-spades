@@ -1,0 +1,14 @@
+@import url("home.css");
+
+#lead-card {
+    grid-column: 4 / 10;
+    border: 1px ridge lightgrey;
+    margin: 2em;
+    padding: 1em;
+}
+
+@media(max-width: 500px) {
+    #lead-card {
+	grid-column: 1 / 6;
+    }
+}
