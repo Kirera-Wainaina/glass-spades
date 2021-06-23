@@ -148,6 +148,30 @@ footer a, footer p {
     box-shadow: 0 0 10px lightgrey;
     text-align: center;
     padding: 1em;
+    display: none;
+}
+
+.slide {
+    animation: slide;
+    animation-duration: 10s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes slide {
+    0% {
+	bottom: 0;
+	opacity: 0 
+    }
+
+    50% {
+	bottom: 20vh;
+	opacity: 1;
+    }
+
+    100% {
+	bottom: 0;
+	opacity: 0;
+    }
 }
 
 @media (max-width: 500px) {
