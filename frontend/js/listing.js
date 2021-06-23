@@ -220,4 +220,25 @@ form.addEventListener("submit", event => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/listing/handleLeadInfo");
     xhr.send(formdata);
+
+    xhr.onreadystatechange = function() {
+	if (this.readyState == 4) {
+	    if (this.response == "success") {
+		const loadingPage = document.getElementById("loading-page");
+		loadingPage.style.display = "none";
+	    } else {
+		const snackbar = document.getElementById("snackbar");
+		snackbar.style.display = "block";
+		snackbar.classList.add("slide");
+		snackbar.addEventListener("animationend", (event) => {
+		    event.target.style.display = "none";
+		})
+	    }
+	}
+    }
 });
+
+form.addEventListener("submit", () => {
+    const loadingPage = document.getElementById("loading-page");
+    loadingPage.style.display = "flex";
+})
