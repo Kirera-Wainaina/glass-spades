@@ -26,13 +26,17 @@ function emailLead(leadDetails) {
 	    pass: `${process.env.GMAIL_APP_PASSWORD}`
 	}
     });
-    transporter.sendMail(message, (error, info) => {
-	if (error) {
-	    console.log(error);
-	} else {
-	    console.log(info.response)
-	}
-    })
+
+    return new Promise((resolve, reject) => {
+	transporter.sendMail(message, (error, info) => {
+	    if (error) {
+		reject(error);
+	    } else {
+		resolve(info)
+	    }
+	})
+    });
+
 }
 
 function createLeadHTML(leadDetails) {
