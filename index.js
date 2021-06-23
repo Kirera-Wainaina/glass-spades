@@ -146,7 +146,7 @@ async function serverSideRender(request, response) {
     const cwd = "."
     if (routeCache.has(parsed_url.pathname)) {
 	response.writeHead(200, { "content-type": "text/html" })
-	    .end(routeCache.get(parsed_url.pathname))
+	    .end(routeCache.get(parsed_url.path))
     } else {
 	if (request.headers["user-agent"] == "glassspades-headless-chromium") {
    	    const filePath = createFilePath(request.url);
@@ -158,7 +158,7 @@ async function serverSideRender(request, response) {
 	    await page.goto(`${process.env.URL}${request.url}`,
 			    { waitUntil: "networkidle0" });
 	    const html = await page.content();
-	    routeCache.set(parsed_url.pathname, html);
+	    routeCache.set(parsed_url.path, html);
 	    response.writeHead(200, {
 		"content-type": "text/html"
 	    })
