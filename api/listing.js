@@ -1,3 +1,5 @@
+const Busboy = require("busboy");
+
 const db = require("../database/models");
 
 function getListingDetails(request, response) {
@@ -37,9 +39,14 @@ function getListingImages(request, response) {
 }
 
 function handleLeadInfo(request, response) {
-    request.on("data", data => {
-	console.log(String(data));
-    })
+    const busboy  = new Busboy({ headers: request.headers });
+    busboy.on("field", (fieldname, value) => {
+	console.log(`${fieldname}: ${value}`);
+    });
+
+    busboy.on("finish", () => console.log("Data received"))
+
+    request.pipe(busboy);
 }
 
 exports.getListingDetails = getListingDetails;
