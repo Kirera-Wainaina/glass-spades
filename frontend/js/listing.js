@@ -212,4 +212,10 @@ function confirmLogin() {
 const form = document.querySelector("form");
 form.addEventListener("submit", event => {
     event.preventDefault();
+
+    const formdata = new FormData(form);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/listing/handleLeadInfo");
+    xhr.send(formdata);
 });

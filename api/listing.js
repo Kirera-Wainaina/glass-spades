@@ -36,5 +36,12 @@ function getListingImages(request, response) {
     })
 }
 
+function handleLeadInfo(request, response) {
+    request.on("data", data => {
+	console.log(String(data));
+    })
+}
+
 exports.getListingDetails = getListingDetails;
 exports.getListingImages = getListingImages;
+exports.handleLeadInfo = handleLeadInfo;
