@@ -1,6 +1,7 @@
 const Busboy = require("busboy");
 
 const db = require("../database/models");
+const email = require("../utils/email");
 
 function getListingDetails(request, response) {
     request.on("data", async (data) => {
@@ -40,11 +41,15 @@ function getListingImages(request, response) {
 
 function handleLeadInfo(request, response) {
     const busboy  = new Busboy({ headers: request.headers });
+    const leadDetails = {};
     busboy.on("field", (fieldname, value) => {
-	console.log(`${fieldname}: ${value}`);
+	// console.log(`${fieldname}: ${value}`);
+	leadDetails[fieldname] = value;
     });
 
-    busboy.on("finish", () => console.log("Data received"))
+    busboy.on("finish", () => {
+	email.emailLead(leadDetails);
+    })
 
     request.pipe(busboy);
 }
