@@ -215,6 +215,7 @@ form.addEventListener("submit", event => {
 
     const formdata = new FormData(form);
     formdata.append("link", location.href);
+    formdata.append("createdDate", new Date());
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/listing/handleLeadInfo");
