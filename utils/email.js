@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 function emailLead(leadDetails) {
-    console.log(leadDetails);
     const dir = path.dirname(__dirname);
     const message = {
 	from: "glassspades@gmail.com",
