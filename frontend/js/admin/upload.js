@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const model = await getModelData();
     sessionStorage.setItem("model", model);
     if (!document.getElementById("Mandate-container")) {
-	constructPage(model);
+	constructPage(JSON.parse(model));
     }
 });
 
@@ -16,7 +16,7 @@ function getModelData() {
     return new Promise((resolve, reject) => {
 	xhr.onreadystatechange = function() {
 	    if (this.readyState == 4) {
-		const model = JSON.parse(this.response);
+		const model = this.response;
 		resolve(model)
 	    }
 	}
