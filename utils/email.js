@@ -111,9 +111,9 @@ function createLeadHTML(leadDetails) {
       </div>
 
       <div id="lead-card">
-	<p>Name: ${leadDetails["first-name"]}</p>
+	<p>Name: ${leadDetails["name"]}</p>
 	<p>Email: ${leadDetails["email"]}</p>
-	<p>Phone Number: ${leadDetails["phone-number"]}</p>
+	<p>Phone Number: ${leadDetails["phoneNumber"]}</p>
 	<p>Listing Link: <a href=${leadDetails["link"]}>Listing of interest</a></p>
       </div>
 
