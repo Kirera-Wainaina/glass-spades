@@ -1,7 +1,11 @@
+const url = require("url");
+const qs = require("querystring");
+
 const Busboy = require("busboy");
 
 const db = require("../database/models");
 const email = require("../utils/email");
+const respond = require("../utils/respond");
 
 function getListingDetails(request, response) {
     request.on("data", async (data) => {
@@ -43,12 +47,21 @@ function handleLeadInfo(request, response) {
     const busboy  = new Busboy({ headers: request.headers });
     const leadDetails = {};
     busboy.on("field", (fieldname, value) => {
-	// console.log(`${fieldname}: ${value}`);
 	leadDetails[fieldname] = value;
     });
 
-    busboy.on("finish", () => {
-	email.emailLead(leadDetails);
+    busboy.on("finish", async () => {
+	const query = qs.parse(url.parse(leadDetails.link).query)
+	leadDetails["listingId"] = query.id;
+	const lead = new db.Lead(leadDetails)
+	const [ emailStatus, savedLead ] = await Promise.all(
+	    [email.emailLead(leadDetails), lead.save()]);
+	
+	if (emailStatus.accepted.length && savedLead) {
+	    respond.handleTextResponse("success", response);
+	} else {
+	    respond.handleTextResponse("fail", response);
+	}
     })
 
     request.pipe(busboy);
