@@ -35,6 +35,8 @@ function createHouseCard(houseDetail) {
     const overviewImg = document.createElement("img");
     overviewImg.src = houseDetail.imageSrc;
     overviewImg.alt = "Glass Spades Houses";
+
+    houseCard.append(createHeading(houseDetail.heading));
     houseCard.append(overviewImg);
 
     houseCard.append(createBedrooms(houseDetail.bedrooms,
@@ -43,6 +45,13 @@ function createHouseCard(houseDetail) {
 				    "/frontend/images/bath-icon.svg"))
 
     return houseCard
+}
+
+function createHeading(heading) {
+    const pEl = document.createElement("p");
+    pEl.textContent = heading;
+    pEl.id = "heading"
+    return pEl
 }
 
 function createBedrooms(value, icon) {

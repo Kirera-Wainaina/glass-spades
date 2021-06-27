@@ -74,6 +74,17 @@ div#listings {
     width: 40vw;
 }
 
+.house-card #heading {
+    grid-column: 1 / 5;
+    color: black;
+    text-align: center;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    padding-right: 1em;
+    padding-left: 1em;
+}
+
 .house-card img {
     grid-column: 1 / 5;
 }
