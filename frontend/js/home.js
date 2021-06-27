@@ -83,13 +83,18 @@ function createIcon(value, icon) {
 }
 
 // window.addEventListener("DOMContentLoaded", handleMenu);
-handleMenu();
-function handleMenu() {
-    const mediaQueryResult = window.matchMedia("(max-width: 500px)");
+const mediaQueryResult = window.matchMedia("(max-width: 500px)");
+mediaQueryResult.addEventListener("change", handleMenu);
+handleMenu(mediaQueryResult);
+
+function handleMenu(mediaQueryResult) {
+    const menu = document.getElementById("menu");
+    const menuButton = document.getElementById("menu-button");
     if (mediaQueryResult.matches) {
-	const menu = document.getElementById("menu");
-	const menuButton = document.getElementById("menu-button");
 	menu.style.display = "none";
 	menuButton.style.display = "block";
+    } else {
+	menu.style.display = "flex";
+	menuButton.style.display = "none";
     }
 }
