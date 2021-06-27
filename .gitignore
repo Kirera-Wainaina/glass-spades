@@ -21,3 +21,6 @@ glass-spades-service-account.json
 # created because restarting the browser all the time is increasing dev time
 # it is also causing errors
 index2.js
+
+# ignore the yarn error log file
+yarn-error.log
