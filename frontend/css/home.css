@@ -228,4 +228,19 @@ footer a, footer p {
 	left: 5vw;
 	width: 80vw;
     }
+
+    .card-details img {
+	margin-right: 0;
+	margin-left: 0;
+	width: 1.5em;
+    }
+
+    .card-details p {
+	margin-left: 0.5em;
+    }
+    
+    .house-card div:nth-of-type(1) p {
+	font-size: 1em;
+    }
+
 }
