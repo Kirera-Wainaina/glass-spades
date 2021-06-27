@@ -269,19 +269,33 @@ footer a, footer p {
 	padding: 20%;
     }
 
-    
-    header #menu {
-	/* display: none; */
-    }
-
     header #menu.phone-menu {
-	border: 1px solid black;
+	box-shadow: 0 0 5px lightgrey;
 	position: absolute;
 	right: 0;
 	top: 4em;
 	display: flex;
 	flex-direction: column;
 	background-color: white;
+	width: 35vw;
+	align-items: stretch;
+    }
+
+    header #menu a {
+	width: 100%;
+	border: 1px solid lightgrey;
+	display: flex;
+	justify-content: center;
+    }
+
+    header #menu a:active {
+	background: black;
+	color: white;
+    }
+
+    header #menu button {
+	border: none;
+	width: 100%;
     }
 
     div#listings {
