@@ -39,10 +39,10 @@ function createHouseCard(houseDetail) {
     houseCard.append(createHeading(houseDetail.heading));
     houseCard.append(overviewImg);
 
-    houseCard.append(createBedrooms(houseDetail.bedrooms,
-				    "/frontend/images/bed-icon.svg"))
-    houseCard.append(createBedrooms(houseDetail.bathrooms,
-				    "/frontend/images/bath-icon.svg"))
+    houseCard.append(createIcon(houseDetail.bedrooms,
+				"/frontend/images/bed-icon.svg"))
+    houseCard.append(createIcon(houseDetail.bathrooms,
+				"/frontend/images/bath-icon.svg"))
 
     return houseCard
 }
@@ -54,7 +54,7 @@ function createHeading(heading) {
     return pEl
 }
 
-function createBedrooms(value, icon) {
+function createIcon(value, icon) {
     const div = document.createElement("div");
     div.classList.add("card-details");
 
