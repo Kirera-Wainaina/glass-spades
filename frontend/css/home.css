@@ -276,10 +276,9 @@ footer a, footer p {
 
     header #menu.phone-menu {
 	border: 1px solid black;
-	position: relative;
+	position: absolute;
 	right: 0;
-	top: 0;
-	grid-column: 4 / 6;
+	top: 4em;
 	display: flex;
 	flex-direction: column;
 	background-color: white;
