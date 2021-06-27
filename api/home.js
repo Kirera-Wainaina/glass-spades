@@ -11,6 +11,8 @@ async function getListings(request, response) {
 		    "imageSrc": overview.link,
 		    "bedrooms": docs.Bedrooms,
 		    "bathrooms": docs.Bathrooms,
+		    "price": docs.Price,
+		    "heading": docs.Heading,
 		    "id": docs._id
 		});
 	    })
