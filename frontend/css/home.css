@@ -37,10 +37,6 @@ header > a {
     margin-left: 1em;
 }
 
-header #menu-button {
-    display: none;
-}
-
 header #menu {
     grid-column: 7 / 13;
     display: flex;
@@ -263,28 +259,17 @@ footer a, footer p {
 	grid-template-columns: repeat(5, 1fr);
     }
 
-    div#listings {
-	flex-direction: column;
-	align-items: center;
-	width: 100vw;
-    }
-
-    .house-card {
-	width: 99vw;
-	margin-bottom: 1em;
-	margin-left: 0;
-    }
-    
-    .house-card > img {
+    header > a {
 	grid-column: 1 / 5;
     }
 
-    #snackbar {
-	bottom: 5vh;
-	left: 5vw;
-	width: 80vw;
+    header #menu-button {
+	grid-column: 5 / 6;
+	height: 50%;
+	padding: 20%;
     }
 
+    
     header #menu {
 	/* display: none; */
     }
@@ -299,5 +284,25 @@ footer a, footer p {
 	flex-direction: column;
 	background-color: white;
     }
+
+    div#listings {
+	flex-direction: column;
+	align-items: center;
+	width: 100vw;
+    }
+
+    .house-card {
+	width: 99vw;
+	margin-bottom: 1em;
+	margin-left: 0;
+    }
+    
+    #snackbar {
+	bottom: 5vh;
+	left: 5vw;
+	width: 80vw;
+    }
+
+
 }
 
