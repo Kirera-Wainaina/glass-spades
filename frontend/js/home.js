@@ -81,3 +81,15 @@ function createIcon(value, icon) {
 
     return div
 }
+
+// window.addEventListener("DOMContentLoaded", handleMenu);
+handleMenu();
+function handleMenu() {
+    const mediaQueryResult = window.matchMedia("(max-width: 500px)");
+    if (mediaQueryResult.matches) {
+	const menu = document.getElementById("menu");
+	const menuButton = document.getElementById("menu-button");
+	menu.style.display = "none";
+	menuButton.style.display = "block";
+    }
+}

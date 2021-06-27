@@ -37,6 +37,10 @@ header > a {
     margin-left: 1em;
 }
 
+header #menu-button {
+    display: none;
+}
+
 header #menu {
     grid-column: 7 / 13;
     display: flex;
@@ -44,7 +48,8 @@ header #menu {
     justify-content: flex-end;
     align-items: center;
     padding-right: 2em;
-}
+ }
+
 
 header #menu a {
     margin: .5em;
@@ -280,4 +285,19 @@ footer a, footer p {
 	width: 80vw;
     }
 
+    header #menu {
+	/* display: none; */
+    }
+
+    header #menu.phone-menu {
+	border: 1px solid black;
+	position: relative;
+	right: 0;
+	top: 0;
+	grid-column: 4 / 6;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+    }
 }
+
