@@ -92,12 +92,20 @@ div#listings {
 .house-card .card-details {
     display: flex;
     flex-direction: row;
-    border-right: .5px solid lightgrey;
+    border-left: .5px solid lightgrey;
     padding: 0.5em;
 }
 
 .house-card div:nth-of-type(1) {
     grid-column: 1 / 3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.house-card div:nth-of-type(1) p {
+    color: black;
 }
 
 .house-card div:nth-of-type(2) {
