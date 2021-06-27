@@ -61,7 +61,7 @@ function inputPrice(price) {
 	  .NumberFormat("sw-ke", { style: "currency", currency: "Kes"})
 	  .format(price);
 
-    pEl.textContent = `Price: ${formatPrice}`;
+    pEl.textContent = `${formatPrice}`;
     divEl.append(pEl);
     return divEl
 }
