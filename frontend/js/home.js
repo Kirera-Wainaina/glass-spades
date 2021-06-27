@@ -38,7 +38,7 @@ function createHouseCard(houseDetail) {
 
     houseCard.append(createHeading(houseDetail.heading));
     houseCard.append(overviewImg);
-
+    houseCard.append(inputPrice(houseDetail.price));
     houseCard.append(createIcon(houseDetail.bedrooms,
 				"/frontend/images/bed-icon.svg"))
     houseCard.append(createIcon(houseDetail.bathrooms,
@@ -50,8 +50,20 @@ function createHouseCard(houseDetail) {
 function createHeading(heading) {
     const pEl = document.createElement("p");
     pEl.textContent = heading;
-    pEl.id = "heading"
+    pEl.classList.add("heading");
     return pEl
+}
+
+function inputPrice(price) {
+    const divEl = document.createElement("div");
+    const pEl = document.createElement("p");
+    const formatPrice = new Intl
+	  .NumberFormat("sw-ke", { style: "currency", currency: "Kes"})
+	  .format(price);
+
+    pEl.textContent = `Price: ${formatPrice}`;
+    divEl.append(pEl);
+    return divEl
 }
 
 function createIcon(value, icon) {
