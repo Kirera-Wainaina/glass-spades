@@ -9,6 +9,7 @@ h2 {
 
 h3 {
     grid-column: 1 / 13;
+    display: none;
 }
 
 @media (max-width: 500px) {
