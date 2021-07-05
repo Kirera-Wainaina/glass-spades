@@ -1,3 +1,4 @@
+import { displayHouseDetails } from "./general.js";
 getListings()
 
 function getListings() {
@@ -10,20 +11,6 @@ function getListings() {
 	    const houseDetails = JSON.parse(this.response);
 	    displayHouseDetails(houseDetails);
 	}
-    }
-}
-
-export function displayHouseDetails(houseDetails) {
-    if (!document.querySelector(".house-card")) {
-	const listings = document.getElementById("listings");
-	const fragment = new DocumentFragment();
-
-	houseDetails.forEach(houseDetail => {
-	    const houseCard = createHouseCard(houseDetail);
-	    fragment.append(houseCard);
-	})
-
-	listings.appendChild(fragment);
     }
 }
 
