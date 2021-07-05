@@ -1,3 +1,4 @@
+import { displayHouseDetails } from "./home.js"
 getRentals();
 
 function getRentals() {
@@ -6,6 +7,9 @@ function getRentals() {
     xhr.send();
 
     xhr.onreadystatechange = function() {
-	console.log(this.response);
+	if (this.readyState == 4 && this.response != "fail") {
+	    const rentalDetails = JSON.parse(this.response);
+	    displayHouseDetails(rentalDetails);
+	}
     }
 }
