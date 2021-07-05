@@ -25,3 +25,17 @@ function showPhoneMenu(event) {
 	menu.style.display  = "none";
     }
 }
+
+export function displayHouseDetails(houseDetails) {
+    if (!document.querySelector(".house-card")) {
+	const listings = document.getElementById("listings");
+	const fragment = new DocumentFragment();
+
+	houseDetails.forEach(houseDetail => {
+	    const houseCard = createHouseCard(houseDetail);
+	    fragment.append(houseCard);
+	})
+
+	listings.appendChild(fragment);
+    }
+}
