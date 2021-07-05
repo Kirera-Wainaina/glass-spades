@@ -13,7 +13,7 @@ function getListings() {
     }
 }
 
-function displayHouseDetails(houseDetails) {
+export function displayHouseDetails(houseDetails) {
     if (!document.querySelector(".house-card")) {
 	const listings = document.getElementById("listings");
 	const fragment = new DocumentFragment();
