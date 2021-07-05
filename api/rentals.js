@@ -20,9 +20,8 @@ async function getRentals(request, response) {
 	}));
 	respond.handleJSONResponse(response, data);
     } else {
-	respond.handleTextResponse("fail", response);
+	respond.handleTextResponse(response, "fail");
     }
-    console.log(data)
 }
 
 exports.getRentals = getRentals;
