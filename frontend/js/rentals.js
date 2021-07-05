@@ -1,4 +1,4 @@
-import { displayHouseDetails } from "./home.js"
+import { displayHouseDetails } from "./general.js"
 getRentals();
 
 function getRentals() {
@@ -7,9 +7,15 @@ function getRentals() {
     xhr.send();
 
     xhr.onreadystatechange = function() {
-	if (this.readyState == 4 && this.response != "fail") {
-	    const rentalDetails = JSON.parse(this.response);
-	    displayHouseDetails(rentalDetails);
+	if (this.readyState == 4) {
+	    if (this.response != "fail") {
+	    // if (this.response == "fail") {
+		const rentalDetails = JSON.parse(this.response);
+		displayHouseDetails(rentalDetails);
+	    } else {
+		const noListings = document.getElementById("no-listings");
+		noListings.style.display = "block";
+	    }
 	}
     }
 }
