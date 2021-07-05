@@ -58,9 +58,9 @@ function handleLeadInfo(request, response) {
 	    [email.emailLead(leadDetails), lead.save()]);
 	
 	if (emailStatus.accepted.length && savedLead) {
-	    respond.handleTextResponse("success", response);
+	    respond.handleTextResponse(response, "success");
 	} else {
-	    respond.handleTextResponse("fail", response);
+	    respond.handleTextResponse(response, "fail");
 	}
     })
 
