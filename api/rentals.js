@@ -15,7 +15,13 @@ async function getRentals(request, response) {
 		const imageData = await db.Image.findOne({ listingId: rental._id,
 							   position: 0 });
 		// _doc is to bring only the rental properties without the object's
-		resolve({...rental._doc, imgSrc: imageData.link});
+		resolve({
+		    heading: rental.Heading,
+		    price: rental.Price,
+		    bedrooms: rental.Bedrooms,
+		    bathrooms: rental.Bathrooms,
+		    imageSrc: imageData.link
+		});
 	    })
 	}));
 	respond.handleJSONResponse(response, data);
