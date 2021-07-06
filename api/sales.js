@@ -20,7 +20,8 @@ async function getSales(request, response) {
 		    price: rental.Price,
 		    bedrooms: rental.Bedrooms,
 		    bathrooms: rental.Bathrooms,
-		    imageSrc: imageData.link
+		    imageSrc: imageData.link,
+		    id: rental._id
 		});
 	    })
 	}));
