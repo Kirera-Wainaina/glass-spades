@@ -1,0 +1,20 @@
+@import url("../home.css");
+
+div#listings {
+    justify-content: flex-start;
+}
+
+.house-card {
+    width: 30vw;
+}
+
+.house-card p {
+    grid-column: 1 / 5;
+    padding: .7em;
+}
+
+@media (max-width: 500px) {
+    .house-card {
+	width: 99vw;
+    }
+}
