@@ -63,14 +63,20 @@ function updateListing(request, response) {
 		counter++
 		if (counter == listing.imageNum) {
 		    try {
+			listing["Location"] = {
+			    coordinates: [ listing.Longitude, listing.Latitude ]
+			};
+
 			// From the promise, only the first result is needed.
 			const [ metadata ] = await Promise.all([
 			    saveFiles(fileNames),
 			    updateExistingFiles(listing.fileId),
 			    db.Listing.updateOne({ _id: listing.id}, listing)]);
+
 			if (metadata && metadata.length) {
 			    await saveToDB(listing, metadata, fileNames);
 			}
+
 			respond.handleTextResponse(response, "success");
 		    } catch (error) {
 			console.log(error)
