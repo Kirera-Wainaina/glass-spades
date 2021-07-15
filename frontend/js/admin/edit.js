@@ -4,7 +4,7 @@ import { startImageDrag, dragOverImage,
 import { showLoadingPage } from "../general.js";
 
 let listingData;
-retrieveListing()
+window.addEventListener("DOMContentLoaded", retrieveListing);
 
 function retrieveListing() {
     const url = new URL(location);
@@ -39,6 +39,8 @@ function handleListing(listing) {
 	    const coords = listing.Location.coordinates;
 	    const event = new Event("coords", { bubble: false })
 	    sessionStorage.setItem("coords", JSON.stringify(coords));
+	    sessionStorage.setItem("Latitude", coords[1]);
+	    sessionStorage.setItem("Longitude", coords[0]);
 	    document.dispatchEvent(event);
 	} else {
 	    enterData(key, listing[key])
