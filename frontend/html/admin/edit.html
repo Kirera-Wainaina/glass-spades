@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Kirera-Wainaina">
+    <meta name="description"
+	  content="Edit Listing ">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/frontend/images/GS-tiny-icon.png">    
+    <link rel="apple-touch-icon" href="/frontend/images/GS-tiny-icon.png">
+    <link rel="stylesheet" href="/frontend/css/admin/upload.css">
+    <!-- <script type="module" async="async" src="/frontend/js/admin/upload.js"> -->
+    <!-- </script> -->
+    <script src="/frontend/js/admin/upload.js"></script>
+    <script type="module" async="async" src="/frontend/js/general.js"></script>
+    <title>Edit Listing | Glass Spades</title>
+  </head>
+
+  <body>
+    <noscript>You need to enable Javascript to run this app</noscript>
+    <div class="page">
+      <header>
+	<a href="/"><img src="/frontend/images/GS-logo.webp"/></a>
+	<input type="image"
+	       src="/frontend/images/menu-button.svg"
+	       id="menu-button" />
+	<div id="menu">
+	  <a href="/rentals"><button>Rentals</button></a>
+	  <a href="/sales"><button>Sales</button></a>
+	  <a href="/contacts"><button>Contact us</button></a>
+	</div>
+      </header>
+
+      <h2>Edit listing</h2>
+
+      <div id="loading-page">
+	<p>loading...</p>
+      </div>
+
+       <p id="empty-error">
+	The following fields do not have values: 
+      </p>
+      
+      <div id="Heading-container" class="container">
+	<p id="Heading-label" class="label">Heading</p>
+	<input type="text" name="Heading"/>
+      </div>
+
+      <div id="Description-container" class="container">
+	<p id="Description-label" class="label">Description</p>
+	<textarea name="Description" rows="6"></textarea>
+      </div>
+
+      <div id="Price-container" class="container">
+	<p id="Price-label" class="label">Price</p>
+	<input type="number" name="Price" />
+      </div>
+
+      <div id="map">
+      </div>
+
+      <button id="file-upload">Upload Images or drag them below</button>
+      <input id="invisible-file-upload" type="file" multiple/>
+      <p id="info">The drag and drop feature mainly works using a
+      mouse or touchpad. While using drag and drop, it is possible to
+      rearrange the order of the photos within the drop zone.</p>
+
+      <div id="drop-zone">
+      </div>
+
+      <button id="submit">Create Listing</button>
+
+      <footer>
+	<a href="/terms">Terms of service</a>
+	<a href="/privacy-policy">Privacy Policy</a>
+	<a href="/contacts">Contact Us</a>
+	<p>&copy Glass Spades. All rights reserved.</p>
+      </footer>
+    </div>
+    <!-- <script async="async" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVByoterVaoQyeLZ_ZmFvDBHcJJInQ84&callback=initMap&libraries=&v=weekly"> -->
+    <!--   </script> -->
+  </body>
+  
+</html>
