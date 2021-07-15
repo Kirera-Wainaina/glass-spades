@@ -35,9 +35,10 @@ function createHouseContainer(listing) {
 }
 
 function createHeading(heading) {
-    const h3 = document.createElement("h3");
-    h3.textContent = heading;
-    return h3
+    const p = document.createElement("p");
+    p.classList.add("heading");
+    p.textContent = heading;
+    return p
 }
 
 function createImage(link) {
