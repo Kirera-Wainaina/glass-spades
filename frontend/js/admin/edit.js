@@ -29,7 +29,7 @@ function retrieveListing() {
 function handleListing(listing) {
     const keys = Object.keys(listing);
     keys.forEach(key => {
-	if (key == "_id" || key == "websiteId" || key == "__v") {
+	if (key == "_id" || key == "Location" || key == "__v") {
 	    return ;
 	} else if (Array.isArray(listing[key])) {
 	    enterArrayData(key, listing[key]);
@@ -64,7 +64,6 @@ function displayImages(listingImages) {
     const dropZone = document.getElementById("drop-zone");
     for (let i = 0; i < listingImages.length; i++) {
 	const image = listingImages.filter(img => img.position == i)[0]
-	console.log(image)
 	if (image) {
 	    fragment.append(displayImage(image));
 	}
