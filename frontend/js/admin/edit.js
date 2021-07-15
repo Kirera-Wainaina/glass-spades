@@ -99,10 +99,9 @@ window.addEventListener("DOMContentLoaded", () => {
 async function organizeData() {
     let formdata = new FormData();
     const clickedButtons = document.querySelectorAll(".clicked-button");
-    // showLoadingPage();
+    showLoadingPage();
     
     clickedButtons.forEach(clickedButton => {
-	console.log(clickedButton.name + ": " +clickedButton.value);
 	if (clickedButton.name == "External Features"
 	    || clickedButton.name == "Internal Features") {
 	    formdata.append(clickedButton.name, clickedButton.value)
@@ -115,13 +114,10 @@ async function organizeData() {
     formdata.set("id", listingData._id);
     handleCoordinates(formdata);
     await handleFiles(formdata);
-    // console.log(formdata.get("Category"))
-    // console.log("function called");
-    // console.log(confirmValues(formdata))
 
-    // if (confirmValues(formdata)) {
-    // 	updateListing(formdata);
-    // }
+    if (confirmValues(formdata)) {
+	updateListing(formdata);
+    }
 }
 function handleCoordinates(formdata) {
     formdata.set("Latitude", sessionStorage.getItem("Latitude"));
@@ -138,18 +134,45 @@ function handleTypedData(formdata) {
 
 async function handleFiles(formdata) {
     const dropZone = document.getElementById("drop-zone");
-    const images = await getImages()
-
-    formdata.set("imageNum", images.length)
-
+    const filesInfo = [];
+    // const images = await getImages()
     for (let i = 0; i < dropZone.childElementCount; i++) {
-	// let the name be an object that contains: filename and position
 	const name = JSON.stringify({ name: dropZone.children[i].id, position: i })
-	formdata.set(name, images[i]);
+	if (!dropZone.children[i].id.includes("-")) {
+	    formdata.append("fileId", name)
+	} else {
+	    filesInfo.push({ src: dropZone.children[i].src, name })
+	}
     }
+    console.log(filesInfo)
+    const files = await Promise.all(
+	filesInfo.map(info => inputFileIntoFormdata(info)));
+    files.forEach(file => formdata.set(file.name, file.data));
+
+    formdata.set("imageNum", dropZone.childElementCount)
+
+    // for (let i = 0; i < dropZone.childElementCount; i++) {
+    // 	// let the name be an object that contains: filename and position
+    // 	const name = JSON.stringify({ name: dropZone.children[i].id, position: i })
+    // 	formdata.set(name, images[i]);
+    // }
     return formdata
 }
 
+function inputFileIntoFormdata(fileData) {
+    return new Promise((resolve, reject) => {
+	const xhr = new XMLHttpRequest();
+	xhr.open("GET", fileData.src)
+	xhr.responseType = "blob";
+	xhr.send();
+
+	xhr.onreadystatechange = function() {
+	    if (this.readyState == 4) {
+		resolve({ name: fileData.name, data: this.response})
+	    }
+	}
+    })
+}
 function updateListing(formdata) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/admin/edit/updateListing");
