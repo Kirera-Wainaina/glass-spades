@@ -1,8 +1,11 @@
+let marker, map;
+
 window.addEventListener("load", () => {
     if (navigator.userAgent != "glassspades-headless-chromium") {
 	appendMapsScript();
     }
 })
+
 
 function appendMapsScript() {
     const body = document.querySelector("body");
@@ -16,7 +19,7 @@ function appendMapsScript() {
 function initMap() {
     const mapEl = document.getElementById("map");
     const nairobi = { lat: -1.230287, lng: 36.848492 };
-    const map = new google.maps.Map(mapEl, {
+    map = new google.maps.Map(mapEl, {
 	center: nairobi,
 	zoom: 15
     })
@@ -25,7 +28,7 @@ function initMap() {
 }
 
 function createMarker(map, position) {
-    const marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
 	map,
 	draggable: true,
 	position
@@ -36,3 +39,9 @@ function createMarker(map, position) {
 	sessionStorage.setItem("Longitude", event.latLng.lng());
     });
 }
+
+document.addEventListener("coords", () => {
+    console.log("coordinates received")
+    const coords = JSON.parse(sessionStorage.getItem("coords"));
+    marker.setPosition({ lat: coords[1], lng: coords[0]})
+})
