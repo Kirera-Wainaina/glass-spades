@@ -29,12 +29,17 @@ function retrieveListing() {
 function handleListing(listing) {
     const keys = Object.keys(listing);
     keys.forEach(key => {
-	if (key == "_id" || key == "Location" || key == "__v") {
+	if (key == "_id" || key == "__v") {
 	    return ;
 	} else if (Array.isArray(listing[key])) {
 	    enterArrayData(key, listing[key]);
 	} else if (key == "Heading" || key == "Description" || key == "Price") {
 	    enterTypedData(key, listing[key]);
+	} else if (key == "Location") {
+	    const coords = listing.Location.coordinates;
+	    const event = new Event("coords", { bubble: false })
+	    sessionStorage.setItem("coords", JSON.stringify(coords));
+	    document.dispatchEvent(event);
 	} else {
 	    enterData(key, listing[key])
 	}
