@@ -186,6 +186,7 @@ footer a, footer p {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 #loading-page p {
