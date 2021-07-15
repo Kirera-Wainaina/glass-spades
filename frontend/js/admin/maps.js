@@ -32,7 +32,7 @@ function createMarker(map, position) {
     });
 
     marker.addListener("dragend", (event) => {
-	houseInfo["Latitude"] = event.latLng.lat();
-	houseInfo["Longitude"] = event.latLng.lng();
+	sessionStorage.setItem("Latitude", event.latLng.lat());
+	sessionStorage.setItem("Longitude", event.latLng.lng());
     });
 }
