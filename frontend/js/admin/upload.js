@@ -1,3 +1,5 @@
+import { showLoadingPage, hideLoadingPage } from "../general.js"
+
 var houseInfo = {};
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -292,17 +294,6 @@ function getBlobFromImgSrc(src) {
 	    reject(error)
 	}
     })
-}
-
-function showLoadingPage() {
-    const loadingPage = document.getElementById("loading-page");
-    loadingPage.style.display = "flex";
-
-}
-
-function hideLoadingPage() {
-    const loadingPage = document.getElementById("loading-page");
-    loadingPage.style.display = "none";
 }
 
 export function confirmValues(formdata) {
