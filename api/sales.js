@@ -10,18 +10,18 @@ async function getSales(request, response) {
 					      Bathrooms: 1
 					  });
     if (sales.length) {
-	const data = await Promise.all(sales.map(rental => {
+	const data = await Promise.all(sales.map(sale => {
 	    return new Promise(async (resolve, reject) => {
-		const imageData = await db.Image.findOne({ listingId: rental._id,
+		const imageData = await db.Image.findOne({ listingId: sale._id,
 							   position: 0 });
-		// _doc is to bring only the rental properties without the object's
+		// _doc is to bring only the sale properties without the object's
 		resolve({
-		    heading: rental.Heading,
-		    price: rental.Price,
-		    bedrooms: rental.Bedrooms,
-		    bathrooms: rental.Bathrooms,
+		    heading: sale.Heading,
+		    price: sale.Price,
+		    bedrooms: sale.Bedrooms,
+		    bathrooms: sale.Bathrooms,
 		    imageSrc: imageData.link,
-		    id: rental._id
+		    id: sale._id
 		});
 	    })
 	}));
