@@ -135,7 +135,7 @@ function handleTypedData(formdata) {
 async function handleFiles(formdata) {
     const dropZone = document.getElementById("drop-zone");
     const filesInfo = [];
-    // const images = await getImages()
+
     for (let i = 0; i < dropZone.childElementCount; i++) {
 	const name = JSON.stringify({ name: dropZone.children[i].id, position: i })
 	if (!dropZone.children[i].id.includes("-")) {
@@ -144,22 +144,17 @@ async function handleFiles(formdata) {
 	    filesInfo.push({ src: dropZone.children[i].src, name })
 	}
     }
-    console.log(filesInfo)
+
     const files = await Promise.all(
-	filesInfo.map(info => inputFileIntoFormdata(info)));
+	filesInfo.map(info => createFileObject(info)));
     files.forEach(file => formdata.set(file.name, file.data));
 
-    formdata.set("imageNum", dropZone.childElementCount)
+    formdata.set("imageNum", files.length)
 
-    // for (let i = 0; i < dropZone.childElementCount; i++) {
-    // 	// let the name be an object that contains: filename and position
-    // 	const name = JSON.stringify({ name: dropZone.children[i].id, position: i })
-    // 	formdata.set(name, images[i]);
-    // }
     return formdata
 }
 
-function inputFileIntoFormdata(fileData) {
+function createFileObject(fileData) {
     return new Promise((resolve, reject) => {
 	const xhr = new XMLHttpRequest();
 	xhr.open("GET", fileData.src)
