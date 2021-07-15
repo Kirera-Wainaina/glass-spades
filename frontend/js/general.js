@@ -94,3 +94,14 @@ function createIcon(value, icon) {
 
     return div
 }
+
+export function showLoadingPage() {
+    const loadingPage = document.getElementById("loading-page");
+    loadingPage.style.display = "flex";
+
+}
+
+export function hideLoadingPage() {
+    const loadingPage = document.getElementById("loading-page");
+    loadingPage.style.display = "none";
+}
