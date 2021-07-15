@@ -113,14 +113,19 @@ async function organizeData() {
 
     handleTypedData(formdata);
     formdata.set("id", listingData._id);
-    // formdata =  await handleFiles(formdata);
-    console.log(formdata.get("Category"))
-    console.log("function called");
-    console.log(confirmValues(formdata))
+    handleCoordinates(formdata);
+    await handleFiles(formdata);
+    // console.log(formdata.get("Category"))
+    // console.log("function called");
+    // console.log(confirmValues(formdata))
 
     // if (confirmValues(formdata)) {
     // 	updateListing(formdata);
     // }
+}
+function handleCoordinates(formdata) {
+    formdata.set("Latitude", sessionStorage.getItem("Latitude"));
+    formdata.set("Longitude", sessionStorage.getItem("Longitude"))
 }
 
 function handleTypedData(formdata) {
