@@ -35,7 +35,8 @@ function updateListing(request, response) {
     let counter = 0;
     
     busboy.on("field", (fieldname, value) => {
-	if (fieldname == "External Features" || fieldname == "Internal Features") {
+	if (fieldname == "External Features" || fieldname == "Internal Features"
+	    || fieldname == "fileId") {
 	    if (listing[fieldname]) {
 		listing[fieldname].push(value);
 	    } else {
@@ -62,14 +63,13 @@ function updateListing(request, response) {
 		counter++
 		if (counter == listing.imageNum) {
 		    try {
-			const sorted = sortFiles(fileNames);
 			// From the promise, only the first result is needed.
 			const [ metadata ] = await Promise.all([
-			    saveFiles(sorted.nonExisting),
-			    updateExistingFiles(sorted.existing),
+			    saveFiles(fileNames),
+			    updateExistingFiles(listing.fileId),
 			    db.Listing.updateOne({ _id: listing.id}, listing)]);
 			if (metadata && metadata.length) {
-			    await saveToDB(listing, metadata, sorted.nonExisting);
+			    await saveToDB(listing, metadata, fileNames);
 			}
 			respond.handleTextResponse(response, "success");
 		    } catch (error) {
@@ -87,39 +87,25 @@ function updateListing(request, response) {
     request.pipe(busboy);
 }
 
-function sortFiles(fileNames) {
-    const existing = [];
-    const nonExisting = [];
-    fileNames.forEach(filename => {
-	// A dash means it was generated in the frontend. It is not saved.
-	if (filename.name.includes("-")) {
-	    nonExisting.push(filename)
-	} else {
-	    existing.push(filename)
-	}
-    })
-    return { existing, nonExisting }
-}
-
-
-function updateExistingFiles(fileNames) {
-    if (fileNames.length) {
-	return Promise.all(fileNames.map(filename => {
-	    return new Promise((resolve, reject) => {
-		db.Image.updateOne(
-		    { _id: filename.name },
-		    { position: filename.position},
-		    (error, result) => {
-			if (error) console.log(`${filename} not exist`);
-			console.log("Updated existing images")
-			resolve(result)
-		    })
-	    })
-	}))
-    }
+function updateExistingFiles(filedata) {
+	
+    return Promise.all(filedata.map(data => {
+	return new Promise((resolve, reject) => {
+	    const dataObj = JSON.parse(data);
+	    db.Image.updateOne(
+		{ _id: dataObj.name },
+		{ position: dataObj.position},
+		(error, result) => {
+		    if (error) console.log(`${filename} not exist`);
+		    console.log("Updated existing images")
+		    resolve(result)
+		})
+	})
+    }))
 }
 
 async function saveFiles(fileNames) {
+
     if (fileNames.length) {
 	const imageFolder = path.join(
 	    path.dirname(path.dirname(__dirname)), "uploaded");
@@ -130,8 +116,8 @@ async function saveFiles(fileNames) {
 	const cloudFiles = await Promise.all(files.map(
 	    file => images.saveImage(file[0].destinationPath)));
 
-	Promise.all(files.forEach(file => fs.unlinkSync(file[0].sourcePath)));
-	Promise.all(files.forEach(file => fs.unlinkSync(file[0].destinationPath)));
+	files.forEach(file => fs.unlinkSync(file[0].sourcePath));
+	files.forEach(file => fs.unlinkSync(file[0].destinationPath));
 
 	const googleMetadata = await Promise.all(cloudFiles.map(
 	    cloudFile => images.getFileMetadata(cloudFile)));
@@ -163,3 +149,4 @@ function saveToDB(listing, metadata, extraData) {
 }
     
 exports.retrieveListing = retrieveListing;
+exports.updateListing = updateListing;
