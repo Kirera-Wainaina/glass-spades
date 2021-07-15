@@ -41,7 +41,8 @@ function createMarker(map, position) {
 }
 
 document.addEventListener("coords", () => {
-    console.log("coordinates received")
     const coords = JSON.parse(sessionStorage.getItem("coords"));
-    marker.setPosition({ lat: coords[1], lng: coords[0]})
+    const latLng = { lat: coords[1], lng: coords[0]};
+    marker.setPosition(latLng);
+    map.setCenter(latLng);
 })
