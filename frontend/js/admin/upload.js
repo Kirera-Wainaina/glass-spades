@@ -218,6 +218,10 @@ async function setData(event) {
     houseInfo[heading.name] = heading.value;
     houseInfo[description.name] = description.value;
     houseInfo[price.name] = price.value;
+    if (sessionStorage.getItem("Latitude")) {
+	houseInfo["Latitude"] = sessionStorage.getItem("Latitude");
+	houseInfo["Longitude"] = sessionStorage.getItem("Longitude");
+    }
     
     Object.keys(houseInfo).forEach(key => {
 	if (Array.isArray(houseInfo[key])) {
