@@ -38,7 +38,6 @@ function handleListing(listing) {
 	} else if (key == "Location") {
 	    const coords = listing.Location.coordinates;
 	    const event = new Event("coords", { bubble: false })
-	    sessionStorage.setItem("coords", JSON.stringify(coords));
 	    sessionStorage.setItem("Latitude", coords[1]);
 	    sessionStorage.setItem("Longitude", coords[0]);
 	    document.dispatchEvent(event);
@@ -91,16 +90,19 @@ function displayImage(image) {
     return img
 }
 
-const submit = document.getElementById("submit");
-submit.removeEventListener("click", setData);
-submit.addEventListener("click",  organizeData);
+window.addEventListener("DOMContentLoaded", () => {
+    const submit = document.getElementById("submit");
+    submit.removeEventListener("click", setData);
+    submit.addEventListener("click",  organizeData);
+})
 
 async function organizeData() {
-    const formdata = new FormData();
+    let formdata = new FormData();
     const clickedButtons = document.querySelectorAll(".clicked-button");
-    showLoadingPage();
+    // showLoadingPage();
     
     clickedButtons.forEach(clickedButton => {
+	console.log(clickedButton.name + ": " +clickedButton.value);
 	if (clickedButton.name == "External Features"
 	    || clickedButton.name == "Internal Features") {
 	    formdata.append(clickedButton.name, clickedButton.value)
@@ -111,12 +113,14 @@ async function organizeData() {
 
     handleTypedData(formdata);
     formdata.set("id", listingData._id);
-    await handleFiles(formdata);
-    console.log(formdata.get("imageNum"))
+    // formdata =  await handleFiles(formdata);
+    console.log(formdata.get("Category"))
+    console.log("function called");
+    console.log(confirmValues(formdata))
 
-    if (confirmValues(formdata)) {
-	updateListing(formdata);
-    }
+    // if (confirmValues(formdata)) {
+    // 	updateListing(formdata);
+    // }
 }
 
 function handleTypedData(formdata) {
@@ -138,6 +142,7 @@ async function handleFiles(formdata) {
 	const name = JSON.stringify({ name: dropZone.children[i].id, position: i })
 	formdata.set(name, images[i]);
     }
+    return formdata
 }
 
 function updateListing(formdata) {
