@@ -185,16 +185,16 @@ function displayImage(image) {
     return img
 }
 
-function startImageDrag(event) {
+export function startImageDrag(event) {
     event.dataTransfer.setData("text/plain", event.target.id);
 }
 
-function dragOverImage (event) {
+export function dragOverImage (event) {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
 }
 
-function dropImage(event) {
+export function dropImage(event) {
     const draggedImgId = event.dataTransfer.getData("text");
     const draggedImgElement = document.getElementById(draggedImgId);
 
@@ -254,7 +254,7 @@ function submitData(formdata) {
     }
 }
 
-function getImages() {
+export function getImages() {
     const dropZone = document.getElementById("drop-zone");
     const imageElements = dropZone.children;
     const imgSrcs = []
@@ -340,7 +340,7 @@ function createMarker(map, position) {
     });
 }
 
-function confirmValues(formdata) {
+export function confirmValues(formdata) {
     const model = JSON.parse(sessionStorage.getItem("model"));
     const keys = Object.keys(model);
     const otherKeys = ["Heading", "Description", "Price", "Longitude", "imageNum"];
