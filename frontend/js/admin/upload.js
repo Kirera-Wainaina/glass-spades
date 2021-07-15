@@ -210,7 +210,7 @@ window.addEventListener("DOMContentLoaded", () => {
     submit.addEventListener("click", setData);
 })
 
-async function setData(event) {
+export async function setData(event) {
     const formdata = new FormData();
 
     const heading = document.querySelector("input[name='Heading']");
