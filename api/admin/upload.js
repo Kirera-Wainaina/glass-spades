@@ -51,7 +51,7 @@ function uploadListing(request, response) {
 		console.log(error)
 	    })
 	    .on("finish", async () => {
-		fileNames.push(name);
+		fileNames.push({ name, position: nameSplit[2] });
  		// const file = await images.minifyImage(route);
 		// fs.unlink(route, error => console.error());
 		// const cloudFile = await images.saveImage(file[0].destinationPath);
@@ -69,7 +69,7 @@ function uploadListing(request, response) {
 		if (fileNames.length == listing.imageNum) {
 		    const convertedFiles = await Promise.all(
 			fileNames.map(filename => images.minifyImage(
-			    path.join(imageFolder, "uploaded", filename))));
+			    path.join(imageFolder, "uploaded", filename.name))));
 
 		    const cloudFiles = await Promise.all(
 			convertedFiles.map(convertedFile => images.saveImage(
@@ -82,8 +82,14 @@ function uploadListing(request, response) {
 			const [ itemMetadata ] = googleMetadata[index];
 			return itemMetadata
 		    });
+		    convertedFiles.forEach(file => fs.unlinkSync(
+			file[0].sourcePath));
+		    convertedFiles.forEach(file => fs.unlinkSync(
+			file[0].destinationPath));
 		    console.log(metadata);
 
+		    // saveImageToDB(fileNames, metadata, listing);
+		    saveListingToDB(listing);
 		}
 	    })
     })
@@ -130,6 +136,18 @@ function saveImageMetadata(imageMetadata, listingId) {
 
     return Promise.all(promiseArray)
 }
+
+function saveListingToDB(listing) {
+    listing["Location"] = {
+	coordinates: [ listing.Longitude, listing.Latitude ]
+    };
+    const newListing = new db.Listing(listing);
+    // await newListing.save()
+    console.log(newListing);
+    return newListing._id
+}
+
+// function saveImageToDB(listingId, imageMetadata, )
 
 exports.sendModelData = sendModelData;
 exports.uploadListing = uploadListing;
