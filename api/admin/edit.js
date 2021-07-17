@@ -122,11 +122,11 @@ async function saveFiles(fileNames) {
 	const cloudFiles = await Promise.all(files.map(
 	    file => images.saveImage(file[0].destinationPath)));
 
+	const googleMetadata = await Promise.all(files.map(
+	    file => images.getFileMetadata(file[0].destinationPath)));
+
 	files.forEach(file => fs.unlinkSync(file[0].sourcePath));
 	files.forEach(file => fs.unlinkSync(file[0].destinationPath));
-
-	const googleMetadata = await Promise.all(cloudFiles.map(
-	    cloudFile => images.getFileMetadata(cloudFile)));
     
 	const metadata = googleMetadata.map((data, index) => {
 	    const [ itemMetadata ] = googleMetadata[index];
