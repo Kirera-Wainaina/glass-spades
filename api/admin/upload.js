@@ -67,11 +67,19 @@ function uploadListing(request, response) {
 		// imageMetadata.push(imageInfo);
 		// emitter.emit("uploaded", listing, imageMetadata, response);
 		if (fileNames.length == listing.imageNum) {
-		    console.log(fileNames);
-		    const files = await Promise.all(
+		    const convertedFiles = await Promise.all(
 			fileNames.map(filename => images.minifyImage(
 			    path.join(imageFolder, "uploaded", filename))));
-		    console.log(files)
+		    console.log(convertedFiles)
+
+		    const cloudFiles = await Promise.all(
+			convertedFiles.map(convertedFile => images.saveImage(
+			    convertedFile[0].destinationPath)));
+
+		    const googleMetadata = await Promise.all(
+			cloudFiles.map(cloudFile => images.getFileMetadata(
+			    cloudFile)));
+		    console.log(googleMetadata);
 		}
 	    })
     })
