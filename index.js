@@ -36,7 +36,7 @@ server.on("request", async (request, response) => {
 
     if (request.url == "/") {
 	serverSideRender(request, response);
-    } else if (findTopDir(request.url) == "/api"){
+    } else if (indexUtils.findTopDir(request.url) == "/api"){
 	// has to come before browser requests
 	try {
 	    const file = require(`${cwd}${path.dirname(request.url)}`);
@@ -49,8 +49,8 @@ server.on("request", async (request, response) => {
 	// browser paths
 	serverSideRender(request, response);
     } else {
-	const filePath = createFilePath(request.url);
-	readFileAndRespond(filePath, response);
+	const filePath = indexUtils.createFilePath(request.url);
+	indexUtils.readFileAndRespond(filePath, response);
     }
 });
 
@@ -94,8 +94,8 @@ async function serverSideRender(request, response) {
 	    .end(routeCache.get(parsed_url.path))
     } else {
 	if (request.headers["user-agent"] == "glassspades-headless-chromium") {
-   	    const filePath = createFilePath(request.url);
-	    readFileAndRespond(filePath, response)
+   	    const filePath = indexUtils.createFilePath(request.url);
+	    indexUtils.readFileAndRespond(filePath, response)
 	} else {
 	    const browser = await puppeteer.connect({ browserWSEndpoint: wsEndpoint });
 	    const page = await browser.newPage();
