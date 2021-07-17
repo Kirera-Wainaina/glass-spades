@@ -5,7 +5,7 @@ const EventEmitter = require("events");
 const Busboy = require("busboy");
 
 const images = require("../../utils/images.js");
-const respond = require("../utils/respond.js");
+const respond = require("../../utils/respond.js");
 const db = require("../../database/models.js");
 
 class Emitter extends EventEmitter {};
@@ -97,7 +97,7 @@ function uploadListing(request, response) {
     request.pipe(busboy);
 }
 
-function saveListingToDB(listing) {
+async function saveListingToDB(listing) {
     listing["Location"] = {
 	coordinates: [ listing.Longitude, listing.Latitude ]
     };
