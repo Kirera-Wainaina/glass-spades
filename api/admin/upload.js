@@ -53,26 +53,24 @@ function uploadListing(request, response) {
 		console.log(error)
 	    })
 	    .on("finish", async () => {
-		try {
-		    fileNames.push({ name, position: nameSplit[2] });
-		    const convertedFile = await images.minifyImage(route);
-		    await images.saveImage(convertedFile[0].destinationPath);
-		    const [ metadata ] = await images.getFileMetadata(
-			convertedFile[0].destinationPath);
-		    imageMetadata.push(metadata)
-		    fs.unlinkSync(convertedFile[0].destinationPath);
-		    fs.unlinkSync(convertedFile[0].sourcePath);
-		    counter++
-		    if (counter == listing.imageNum) {
-			console.log("All files uploaded")
-			const listingId = await saveListingToDB(listing);
-			await saveImagesToDB(listingId, fileNames, imageMetadata);
-			console.log("Images saved to DB");
-			respond.handleTextResponse(response, "success");
-		    }
-		} catch (error) {
-		    console.log(error);
-		    respond.handleTextResponse(response, "fail")
+		fileNames.push({ name, position: nameSplit[2] });
+		const convertedFile = await images.minifyImage(route);
+		await images.saveImage(convertedFile[0].destinationPath);
+		const [ metadata ] = await images.getFileMetadata(
+		    convertedFile[0].destinationPath);
+		imageMetadata.push(metadata)
+		fs.unlinkSync(convertedFile[0].destinationPath);
+		fs.unlinkSync(convertedFile[0].sourcePath);
+		counter++
+		// for some reason, the process works with the log line below
+		// It breaks without it
+		console.log(counter)
+		if (counter == listing.imageNum) {
+		    console.log("All files uploaded")
+		    const listingId = await saveListingToDB(listing);
+		    await saveImagesToDB(listingId, fileNames, imageMetadata);
+		    console.log("Images saved to DB");
+		    respond.handleTextResponse(response, "success");
 		}
 	    })
     })
