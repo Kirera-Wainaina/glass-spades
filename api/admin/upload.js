@@ -61,29 +61,44 @@ function uploadListing(request, response) {
 					  "uploaded",
 					  filename.name))));
 
-			const cloudFiles = await Promise.all(
-			    convertedFiles.map(convertedFile => images.saveImage(
-				convertedFile[0].destinationPath)));
-
 			const googleMetadata = await Promise.all(
-			    cloudFiles.map(cloudFile => images.getFileMetadata(
-				cloudFile)));
-			const metadata = googleMetadata.map((data, index) => {
-			    const [ itemMetadata ] = googleMetadata[index];
-			    return itemMetadata
-			});
+			    convertedFiles.map(async convertedFile => {
+				await images.saveImage(
+				    convertedFile[0].destinationPath);
+				return images.getFileMetadata(
+				    convertedFile[0].destinationPath);
+			    }));
+
+			// convertedFiles.forEach(convertedFile => images.saveImage(
+			//     convertedFile[0].destinationPath))
+
 			convertedFiles.forEach(file => fs.unlinkSync(
 			    file[0].sourcePath));
 			convertedFiles.forEach(file => fs.unlinkSync(
 			    file[0].destinationPath));
 
-			const listingId = saveListingToDB(listing);
-			await saveImageToDB(listingId, fileNames, metadata);
-			respond.handleTextResponse(response, "success");
+			console.log("Retrieving Metadata");
+			// const googleMetadata = await Promise.all(
+			//     cloudFiles.map(cloudFile => images.getFileMetadata(
+			// 	cloudFile)));
+			// const googleMetadata = await Promise.all(fileNames.map(
+			//     info => images.getFileMetadata(info.name)));
+			const metadata = googleMetadata.map((data, index) => {
+			    const [ itemMetadata ] = googleMetadata[index];
+			    return itemMetadata
+			});
+			console.log(metadata)
+
+			// const listingId = saveListingToDB(listing);
+			// await saveImageToDB(listingId, fileNames, metadata);
+			// console.log("Images saved to DB");
+			// respond.handleTextResponse(response, "success");
 		    }
 		} catch (error) {
 		    console.log(error);
-		    respond.handleTextResponse(response, "fail")
+		    if (error.code != "ECONNRESET") {
+			respond.handleTextResponse(response, "fail")
+		    }
 		}
 	    })
     })
@@ -103,6 +118,7 @@ async function saveListingToDB(listing) {
     };
     const newListing = new db.Listing(listing);
     await newListing.save()
+    console.log("Listing saved to DB")
     return newListing._id
 }
 

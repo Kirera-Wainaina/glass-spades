@@ -22,12 +22,16 @@ function saveImage(filepath) {
     const storage = new Storage();
     const bucket = storage.bucket("glass-spades-images");
     const filename = path.basename(filepath)
-
     const file = bucket.file(filename);
+    // The options will prevent a socket hangup error
+    // The error occurs when uploading a lot of files at the same time
+    const gcsStream = file.createWriteStream({ resumable: false,
+					       validation: false });
 
     return new Promise((resolve, reject) => {
 	fs.createReadStream(filepath)
-	    .pipe(file.createWriteStream())
+	    // .pipe(file.createWriteStream())
+	    .pipe(gcsStream)
 	    .on("error", error => reject(error))
 	    .on("finish", () => {
 		console.log("Finished uploading to google")
@@ -36,8 +40,29 @@ function saveImage(filepath) {
     })
 }
 
-function getFileMetadata(cloudFile) {
-    return cloudFile.getMetadata()
+// function saveImage(filePath) {
+//     const storage = new Storage();
+//     const bucket = storage.bucket("glass-spades-images");
+//     const filename = path.basename(filePath);
+//     const file = bucket.file(filename);
+//     const gcsStream = file.createWriteStream({ resumable: false,
+// 					       validation: false })
+//     fs.createReadStream(filePath)
+// 	.pipe(gcsStream)
+// 	.on("error", error => console.log(error))
+// 	.on("finish", () => console.log("Finished uploading to google"))
+// }
+
+// function getFileMetadata(cloudFile) {
+//     return cloudFile.getMetadata()
+// }
+
+function getFileMetadata(filePath) {
+    const storage = new Storage();
+    const bucket = storage.bucket("glass-spades-images");
+    const filename = path.basename(filePath);
+    const file = bucket.file(filename);
+    return file.getMetadata()
 }
 
 exports.minifyImage = minifyImage;
