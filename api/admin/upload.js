@@ -86,10 +86,10 @@ function uploadListing(request, response) {
 			file[0].sourcePath));
 		    convertedFiles.forEach(file => fs.unlinkSync(
 			file[0].destinationPath));
-		    console.log(metadata);
 
-		    // saveImageToDB(fileNames, metadata, listing);
-		    saveListingToDB(listing);
+		    const listingId = saveListingToDB(listing);
+		    console.log(listingId);
+		    saveImageToDB(listingId, fileNames, metadata);
 		}
 	    })
     })
@@ -147,7 +147,22 @@ function saveListingToDB(listing) {
     return newListing._id
 }
 
-// function saveImageToDB(listingId, imageMetadata, )
+async function saveImageToDB(listingId, fileNames, metadata) {
+    await Promise.all(metadata.map(imageMeta => {
+	const position = fileNames.filter(
+	    fileName => `${fileName.name}.webp` == imageMeta.name)[0].position;
+	const imageModel = new db.Image({
+	    listingId,
+	    position,
+	    googleId: imageMeta.id,
+	    link: imageMeta.mediaLink,
+	    name: imageMeta.name,
+	    contentType: imageMeta.contentType
+	});
+	console.log(imageModel)
+	// return imageModel.save();
+    }))
+}
 
 exports.sendModelData = sendModelData;
 exports.uploadListing = uploadListing;
