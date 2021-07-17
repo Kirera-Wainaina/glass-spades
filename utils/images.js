@@ -40,23 +40,6 @@ function saveImage(filepath) {
     })
 }
 
-// function saveImage(filePath) {
-//     const storage = new Storage();
-//     const bucket = storage.bucket("glass-spades-images");
-//     const filename = path.basename(filePath);
-//     const file = bucket.file(filename);
-//     const gcsStream = file.createWriteStream({ resumable: false,
-// 					       validation: false })
-//     fs.createReadStream(filePath)
-// 	.pipe(gcsStream)
-// 	.on("error", error => console.log(error))
-// 	.on("finish", () => console.log("Finished uploading to google"))
-// }
-
-// function getFileMetadata(cloudFile) {
-//     return cloudFile.getMetadata()
-// }
-
 function getFileMetadata(filePath) {
     const storage = new Storage();
     const bucket = storage.bucket("glass-spades-images");
