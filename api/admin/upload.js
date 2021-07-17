@@ -25,6 +25,7 @@ function uploadListing(request, response) {
     const busboy = new Busboy({ headers: request.headers });
     const listing = {};
     const imageMetadata = [];
+    const fileNames = [];
 
     busboy.on("field", (fieldname, value) => {
 	if (fieldname == "External Features" || fieldname == "Internal Features") {
@@ -43,26 +44,35 @@ function uploadListing(request, response) {
 	const name = `${nameSplit[0]}-${nameSplit[1]}`;
 	const imageFolder = path.dirname(path.dirname(__dirname));
 	const route = path.join(imageFolder, "uploaded", name);
+	
 	file.pipe(fs.createWriteStream(route))
 	    .on("error", error => {
 		console.log("Error When writing image to file")
 		console.log(error)
 	    })
 	    .on("finish", async () => {
- 		const file = await images.minifyImage(route);
-		fs.unlink(route, error => console.error());
-		const cloudFile = await images.saveImage(file[0].destinationPath);
-		fs.unlink(file[0].destinationPath, error => console.error());
-		const [ metadata ] = await images.getFileMetadata(cloudFile)
-		const imageInfo = {
-		    googleId: metadata["id"],
-		    link: metadata["mediaLink"],
-		    name: metadata["name"],
-		    contentType: metadata["contentType"],
-		    position: nameSplit[2]
-		};
-		imageMetadata.push(imageInfo);
-		emitter.emit("uploaded", listing, imageMetadata, response);
+		fileNames.push(name);
+ 		// const file = await images.minifyImage(route);
+		// fs.unlink(route, error => console.error());
+		// const cloudFile = await images.saveImage(file[0].destinationPath);
+		// fs.unlink(file[0].destinationPath, error => console.error());
+		// const [ metadata ] = await images.getFileMetadata(cloudFile)
+		// const imageInfo = {
+		//     googleId: metadata["id"],
+		//     link: metadata["mediaLink"],
+		//     name: metadata["name"],
+		//     contentType: metadata["contentType"],
+		//     position: nameSplit[2]
+		// };
+		// imageMetadata.push(imageInfo);
+		// emitter.emit("uploaded", listing, imageMetadata, response);
+		if (fileNames.length == listing.imageNum) {
+		    console.log(fileNames);
+		    const files = await Promise.all(
+			fileNames.map(filename => images.minifyImage(
+			    path.join(imageFolder, "uploaded", filename))));
+		    console.log(files)
+		}
 	    })
     })
 
