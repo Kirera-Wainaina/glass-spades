@@ -14,8 +14,10 @@ let wsEndpoint, routeCache;
 
 dotenv.config()
 
-const httpPort = process.env.HTTP_PORT;
-const port = process.env.PORT;
+// const httpPort = process.env.HTTP_PORT;
+// const port = process.env.PORT;
+const httpPort = 80;
+const port = 443;
 
 const options = {
     key: fs.readFileSync(`${process.env.CERTPATH}/privkey.pem`, "utf8"),
