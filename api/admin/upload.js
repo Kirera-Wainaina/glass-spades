@@ -27,6 +27,7 @@ function uploadListing(request, response) {
     const listing = {};
     const imageMetadata = [];
     const fileNames = [];
+    let counter = 0;
 
     busboy.on("field", (fieldname, value) => {
 	if (fieldname == "External Features" || fieldname == "Internal Features") {
@@ -54,57 +55,29 @@ function uploadListing(request, response) {
 	    .on("finish", async () => {
 		try {
 		    fileNames.push({ name, position: nameSplit[2] });
-		    if (fileNames.length == listing.imageNum) {
-			const convertedFiles = await Promise.all(
-			    fileNames.map(filename => images.minifyImage(
-				path.join(imageFolder,
-					  "uploaded",
-					  filename.name))));
-
-			const googleMetadata = await Promise.all(
-			    convertedFiles.map(async convertedFile => {
-				await images.saveImage(
-				    convertedFile[0].destinationPath);
-				return images.getFileMetadata(
-				    convertedFile[0].destinationPath);
-			    }));
-
-			// convertedFiles.forEach(convertedFile => images.saveImage(
-			//     convertedFile[0].destinationPath))
-
-			convertedFiles.forEach(file => fs.unlinkSync(
-			    file[0].sourcePath));
-			convertedFiles.forEach(file => fs.unlinkSync(
-			    file[0].destinationPath));
-
-			console.log("Retrieving Metadata");
-			// const googleMetadata = await Promise.all(
-			//     cloudFiles.map(cloudFile => images.getFileMetadata(
-			// 	cloudFile)));
-			// const googleMetadata = await Promise.all(fileNames.map(
-			//     info => images.getFileMetadata(info.name)));
-			const metadata = googleMetadata.map((data, index) => {
-			    const [ itemMetadata ] = googleMetadata[index];
-			    return itemMetadata
-			});
-			console.log(metadata)
-
-			// const listingId = saveListingToDB(listing);
-			// await saveImageToDB(listingId, fileNames, metadata);
-			// console.log("Images saved to DB");
-			// respond.handleTextResponse(response, "success");
+		    const convertedFile = await images.minifyImage(route);
+		    await images.saveImage(convertedFile[0].destinationPath);
+		    const [ metadata ] = await images.getFileMetadata(
+			convertedFile[0].destinationPath);
+		    imageMetadata.push(metadata)
+		    fs.unlinkSync(convertedFile[0].destinationPath);
+		    fs.unlinkSync(convertedFile[0].sourcePath);
+		    counter++
+		    if (counter == listing.imageNum) {
+			console.log("All files uploaded")
+			const listingId = await saveListingToDB(listing);
+			await saveImagesToDB(listingId, fileNames, imageMetadata);
+			console.log("Images saved to DB");
+			respond.handleTextResponse(response, "success");
 		    }
 		} catch (error) {
 		    console.log(error);
-		    if (error.code != "ECONNRESET") {
-			respond.handleTextResponse(response, "fail")
-		    }
+		    respond.handleTextResponse(response, "fail")
 		}
 	    })
     })
 
     busboy.on("finish", () => {
-	// console.log(listing);
 	console.log("All the data is received")
 	// Let the program know all the data is in
     })
@@ -119,10 +92,10 @@ async function saveListingToDB(listing) {
     const newListing = new db.Listing(listing);
     await newListing.save()
     console.log("Listing saved to DB")
-    return newListing._id
+    return Promise.resolve(newListing._id)
 }
 
-function savesImageToDB(listingId, fileNames, metadata) {
+function saveImagesToDB(listingId, fileNames, metadata) {
     return Promise.all(metadata.map(imageMeta => {
 	const position = fileNames.filter(
 	    fileName => `${fileName.name}.webp` == imageMeta.name)[0].position;
