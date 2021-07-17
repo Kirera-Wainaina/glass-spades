@@ -79,9 +79,11 @@ function uploadListing(request, response) {
 
 			const listingId = saveListingToDB(listing);
 			await saveImageToDB(listingId, fileNames, metadata);
+			respond.handleTextResponse(response, "success");
 		    }
 		} catch (error) {
 		    console.log(error);
+		    respond.handleTextResponse(response, "fail")
 		}
 	    })
     })
