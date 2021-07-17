@@ -70,7 +70,6 @@ function uploadListing(request, response) {
 		    const convertedFiles = await Promise.all(
 			fileNames.map(filename => images.minifyImage(
 			    path.join(imageFolder, "uploaded", filename))));
-		    console.log(convertedFiles)
 
 		    const cloudFiles = await Promise.all(
 			convertedFiles.map(convertedFile => images.saveImage(
@@ -79,7 +78,12 @@ function uploadListing(request, response) {
 		    const googleMetadata = await Promise.all(
 			cloudFiles.map(cloudFile => images.getFileMetadata(
 			    cloudFile)));
-		    console.log(googleMetadata);
+		    const metadata = googleMetadata.map((data, index) => {
+			const [ itemMetadata ] = googleMetadata[index];
+			return itemMetadata
+		    });
+		    console.log(metadata);
+
 		}
 	    })
     })
