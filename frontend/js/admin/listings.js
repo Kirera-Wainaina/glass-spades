@@ -49,6 +49,7 @@ function createButton(value, listingId) {
     button.type = "button";
     button.setAttribute("data-listing-id", listingId);
     button.addEventListener("click", changeColor)
+    button.addEventListener("click", addListingToFeatured);
     return button
 }
 
@@ -95,9 +96,26 @@ function changeColor(event) {
     }
 }
 
+function addListingToFeatured(event) {
+    const el = event.target;
+    const featured = JSON.parse(sessionStorage.getItem("featured"));
+    const listingId = el.dataset.listingId;
+    
+    if (featured.includes(listingId)) {
+	const index = featured.findIndex(el => el == listingId);
+	featured.splice(index, 1);
+    } else {
+	featured.push(listingId);
+    }
+    sessionStorage.setItem("featured", JSON.stringify(featured))
+    console.log(featured)
+}
+
 function saveFeaturedListings(listings) {
-    const featured = listings.filter(listing => listing.featured == true)
-    sessionStorage.setItem("featured", featured);
+    const featuredListings = listings.filter(listing => listing.featured == true);
+    const featuredIds = featuredListings.map(listing => listing.id);
+    
+    sessionStorage.setItem("featured", JSON.stringify(featuredIds));
 }
 
 function displayFeaturedListings(listings) {
