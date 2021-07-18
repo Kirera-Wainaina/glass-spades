@@ -27,23 +27,24 @@ function createHouseSection(listing) {
     const div = document.createElement("div");
     div.classList.add("listing-container");
 
-    div.append(createButtonSection())
+    div.append(createButtonSection(listing.id))
     div.append(createHouse(listing));
     return div
 }
 
-function createButtonSection() {
+function createButtonSection(listingId) {
     const div = document.createElement("div");
     div.classList.add("button-section");
-    div.append(createButton("Featured"));
-    div.append(createButton("Archived"))
+    div.append(createButton("Featured", listingId));
+    div.append(createButton("Archived", listingId))
     return div
 }
 
-function createButton(value) {
+function createButton(value, listingId) {
     const button = document.createElement("button");
     button.textContent = value;
-    button.type = "button"
+    button.type = "button";
+    button.setAttribute("data-listing-id", listingId);
     return button
 }
 
