@@ -15,6 +15,21 @@ div#listings {
     color: black;
 }
 
+.listing-container {
+}
+
+.button-section {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.button-section button {
+    height: 3em;
+    width: 30%;
+    background-color: white;
+    border: 1px solid grey;
+}
+
 @media (max-width: 500px) {
     .house-card {
 	width: 99vw;
