@@ -19,11 +19,35 @@ function getListings() {
 function displayListings(listings) {
     const listingsEl = document.getElementById("listings");
     listings.forEach(listing => {
-	listingsEl.append(createHouseContainer(listing));
+	listingsEl.append(createHouseSection(listing));
     });
 }
 
-function createHouseContainer(listing) {
+function createHouseSection(listing) {
+    const div = document.createElement("div");
+    div.classList.add("listing-container");
+
+    div.append(createButtonSection())
+    div.append(createHouse(listing));
+    return div
+}
+
+function createButtonSection() {
+    const div = document.createElement("div");
+    div.classList.add("button-section");
+    div.append(createButton("Featured"));
+    div.append(createButton("Archived"))
+    return div
+}
+
+function createButton(value) {
+    const button = document.createElement("button");
+    button.textContent = value;
+    button.type = "button"
+    return button
+}
+
+function createHouse(listing) {
     const a = document.createElement("a");
     a.classList.add("house-card");
     a.href = `/admin/edit?id=${listing.id}`;
