@@ -32,6 +32,8 @@ function compileListingData(listing, image) {
 	    heading: listing.Heading,
 	    price: listing.Price,
 	    link: image.link,
+	    featured: listing.Featured,
+	    archived: listing.Archived
 	})
     })
 }
