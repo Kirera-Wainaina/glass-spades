@@ -45,6 +45,7 @@ function createButton(value, listingId) {
     button.textContent = value;
     button.type = "button";
     button.setAttribute("data-listing-id", listingId);
+    button.addEventListener("click", changeColor)
     return button
 }
 
@@ -80,4 +81,13 @@ function createPrice(price) {
 	.format(price);
     p.textContent = `Price: ${formattedPrice}`;
     return p
+}
+
+function changeColor(event) {
+    const el = event.target;
+    if (!el.classList.contains("clicked")) {
+	el.classList.add("clicked");
+    } else {
+	el.classList.remove("clicked")
+    }
 }
