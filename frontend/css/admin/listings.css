@@ -30,6 +30,11 @@ div#listings {
     border: 1px solid grey;
 }
 
+.button-section .clicked {
+    background-color: lightgrey;
+    color: black;
+}
+
 @media (max-width: 500px) {
     .house-card {
 	width: 99vw;
