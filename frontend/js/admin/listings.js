@@ -11,6 +11,8 @@ function getListings() {
 		const listings = JSON.parse(this.response);
 		console.log(listings);
 		displayListings(listings);
+		saveFeaturedListings(listings);
+		displayFeaturedListings(listings)
 	    }
 	}
     }
@@ -43,6 +45,7 @@ function createButtonSection(listingId) {
 function createButton(value, listingId) {
     const button = document.createElement("button");
     button.textContent = value;
+    button.name = value;
     button.type = "button";
     button.setAttribute("data-listing-id", listingId);
     button.addEventListener("click", changeColor)
@@ -90,4 +93,21 @@ function changeColor(event) {
     } else {
 	el.classList.remove("clicked")
     }
+}
+
+function saveFeaturedListings(listings) {
+    const featured = listings.filter(listing => listing.featured == true)
+    sessionStorage.setItem("featured", featured);
+}
+
+function displayFeaturedListings(listings) {
+    const featuredListings = listings.filter(listing => listing.featured == true)
+    const featuredButtons = document.querySelector("button[name='Featured']");
+    featuredListings.forEach(listing => {
+	featuredButtons.forEach(button => {
+	    if (button.dataset.listingId == listing.id) {
+		button.classList.add("clicked");
+	    }
+	});
+    })
 }
