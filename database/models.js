@@ -47,7 +47,9 @@ const listingSchema = new Schema({
     Location: {
 	type: { type: String, enum: ["Point"], default: "Point" },
 	coordinates: { type: [Number] }
-    }
+    },
+    Featured: Boolean,
+    Archived: Boolean
 });
 
 const imageSchema = new Schema({
