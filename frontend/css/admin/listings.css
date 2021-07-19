@@ -35,8 +35,42 @@ div#listings {
     color: black;
 }
 
+.save {
+    height: 3em;
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.save:active {
+    background-color: white;
+    color: black;
+}
+
+#save-featured {
+    grid-column: 1 / 7;
+}
+
+#save-archived {
+    grid-column: 7 / 13;
+}
+
 @media (max-width: 500px) {
     .house-card {
 	width: 99vw;
+    }
+
+    .save {
+	margin-top: 0.5em;
+    }
+    
+    #save-featured {
+	grid-column: 1 / 6;
+    }
+
+    #save-archived {
+	grid-column: 1 / 6;
     }
 }
