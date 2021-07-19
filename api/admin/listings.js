@@ -42,14 +42,30 @@ function compileListingData(listing, image) {
 
 function saveFeatured(request, response) {
     const busboy = new Busboy({ headers: request.headers });
-    let featured;
+    let featuredIds;
 
     busboy.on("field", (fieldname, value) => {
-	featured = value;
+	featuredIds = JSON.parse(value);
     });
 
-    busboy.on("finish", () => {
-	console.log(featured)
+    busboy.on("finish", async () => {
+	try {
+	    const existingFeatured = await db.Listing.find({ Featured: true });
+
+	    if (existingFeatured.length) {
+		Promise.all(existingFeatured.map(existing => {
+		    existing.Featured = false;
+		    return existing.save()
+		}))
+	    }
+	    await Promise.all(featuredIds.map(id => {
+		return db.Listing.findByIdAndUpdate(id, { Featured: true });
+	    }));
+	    respond.handleTextResponse(response, "success")
+	} catch (error) {
+	    console.log(error);
+	    respond.handleTextResponse(response, "fail")
+	}
     })
 
     request.pipe(busboy);
