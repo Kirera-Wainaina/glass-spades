@@ -141,8 +141,8 @@ saveFeatured.addEventListener("click", event => {
     xhr.send(formdata);
 
     xhr.onreadystatechange = function() {
-	if (this.readyState == 4) {
-	    console.log(this.response);
+	if (this.readyState == 4 && this.response != "fail") {
+	    location.reload();
 	}
     }
 });
