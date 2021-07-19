@@ -1,3 +1,4 @@
+import { showLoadingPage } from "../general.js";
 getListings();
 
 function getListings() {
@@ -132,6 +133,7 @@ function displayFeaturedListings(listings) {
 
 const saveFeatured = document.getElementById("save-featured");
 saveFeatured.addEventListener("click", event => {
+    showLoadingPage();
     const featured = sessionStorage.getItem("featured");
     const formdata = new FormData();
     formdata.set("featured", featured);
