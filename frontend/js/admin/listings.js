@@ -129,3 +129,20 @@ function displayFeaturedListings(listings) {
 	});
     })
 }
+
+const saveFeatured = document.getElementById("save-featured");
+saveFeatured.addEventListener("click", event => {
+    const featured = sessionStorage.getItem("featured");
+    const formdata = new FormData();
+    formdata.set("featured", featured);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/admin/listings/saveFeatured");
+    xhr.send(formdata);
+
+    xhr.onreadystatechange = function() {
+	if (this.readyState == 4) {
+	    console.log(this.response);
+	}
+    }
+});
