@@ -10,7 +10,6 @@ function getListings() {
 	if (this.readyState == 4) {
 	    if (this.response != "fail") {
 		const listings = JSON.parse(this.response);
-		console.log(listings);
 		displayListings(listings);
 
 		storeFeaturedListings(listings);
@@ -119,7 +118,6 @@ function addListingToState(event, state) {
 	stateIds.push(listingId);
     }
     sessionStorage.setItem(state, JSON.stringify(stateIds))
-    console.log(stateIds)
 }
 
 function storeFeaturedListings(listings) {
