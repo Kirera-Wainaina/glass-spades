@@ -120,7 +120,7 @@ function storeFeaturedListings(listings) {
 
 function displayFeaturedListings(listings) {
     const featuredListings = listings.filter(listing => listing.featured == true)
-    const featuredButtons = document.querySelector("button[name='Featured']");
+    const featuredButtons = document.querySelectorAll("button[name='Featured']");
     featuredListings.forEach(listing => {
 	featuredButtons.forEach(button => {
 	    if (button.dataset.listingId == listing.id) {
