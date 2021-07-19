@@ -13,6 +13,7 @@ mongoose.connect(uri,
 		     useNewUrlParser: true,
 		     useUnifiedTopology: true
 		 });
+mongoose.set("useFindAndModify", false);
 
 const userSchema = new Schema({
     firstname: String,
