@@ -1,30 +1,25 @@
 const db = require("../database/models");
+const respond = require("../utils/respond");
 
 async function getListings(request, response) {
-    const overviews = await db.Image.find({ position: 0 })
+    const featuredListings = await db.Listing.find({ Featured: true });
 
-    Promise.all(overviews.map(overview => {
-	return new Promise((resolve, reject) => {
-	    db.Listing.findById(overview.listingId, (error, docs) => {
-		if (error) reject(error);
-		resolve({
+    const details = await Promise.all(featuredListings.map(listing => {
+	return new Promise(async (resolve, reject) => {
+	    const overview = await db.Image.findOne({ listingId: listing._id,
+						      position: 0 });
+	    resolve({
 		    "imageSrc": overview.link,
-		    "bedrooms": docs.Bedrooms,
-		    "bathrooms": docs.Bathrooms,
-		    "price": docs.Price,
-		    "heading": docs.Heading,
-		    "id": docs._id
-		});
+		    "bedrooms": listing.Bedrooms,
+		    "bathrooms": listing.Bathrooms,
+		    "price": listing.Price,
+		    "heading": listing.Heading,
+		    "id": listing._id
 	    })
 	})
-    }))
-	.then(details =>{
-	    response.writeHead(200, {
-		"content-type": "application/json"
-	    })
-		.end(JSON.stringify(details));
-	})
-	.catch(error => console.error())
+    }));
+
+    respond.handleJSONResponse(response, details);
 }
 
 exports.getListings = getListings;
