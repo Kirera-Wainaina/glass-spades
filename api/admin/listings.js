@@ -53,7 +53,7 @@ function saveFeatured(request, response) {
 	    const existingFeatured = await db.Listing.find({ Featured: true });
 
 	    if (existingFeatured.length) {
-		Promise.all(existingFeatured.map(existing => {
+		await Promise.all(existingFeatured.map(existing => {
 		    existing.Featured = false;
 		    return existing.save()
 		}))
