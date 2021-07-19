@@ -71,5 +71,36 @@ function saveFeatured(request, response) {
     request.pipe(busboy);
 }
 
+function saveArchived(request, response) {
+    const busboy = new Busboy({ headers: request.headers });
+    let archivedIds
+
+    busboy.on("field", (fieldname, value) => {
+	archivedIds = JSON.parse(value);
+    })
+
+    busboy.on("finish", async () => {
+	try {
+	    const existingArchived = await db.Listing.find({ Archived: true});
+	    if (existingArchived.length) {
+		await Promise.all(existingArchived.map(existing => {
+		    existing.Archived = false;
+		    return existing.save();
+		}))
+	    }
+	    await Promise.all(archivedIds.map(id => {
+		return db.Listing.findByIdAndUpdate(id, { Archived: true });
+	    }))
+	    respond.handleTextResponse(response, "success");
+	} catch (error) {
+	    console.log(error);
+	    respond.handleTextResponse(response, "fail");
+	}
+    })
+
+    request.pipe(busboy);
+}
+
 exports.getListings = getListings;
 exports.saveFeatured = saveFeatured;
+exports.saveArchived = saveArchived;
