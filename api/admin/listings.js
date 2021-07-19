@@ -1,3 +1,5 @@
+const Busboy = require("busboy");
+
 const respond = require("../../utils/respond");
 const db = require("../../database/models");
 
@@ -38,4 +40,20 @@ function compileListingData(listing, image) {
     })
 }
 
+function saveFeatured(request, response) {
+    const busboy = new Busboy({ headers: request.headers });
+    let featured;
+
+    busboy.on("field", (fieldname, value) => {
+	featured = value;
+    });
+
+    busboy.on("finish", () => {
+	console.log(featured)
+    })
+
+    request.pipe(busboy);
+}
+
 exports.getListings = getListings;
+exports.saveFeatured = saveFeatured;
