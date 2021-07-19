@@ -12,8 +12,12 @@ function getListings() {
 		const listings = JSON.parse(this.response);
 		console.log(listings);
 		displayListings(listings);
+
 		storeFeaturedListings(listings);
-		displayFeaturedListings(listings)
+		storeArchivedListings(listings);
+
+		displayFeaturedListings(listings);
+		displayArchivedListings(listings);
 	    }
 	}
     }
@@ -50,7 +54,13 @@ function createButton(value, listingId) {
     button.type = "button";
     button.setAttribute("data-listing-id", listingId);
     button.addEventListener("click", changeColor)
-    button.addEventListener("click", addListingToFeatured);
+    if (value == "Featured") {
+	button.addEventListener("click",
+				event => addListingToState(event, "featured"));
+    } else {
+	button.addEventListener("click",
+				event => addListingToState(event, "archived"))
+    }
     return button
 }
 
@@ -97,26 +107,33 @@ function changeColor(event) {
     }
 }
 
-function addListingToFeatured(event) {
+function addListingToState(event, state) {
     const el = event.target;
-    const featured = JSON.parse(sessionStorage.getItem("featured"));
+    const stateIds = JSON.parse(sessionStorage.getItem(state));
     const listingId = el.dataset.listingId;
     
-    if (featured.includes(listingId)) {
-	const index = featured.findIndex(el => el == listingId);
-	featured.splice(index, 1);
+    if (stateIds.includes(listingId)) {
+	const index = stateIds.findIndex(el => el == listingId);
+	stateIds.splice(index, 1);
     } else {
-	featured.push(listingId);
+	stateIds.push(listingId);
     }
-    sessionStorage.setItem("featured", JSON.stringify(featured))
-    // console.log(featured)
+    sessionStorage.setItem(state, JSON.stringify(stateIds))
+    console.log(stateIds)
 }
 
 function storeFeaturedListings(listings) {
     const featuredListings = listings.filter(listing => listing.featured == true);
     const featuredIds = featuredListings.map(listing => listing.id);
-    
+
     sessionStorage.setItem("featured", JSON.stringify(featuredIds));
+}
+
+function storeArchivedListings(listings) {
+    const archivedListings = listings.filter(listing => listing.archived == true);
+    const archivedIds = archivedListings.map(listing => listing.id);
+
+    sessionStorage.setItem("archived", JSON.stringify(archivedIds));
 }
 
 function displayFeaturedListings(listings) {
@@ -131,15 +148,34 @@ function displayFeaturedListings(listings) {
     })
 }
 
+function displayArchivedListings(listings) {
+    const archivedListings = listings.filter(listing => listing.archived == true)
+    const archivedButtons = document.querySelectorAll("button[name='Archived']");
+    archivedListings.forEach(listing => {
+	archivedButtons.forEach(button => {
+	    if (button.dataset.listingId == listing.id) {
+		button.classList.add("clicked");
+	    }
+	});
+    })
+}
+
 const saveFeatured = document.getElementById("save-featured");
-saveFeatured.addEventListener("click", event => {
+saveFeatured.addEventListener("click",() => saveState(
+    "featured", "/api/admin/listings/saveFeatured"))
+
+const saveArchived = document.getElementById("save-archived");
+saveArchived.addEventListener("click",() => saveState(
+    "archived", "/api/admin/listings/saveArchived"))
+
+function saveState(state, url) {
     showLoadingPage();
-    const featured = sessionStorage.getItem("featured");
+    const stateIds = sessionStorage.getItem(state);
     const formdata = new FormData();
-    formdata.set("featured", featured);
+    formdata.set(state, stateIds);
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/admin/listings/saveFeatured");
+    xhr.open("POST", url);
     xhr.send(formdata);
 
     xhr.onreadystatechange = function() {
@@ -147,4 +183,4 @@ saveFeatured.addEventListener("click", event => {
 	    location.reload();
 	}
     }
-});
+}
