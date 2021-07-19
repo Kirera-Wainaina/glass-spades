@@ -11,7 +11,7 @@ function getListings() {
 		const listings = JSON.parse(this.response);
 		console.log(listings);
 		displayListings(listings);
-		saveFeaturedListings(listings);
+		storeFeaturedListings(listings);
 		displayFeaturedListings(listings)
 	    }
 	}
@@ -108,10 +108,10 @@ function addListingToFeatured(event) {
 	featured.push(listingId);
     }
     sessionStorage.setItem("featured", JSON.stringify(featured))
-    console.log(featured)
+    // console.log(featured)
 }
 
-function saveFeaturedListings(listings) {
+function storeFeaturedListings(listings) {
     const featuredListings = listings.filter(listing => listing.featured == true);
     const featuredIds = featuredListings.map(listing => listing.id);
     
