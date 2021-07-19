@@ -2,7 +2,7 @@ const db = require("../database/models");
 const respond = require("../utils/respond");
 
 async function getSales(request, response) {
-    const sales = await db.Listing.find({ Mandate: "Sale" },
+    const sales = await db.Listing.find({ Mandate: "Sale", Archived: false },
 					  {
 					      Heading: 1,
 					      Price: 1,

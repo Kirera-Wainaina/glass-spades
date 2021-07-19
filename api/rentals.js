@@ -2,7 +2,7 @@ const db = require("../database/models");
 const respond = require("../utils/respond");
 
 async function getRentals(request, response) {
-    const rentals = await db.Listing.find({ Mandate: "Rent" },
+    const rentals = await db.Listing.find({ Mandate: "Rent", Archived: false },
 					  {
 					      Heading: 1,
 					      Price: 1,
