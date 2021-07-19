@@ -22,13 +22,11 @@ function sendModelData(request, response) {
 	.pipe(response)
 }
 
-function uploadListing(request, response) {
+async function uploadListing(request, response) {
     const busboy = new Busboy({ headers: request.headers });
-    const listing = {};
-    const imageMetadata = [];
-    const fileNames = [];
-    let counter = 0;
-
+    let listing = await new db.Listing();
+    const listingId = listing._id;
+    
     busboy.on("field", (fieldname, value) => {
 	if (fieldname == "External Features" || fieldname == "Internal Features") {
 	    if (listing[fieldname]) {
@@ -41,7 +39,7 @@ function uploadListing(request, response) {
 	}
     })
 
-    busboy.on("file", (fieldname, file, filename, encoding) => {
+    busboy.on("file", (fieldname, file) => {
 	const nameSplit = fieldname.split("-");
 	const name = `${nameSplit[0]}-${nameSplit[1]}`;
 	const imageFolder = path.dirname(path.dirname(__dirname));
@@ -53,61 +51,31 @@ function uploadListing(request, response) {
 		console.log(error)
 	    })
 	    .on("finish", async () => {
-		fileNames.push({ name, position: nameSplit[2] });
 		const convertedFile = await images.minifyImage(route);
 		await images.saveImage(convertedFile[0].destinationPath);
 		const [ metadata ] = await images.getFileMetadata(
 		    convertedFile[0].destinationPath);
-		imageMetadata.push(metadata)
 		fs.unlinkSync(convertedFile[0].destinationPath);
 		fs.unlinkSync(convertedFile[0].sourcePath);
-		counter++
-		// for some reason, the process works with the log line below
-		// It breaks without it
-		console.log(counter)
-		if (counter == listing.imageNum) {
-		    console.log("All files uploaded")
-		    const listingId = await saveListingToDB(listing);
-		    await saveImagesToDB(listingId, fileNames, imageMetadata);
-		    console.log("Images saved to DB");
-		    respond.handleTextResponse(response, "success");
-		}
+		const imageModel = new db.Image({
+		    listingId,
+		    position: nameSplit[2],
+		    googleId: metadata.id,
+		    link: metadata.mediaLink,
+		    name: metadata.name,
+		    contentType: metadata.contentType
+		});
+		await imageModel.save()
 	    })
     })
 
-    busboy.on("finish", () => {
-	console.log("All the data is received")
-	// Let the program know all the data is in
+    busboy.on("finish", async () => {
+	console.log("Data received");
+	await listing.save()
+	respond.handleTextResponse(response, "success");
     })
-    
-    request.pipe(busboy);
-}
 
-async function saveListingToDB(listing) {
-    listing["Location"] = {
-	coordinates: [ listing.Longitude, listing.Latitude ]
-    };
-    const newListing = new db.Listing(listing);
-    await newListing.save()
-    console.log("Listing saved to DB")
-    return Promise.resolve(newListing._id)
+    request.pipe(busboy)
 }
-
-function saveImagesToDB(listingId, fileNames, metadata) {
-    return Promise.all(metadata.map(imageMeta => {
-	const position = fileNames.filter(
-	    fileName => `${fileName.name}.webp` == imageMeta.name)[0].position;
-	const imageModel = new db.Image({
-	    listingId,
-	    position,
-	    googleId: imageMeta.id,
-	    link: imageMeta.mediaLink,
-	    name: imageMeta.name,
-	    contentType: imageMeta.contentType
-	});
-	return imageModel.save();
-    }))
-}
-
 exports.sendModelData = sendModelData;
 exports.uploadListing = uploadListing;
