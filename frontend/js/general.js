@@ -105,3 +105,11 @@ export function hideLoadingPage() {
     const loadingPage = document.getElementById("loading-page");
     loadingPage.style.display = "none";
 }
+
+// implement google analytics
+window.dataLayer = window.dataLayer || [];
+function gtag() {
+    dataLayer.push(arguments);
+}
+gtag("js", new Date());
+gtag("config", "G-VBW87T999B");
