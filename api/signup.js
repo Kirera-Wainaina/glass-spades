@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 
 const database = require("../database/models");
+const respond = require("../utils/respond");
 
 dotenv.config()
 
@@ -98,15 +99,12 @@ function checkLogin(request, response) {
     if (request.headers.cookie) {
 	const cookies = querystring.parse(request.headers.cookie, "; ");
 	if (cookies.auth) {
-	    response
-		.writeHead(200, {
-		    "content-type": "text/plain"
-		})
-		.end("/admin/home")
+	    respond.handleTextResponse(response, "/admin/home")
+	} else {
+	    respond.handleTextResponse(response, "")
 	}
     } else {
-	response.writeHead(200, { "content-type": "text/plain" })
-	    .end()
+	respond.handleTextResponse(response, "");
     }
 }
 
