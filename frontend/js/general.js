@@ -36,7 +36,7 @@ export function displayHouseDetails(houseDetails) {
 	    fragment.append(houseCard);
 	})
 
-	listings.appendChild(fragment);
+	if (listings) listings.appendChild(fragment);
     }
 }
 
