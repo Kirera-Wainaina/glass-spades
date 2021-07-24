@@ -1,4 +1,4 @@
-const dataLayer = [];
+var dataLayer = [];
 
 getListingDetails();
 getListingImages();
