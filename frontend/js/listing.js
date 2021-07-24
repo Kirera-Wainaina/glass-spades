@@ -252,10 +252,8 @@ form.addEventListener("submit", () => {
     loadingPage.style.display = "flex";
 })
 
-form.addEventListener("submit", () => {
-    const details = JSON.parse(sessionStorage.getItem("details"));
-    const price = details.Price;
-    
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
     dataLayer.push({
 	"event": "generate_lead",
     })
