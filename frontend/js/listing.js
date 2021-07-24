@@ -1,4 +1,3 @@
-var dataLayer = [];
 
 getListingDetails();
 getListingImages();
