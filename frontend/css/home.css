@@ -85,6 +85,44 @@ h3 {
     margin-top: 1em;
 }
 
+div#offer-container {
+    grid-column: 1 / 13;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.offer {
+    display: none;
+    font-size: 1.7em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid lightgrey;
+    border-top:1px solid lightgrey;
+}
+
+.offer-animation {
+    display: flex;
+    animation: offer-slide;
+    animation-timing-function: ease-in-out;
+    animation-duration: 8s;
+}
+
+@keyframes offer-slide {
+    0% {
+	opacity: 0;
+    }
+
+    50% {
+	opacity: 1;
+    }
+
+    100% {
+	opacity: 0;
+    }
+}
+
 div#listings {
     grid-column: 1 / 13;
     width: 95vw;
@@ -283,6 +321,10 @@ footer a, footer p {
 	width: 50vw;
 	height: 85vh;
 	align-items: stretch;
+    }
+
+    .offer {
+	font-size: 1.5em;
     }
 
     header #menu a {
