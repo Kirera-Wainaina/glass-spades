@@ -77,7 +77,6 @@ function updateListing(request, response) {
 			    await saveToDB(listing, metadata, fileNames);
 			}
 
-			respond.handleTextResponse(response, "success");
 		    } catch (error) {
 			console.log(error)
 			respond.handleTextResponse(response, "fail");
@@ -88,6 +87,12 @@ function updateListing(request, response) {
 
     busboy.on("finish", async () => {
 	console.log("All data received")
+	listing["Location"] = {
+	    coordinates: [ listing.Longitude, listing.Latitude ]
+	};
+	await db.Listing.updateOne({ _id: listing.id}, listing);
+	
+	respond.handleTextResponse(response, "success");
     })
     
     request.pipe(busboy);
