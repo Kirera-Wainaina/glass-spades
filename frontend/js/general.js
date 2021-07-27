@@ -36,6 +36,13 @@ function showPhoneMenu(event) {
     }
 }
 
+const menu = document.getElementById("menu");
+document.addEventListener("click", event => {
+    if (event.target.id != "menu-button" && menu.style.display == "flex") {
+	menu.style.display = "none";
+    }
+});
+
 export function displayHouseDetails(houseDetails) {
     if (!document.querySelector(".house-card")) {
 	const listings = document.getElementById("listings");
