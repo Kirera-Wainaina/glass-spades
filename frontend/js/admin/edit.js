@@ -117,9 +117,7 @@ async function organizeData() {
     handleCoordinates(formdata);
     await handleFiles(formdata);
 
-    if (confirmValues(formdata)) {
-	updateListing(formdata);
-    }
+    updateListing(formdata);
 }
 function handleCoordinates(formdata) {
     formdata.set("Latitude", sessionStorage.getItem("Latitude"));
