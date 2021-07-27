@@ -71,6 +71,9 @@ async function uploadListing(request, response) {
 
     busboy.on("finish", async () => {
 	console.log("Data received");
+	listing["Location"] = {
+	    coordinates: [ listing.Longitude, listing.Latitude ]
+	};
 	await listing.save()
 	respond.handleTextResponse(response, "success");
     })
