@@ -274,12 +274,14 @@ footer a, footer p {
     header #menu.phone-menu {
 	box-shadow: 0 0 5px lightgrey;
 	position: absolute;
-	right: 0;
+	left: 0;
 	top: 4em;
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-start;
 	background-color: white;
-	width: 35vw;
+	width: 50vw;
+	height: 85vh;
 	align-items: stretch;
     }
 
