@@ -18,7 +18,8 @@ function readFileAndRespond(filePath, response, statusCode=null) {
 	    if (mime.split("/")[0] == "image") {
 		// images should not be compressed
 		response.writeHead(statusCode || 200, {
-		    "content-type": mime
+		    "content-type": mime,
+		    "cache-control": "max-age=604800"
 		})
 
 		fs.createReadStream(filePath)
@@ -26,7 +27,8 @@ function readFileAndRespond(filePath, response, statusCode=null) {
 	    } else {
 		response.writeHead(statusCode || 200, {
 		    "content-type": mime,
-		    "content-encoding": "gzip"
+		    "content-encoding": "gzip",
+		    "cache-control": "max-age=86400"
 		})
 		
 		fs.createReadStream(filePath)

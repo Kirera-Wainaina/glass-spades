@@ -90,7 +90,9 @@ async function serverSideRender(request, response) {
     const parsed_url = url.parse(request.url);
     const cwd = "."
     if (routeCache.has(parsed_url.pathname)) {
-	response.writeHead(200, { "content-type": "text/html" })
+	response.writeHead(200, { "content-type": "text/html",
+				  "cache-control": "max-age=86400"
+				})
 	    .end(routeCache.get(parsed_url.path))
     } else {
 	if (request.headers["user-agent"] == "glassspades-headless-chromium") {
@@ -105,7 +107,8 @@ async function serverSideRender(request, response) {
 	    const html = await page.content();
 	    routeCache.set(parsed_url.path, html);
 	    response.writeHead(200, {
-		"content-type": "text/html"
+		"content-type": "text/html",
+		"cache-control": "max-age=86400"
 	    })
 		.end(html)
 	}
