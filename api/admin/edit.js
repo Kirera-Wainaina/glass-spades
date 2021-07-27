@@ -71,7 +71,7 @@ function updateListing(request, response) {
 			const [ metadata ] = await Promise.all([
 			    saveFiles(fileNames),
 			    updateExistingFiles(listing.fileId),
-			    db.Listing.updateOne({ _id: listing.id}, listing)]);
+			]);
 
 			if (metadata && metadata.length) {
 			    await saveToDB(listing, metadata, fileNames);
