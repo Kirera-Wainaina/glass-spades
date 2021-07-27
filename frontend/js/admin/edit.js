@@ -36,11 +36,13 @@ function handleListing(listing) {
 	} else if (key == "Heading" || key == "Description" || key == "Price") {
 	    enterTypedData(key, listing[key]);
 	} else if (key == "Location") {
-	    const coords = listing.Location.coordinates;
-	    const event = new Event("coords", { bubble: false })
-	    sessionStorage.setItem("Latitude", coords[1]);
-	    sessionStorage.setItem("Longitude", coords[0]);
-	    document.dispatchEvent(event);
+	    if (listing[key].coordinates.length) {
+		const coords = listing.Location.coordinates;
+		const event = new Event("coords", { bubble: false })
+		sessionStorage.setItem("Latitude", coords[1]);
+		sessionStorage.setItem("Longitude", coords[0]);
+		document.dispatchEvent(event);
+	    }
 	} else {
 	    enterData(key, listing[key])
 	}
