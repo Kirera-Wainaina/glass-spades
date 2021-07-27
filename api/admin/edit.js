@@ -16,7 +16,7 @@ function retrieveListing(request, response) {
     request.on("end", async () => {
 	try {
 	    const [ listing, listingImages ] = await Promise.all([
-		db.Listing.findById(listingId),
+		db.Listing.findById(listingId, { Featured: 0, Archived: 0 }),
 		db.Image.find({ listingId })
 	    ]);
 
