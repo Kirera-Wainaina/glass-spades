@@ -96,6 +96,7 @@ div#offer-container {
 .offer {
     display: none;
     font-size: 1.7em;
+    text-align: center;
     padding-top: 1em;
     padding-bottom: 1em;
     border-bottom: 1px solid lightgrey;
@@ -325,6 +326,8 @@ footer a, footer p {
 
     .offer {
 	font-size: 1.5em;
+	margin-left: 1em;
+	margin-right: 1em;
     }
 
     header #menu a {
