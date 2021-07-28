@@ -90,6 +90,7 @@ async function serverSideRender(request, response) {
     const parsed_url = url.parse(request.url);
     const cwd = "."
     const cacheUrl = createCacheUrl(request)
+
     if (routeCache.has(cacheUrl)) {
 	response.writeHead(200, { "content-type": "text/html",
 				  "cache-control": "max-age=86400"
@@ -139,8 +140,11 @@ function createCacheUrl(request) {
     if (fileExists) {
 	if (parsed_url.pathname == "/listing") {
 	    const query = qs.parse(parsed_url.query);
+	    // don't save path because when google ads their query parameters,
+	    // the request may seem like it's different and would end up being
+	    // saved again under a different name
 	    const id = query.id;
-	    cacheUrl = `${parsed_url.pathname}-{id}`;
+	    cacheUrl = `${parsed_url.pathname}-${id}`;
 	} else {
 	    cacheUrl = parsed_url.pathname;
 	}
