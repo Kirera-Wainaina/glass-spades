@@ -73,7 +73,7 @@ function createFilePath(urlPath) {
     const parsed_url = url.parse(urlPath);
     let filePath;
 
-    if (urlPath == "/") {
+    if (parsed_url.pathname == "/") {
 	filePath = `${cwd}/frontend/html/home.html`;
     } else if (!path.extname(parsed_url.pathname) ){
 	// browser paths
