@@ -312,15 +312,16 @@ footer a, footer p {
 
     header #menu.phone-menu {
 	box-shadow: 0 0 5px lightgrey;
-	position: absolute;
+	position: fixed;
 	left: 0;
-	top: 4em;
+	top: 0;
+	z-index: 1;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	background-color: white;
 	width: 50vw;
-	height: 85vh;
+	height: 100vh;
 	align-items: stretch;
     }
 
