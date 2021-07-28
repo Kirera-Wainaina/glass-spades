@@ -104,6 +104,18 @@ async function serverSideRender(request, response) {
 		browserWSEndpoint: wsEndpoint });
 	    const page = await browser.newPage();
 	    await page.setUserAgent("glassspades-headless-chromium")
+	    await page.setRequestInterception(true);
+	    page.on("request", req => {
+		// anything request not on the allow list is not useful to the dom
+		const allowList = ["document", "script", "xhr"];
+
+		if (!allowList.include(req.resourceType())) {
+		    req.abort();
+		}
+
+		req.continue();
+	    })
+
 	    await page.goto(`${process.env.URL}${request.url}`,
 			    { waitUntil: "networkidle0" });
 	    const html = await page.content();
