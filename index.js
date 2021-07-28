@@ -110,7 +110,7 @@ async function serverSideRender(request, response) {
 		const allowList = ["document", "script", "xhr"];
 
 		if (!allowList.includes(req.resourceType())) {
-		    req.abort();
+		    return req.abort();
 		}
 
 		req.continue();
