@@ -109,7 +109,7 @@ async function serverSideRender(request, response) {
 		// anything request not on the allow list is not useful to the dom
 		const allowList = ["document", "script", "xhr"];
 
-		if (!allowList.include(req.resourceType())) {
+		if (!allowList.includes(req.resourceType())) {
 		    req.abort();
 		}
 
