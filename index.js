@@ -89,11 +89,12 @@ httpServer.on("error", error => {
 async function serverSideRender(request, response) {
     const parsed_url = url.parse(request.url);
     const cwd = "."
-    if (routeCache.has(parsed_url.pathname)) {
+    const cacheUrl = createCacheUrl(request)
+    if (routeCache.has(cacheUrl)) {
 	response.writeHead(200, { "content-type": "text/html",
 				  "cache-control": "max-age=86400"
 				})
-	    .end(routeCache.get(parsed_url.path))
+	    .end(routeCache.get(cacheUrl))
     } else {
 	if (request.headers["user-agent"] == "glassspades-headless-chromium") {
    	    const filePath = indexUtils.createFilePath(request.url);
@@ -107,7 +108,7 @@ async function serverSideRender(request, response) {
 			    { waitUntil: "networkidle0" });
 	    const html = await page.content();
 	    await page.close();
-	    routeCache.set(parsed_url.path, html);
+	    routeCache.set(cacheUrl, html);
 	    response.writeHead(200, {
 		"content-type": "text/html",
 		"cache-control": "max-age=86400"
@@ -115,4 +116,17 @@ async function serverSideRender(request, response) {
 		.end(html)
 	}
     }
+}
+
+function createCacheUrl(request) {
+    const parsed_url = url.parse(request.url);
+    let cacheUrl;
+    if (parsed_url.pathname == "/listing") {
+	const query = qs.parse(parsed_url.query);
+	const id = query.id;
+	cacheUrl = `${parsed_url.pathname}-{id}`;
+    } else {
+	cacheUrl = parsed_url.pathname;
+    }
+    return cacheUrl
 }
