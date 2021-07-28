@@ -131,14 +131,23 @@ async function serverSideRender(request, response) {
 }
 
 function createCacheUrl(request) {
-    const parsed_url = url.parse(request.url);
     let cacheUrl;
-    if (parsed_url.pathname == "/listing") {
-	const query = qs.parse(parsed_url.query);
-	const id = query.id;
-	cacheUrl = `${parsed_url.pathname}-{id}`;
+    const parsed_url = url.parse(request.url);
+    const filePath = indexUtils.createFilePath(request.url);
+    const fileExists = fs.existsSync(filePath);
+
+    if (fileExists) {
+	if (parsed_url.pathname == "/listing") {
+	    const query = qs.parse(parsed_url.query);
+	    const id = query.id;
+	    cacheUrl = `${parsed_url.pathname}-{id}`;
+	} else {
+	    cacheUrl = parsed_url.pathname;
+	}
     } else {
-	cacheUrl = parsed_url.pathname;
+	// to prevent error page from being saved multiple times under
+	// different names
+	cacheUrl = "error";
     }
     return cacheUrl
 }
