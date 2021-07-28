@@ -99,12 +99,14 @@ async function serverSideRender(request, response) {
    	    const filePath = indexUtils.createFilePath(request.url);
 	    indexUtils.readFileAndRespond(filePath, response)
 	} else {
-	    const browser = await puppeteer.connect({ browserWSEndpoint: wsEndpoint });
+	    const browser = await puppeteer.connect({
+		browserWSEndpoint: wsEndpoint });
 	    const page = await browser.newPage();
 	    await page.setUserAgent("glassspades-headless-chromium")
 	    await page.goto(`${process.env.URL}${request.url}`,
 			    { waitUntil: "networkidle0" });
 	    const html = await page.content();
+	    await page.close();
 	    routeCache.set(parsed_url.path, html);
 	    response.writeHead(200, {
 		"content-type": "text/html",
