@@ -20,10 +20,12 @@ function handleMenu(mediaQueryResult) {
 	menu.style.display = "none";
 	menuButton.style.display = "block";
 	menuButton.addEventListener("click", showPhoneMenu);
+	document.addEventListener("click", hidePhoneMenu)
     } else {
 	menu.style.display = "flex";
 	menuButton.style.display = "none";
 	menuButton.removeEventListener("click", showPhoneMenu);
+	document.removeEventListener("click", hidePhoneMenu);
     }
 }
 
@@ -37,12 +39,13 @@ function showPhoneMenu(event) {
     }
 }
 
-const menu = document.getElementById("menu");
-document.addEventListener("click", event => {
+function hidePhoneMenu(event) {
+    const menu = document.getElementById("menu");
     if (event.target.id != "menu-button" && menu.style.display == "flex") {
 	menu.style.display = "none";
+	console.log("called")
     }
-});
+}
 
 export function displayHouseDetails(houseDetails) {
     if (!document.querySelector(".house-card")) {
