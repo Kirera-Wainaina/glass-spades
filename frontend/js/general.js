@@ -66,10 +66,7 @@ function createHouseCard(houseDetail) {
     houseCard.href = `/listing?id=${houseDetail.id}`;
     houseCard.classList.add("house-card");
 
-    const overviewImg = document.createElement("img");
-    // overviewImg.src = houseDetail.imageSrc;
-    overviewImg.src = "/frontend/images/GS-icon.webp";
-    overviewImg.alt = "Glass Spades Houses";
+    const overviewImg = handleImage(houseDetail.imageSrc);
 
     houseCard.append(createHeading(houseDetail.heading));
     houseCard.append(overviewImg);
@@ -80,6 +77,31 @@ function createHouseCard(houseDetail) {
 				"/frontend/images/bath-icon.svg"))
 
     return houseCard
+}
+
+function handleImage(imageSrc) {
+    const overviewImg = document.createElement("img");
+    overviewImg.dataset.imageSrc = imageSrc;
+    overviewImg.src = "/frontend/images/GS-icon.webp";
+    overviewImg.alt = "Glass Spades Houses";
+
+    const options = {
+	root: null,
+	rootMargin: "0px",
+	threshold: .2
+    };
+    
+    const observer = new IntersectionObserver(handleIntersect, options);
+    observer.observe(overviewImg);
+    return overviewImg;
+}
+
+function handleIntersect(entries) {
+    entries.forEach(entry => {
+	if (entry.isIntersecting) {
+	    entry.target.src = entry.target.dataset.imageSrc;
+	}
+    })
 }
 
 function createHeading(heading) {
