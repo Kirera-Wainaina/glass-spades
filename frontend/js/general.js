@@ -67,7 +67,8 @@ function createHouseCard(houseDetail) {
     houseCard.classList.add("house-card");
 
     const overviewImg = document.createElement("img");
-    overviewImg.src = houseDetail.imageSrc;
+    // overviewImg.src = houseDetail.imageSrc;
+    overviewImg.src = "/frontend/images/GS-icon.webp";
     overviewImg.alt = "Glass Spades Houses";
 
     houseCard.append(createHeading(houseDetail.heading));
