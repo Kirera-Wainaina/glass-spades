@@ -51,8 +51,6 @@ const exists = new Event("exists");
 
 document.addEventListener("exists", () => {
     const overviewImages = document.querySelectorAll(".overview");
-    console.log(overviewImages)
-    console.log("called")
     const options = {
 	root: null,
 	rootMargin: "0px",
@@ -60,14 +58,12 @@ document.addEventListener("exists", () => {
     };
 
     overviewImages.forEach(overview => {
-	console.log("...")
  	const observer = new IntersectionObserver(handleIntersect, options);
 	observer.observe(overview);
     })
 })
 
 function handleIntersect(entries) {
-    console.log("handle intersect called")
     entries.forEach(entry => {
 	if (entry.isIntersecting) {
 	    entry.target.src = entry.target.dataset.imageSrc;
@@ -88,7 +84,10 @@ export function displayHouseDetails(houseDetails) {
 
 	if (listings) listings.appendChild(fragment);
 	// dispatch event after the images are in dom
-	document.dispatchEvent(exists);
+	if (navigator.userAgent != "glassspades-headless-chromium") {
+	    // dont dispatch for ssr
+	    document.dispatchEvent(exists);
+	}
     } else {
 	document.dispatchEvent(exists);
     }
