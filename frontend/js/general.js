@@ -47,8 +47,37 @@ function hidePhoneMenu(event) {
     }
 }
 
+const exists = new Event("exists");
+
+document.addEventListener("exists", () => {
+    const overviewImages = document.querySelectorAll(".overview");
+    console.log(overviewImages)
+    console.log("called")
+    const options = {
+	root: null,
+	rootMargin: "0px",
+	threshold: .2
+    };
+
+    overviewImages.forEach(overview => {
+	console.log("...")
+ 	const observer = new IntersectionObserver(handleIntersect, options);
+	observer.observe(overview);
+    })
+})
+
+function handleIntersect(entries) {
+    console.log("handle intersect called")
+    entries.forEach(entry => {
+	if (entry.isIntersecting) {
+	    entry.target.src = entry.target.dataset.imageSrc;
+	}
+    })
+}
+
 export function displayHouseDetails(houseDetails) {
     if (!document.querySelector(".house-card")) {
+	// before or without ssr
 	const listings = document.getElementById("listings");
 	const fragment = new DocumentFragment();
 
@@ -58,6 +87,10 @@ export function displayHouseDetails(houseDetails) {
 	})
 
 	if (listings) listings.appendChild(fragment);
+	// dispatch event after the images are in dom
+	document.dispatchEvent(exists);
+    } else {
+	document.dispatchEvent(exists);
     }
 }
 
@@ -84,24 +117,9 @@ function handleImage(imageSrc) {
     overviewImg.dataset.imageSrc = imageSrc;
     overviewImg.src = "/frontend/images/GS-icon.webp";
     overviewImg.alt = "Glass Spades Houses";
+    overviewImg.classList.add("overview");
 
-    const options = {
-	root: null,
-	rootMargin: "0px",
-	threshold: .2
-    };
-    
-    const observer = new IntersectionObserver(handleIntersect, options);
-    observer.observe(overviewImg);
     return overviewImg;
-}
-
-function handleIntersect(entries) {
-    entries.forEach(entry => {
-	if (entry.isIntersecting) {
-	    entry.target.src = entry.target.dataset.imageSrc;
-	}
-    })
 }
 
 function createHeading(heading) {
