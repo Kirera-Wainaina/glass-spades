@@ -58,24 +58,49 @@ function displayFirstImages(images) {
 const backArrow = document.querySelector("div#images div:nth-of-type(1)");
 const forwardArrow = document.querySelector("div#images div:nth-of-type(2)");
 
-forwardArrow.addEventListener("click", forwardPhoto);
+forwardArrow.addEventListener("click", () => forwardPhoto(
+    document.getElementById("main-photo")));
+forwardArrow.addEventListener("click", () => forwardPhoto(
+    document.getElementById("display-photo-1")));
+forwardArrow.addEventListener("click", () => forwardPhoto(
+    document.getElementById("display-photo-2")));
 
-function forwardPhoto() {
+function forwardPhoto(photoElement) {
     const images = JSON.parse(sessionStorage.getItem("images"));
-    const imgElements = document.querySelectorAll("div#images > img");
-    const mainPhotoLink = imgElements[0].src;
-    const mainPhotoPosition = images
-	  .filter(image => mainPhotoLink == image.link)[0].position;
+    const currentImagePosition = images.filter(
+	image => image.link == photoElement.src)[0].position;
 
-    for (let i = 0; i < imgElements.length; i++) {
-	let indexPosition = mainPhotoPosition + 1 + i;
-	if (indexPosition >= images.length) {
-	    indexPosition = indexPosition % images.length;
-	};
-	imgElements[i].src = images
-	    .filter(image => image.position == indexPosition)[0].link;
+    function nextPhoto(nextImagePosition) {
+	const image = images.filter(image => nextImagePosition == image.position);
+	if (image.length) {
+	    photoElement.src = image[0].link;
+	} else {
+	    nextPhoto(nextImagePosition + 1)
+	}
     }
+    
+    nextPhoto(currentImagePosition + 1);
 }
+
+// forwardArrow.addEventListener("click", forwardPhoto);
+
+// function forwardPhoto() {
+//     const images = JSON.parse(sessionStorage.getItem("images"));
+//     const imgElements = document.querySelectorAll("div#images > img");
+//     const mainPhotoLink = imgElements[0].src;
+//     const mainPhotoPosition = images
+// 	  .filter(image => mainPhotoLink == image.link)[0].position;
+
+//     for (let i = 0; i < imgElements.length; i++) {
+// 	let indexPosition = mainPhotoPosition + 1 + i;
+// 	if (indexPosition >= images.length) {
+// 	    indexPosition = indexPosition % images.length;
+// 	};
+// 	imgElements[i].src = images
+// 	    .filter(image => image.position == indexPosition)[0].link;
+//     }
+// }
+
 
 backArrow.addEventListener("click", backPhoto);
 
