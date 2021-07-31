@@ -93,25 +93,42 @@ function forwardPhoto(photoElement) {
     nextPhoto(currentImagePosition + 1);
 }
 
-backArrow.addEventListener("click", backPhoto);
+backArrow.addEventListener("click", () => backPhoto(
+    document.getElementById("main-photo")));
+backArrow.addEventListener("click", () => backPhoto(
+    document.getElementById("display-photo-1")));
+backArrow.addEventListener("click", () => backPhoto(
+    document.getElementById("display-photo-2")));
 
-function backPhoto() {
+function backPhoto(photoElement) {
     const images = JSON.parse(sessionStorage.getItem("images"));
-    const imgElements = document.querySelectorAll("div#images > img");
-    const mainPhotoLink = imgElements[0].src;
-    const mainPhotoPosition = images
-	  .filter(image => mainPhotoLink == image.link)[0].position;
-
-    for (let i = 0; i < imgElements.length; i++) {
-	let indexPosition = mainPhotoPosition + i - 1;
-	if (indexPosition < 0) {
-	    indexPosition += images.length;
-	} else if (indexPosition >= images.length) {
-	    indexPosition = images.length % indexPosition;
+    const currentImagePosition = images.filter(
+	image => image.link == photoElement.src)[0].position;
+    
+    function previousPhoto(previousImagePosition) {
+	if (previousImagePosition < 0) {
+	    const largestPosition = images.reduce(
+		(accumulator, currentValue, index) => {
+		    if (index == 0) {
+			return currentValue;
+		    } else {
+			return accumulator > currentValue
+			    ? accumulator : currentValue
+		    }
+		}).position;
+	    previousImagePosition = largestPosition;
 	}
-	imgElements[i].src = images
-	    .filter(image => image.position == indexPosition)[0].link;
+	const image = images.filter(
+	    image => previousImagePosition == image.position);
+	if (image.length) {
+	    photoElement.src = image[0].link;
+	} else {
+	    previousPhoto(previousImagePosition - 1)
+	}
+
     }
+
+    previousPhoto(currentImagePosition - 1)
 }
 
 function setHeading(details) {
