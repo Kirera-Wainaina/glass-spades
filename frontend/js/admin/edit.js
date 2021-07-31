@@ -70,13 +70,20 @@ function enterArrayData(key, values) {
 function displayImages(listingImages) {
     const fragment = new DocumentFragment();
     const dropZone = document.getElementById("drop-zone");
-    for (let i = 0; i < listingImages.length; i++) {
-	const image = listingImages.filter(img => img.position == i)[0]
-	if (image) {
-	    fragment.append(displayImage(image));
-	}
+    const imageArr = sortByPosition(listingImages);
+
+    for (let i = 0; i < imageArr.length; i++) {
+	fragment.append(displayImage(imageArr[i]));
     }
     dropZone.append(fragment);
+}
+
+function sortByPosition(listingImages) {
+    const imagePositions = listingImages.map(image => image.position);
+    imagePositions.sort((a, b) => a - b);
+    const sortedImages = imagePositions.map(imagePosition =>
+	listingImages.filter(image => image.position == imagePosition)[0])
+    return sortedImages
 }
 
 function displayImage(image) {
@@ -138,6 +145,7 @@ async function handleFiles(formdata) {
 
     for (let i = 0; i < dropZone.childElementCount; i++) {
 	const name = JSON.stringify({ name: dropZone.children[i].id, position: i })
+	console.log(name)
 	if (!dropZone.children[i].id.includes("-")) {
 	    formdata.append("fileId", name)
 	} else {
