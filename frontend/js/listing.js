@@ -65,16 +65,16 @@ forwardArrow.addEventListener("click", () => forwardPhoto(
 forwardArrow.addEventListener("click", () => forwardPhoto(
     document.getElementById("display-photo-2")));
 
+const images = JSON.parse(sessionStorage.getItem("images"));
+const largestPosition = images.reduce((accumulator, currentValue, index) => {
+    if (index == 0) {
+	return currentValue;
+    } else {
+	return accumulator > currentValue ? accumulator : currentValue
+    }
+}).position;
+
 function forwardPhoto(photoElement) {
-    const images = JSON.parse(sessionStorage.getItem("images"));
-    const largestPosition = images.reduce((accumulator, currentValue, index) => {
-	if (index == 0) {
-	    return currentValue;
-	} else {
-	    return accumulator > currentValue ? accumulator : currentValue
-	}
-    }).position;
-    
     const currentImagePosition = images.filter(
 	image => image.link == photoElement.src)[0].position;
 
@@ -101,21 +101,11 @@ backArrow.addEventListener("click", () => backPhoto(
     document.getElementById("display-photo-2")));
 
 function backPhoto(photoElement) {
-    const images = JSON.parse(sessionStorage.getItem("images"));
     const currentImagePosition = images.filter(
 	image => image.link == photoElement.src)[0].position;
     
     function previousPhoto(previousImagePosition) {
 	if (previousImagePosition < 0) {
-	    const largestPosition = images.reduce(
-		(accumulator, currentValue, index) => {
-		    if (index == 0) {
-			return currentValue;
-		    } else {
-			return accumulator > currentValue
-			    ? accumulator : currentValue
-		    }
-		}).position;
 	    previousImagePosition = largestPosition;
 	}
 	const image = images.filter(
