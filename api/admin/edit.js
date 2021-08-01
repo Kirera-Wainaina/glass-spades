@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const qs = require("querystring");
 
 const Busboy = require("busboy");
 
@@ -48,7 +49,7 @@ function updateListing(request, response) {
     })
 
     busboy.on("file", (fieldname, file) => {
-	const imageInfo = JSON.parse(fieldname);
+	const imageInfo = qs.parse(fieldname);
 	fileNames.push(imageInfo);
 
 	const imageRoute = path.join(
@@ -102,7 +103,7 @@ function updateExistingFiles(filedata) {
 	
     return Promise.all(filedata.map(data => {
 	return new Promise((resolve, reject) => {
-	    const dataObj = JSON.parse(data);
+	    const dataObj = qs.parse(data);
 	    db.Image.updateOne(
 		{ _id: dataObj.name },
 		{ position: dataObj.position},

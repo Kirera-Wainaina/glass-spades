@@ -144,8 +144,8 @@ async function handleFiles(formdata) {
     const filesInfo = [];
 
     for (let i = 0; i < dropZone.childElementCount; i++) {
-	const name = JSON.stringify({ name: dropZone.children[i].id, position: i })
-	console.log(name)
+	// JSON is not working so use querystring instead
+	const name = `name=${dropZone.children[i].id}&position=${i}`;
 	if (!dropZone.children[i].id.includes("-")) {
 	    formdata.append("fileId", name)
 	} else {
