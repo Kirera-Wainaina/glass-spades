@@ -1,4 +1,4 @@
-
+var dataLayer = [];
 getListingDetails();
 getListingImages();
 
@@ -238,6 +238,8 @@ const form = document.querySelector("form");
 form.addEventListener("submit", event => {
     event.preventDefault();
 
+    dataLayer.push({ "event": "generate_lead" })
+
     const formdata = new FormData(form);
     formdata.append("link", location.href);
     formdata.append("createdDate", Date.now());
@@ -272,9 +274,4 @@ form.addEventListener("submit", event => {
 form.addEventListener("submit", () => {
     const loadingPage = document.getElementById("loading-page");
     loadingPage.style.display = "flex";
-})
-
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    dataLayer.push({ "event": "generate_lead" })
 })
