@@ -30,6 +30,8 @@ function getListingImages() {
     xhr.onreadystatechange = function() {
 	if (xhr.readyState == 4) {
 	    sessionStorage.setItem("images", this.response);
+	    const received = new Event("received");
+	    document.dispatchEvent(received)
 	    const images = JSON.parse(this.response);
 	    displayFirstImages(images);
 	}
@@ -65,14 +67,18 @@ forwardArrow.addEventListener("click", () => forwardPhoto(
 forwardArrow.addEventListener("click", () => forwardPhoto(
     document.getElementById("display-photo-2")));
 
-const images = JSON.parse(sessionStorage.getItem("images"));
-const largestPosition = images.reduce((accumulator, currentValue, index) => {
-    if (index == 0) {
-	return currentValue;
-    } else {
-	return accumulator > currentValue ? accumulator : currentValue
-    }
-}).position;
+let images, largestPosition;
+
+document.addEventListener("received", () => {
+    images = JSON.parse(sessionStorage.getItem("images"));
+    largestPosition = images.reduce((accumulator, currentValue, index) => {
+	if (index == 0) {
+	    return currentValue;
+	} else {
+	    return accumulator > currentValue ? accumulator : currentValue
+	}
+    }).position;
+})
 
 function forwardPhoto(photoElement) {
     const currentImagePosition = images.filter(
@@ -234,8 +240,13 @@ function confirmLogin() {
     })
 }
 
+window.addEventListener("load", () => {
+    console.log("DOM loaded")
+});
 const form = document.querySelector("form");
-form.addEventListener("submit", event => {
+form.addEventListener("submit", handleForm)
+
+function handleForm(event) {
     event.preventDefault();
 
     dataLayer.push({ "event": "generate_lead" })
@@ -269,9 +280,7 @@ form.addEventListener("submit", event => {
 	    }
 	}
     }
-});
 
-form.addEventListener("submit", () => {
     const loadingPage = document.getElementById("loading-page");
     loadingPage.style.display = "flex";
-})
+}

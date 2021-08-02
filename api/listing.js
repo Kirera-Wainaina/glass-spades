@@ -44,6 +44,7 @@ function getListingImages(request, response) {
 }
 
 function handleLeadInfo(request, response) {
+    console.log("Lead request received")
     const busboy  = new Busboy({ headers: request.headers });
     const leadDetails = {};
     busboy.on("field", (fieldname, value) => {
