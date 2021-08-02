@@ -1,0 +1,84 @@
+@import url("home.css");
+
+h1 {
+    grid-column: 1 / 13;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 1em;
+}
+
+p {
+    grid-column: 3 / 11;
+}
+
+#easy-access-section {
+    grid-column: 2 / 9;
+    margin-top: 3em;
+}
+
+#easy-access-section img {
+    float: left;
+    width: 60%;
+}
+
+#quality-photos-section {
+    grid-column: 5 / 12;
+    margin-top: 3em;
+}
+
+#quality-photos-img {
+    float: right;
+    width: 60%;
+}
+
+#relevant-section {
+    grid-column: 3 / 11;
+    margin-top: 3em;
+}
+
+#relevant-section img {
+    float: left;
+    width: 60%;
+}
+
+#your-side-section {
+    grid-column: 2 / 10;
+    margin-top: 3em;
+}
+
+#your-side-section img {
+    float: right;
+    width: 60%;
+}
+
+#slogan {
+    font-size: 1.8em;
+    margin-top: 2em;
+    color: grey;
+}
+
+@media (max-width: 500px) {
+    h1 {
+	grid-column: 1 / 6;
+	margin-top: 0.5em;
+    }
+
+    p {
+	grid-column: 1 / 6;
+	margin-left: 0.5em;
+    }
+
+    #easy-access-section,
+    #quality-photos-section,
+    #relevant-section,
+    #your-side-section {
+	grid-column: 1 / 6;
+	margin-top: 2em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+    }
+
+    #slogan {
+	text-align: center;
+    }
+}
