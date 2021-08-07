@@ -90,3 +90,4 @@ exports.readFileAndRespond = readFileAndRespond;
 exports.createFilePath = createFilePath;
 exports.handleError = handleError;
 exports.findTopDir = findTopDir;
+exports.routeCache = new Map();
