@@ -54,14 +54,12 @@ server.on("request", async (request, response) => {
     }
 });
 
-server.on("listening", async () => {
+server.listen(port, async () =>  {
+    console.log(`Listening on port ${port}`)
     const browser = await puppeteer
  	.launch({ args: ["--no-sandbox", "--disable-setuid-sandbox"] });
     wsEndpoint = browser.wsEndpoint();
-    // routeCache = new Map();
-})
-
-server.listen(port, () => console.log(`Listening on port ${port}`));
+});
 
 ////////////////////////////////////////////////////////////////////////
 
