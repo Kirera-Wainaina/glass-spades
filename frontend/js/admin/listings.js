@@ -1,5 +1,8 @@
 import { showLoadingPage } from "../general.js";
-getListings();
+
+if (!document.querySelector(".listing-container")) {
+    getListings();
+}
 
 function getListings() {
     const xhr = new XMLHttpRequest();
