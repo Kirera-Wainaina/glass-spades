@@ -45,6 +45,8 @@ function saveFeatured(request, response) {
     const busboy = new Busboy({ headers: request.headers });
     let featuredIds;
 
+    general.deleteFromRouteCache("/");
+
     busboy.on("field", (fieldname, value) => {
 	featuredIds = JSON.parse(value);
     });
