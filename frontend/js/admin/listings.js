@@ -55,14 +55,6 @@ function createButton(value, listingId) {
     button.name = value;
     button.type = "button";
     button.setAttribute("data-listing-id", listingId);
-    button.addEventListener("click", changeColor)
-    if (value == "Featured") {
-	button.addEventListener("click",
-				event => addListingToState(event, "featured"));
-    } else {
-	button.addEventListener("click",
-				event => addListingToState(event, "archived"))
-    }
     return button
 }
 
@@ -99,6 +91,18 @@ function createPrice(price) {
     p.textContent = `Price: ${formattedPrice}`;
     return p
 }
+
+const stateButtons = document.querySelectorAll(".button-section button");
+stateButtons.forEach(stateButton => {
+    stateButton.addEventListener("click", changeColor)
+    if (stateButton.name == "Featured") {
+	stateButton.addEventListener("click",
+				event => addListingToState(event, "featured"));
+    } else {
+	stateButton.addEventListener("click",
+				event => addListingToState(event, "archived"))
+    }
+})
 
 function changeColor(event) {
     const el = event.target;
