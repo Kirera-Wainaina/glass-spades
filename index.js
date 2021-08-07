@@ -10,7 +10,7 @@ const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 const MIMES = require("./utils/MIMETypes.js");
 const indexUtils = require("./index-utils.js");
-let wsEndpoint, routeCache;
+let wsEndpoint;
 
 dotenv.config()
 
@@ -58,7 +58,7 @@ server.on("listening", async () => {
     const browser = await puppeteer
  	.launch({ args: ["--no-sandbox", "--disable-setuid-sandbox"] });
     wsEndpoint = browser.wsEndpoint();
-    routeCache = new Map();
+    // routeCache = new Map();
 })
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
@@ -91,11 +91,11 @@ async function serverSideRender(request, response) {
     const cwd = "."
     const cacheUrl = createCacheUrl(request)
 
-    if (routeCache.has(cacheUrl)) {
+    if (indexUtils.routeCache.has(cacheUrl)) {
 	response.writeHead(200, { "content-type": "text/html",
 				  "cache-control": "max-age=86400"
 				})
-	    .end(routeCache.get(cacheUrl))
+	    .end(indexUtils.routeCache.get(cacheUrl))
     } else {
 	if (request.headers["user-agent"] == "glassspades-headless-chromium") {
    	    const filePath = indexUtils.createFilePath(request.url);
@@ -121,7 +121,7 @@ async function serverSideRender(request, response) {
 			    { waitUntil: "networkidle0" });
 	    const html = await page.content();
 	    await page.close();
-	    routeCache.set(cacheUrl, html);
+	    indexUtils.routeCache.set(cacheUrl, html);
 	    response.writeHead(200, {
 		"content-type": "text/html",
 		"cache-control": "max-age=86400"
