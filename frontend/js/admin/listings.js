@@ -1,26 +1,25 @@
 import { showLoadingPage } from "../general.js";
 
-if (!document.querySelector(".listing-container")) {
-    getListings();
-}
-
+getListings();
 function getListings() {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/api/admin/listings/getListings");
     xhr.send();
 
     xhr.onreadystatechange = function() {
-	if (this.readyState == 4) {
-	    if (this.response != "fail") {
-		const listings = JSON.parse(this.response);
+	if (this.readyState == 4 && this.response != "fail") {
+	    const listings = JSON.parse(this.response);
+	    console.log(listings)
+	    if (!document.querySelector(".listing-container")) {
+		// dependent on whether it is ssr or not
 		displayListings(listings);
-
-		storeFeaturedListings(listings);
-		storeArchivedListings(listings);
-
-		displayFeaturedListings(listings);
-		displayArchivedListings(listings);
 	    }
+	    // whether ssr or not, the below functions have to run
+	    storeFeaturedListings(listings);
+	    storeArchivedListings(listings);
+
+	    displayFeaturedListings(listings);
+	    displayArchivedListings(listings);
 	}
     }
 }
