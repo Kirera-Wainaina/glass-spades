@@ -1,6 +1,7 @@
 const Busboy = require("busboy");
 
 const respond = require("../../utils/respond");
+const general = require("../../utils/general");
 const db = require("../../database/models");
 
 async function getListings(request, response) {
@@ -75,6 +76,10 @@ function saveArchived(request, response) {
     const busboy = new Busboy({ headers: request.headers });
     let archivedIds
 
+    general.deleteFromRouteCache("/rentals");
+    general.deleteFromRouteCache("/");
+    general.deleteFromRouteCache("/sales");
+    
     busboy.on("field", (fieldname, value) => {
 	archivedIds = JSON.parse(value);
     })
