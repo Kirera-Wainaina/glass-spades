@@ -24,6 +24,8 @@ function initMap() {
 	zoom: 15
     })
 
+    map.addListener("click", event => marker.setPosition(event.latLng));
+
     const searchInput = document.getElementById("search-input");
     const searchBox = new google.maps.places.SearchBox(searchInput);
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchInput);
