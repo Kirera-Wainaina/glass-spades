@@ -26,14 +26,7 @@ function initMap() {
 
     map.addListener("click", event => marker.setPosition(event.latLng));
 
-    const searchInput = document.getElementById("search-input");
-    const searchBox = new google.maps.places.SearchBox(searchInput);
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchInput);
-
-    // bias the search results towards the current map bounds
-    map.addListener("bounds_changed", () => {
-	searchBox.setBounds(map.getBounds());
-    })
+    createSearchBox();
 
     createMarker(map, nairobi);
 }
@@ -49,6 +42,17 @@ function createMarker(map, position) {
 	sessionStorage.setItem("Latitude", event.latLng.lat());
 	sessionStorage.setItem("Longitude", event.latLng.lng());
     });
+}
+
+function createSearchBox() {
+    const searchInput = document.getElementById("search-input");
+    const searchBox = new google.maps.places.SearchBox(searchInput);
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchInput);
+
+    // bias the search results towards the current map bounds
+    map.addListener("bounds_changed", () => {
+	searchBox.setBounds(map.getBounds());
+    })
 }
 
 document.addEventListener("coords", () => {
