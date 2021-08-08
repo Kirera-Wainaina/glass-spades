@@ -88,6 +88,13 @@ div#map {
     margin-top: 2em;
 }
 
+#search-input {
+    font-size: 1.5em;
+    height: 1.5em;
+    width: 25%;
+    margin-top: 1em;
+}
+
 button#portrait-upload {
     margin-top: 2em;
 }
@@ -181,5 +188,9 @@ p#empty-error {
 
     p#empty-error {
 	grid-column: 1 / 6;
+    }
+
+    #search-input {
+	width: 50%;
     }
 }

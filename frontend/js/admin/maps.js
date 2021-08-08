@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
 function appendMapsScript() {
     const body = document.querySelector("body");
     const script = document.createElement("script");
-    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVByoterVaoQyeLZ_ZmFvDBHcJJInQ84&callback=initMap&libraries=&v=weekly";
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDrVByoterVaoQyeLZ_ZmFvDBHcJJInQ84&callback=initMap&libraries=places&v=weekly";
     script.id = "google-maps-script";
     body.append(script)
 }
@@ -23,6 +23,10 @@ function initMap() {
 	center: nairobi,
 	zoom: 15
     })
+
+    const searchInput = document.getElementById("search-input");
+    const searchBox = new google.maps.places.SearchBox(searchInput);
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchInput);
 
     createMarker(map, nairobi);
 }
