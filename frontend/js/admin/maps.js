@@ -24,7 +24,11 @@ function initMap() {
 	zoom: 15
     })
 
-    map.addListener("click", event => marker.setPosition(event.latLng));
+    map.addListener("click", event => {
+	marker.setPosition(event.latLng)
+	sessionStorage.setItem("Latitude", event.latLng.lat());
+	sessionStorage.setItem("Longitude", event.latLng.lng());
+    });
 
     createSearchBox();
 
@@ -53,6 +57,17 @@ function createSearchBox() {
     map.addListener("bounds_changed", () => {
 	searchBox.setBounds(map.getBounds());
     })
+
+    searchBox.addListener("places_changed", () => {
+	const placeResult = searchBox.getPlaces();
+	if (placeResult.length)	{
+	    const resultLocation = placeResult[0].geometry.location;
+	    map.setCenter(resultLocation)
+	    marker.setPosition(resultLocation);
+	    sessionStorage.setItem("Latitude", resultLocation.lat());
+	    sessionStorage.setItem("Longitude", resultLocation.lng());
+	}
+    });
 }
 
 document.addEventListener("coords", () => {
