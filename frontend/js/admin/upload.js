@@ -2,13 +2,13 @@ import { showLoadingPage, hideLoadingPage } from "../general.js"
 
 var houseInfo = {};
 
-window.addEventListener("DOMContentLoaded", async () => {
+(async function() {
     const model = await getModelData();
     sessionStorage.setItem("model", model);
     if (!document.getElementById("Mandate-container")) {
 	constructPage(JSON.parse(model));
     }
-});
+})()
 
 function getModelData() {
     const xhr = new XMLHttpRequest();
