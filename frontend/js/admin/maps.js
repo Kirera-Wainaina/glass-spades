@@ -30,6 +30,11 @@ function initMap() {
     const searchBox = new google.maps.places.SearchBox(searchInput);
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchInput);
 
+    // bias the search results towards the current map bounds
+    map.addListener("bounds_changed", () => {
+	searchBox.setBounds(map.getBounds());
+    })
+
     createMarker(map, nairobi);
 }
 
