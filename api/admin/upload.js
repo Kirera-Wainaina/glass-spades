@@ -6,6 +6,7 @@ const Busboy = require("busboy");
 
 const images = require("../../utils/images.js");
 const respond = require("../../utils/respond.js");
+const general = require("../../utils/general");
 const db = require("../../database/models.js");
 
 class Emitter extends EventEmitter {};
@@ -75,6 +76,11 @@ async function uploadListing(request, response) {
 	    coordinates: [ listing.Longitude, listing.Latitude ]
 	};
 	await listing.save()
+
+	general.deleteFromRouteCache("/");
+	general.deleteFromRouteCache("/sales");
+	general.deleteFromRouteCache("/rentals");
+
 	respond.handleTextResponse(response, "success");
     })
 
