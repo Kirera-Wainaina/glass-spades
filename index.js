@@ -10,7 +10,6 @@ const dotenv = require("dotenv");
 const puppeteer = require("puppeteer");
 const MIMES = require("./utils/MIMETypes.js");
 const indexUtils = require("./index-utils.js");
-let wsEndpoint;
 
 dotenv.config()
 
@@ -56,9 +55,6 @@ server.on("request", async (request, response) => {
 
 server.listen(port, async () =>  {
     console.log(`Listening on port ${port}`)
-    const browser = await puppeteer
- 	.launch({ args: ["--no-sandbox", "--disable-setuid-sandbox"] });
-    wsEndpoint = browser.wsEndpoint();
 });
 
 ////////////////////////////////////////////////////////////////////////
@@ -99,8 +95,9 @@ async function serverSideRender(request, response) {
    	    const filePath = indexUtils.createFilePath(request.url);
 	    indexUtils.readFileAndRespond(filePath, response)
 	} else {
-	    const browser = await puppeteer.connect({
-		browserWSEndpoint: wsEndpoint });
+	    // launch a new browser. 
+	    const browser = await puppeteer
+		  .launch({ args: ["--no-sandbox", "--disable-setuid-sandbox"] });
 	    const page = await browser.newPage();
 	    await page.setUserAgent("glassspades-headless-chromium")
 	    await page.setRequestInterception(true);
@@ -118,7 +115,8 @@ async function serverSideRender(request, response) {
 	    await page.goto(`${process.env.URL}${request.url}`,
 			    { waitUntil: "networkidle0" });
 	    const html = await page.content();
-	    await page.close();
+	    // await page.close();
+	    await browser.close();
 	    indexUtils.routeCache.set(cacheUrl, html);
 	    response.writeHead(200, {
 		"content-type": "text/html",
