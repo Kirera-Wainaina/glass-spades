@@ -14,7 +14,7 @@ pgrep.on("exit", (code) => {
     // console.log(nodeProcs);
     if (nodeProcs.length <= 1) {
 	// restart server
-	// send email and notify me of crash
+	console.log(`Reboot due to crash at ${new Date()}`)
 	const shutdown = exec("shutdown -r now", (err, stdout, stderr) => {
 	    if (err) console.log(err);
 	})
@@ -36,16 +36,17 @@ pgrep.stderr.on("data", error => {
 
 // Check Memory usage
 function calcUsedMemory() {
-    const free = os.freeMem();
-    const total = os.totalMem();
+    const free = os.freemem();
+    const total = os.totalmem();
     return free / total * 100;
 }
 
 // reboot if memory is less than 20%
-if (calUsedMemory() < 20) {
-    exec("reboot", (err, stdout, stderr)) {
+if (calcUsedMemory() < 20) {
+    console.log(`Reboot due to memory at ${new Date()}`)
+    exec("reboot", (err, stdout, stderr) => {
 	if (err) console.log(err);
 	if (stdout) console.log(stdout);
 	if (stderr) console.log(stderr);
-    }
+    })
 }
