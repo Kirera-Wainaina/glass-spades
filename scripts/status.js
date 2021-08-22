@@ -10,7 +10,7 @@ pgrep.on("message", (message) => {
 })
 
 pgrep.on("exit", (code) => {
-    console.log(nodeProcs);
+    // console.log(nodeProcs);
     if (nodeProcs.length <= 1) {
 	// restart server
 	// send email and notify me of crash
