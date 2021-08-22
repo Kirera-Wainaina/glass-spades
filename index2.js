@@ -49,7 +49,9 @@ server.on("request", async (request, response) => {
     }
 });
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(port, () => {
+    console.log(`Listening on port ${port}`)
+});
 
 ////////////////////////////////////////////////////////////////////////
 
