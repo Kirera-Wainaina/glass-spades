@@ -1,4 +1,4 @@
-const { spawn } = require("child_process");
+const { spawn, exec } = require("child_process");
 const qs = require("querystring");
 let nodeProcs;
 
@@ -10,9 +10,14 @@ pgrep.on("message", (message) => {
 })
 
 pgrep.on("exit", (code) => {
-    console.log(`Code: ${code}`);
-    console.log("Onto the next one");
     console.log(nodeProcs);
+    if (nodeProcs.length <= 1) {
+	// restart server
+	// send email and notify me of crash
+	const shutdown = exec("shutdown -r now", (err, stdout, stderr) => {
+	    if (err) console.log(err);
+	})
+    }
 })
 
 pgrep.stdout.on("data", data => {
