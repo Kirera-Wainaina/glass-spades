@@ -1,9 +1,10 @@
 const { spawn, exec } = require("child_process");
 const qs = require("querystring");
+const os = require("os");
 let nodeProcs;
 
+// Handle crashed node process
 const pgrep = spawn("pgrep", ["node"]);
-
 
 pgrep.on("message", (message) => {
     console.log(`Message: ${message}`);
@@ -32,3 +33,19 @@ pgrep.stdout.on("data", data => {
 pgrep.stderr.on("data", error => {
     console.log(`Error: ${error}`)
 })
+
+// Check Memory usage
+function calcUsedMemory() {
+    const free = os.freeMem();
+    const total = os.totalMem();
+    return free / total * 100;
+}
+
+// reboot if memory is less than 20%
+if (calUsedMemory() < 20) {
+    exec("reboot", (err, stdout, stderr)) {
+	if (err) console.log(err);
+	if (stdout) console.log(stdout);
+	if (stderr) console.log(stderr);
+    }
+}
