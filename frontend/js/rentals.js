@@ -19,3 +19,9 @@ function getRentals() {
 	}
     }
 }
+
+const filter = document.getElementById("filter-icon");
+filter.addEventListener("click", event => {
+    const filterContainer = document.getElementById("filter-container");
+    filterContainer.style.display = "block";
+});
