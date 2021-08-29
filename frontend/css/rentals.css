@@ -18,7 +18,7 @@ h3 {
     right: 2em;
     height: 3em;
     border-radius: 50%;
-    border: 1px solid lightgrey;
+    background-color: grey;
 }
 
 #filter:hover {
@@ -40,5 +40,7 @@ h3 {
     }
 
     #filter {
+	bottom: 1em;
+	right: 1em;
     }
 }
