@@ -12,7 +12,7 @@ h3 {
     display: none;
 }
 
-#filter {
+#filter-icon {
     position: fixed;
     bottom: 2em;
     right: 2em;
@@ -21,12 +21,12 @@ h3 {
     background-color: grey;
 }
 
-#filter:hover {
+#filter-icon:hover {
     box-shadow: 3px 3px 5px lightgrey;
     border-radius: 50%;
 }
 
-#filter:active {
+#filter-icon:active {
     background-color: lightgrey;
 }
 
@@ -39,7 +39,7 @@ h3 {
 	grid-column: 1 / 6;
     }
 
-    #filter {
+    #filter-icon {
 	bottom: 1em;
 	right: 1em;
     }
