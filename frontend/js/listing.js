@@ -73,11 +73,12 @@ document.addEventListener("received", () => {
     images = JSON.parse(sessionStorage.getItem("images"));
     largestPosition = images.reduce((accumulator, currentValue, index) => {
 	if (index == 0) {
-	    return currentValue;
+	    return currentValue.position;
 	} else {
-	    return accumulator > currentValue ? accumulator : currentValue
+	    return accumulator > currentValue.position
+		? accumulator : currentValue.position
 	}
-    }).position;
+    });
 })
 
 function forwardPhoto(photoElement) {
