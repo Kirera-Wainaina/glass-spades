@@ -12,6 +12,24 @@ h3 {
     display: none;
 }
 
+#filter {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    height: 3em;
+    border-radius: 50%;
+    border: 1px solid lightgrey;
+}
+
+#filter:hover {
+    box-shadow: 3px 3px 5px lightgrey;
+    border-radius: 50%;
+}
+
+#filter:active {
+    background-color: lightgrey;
+}
+
 @media (max-width: 500px) {
     h2 {
 	grid-column: 1 / 6;
@@ -19,5 +37,8 @@ h3 {
 
     h3 {
 	grid-column: 1 / 6;
+    }
+
+    #filter {
     }
 }
