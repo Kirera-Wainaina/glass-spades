@@ -37,6 +37,7 @@ h3 {
     width: 100vw;
     background-color: black;
     opacity: 0.6;
+    
 }
 
 #close-icon {
@@ -48,6 +49,18 @@ h3 {
 
 #close-icon:active {
     background-color: white;
+}
+
+#filter-card {
+    display: none;
+    position: fixed;
+    top: 10vh;
+    right: 25vw;
+    z-index: 3;
+    width: 50vw;
+    height: 75vh;
+    background-color: white;
+    
 }
 
 @media (max-width: 500px) {
