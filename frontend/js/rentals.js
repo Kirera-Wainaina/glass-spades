@@ -23,11 +23,15 @@ function getRentals() {
 const filterIcon = document.getElementById("filter-icon");
 filterIcon.addEventListener("click", event => {
     const filterContainer = document.getElementById("filter-container");
+    const filterCard = document.getElementById("filter-card");
     filterContainer.style.display = "block";
+    filterCard.style.display = "block";    
 });
 
 const closeIcon = document.getElementById("close-icon");
 closeIcon.addEventListener("click", () => {
     const filterContainer = document.getElementById("filter-container");
+    const filterCard = document.getElementById("filter-card");
     filterContainer.style.display = "none";
+    filterCard.style.display = "none";    
 });
