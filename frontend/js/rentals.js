@@ -20,8 +20,14 @@ function getRentals() {
     }
 }
 
-const filter = document.getElementById("filter-icon");
-filter.addEventListener("click", event => {
+const filterIcon = document.getElementById("filter-icon");
+filterIcon.addEventListener("click", event => {
     const filterContainer = document.getElementById("filter-container");
     filterContainer.style.display = "block";
+});
+
+const closeIcon = document.getElementById("close-icon");
+closeIcon.addEventListener("click", () => {
+    const filterContainer = document.getElementById("filter-container");
+    filterContainer.style.display = "none";
 });
