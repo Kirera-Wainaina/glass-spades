@@ -76,4 +76,9 @@ h3 {
 	bottom: 1em;
 	right: 1em;
     }
+
+    #filter-card {
+	right: 2vw;
+	width: 96vw;
+    }
 }
