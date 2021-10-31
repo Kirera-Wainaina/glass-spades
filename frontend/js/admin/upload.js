@@ -95,7 +95,8 @@ function addDataToHouseInfo(event) {
     
     if (element.tagName == "BUTTON") {
 	if (element.name == "Mandate" || element.name == "Category"
-	    || element.name == "Bedrooms" || element.name == "Bathrooms")
+	    || element.name == "Bedrooms" || element.name == "Bathrooms"
+	    || element.name == "Unit Type")
 	{
 	    // The properties that are ENUMS
 	    houseInfo[element.name] = element.value;
@@ -114,6 +115,7 @@ function addDataToHouseInfo(event) {
 	    }
 	}
     }
+
 }
 
 
@@ -123,11 +125,12 @@ function changeButtonColorOnClick(event) {
 
     if (element.tagName == "BUTTON") {
 	if (element.name == "Mandate" || element.name == "Category"
-	    || element.name == "Bedrooms" || element.name == "Bathrooms")
+	    || element.name == "Bedrooms" || element.name == "Bathrooms"
+	    || element.name == "Unit Type")
 	{
 	    // only one element can be colored
 	    const buttons = document
-		  .querySelectorAll(`button[name=${element.name}]`);
+		  .querySelectorAll(`button[name="${element.name}"]`);
 	    // remove the coloring for all buttons in one category
 	    buttons.forEach(button => {
 		if (button.classList.contains("clicked-button")) {
@@ -232,10 +235,16 @@ export async function setData(event) {
     const heading = document.querySelector("input[name='Heading']");
     const description = document.querySelector("textarea");
     const price = document.querySelector("input[name='Price']");
+    const size = document.querySelector("input[name='Size']");
 
     houseInfo[heading.name] = heading.value;
     houseInfo[description.name] = description.value;
     houseInfo[price.name] = price.value;
+
+    if (houseInfo.Category == "Land") {
+	houseInfo[size.name] = size.value;
+    }
+
     if (sessionStorage.getItem("Latitude")) {
 	houseInfo["Latitude"] = sessionStorage.getItem("Latitude");
 	houseInfo["Longitude"] = sessionStorage.getItem("Longitude");
@@ -258,9 +267,8 @@ export async function setData(event) {
     })
 
     if (confirmValues(formdata)) {
-	// submitData(formdata);
+	submitData(formdata);
     }
-    // console.log(houseInfo)
 }
 
 function submitData(formdata) {
