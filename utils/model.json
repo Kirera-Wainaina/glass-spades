@@ -1,6 +1,6 @@
 {
     "Mandate": ["Sale", "Rent"],
-    "Category": ["Apartment", "Townhouse", "Villa", "Office"],
+    "Category": ["Apartment", "Townhouse", "Villa", "Office", "Land"],
     "Bedrooms": [1, 2, 3, 4, 5, 6],
     "Bathrooms": [1, 2, 3, 4, 5, 6],
     "Internal Features": ["Air Conditioning", "Backup Generator", "Fibre Internet",
