@@ -41,7 +41,11 @@ function createContainers(model) {
 	div.id = `${key}-container`.replaceAll(" ", "-");
 	div.classList.add("container");
 	div.appendChild(createLabel(key));
-	div.appendChild(createButtons(key, model[key]));
+	if (key != "Size") {
+	    div.appendChild(createButtons(key, model[key]));
+	} else {
+	    div.appendChild(createInput(key))
+	}
 	fragment.append(div)
     })
     return fragment
@@ -66,6 +70,13 @@ function createButtons(key, data) {
 	fragment.appendChild(button);
     })
     return fragment
+}
+
+function createInput(key) {
+    const input = document.createElement("input");
+    input.type = "number";
+    input.name = "Size";
+    return input
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -339,12 +350,20 @@ function displayError(blanks) {
 document.addEventListener("click", event => {
     console.log(event.target.value)
     if (event.target.value == "Land") {
-	const bedrooms = document.getElementById("Bedrooms-container");
-	const bathrooms = document.getElementById("Bathrooms-container");
-	const internalFeatures = document
-	      .getElementById("Internal-Features-container");
-	bedrooms.style.display = "none";
-	bathrooms.style.display = "none";
-	internalFeatures.style.display = "none";
+	removeHouseAttributes();
     }
 });
+
+function removeHouseAttributes() {
+    const bedrooms = document.getElementById("Bedrooms-container");
+    const bathrooms = document.getElementById("Bathrooms-container");
+    const internalFeatures = document
+	  .getElementById("Internal-Features-container");
+    bedrooms.style.display = "none";
+    bathrooms.style.display = "none";
+    internalFeatures.style.display = "none";
+}
+
+function displayLandAttributes() {
+    
+}
