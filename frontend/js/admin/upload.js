@@ -254,7 +254,7 @@ export async function setData(event) {
     })
 
     if (confirmValues(formdata)) {
-	submitData(formdata);
+	// submitData(formdata);
     }
     // console.log(houseInfo)
 }
@@ -312,9 +312,12 @@ export function confirmValues(formdata) {
     const model = JSON.parse(sessionStorage.getItem("model"));
     const keys = Object.keys(model);
     const otherKeys = ["Heading", "Description", "Price", "Longitude", "imageNum"];
-    const allKeys = keys.concat(otherKeys);
+    let allKeys = keys.concat(otherKeys);
     const blanks = [];
 
+    allKeys = reviseKeys(allKeys, formdata.get("Category"))
+    console.log(allKeys)
+    
     allKeys.forEach(key => {
 	if (!formdata.get(key)) {
 	    blanks.push(key);
@@ -330,6 +333,23 @@ export function confirmValues(formdata) {
 	showLoadingPage();
 	return true
     }
+}
+
+function reviseKeys(allKeys, category) {
+    // For land, dont check presence of house features
+    if (category == "Land") {
+	allKeys = allKeys.filter(key => {
+	    return (key != "Internal Features" && key != "Bedrooms"
+		    && key != "Bathrooms")
+	})
+    } else {
+	// for houses, don't check presence of land features
+	allKeys = allKeys.filter(key => {
+	    return key != "Size"
+	})
+    }
+
+    return allKeys
 }
 
 function displayError(blanks) {
