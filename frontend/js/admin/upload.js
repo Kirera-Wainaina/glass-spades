@@ -320,7 +320,6 @@ export function confirmValues(formdata) {
     const blanks = [];
 
     allKeys = reviseKeys(allKeys, formdata.get("Category"))
-    console.log(allKeys)
     
     allKeys.forEach(key => {
 	if (!formdata.get(key)) {
@@ -349,7 +348,7 @@ function reviseKeys(allKeys, category) {
     } else {
 	// for houses, don't check presence of land features
 	allKeys = allKeys.filter(key => {
-	    return key != "Size"
+	    return (key != "Size" && key != "Unit Type")
 	})
     }
 
