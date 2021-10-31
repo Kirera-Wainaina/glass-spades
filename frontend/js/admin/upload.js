@@ -44,7 +44,8 @@ function createContainers(model) {
 	if (key != "Size") {
 	    div.appendChild(createButtons(key, model[key]));
 	} else {
-	    div.appendChild(createInput(key))
+	    div.appendChild(createInput(key));
+	    div.style.display = "none";
 	}
 	fragment.append(div)
     })
@@ -348,22 +349,22 @@ function displayError(blanks) {
 }
 
 document.addEventListener("click", event => {
-    console.log(event.target.value)
-    if (event.target.value == "Land") {
-	removeHouseAttributes();
-    }
-});
-
-function removeHouseAttributes() {
+    const value = event.target.value;
     const bedrooms = document.getElementById("Bedrooms-container");
     const bathrooms = document.getElementById("Bathrooms-container");
     const internalFeatures = document
 	  .getElementById("Internal-Features-container");
-    bedrooms.style.display = "none";
-    bathrooms.style.display = "none";
-    internalFeatures.style.display = "none";
-}
+    const size = document.getElementById("Size-container");
 
-function displayLandAttributes() {
-    
-}
+    if (value == "Land") {
+	bedrooms.style.display = "none";
+	bathrooms.style.display = "none";
+	internalFeatures.style.display = "none";
+	size.style.display = "grid";
+    } else if (value == "Townhouse" || value == "Villa" || value == "Apartment") {
+	bedrooms.style.display = "grid";
+	bathrooms.style.display = "grid";
+	internalFeatures.style.display = "grid"
+	size.style.display = "none"
+    }
+});
