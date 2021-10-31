@@ -41,10 +41,14 @@ function createContainers(model) {
 	div.id = `${key}-container`.replaceAll(" ", "-");
 	div.classList.add("container");
 	div.appendChild(createLabel(key));
-	if (key != "Size") {
+	if (key != "Size" && key != "Unit Type") {
 	    div.appendChild(createButtons(key, model[key]));
 	} else {
-	    div.appendChild(createInput(key));
+	    if (key == "Unit Type") {
+	    div.appendChild(createButtons(key, model[key]));
+	    } else {
+		div.appendChild(createInput(key));
+	    }
 	    div.style.display = "none";
 	}
 	fragment.append(div)
@@ -375,16 +379,19 @@ document.addEventListener("click", event => {
     const internalFeatures = document
 	  .getElementById("Internal-Features-container");
     const size = document.getElementById("Size-container");
+    const unitType = document.getElementById("Unit-Type-container");
 
     if (value == "Land") {
 	bedrooms.style.display = "none";
 	bathrooms.style.display = "none";
 	internalFeatures.style.display = "none";
 	size.style.display = "grid";
+	unitType.style.display = "grid";
     } else if (value == "Townhouse" || value == "Villa" || value == "Apartment") {
 	bedrooms.style.display = "grid";
 	bathrooms.style.display = "grid";
-	internalFeatures.style.display = "grid"
-	size.style.display = "none"
+	internalFeatures.style.display = "grid";
+	size.style.display = "none";
+	unitType.style.display = "none";
     }
 });
