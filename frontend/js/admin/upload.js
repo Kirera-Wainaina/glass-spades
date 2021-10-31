@@ -335,3 +335,16 @@ function displayError(blanks) {
     })
     window.scrollTo(0, 0);
 }
+
+document.addEventListener("click", event => {
+    console.log(event.target.value)
+    if (event.target.value == "Land") {
+	const bedrooms = document.getElementById("Bedrooms-container");
+	const bathrooms = document.getElementById("Bathrooms-container");
+	const internalFeatures = document
+	      .getElementById("Internal-Features-container");
+	bedrooms.style.display = "none";
+	bathrooms.style.display = "none";
+	internalFeatures.style.display = "none";
+    }
+});
