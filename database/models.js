@@ -42,6 +42,8 @@ const listingSchema = new Schema({
     Category: String,
     Bedrooms: Number,
     Bathrooms: Number,
+    Size: Number,
+    "Unit Type": [String],
     Price: Number,
     "Internal Features": [String],
     "External Features": [String],
