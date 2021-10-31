@@ -38,19 +38,20 @@ header > a {
 }
 
 header #menu {
-    grid-column: 7 / 13;
+    grid-column: 9 / 13;
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-right: 1em;
  }
-
 
 header #menu a {
     width: 100%;
 }
+
 header #menu button {
-    font-size: .9em;
-    width: 95%;
+    font-size: .8em;
+    width: 80%;
     height: 2.3em;
     border: 1px solid lightgrey;
     background-color: white;
