@@ -2,6 +2,7 @@
     "Mandate": ["Sale", "Rent"],
     "Category": ["Apartment", "Townhouse", "Villa", "Office", "Land"],
     "Size": [],
+    "Unit Type": ["Acres", "Hectares", "Square Meters", "Square Feet"],
     "Bedrooms": [1, 2, 3, 4, 5, 6],
     "Bathrooms": [1, 2, 3, 4, 5, 6],
     "Internal Features": ["Air Conditioning", "Backup Generator", "Fibre Internet",
