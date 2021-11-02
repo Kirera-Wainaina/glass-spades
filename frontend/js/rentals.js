@@ -39,8 +39,10 @@ closeIcon.addEventListener("click", () => {
 
 const filterButton = document.getElementById("filter-button");
 filterButton.addEventListener("click", () => {
-    const maxPrices = document.getElementById("max-prices");
-    const minPrices = document.getElementById("min-prices");
-    console.log("Min Price: " + minPrices.value)
-    console.log("Max Price:" + maxPrices.value);
+    const maxPrice = document.getElementById("max-price");
+    const minPrice = document.getElementById("min-price");
+    const rentals = JSON.parse(sessionStorage.getItem("rentals"));
+    const filtered = rentals.filter(rental =>
+	rental.price >= minPrice.value && rental.price <= maxPrice.value);
+    console.log(filtered)
 });
