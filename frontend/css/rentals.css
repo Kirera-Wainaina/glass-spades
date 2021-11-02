@@ -79,6 +79,19 @@ h3 {
     margin-top: 1em;
 }
 
+#filter-card select {
+    height: 2.5em;
+    margin: 0.5em;
+}
+
+#min-prices {
+    grid-column: 1 / 2;
+}
+
+#max-prices {
+    grid-column: 2 / 3;
+}
+
 @media (max-width: 500px) {
     h2 {
 	grid-column: 1 / 6;
