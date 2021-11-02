@@ -45,4 +45,17 @@ filterButton.addEventListener("click", () => {
     const filtered = rentals.filter(rental =>
 	rental.price >= minPrice.value && rental.price <= maxPrice.value);
     console.log(filtered)
+
+    if (filtered.length) {
+	sessionStorage.setItem("filtered", JSON.stringify(filtered));
+	const listings = document.getElementById("listings");
+	while (listings.childElementCount != 0) {
+	    listings.removeChild(listings.children[listings.childElementCount - 1])
+	}
+	// the function below only works if the listings element is empty
+	displayHouseDetails(filtered);
+    } else {
+	const noListings = document.getElementById("no-listings");
+	noListings.style.display = "block";
+    }
 });
