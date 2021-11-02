@@ -35,3 +35,11 @@ closeIcon.addEventListener("click", () => {
     filterContainer.style.display = "none";
     filterCard.style.display = "none";    
 });
+
+const filterButton = document.getElementById("filter-button");
+filterButton.addEventListener("click", () => {
+    const maxPrices = document.getElementById("max-prices");
+    const minPrices = document.getElementById("min-prices");
+    console.log("Min Price: " + minPrices.value)
+    console.log("Max Price:" + maxPrices.value);
+});
