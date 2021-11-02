@@ -84,6 +84,10 @@ h3 {
     margin: 0.5em;
 }
 
+#filter-card option {
+    font-size: 1em;
+}
+
 #min-prices {
     grid-column: 1 / 2;
 }
