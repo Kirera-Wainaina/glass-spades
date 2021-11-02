@@ -11,6 +11,7 @@ function getRentals() {
 	    if (this.response != "fail") {
 	    // if (this.response == "fail") {
 		const rentalDetails = JSON.parse(this.response);
+		sessionStorage.setItem("rentals", this.response);
 		displayHouseDetails(rentalDetails);
 	    } else {
 		const noListings = document.getElementById("no-listings");
