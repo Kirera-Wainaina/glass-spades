@@ -104,15 +104,21 @@ function createHouseCard(houseDetail) {
     houseCard.href = `/listing?id=${houseDetail.id}`;
     houseCard.classList.add("house-card");
 
+    console.log(houseDetail)
     const overviewImg = handleImage(houseDetail.imageSrc);
 
     houseCard.append(createHeading(houseDetail.heading));
     houseCard.append(overviewImg);
     houseCard.append(inputPrice(houseDetail.price));
-    houseCard.append(createIcon(houseDetail.bedrooms,
-				"/frontend/images/bed-icon.svg"))
-    houseCard.append(createIcon(houseDetail.bathrooms,
-				"/frontend/images/bath-icon.svg"))
+    if (houseDetail.category == "Land") {
+	houseCard.append(createIcon(houseDetail.size,
+				    "/frontend/images/size-icon.svg"))
+    } else {
+	houseCard.append(createIcon(houseDetail.bedrooms,
+				    "/frontend/images/bed-icon.svg"))
+	houseCard.append(createIcon(houseDetail.bathrooms,
+				    "/frontend/images/bath-icon.svg"))
+    }
 
     return houseCard
 }
