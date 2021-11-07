@@ -146,14 +146,22 @@ async function createBody(details) {
 	  .NumberFormat("sw-ke", { style: "currency", currency: "Kes"})
 	  .format(details.Price);
 
+    console.log(details)
     fragment.append(createDescription(details.Description));
 
     fragment.append(createSection("Category", details.Category));
     fragment.append(createSection("Mandate", details.Mandate));
-    fragment.append(createSection("Bedrooms", details.Bedrooms));
-    fragment.append(createSection("Bathrooms", details.Bathrooms));
-    fragment.append(createSection("Internal Features",
-				  details["Internal Features"]));
+
+    if (details.Category == "Land") {
+	fragment.append(createSection("Size", details.Size));
+	fragment.append(createSection("Unit Type", details["Unit Type"]))
+    } else {
+	fragment.append(createSection("Bedrooms", details.Bedrooms));
+	fragment.append(createSection("Bathrooms", details.Bathrooms));
+	fragment.append(createSection("Internal Features",
+				      details["Internal Features"]));
+    }
+
     fragment.append(createSection("External Features",
 				  details["External Features"]));
     fragment.append(createSection("Price", price));
