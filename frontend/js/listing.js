@@ -146,7 +146,6 @@ async function createBody(details) {
 	  .NumberFormat("sw-ke", { style: "currency", currency: "Kes"})
 	  .format(details.Price);
 
-    console.log(details)
     fragment.append(createDescription(details.Description));
 
     fragment.append(createSection("Category", details.Category));
