@@ -7,7 +7,10 @@ async function getSales(request, response) {
 					      Heading: 1,
 					      Price: 1,
 					      Bedrooms: 1,
-					      Bathrooms: 1
+					      Bathrooms: 1,
+					      Size: 1,
+					      "Unit Type": 1,
+					      Category: 1
 					  });
     if (sales.length) {
 	const data = await Promise.all(sales.map(sale => {
@@ -20,6 +23,9 @@ async function getSales(request, response) {
 		    price: sale.Price,
 		    bedrooms: sale.Bedrooms,
 		    bathrooms: sale.Bathrooms,
+		    size: sale.Size,
+		    unitType: sale["Unit Type"],
+		    category: sale.Category,
 		    imageSrc: imageData.link,
 		    id: sale._id
 		});
