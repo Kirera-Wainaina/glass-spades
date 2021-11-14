@@ -42,9 +42,10 @@ filterButton.addEventListener("click", () => {
     const listings = document.getElementById("listings");
     const rentals = JSON.parse(sessionStorage.getItem("rentals"));
     const priceResults = filterByPrice(rentals);
+    const bedroomResults = filterByBedrooms(priceResults);
 
     // the final list should be the variable 'filtered'
-    let filtered = priceResults;
+    let filtered = bedroomResults;
     console.log(filtered)
 
     displayResults(filtered)
@@ -71,6 +72,17 @@ function filterByPrice(rentals) {
     } else {
 	const filtered = rentals.filter(rental =>
 	    rental.price >= minPrice.value && rental.price <= maxPrice.value);
+	return filtered
+    }
+}
+
+function filterByBedrooms(rentals) {
+    const bedrooms = document.getElementById("bedrooms");
+    if (bedrooms.value == "") {
+	return rentals
+    } else {
+	const filtered = rentals.filter(rental =>
+	    rental.bedrooms == bedrooms.value);
 	return filtered
     }
 }
