@@ -51,7 +51,7 @@ function handleListing(listing) {
 }
 
 function enterData(key, value) {
-    const element = document.querySelector(`[name=${key}][value="${value}"]`);
+    const element = document.querySelector(`[name="${key}"][value="${value}"]`);
     element.classList.add("clicked-button");
 }
 
