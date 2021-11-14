@@ -52,7 +52,8 @@ const listingSchema = new Schema({
 	coordinates: { type: [Number] }
     },
     Featured: { type: Boolean, default: false },
-    Archived: { type: Boolean, default: false }
+    Archived: { type: Boolean, default: false },
+    Location-name: String
 });
 
 const imageSchema = new Schema({
