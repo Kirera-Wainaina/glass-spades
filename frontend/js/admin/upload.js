@@ -96,7 +96,7 @@ function addDataToHouseInfo(event) {
     if (element.tagName == "BUTTON") {
 	if (element.name == "Mandate" || element.name == "Category"
 	    || element.name == "Bedrooms" || element.name == "Bathrooms"
-	    || element.name == "Unit Type" || element.name == "Location-name")
+	    || element.name == "Unit Type" || element.name == "Location Name")
 	{
 	    // The properties that are ENUMS
 	    houseInfo[element.name] = element.value;
@@ -126,7 +126,7 @@ function changeButtonColorOnClick(event) {
     if (element.tagName == "BUTTON") {
 	if (element.name == "Mandate" || element.name == "Category"
 	    || element.name == "Bedrooms" || element.name == "Bathrooms"
-	    || element.name == "Unit Type" || element.name == "Location-name")
+	    || element.name == "Unit Type" || element.name == "Location Name")
 	{
 	    // only one element can be colored
 	    const buttons = document
