@@ -68,7 +68,6 @@ filterButton.addEventListener("click", () => {
 
     // the final list should be the variable 'filtered'
     let filtered = locationResults;
-    console.log(filtered)
 
     displayResults(filtered)
     closeIcon.click();
