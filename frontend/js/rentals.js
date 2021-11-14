@@ -59,6 +59,7 @@ filterButton.addEventListener("click", () => {
 	const noListings = document.getElementById("no-listings");
 	noListings.style.display = "block";
     }
+    closeIcon.click();
 });
 
 function filterByPrice(rentals) {
