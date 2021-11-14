@@ -54,9 +54,15 @@ filterButton.addEventListener("click", () => {
 function filterByPrice(rentals) {
     const maxPrice = document.getElementById("max-price");
     const minPrice = document.getElementById("min-price");
-    const filtered = rentals.filter(rental =>
-	rental.price >= minPrice.value && rental.price <= maxPrice.value);
-    return filtered
+    if (minPrice.value == "" || maxPrice.value == "") {
+	const notice = document.getElementById("no-price-filter");
+	notice.style.display = "block";
+	return rentals
+    } else {
+	const filtered = rentals.filter(rental =>
+	    rental.price >= minPrice.value && rental.price <= maxPrice.value);
+	return filtered
+    }
 }
 
 function displayResults(results) {
