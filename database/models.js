@@ -53,7 +53,7 @@ const listingSchema = new Schema({
     },
     Featured: { type: Boolean, default: false },
     Archived: { type: Boolean, default: false },
-    Location-name: String
+    "Location Name": String
 });
 
 const imageSchema = new Schema({
