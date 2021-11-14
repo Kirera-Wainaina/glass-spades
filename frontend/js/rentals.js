@@ -47,18 +47,7 @@ filterButton.addEventListener("click", () => {
     let filtered = priceResults;
     console.log(filtered)
 
-    if (filtered.length) {
-	sessionStorage.setItem("filtered", JSON.stringify(filtered));
-	while (listings.childElementCount != 0) {
-	    listings.removeChild(listings.children[listings.childElementCount - 1])
-	}
-	// the function below only works if the listings element is empty
-	displayHouseDetails(filtered);
-    } else {
-	listings.parentNode.removeChild(listings);
-	const noListings = document.getElementById("no-listings");
-	noListings.style.display = "block";
-    }
+    displayResults(filtered)
     closeIcon.click();
 });
 
@@ -68,4 +57,20 @@ function filterByPrice(rentals) {
     const filtered = rentals.filter(rental =>
 	rental.price >= minPrice.value && rental.price <= maxPrice.value);
     return filtered
+}
+
+function displayResults(results) {
+    if (results.length) {
+	sessionStorage.setItem("filtered", JSON.stringify(results));
+	while (listings.childElementCount != 0) {
+	    listings.removeChild(listings.children[listings.childElementCount - 1])
+	}
+	// the function below only works if the listings element is empty
+	displayHouseDetails(results);
+    } else {
+	listings.parentNode.removeChild(listings);
+	const noListings = document.getElementById("no-listings");
+	noListings.style.display = "block";
+    }
+
 }
