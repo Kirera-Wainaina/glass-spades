@@ -100,6 +100,10 @@ h3 {
     grid-column: 1 / 2;
 }
 
+#locations {
+    grid-column: 1 / 2;
+}
+
 .filter-notice {
     grid-column: 3 / 11;
     margin: 1em;
