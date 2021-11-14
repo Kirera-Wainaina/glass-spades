@@ -39,7 +39,6 @@ closeIcon.addEventListener("click", () => {
 
 const filterButton = document.getElementById("filter-button");
 filterButton.addEventListener("click", () => {
-    const listings = document.getElementById("listings");
     const rentals = JSON.parse(sessionStorage.getItem("rentals"));
     const priceResults = filterByPrice(rentals);
     const bedroomResults = filterByBedrooms(priceResults);
@@ -81,13 +80,20 @@ function filterByBedrooms(rentals) {
     if (bedrooms.value == "") {
 	return rentals
     } else {
-	const filtered = rentals.filter(rental =>
-	    rental.bedrooms == bedrooms.value);
+	const filtered = rentals.filter(rental => {
+	    if (bedrooms.value == 6) {
+		// look for a listing with more than 5 bedrooms
+		return rental.bedrooms > 5;
+	    } else {
+		return rental.bedrooms == bedrooms.value;
+	    }
+	});
 	return filtered
     }
 }
 
 function displayResults(results) {
+    const listings = document.getElementById("listings");
     if (results.length) {
 	sessionStorage.setItem("filtered", JSON.stringify(results));
 	while (listings.childElementCount != 0) {
