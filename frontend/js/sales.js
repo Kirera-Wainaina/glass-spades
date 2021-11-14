@@ -1,4 +1,5 @@
 import { displayHouseDetails } from "./general.js"
+import { displayFilterBanner } from "./rentals.js"
 getSales();
 
 function getSales() {
@@ -19,3 +20,6 @@ function getSales() {
 	}
     }
 }
+
+const filterIcon = document.getElementById("filter-icon");
+filterIcon.addEventListener("click", displayFilterBanner);
