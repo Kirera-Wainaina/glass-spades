@@ -7,7 +7,8 @@ async function getRentals(request, response) {
 					      Heading: 1,
 					      Price: 1,
 					      Bedrooms: 1,
-					      Bathrooms: 1
+					      Bathrooms: 1,
+					      "Location Name": 1
 					  });
     if (rentals.length) {
 	const data = await Promise.all(rentals.map(rental => {
@@ -20,6 +21,7 @@ async function getRentals(request, response) {
 		    price: rental.Price,
 		    bedrooms: rental.Bedrooms,
 		    bathrooms: rental.Bathrooms,
+		    locationName: rental["Location Name"],
 		    imageSrc: imageData.link,
 		    id: rental._id
 		});
