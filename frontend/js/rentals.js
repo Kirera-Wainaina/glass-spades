@@ -64,16 +64,17 @@ filterButton.addEventListener("click", () => {
     const rentals = JSON.parse(sessionStorage.getItem("rentals"));
     const priceResults = filterByPrice(rentals);
     const bedroomResults = filterByBedrooms(priceResults);
+    const locationResults = filterByLocation(bedroomResults);
 
     // the final list should be the variable 'filtered'
-    let filtered = bedroomResults;
+    let filtered = locationResults;
     console.log(filtered)
 
     displayResults(filtered)
     closeIcon.click();
 });
 
-function filterByPrice(rentals) {
+function filterByPrice(listings) {
     const maxPrice = document.getElementById("max-price");
     const minPrice = document.getElementById("min-price");
     const displayedNotices = document.querySelectorAll(".filter-notice");
@@ -85,31 +86,43 @@ function filterByPrice(rentals) {
     if (minPrice.value == "" || maxPrice.value == "") {
 	const notice = document.getElementById("no-price-filter");
 	notice.style.display = "block";
-	return rentals
+	return listings
     } else if (maxPrice.value < minPrice.value) {
 	const notice = document.getElementById("wrong-entry");
 	notice.style.display = "block";
-	return rentals
+	return listings
     } else {
-	const filtered = rentals.filter(rental =>
-	    rental.price >= minPrice.value && rental.price <= maxPrice.value);
+	const filtered = listings.filter(listing =>
+	    listing.price >= minPrice.value && listing.price <= maxPrice.value);
 	return filtered
     }
 }
 
-function filterByBedrooms(rentals) {
+function filterByBedrooms(listings) {
     const bedrooms = document.getElementById("bedrooms");
     if (bedrooms.value == "") {
-	return rentals
+	return listings
     } else {
-	const filtered = rentals.filter(rental => {
+	const filtered = listings.filter(listing => {
 	    if (bedrooms.value == 6) {
 		// look for a listing with more than 5 bedrooms
-		return rental.bedrooms > 5;
+		return listing.bedrooms > 5;
 	    } else {
-		return rental.bedrooms == bedrooms.value;
+		return listing.bedrooms == bedrooms.value;
 	    }
 	});
+	return filtered
+    }
+}
+
+function filterByLocation(listings) {
+    const locations = document.getElementById("locations");
+    if (locations.value == "") {
+	return listings
+    } else {
+	const filtered = listings.filter(listing => {
+	    return listing.locationName == locations.value;
+	})
 	return filtered
     }
 }
@@ -117,7 +130,6 @@ function filterByBedrooms(rentals) {
 function displayResults(results) {
     const listings = document.getElementById("listings");
     if (results.length) {
-	sessionStorage.setItem("filtered", JSON.stringify(results));
 	while (listings.childElementCount != 0) {
 	    listings.removeChild(listings.children[listings.childElementCount - 1])
 	}
