@@ -39,11 +39,11 @@ closeIcon.addEventListener("click", () => {
 
 const filterButton = document.getElementById("filter-button");
 filterButton.addEventListener("click", () => {
-    const maxPrice = document.getElementById("max-price");
-    const minPrice = document.getElementById("min-price");
     const rentals = JSON.parse(sessionStorage.getItem("rentals"));
-    const filtered = rentals.filter(rental =>
-	rental.price >= minPrice.value && rental.price <= maxPrice.value);
+    const priceResults = filterByPrice(rentals);
+
+    // the final list should be the variable 'filtered'
+    let filtered = priceResults;
     console.log(filtered)
 
     if (filtered.length) {
@@ -59,3 +59,11 @@ filterButton.addEventListener("click", () => {
 	noListings.style.display = "block";
     }
 });
+
+function filterByPrice(rentals) {
+    const maxPrice = document.getElementById("max-price");
+    const minPrice = document.getElementById("min-price");
+    const filtered = rentals.filter(rental =>
+	rental.price >= minPrice.value && rental.price <= maxPrice.value);
+    return filtered
+}
