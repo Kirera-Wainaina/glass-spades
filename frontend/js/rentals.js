@@ -39,6 +39,7 @@ closeIcon.addEventListener("click", () => {
 
 const filterButton = document.getElementById("filter-button");
 filterButton.addEventListener("click", () => {
+    const listings = document.getElementById("listings");
     const rentals = JSON.parse(sessionStorage.getItem("rentals"));
     const priceResults = filterByPrice(rentals);
 
@@ -48,13 +49,13 @@ filterButton.addEventListener("click", () => {
 
     if (filtered.length) {
 	sessionStorage.setItem("filtered", JSON.stringify(filtered));
-	const listings = document.getElementById("listings");
 	while (listings.childElementCount != 0) {
 	    listings.removeChild(listings.children[listings.childElementCount - 1])
 	}
 	// the function below only works if the listings element is empty
 	displayHouseDetails(filtered);
     } else {
+	listings.parentNode.removeChild(listings);
 	const noListings = document.getElementById("no-listings");
 	noListings.style.display = "block";
     }
