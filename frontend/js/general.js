@@ -172,3 +172,12 @@ export function hideLoadingPage() {
     const loadingPage = document.getElementById("loading-page");
     loadingPage.style.display = "none";
 }
+
+/////////////////////////////////////////////////////////////////////////
+///////////////////// Filter Functionality //////////////////////////////
+export function displayFilterBanner() {
+    const filterContainer = document.getElementById("filter-container");
+    const filterCard = document.getElementById("filter-card");
+    filterContainer.style.display = "block";
+    filterCard.style.display = "grid";    
+}

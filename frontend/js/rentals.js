@@ -1,4 +1,4 @@
-import { displayHouseDetails } from "./general.js"
+import { displayHouseDetails, displayFilterBanner } from "./general.js"
 getRentals();
 
 (function (){
@@ -44,20 +44,7 @@ function getRentals() {
 }
 
 const filterIcon = document.getElementById("filter-icon");
-// filterIcon.addEventListener("click", event => {
-//     const filterContainer = document.getElementById("filter-container");
-//     const filterCard = document.getElementById("filter-card");
-//     filterContainer.style.display = "block";
-//     filterCard.style.display = "grid";    
-// });
-
 filterIcon.addEventListener("click", displayFilterBanner);
-export function displayFilterBanner() {
-    const filterContainer = document.getElementById("filter-container");
-    const filterCard = document.getElementById("filter-card");
-    filterContainer.style.display = "block";
-    filterCard.style.display = "grid";    
-}
 
 const closeIcon = document.getElementById("close-icon");
 closeIcon.addEventListener("click", () => {

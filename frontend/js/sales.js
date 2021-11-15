@@ -1,5 +1,5 @@
-import { displayHouseDetails } from "./general.js"
-import { displayFilterBanner } from "./rentals.js"
+import { displayHouseDetails, displayFilterBanner } from "./general.js"
+
 getSales();
 
 function getSales() {
