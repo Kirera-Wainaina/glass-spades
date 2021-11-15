@@ -39,8 +39,7 @@
       </header>
 
       <input type="image"
-	     src="/frontend/images/white-filter.svg" id="filter-icon"
-	     style="display:none"/>
+	     src="/frontend/images/white-filter.svg" id="filter-icon"/>
 
       <div id="filter-container">
 	<input type="image"
@@ -49,16 +48,60 @@
       </div>
       <div id="filter-card">
 	<p>Filter Rental Properties</p>
-	<p class="filter-category">By Price:</p>
-	<!-- <select id="min-prices"></select> -->
+	<p class="filter-category">By Price(Kes):</p>
+	<select id="min-price">
+	  <option value="">Minimum Price</option>
+	  <option value="100000">100,000</option>
+	  <option value="200000">200,000</option>
+	  <option value="300000">300,000</option>
+	  <option value="400000">400,000</option>
+	</select>
+	<select id="max-price">
+	  <option value="">Maximum Price</option>
+	  <option value="200000">200,000</option>
+	  <option value="300000">300,000</option>
+	  <option value="400000">400,000</option>
+	  <option value="4000000">Above 400,000</option>
+	</select>
+
+	<p class="filter-category">By Bedrooms:</p>
+	<select id="bedrooms">
+	  <option value="">Bedrooms</option>
+	  <option value="1">1</option>
+	  <option value="2">2</option>
+	  <option value="3">3</option>
+	  <option value="4">4</option>
+	  <option value="5">5</option>
+	  <option value="20">+5</option>
+	</select>
+
+	<p class="filter-category">By Location:</p>
+	<select id="locations">
+	  <option value="">Locations</option>
+	</select>
+
+	<button id="filter-button">Show Results</button>
       </div>
       
       <h2>Rentals</h2>
       
+      <p class="filter-notice" id="no-price-filter">
+	  For us to filter using prices, you need to choose both a
+	minimum price and a maximum price. We did not filter using
+	prices.
+      </p>
+
+      <p class="filter-notice" id="wrong-entry">
+	The maximum price should not be less than the minimum
+	price. We did not filter using prices.
+      </p>
+
       <div id="listings">
       </div>
 
-      <h3 id="no-listings">There are currently no rentals</h3>
+      <h3 id="no-listings">
+	There are currently no rentals matching your criteria
+      </h3>
 
       <footer>
 	<a href="/terms">Terms of service</a>

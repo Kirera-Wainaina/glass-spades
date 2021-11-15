@@ -33,7 +33,8 @@ function handleListing(listing) {
 	    return ;
 	} else if (Array.isArray(listing[key])) {
 	    enterArrayData(key, listing[key]);
-	} else if (key == "Heading" || key == "Description" || key == "Price") {
+	} else if (key == "Heading" || key == "Description" || key == "Price"
+		   || key == "Size") {
 	    enterTypedData(key, listing[key]);
 	} else if (key == "Location") {
 	    if (listing[key].coordinates.length) {
@@ -51,8 +52,8 @@ function handleListing(listing) {
 }
 
 function enterData(key, value) {
-    const element = document.querySelector(`[name=${key}][value="${value}"]`);
-    element.classList.add("clicked-button");
+    const element = document.querySelector(`[name="${key}"][value="${value}"]`);
+    if (element) element.classList.add("clicked-button");
 }
 
 function enterTypedData(key, value) {

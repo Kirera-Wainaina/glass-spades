@@ -150,7 +150,7 @@ async function createBody(details) {
 
     fragment.append(createSection("Category", details.Category));
     fragment.append(createSection("Mandate", details.Mandate));
-
+    fragment.append(createSection("Location Name", details["Location Name"]));
     if (details.Category == "Land") {
 	fragment.append(createSection("Size", details.Size));
 	fragment.append(createSection("Unit Type", details["Unit Type"]))
@@ -160,7 +160,6 @@ async function createBody(details) {
 	fragment.append(createSection("Internal Features",
 				      details["Internal Features"]));
     }
-
     fragment.append(createSection("External Features",
 				  details["External Features"]));
     fragment.append(createSection("Price", price));
