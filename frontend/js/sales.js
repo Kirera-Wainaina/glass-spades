@@ -1,5 +1,5 @@
 import {
-    displayHouseDetails, displayFilterBanner, closeFilterBanner
+    displayHouseDetails, displayFilterBanner, closeFilterBanner, runFilter
 } from "./general.js"
 
 getSales();
@@ -14,6 +14,7 @@ function getSales() {
 	    if (this.response != "fail") {
 	    // if (this.response == "fail") {
 		const salesDetails = JSON.parse(this.response);
+		sessionStorage.setItem("sales", this.response);
 		displayHouseDetails(salesDetails);
 	    } else {
 		const noListings = document.getElementById("no-listings");
@@ -28,3 +29,6 @@ filterIcon.addEventListener("click", displayFilterBanner);
 
 const closeIcon = document.getElementById("close-icon");
 closeIcon.addEventListener("click", closeFilterBanner)
+
+const filterButton = document.getElementById("filter-button");
+filterButton.addEventListener("click", () => runFilter("sales"))
