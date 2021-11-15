@@ -181,3 +181,10 @@ export function displayFilterBanner() {
     filterContainer.style.display = "block";
     filterCard.style.display = "grid";    
 }
+
+export function closeFilterBanner() {
+    const filterContainer = document.getElementById("filter-container");
+    const filterCard = document.getElementById("filter-card");
+    filterContainer.style.display = "none";
+    filterCard.style.display = "none";    
+}

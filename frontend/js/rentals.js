@@ -1,4 +1,7 @@
-import { displayHouseDetails, displayFilterBanner } from "./general.js"
+import {
+    displayHouseDetails, displayFilterBanner, closeFilterBanner
+} from "./general.js"
+
 getRentals();
 
 (function (){
@@ -47,12 +50,7 @@ const filterIcon = document.getElementById("filter-icon");
 filterIcon.addEventListener("click", displayFilterBanner);
 
 const closeIcon = document.getElementById("close-icon");
-closeIcon.addEventListener("click", () => {
-    const filterContainer = document.getElementById("filter-container");
-    const filterCard = document.getElementById("filter-card");
-    filterContainer.style.display = "none";
-    filterCard.style.display = "none";    
-});
+closeIcon.addEventListener("click", closeFilterBanner)
 
 const filterButton = document.getElementById("filter-button");
 filterButton.addEventListener("click", () => {

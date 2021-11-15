@@ -1,4 +1,6 @@
-import { displayHouseDetails, displayFilterBanner } from "./general.js"
+import {
+    displayHouseDetails, displayFilterBanner, closeFilterBanner
+} from "./general.js"
 
 getSales();
 
@@ -23,3 +25,6 @@ function getSales() {
 
 const filterIcon = document.getElementById("filter-icon");
 filterIcon.addEventListener("click", displayFilterBanner);
+
+const closeIcon = document.getElementById("close-icon");
+closeIcon.addEventListener("click", closeFilterBanner)
