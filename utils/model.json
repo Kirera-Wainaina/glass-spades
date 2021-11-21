@@ -1,7 +1,7 @@
 {
     "Mandate": ["Sale", "Rent"],
     "Category": ["Apartment", "Townhouse", "Villa", "Office", "Land"],
-    "Location Name": ["Runda", "Isinya"],
+    "Location Name": ["Runda", "Isinya", "Kitisuru", "Kilimani", "Kileleshwa", "Thigiri"],
     "Size": [],
     "Unit Type": ["Acres", "Hectares", "Square Meters", "Square Feet"],
     "Bedrooms": [1, 2, 3, 4, 5, 6],
