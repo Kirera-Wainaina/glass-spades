@@ -34,6 +34,7 @@ function getListingImages() {
 	    document.dispatchEvent(received)
 	    const images = JSON.parse(this.response);
 	    displayFirstImages(images);
+	    createThumbnail(images);
 	}
     }
 }
@@ -290,4 +291,10 @@ function handleForm(event) {
 
     const loadingPage = document.getElementById("loading-page");
     loadingPage.style.display = "flex";
+}
+
+function createThumbnail(images) {
+    const [ first ] = images.filter(image => image.position == 0);
+    const thumbnailEl = document.querySelector("meta[name='thumbnail']");
+    thumbnailEl.content = first.link;
 }
