@@ -298,3 +298,8 @@ function createThumbnail(images) {
     const thumbnailEl = document.querySelector("meta[name='thumbnail']");
     thumbnailEl.content = first.link;
 }
+
+(function () {
+    const whatsapp = document.getElementById("whatsapp");
+    whatsapp.href += `Hi,%20I%20am%20interested%20in%20the%20property%20in%20the%20link:%20${location.href}`
+})()
