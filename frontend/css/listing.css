@@ -57,11 +57,11 @@ div#images img.arrow {
     width: 2em;
 }
 
-h2#heading {
+h1#heading {
     grid-column: 5 / 9;
     margin-top: 1em;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.8em;
 }
 
 p.description {
@@ -231,7 +231,7 @@ form input[type="submit"] {
 	width: 1.5em;
     }
 
-    h2#heading {
+    h1#heading {
 	grid-column: 1 / 6;
 	margin-left: .5em;
 	margin-right: .5em;
