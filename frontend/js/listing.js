@@ -142,7 +142,7 @@ function setTitle(details) {
 async function createBody(details) {
     const fragment = new DocumentFragment();
     const page = document.querySelector(".page");
-    const whatsapp = document.querySelector("#whatsapp-button");
+    const whatsapp = document.querySelector("#whatsapp");
     const price = new Intl
 	  .NumberFormat("sw-ke", { style: "currency", currency: "Kes"})
 	  .format(details.Price);

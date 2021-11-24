@@ -111,7 +111,7 @@ section {
     border: 1px solid lightgrey;
 }
 
-#whatsapp-button {
+#whatsapp {
     grid-column: 4 / 10;
     height: 3em;
     display: flex;
@@ -121,14 +121,14 @@ section {
     margin-top: 2em;
 }
 
-#whatsapp-button img {
-    height: 2.8em;
+#whatsapp img {
+    height: 3em;
 }
 
 form {
     grid-column: 4 / 10;
     border: 2px ridge lightgrey;
-    margin-top: 2em;
+    margin-top: 1em;
     padding: 2em;
 
     display: flex;
@@ -274,10 +274,19 @@ form input[type="submit"] {
 	flex: 1.5;
     }
 
-    form {
+    #whatsapp {
 	grid-column: 1 / 6;
 	margin: 1em;
 	margin-top: 2em;
+    }
+
+    #whatsapp img {
+	height: 2em;
+    }
+    
+    form {
+	grid-column: 1 / 6;
+	margin: 1em;
     }
 
     form input {
