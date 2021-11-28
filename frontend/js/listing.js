@@ -45,6 +45,7 @@ function runBodyFunctions() {
 	setTitle(details)
 	setHeading(details);
 	setMetaDescription(details);
+	setOGElements(details);
 	createBody(details);
     }
 }
@@ -303,3 +304,26 @@ function createThumbnail(images) {
     const whatsapp = document.getElementById("whatsapp");
     whatsapp.href += `Hi,%20I%20am%20interested%20in%20the%20property%20in%20the%20link:%20${location.href}`
 })()
+
+function setOGElements(details) {
+    setOGTitle(details.Heading);
+    setOGUrl();
+    setImage();
+}
+
+function setOGTitle(heading) {
+    const title = document.querySelector("meta[name='og:title']")
+    title.content = heading
+}
+
+function setOGUrl() {
+    const url = document.querySelector("meta[name='og:url']");
+    url.content = location.href;
+}
+
+function setImage() {
+    const image = document.querySelector("meta[name='og:image']");
+    const allImages = JSON.parse(sessionStorage.images);
+    const [ overview ] = allImages.filter(imageObj => imageObj.position == 0);
+    image.content = overview.link;
+}
