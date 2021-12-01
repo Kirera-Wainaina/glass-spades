@@ -46,6 +46,7 @@ function getListingImages() {
 	    const images = JSON.parse(this.response);
 	    displayFirstImages(images);
 	    createThumbnail(images);
+	    setImage();
 	}
     }
 }
@@ -319,7 +320,7 @@ function createThumbnail(images) {
 function setOGElements(details) {
     setOGTitle(details.Heading);
     setOGUrl();
-    setImage();
+    // setImage();
 }
 
 function setOGTitle(heading) {
@@ -334,7 +335,7 @@ function setOGUrl() {
 
 function setImage() {
     const image = document.querySelector("meta[name='og:image']");
-    const allImages = JSON.parse(sessionStorage.images);
+    const allImages = JSON.parse(sessionStorage.getItem("images"));
     const [ overview ] = allImages.filter(imageObj => imageObj.position == 0);
     image.content = overview.link;
 }
