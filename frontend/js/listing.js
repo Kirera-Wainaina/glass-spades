@@ -149,7 +149,9 @@ function setHeading(details) {
 
 function setTitle(details) {
     const title = document.querySelector("title");
-    title.textContent += details.Heading;
+    if (!title.textContent.includes("Glass Spades")) {
+	title.textContent = `Glass Spades | ${details.Heading}`
+    }
 }
 
 async function createBody(details) {
