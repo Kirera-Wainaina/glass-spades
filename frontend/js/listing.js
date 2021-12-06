@@ -167,7 +167,7 @@ async function createBody(details) {
     fragment.append(createSection("Category", details.Category));
     fragment.append(createSection("Mandate", details.Mandate));
     fragment.append(createSection("Location Name", details["Location Name"]));
-    if (details.Category == "Land") {
+    if (details.Category == "Land" || details.Category == "Apartment") {
 	fragment.append(createSection("Size", details.Size));
 	fragment.append(createSection("Unit Type", details["Unit Type"]))
     } else {
