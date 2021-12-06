@@ -398,7 +398,12 @@ document.addEventListener("click", event => {
 	bedrooms.style.display = "grid";
 	bathrooms.style.display = "grid";
 	internalFeatures.style.display = "grid";
-	size.style.display = "none";
-	unitType.style.display = "none";
+	if (value == "Apartment") {
+	    size.style.display = "grid";
+	    unitType.style.display = "grid";
+	} else {
+	    size.style.display = "none";
+	    unitType.style.display = "none";
+	}
     }
 });
