@@ -169,7 +169,11 @@ async function createBody(details) {
     fragment.append(createSection("Location Name", details["Location Name"]));
     if (details.Category == "Land" || details.Category == "Apartment") {
 	fragment.append(createSection("Size", details.Size));
-	fragment.append(createSection("Unit Type", details["Unit Type"]))
+	fragment.append(createSection("Unit Type", details["Unit Type"]));
+	if (details.Category == "Apartment") {
+	    fragment.append(createSection("Internal Features",
+					  details["Internal Features"]));
+	}
     } else {
 	fragment.append(createSection("Bedrooms", details.Bedrooms));
 	fragment.append(createSection("Bathrooms", details.Bathrooms));
