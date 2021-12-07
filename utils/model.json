@@ -8,8 +8,12 @@
     "Bathrooms": [1, 2, 3, 4, 5, 6],
     "Internal Features": ["Air Conditioning", "Backup Generator", "Fibre Internet",
 			  "Serviced", "Walk in Closet", "Alarm", "Ensuite",
-			  "Furnished", "Service Charge Included"],
+			  "Furnished", "Service Charge Included",
+			  "Solar Hot Water System", "Satellite TV",
+			  ],
     "External Features": ["Balcony", "Borehole", "Electric Fence", "Gym",
 			  "Staff Quarters", "Wheelchair Access", "BBQ", "CCTV",
-			  "Garden", "Parking", "Swimming Pool"]
+			  "Garden", "Parking", "Swimming Pool",
+			  "Power Backup for Common Areas", "Intercom",
+			  "High Speed Lifts"]
 }
