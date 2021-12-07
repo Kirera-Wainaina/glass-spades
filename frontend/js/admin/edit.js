@@ -133,7 +133,7 @@ function handleCoordinates(formdata) {
 }
 
 function handleTypedData(formdata) {
-    const typedNames = ["Heading", "Description", "Price"];
+    const typedNames = ["Heading", "Description", "Price", "Size"];
     typedNames.forEach(typedName => {
 	const element = document.querySelector(`[name=${typedName}]`);
 	formdata.set(element.name, element.value)

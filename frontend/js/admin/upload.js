@@ -241,7 +241,7 @@ export async function setData(event) {
     houseInfo[description.name] = description.value;
     houseInfo[price.name] = price.value;
 
-    if (houseInfo.Category == "Land") {
+    if (houseInfo.Category == "Land" || houseInfo.Category == "Apartments") {
 	houseInfo[size.name] = size.value;
     }
 
