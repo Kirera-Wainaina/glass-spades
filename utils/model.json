@@ -4,7 +4,7 @@
     "Location Name": ["Runda", "Isinya", "Kitisuru", "Kilimani", "Kileleshwa", "Thigiri"],
     "Size": [],
     "Unit Type": ["Acres", "Hectares", "Square Meters", "Square Feet"],
-    "Bedrooms": [1, 2, 3, 4, 5, 6],
+    "Bedrooms": ["Studio", 1, 2, 3, 4, 5, 6],
     "Bathrooms": [1, 2, 3, 4, 5, 6],
     "Internal Features": ["Air Conditioning", "Backup Generator", "Fibre Internet",
 			  "Serviced", "Walk in Closet", "Alarm", "Ensuite",
