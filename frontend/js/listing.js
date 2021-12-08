@@ -171,6 +171,8 @@ async function createBody(details) {
 	fragment.append(createSection("Size", details.Size));
 	fragment.append(createSection("Unit Type", details["Unit Type"]));
 	if (details.Category == "Apartment") {
+	    fragment.append(createSection("Bedrooms", details.Bedrooms));
+	    fragment.append(createSection("Bathrooms", details.Bathrooms));
 	    fragment.append(createSection("Internal Features",
 					  details["Internal Features"]));
 	}
