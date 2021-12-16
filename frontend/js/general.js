@@ -220,18 +220,37 @@ export function closeFilterBanner() {
 }
 
 export function runFilter(mandate) {
-    const listings = JSON.parse(sessionStorage.getItem(mandate));
-    const priceResults = filterByPrice(listings);
-    const bedroomResults = filterByBedrooms(priceResults);
-    const locationResults = filterByLocation(bedroomResults);
+    const maxPrice = document.getElementById("max-price").value;
+    const minPrice = document.getElementById("min-price").value;
+    verifyPrices(maxPrice, minPrice);
 
-    // the final list should be the variable 'filtered'
-    let filtered = locationResults;
-
-    displayResults(filtered)
-    const closeIcon = document.getElementById("close-icon");
-    closeIcon.click();
+    location.href = location.origin + location.pathname +
+	`?max-price=${maxPrice}&min-price=${minPrice}`;
 }
+
+function verifyPrices(maxPrice, minPrice) {
+    if (minPrice.value == "" || maxPrice.value == "") {
+	const notice = document.getElementById("no-price-filter");
+	notice.style.display = "block";
+    } else if (maxPrice.value < minPrice.value) {
+	const notice = document.getElementById("wrong-entry");
+	notice.style.display = "block";
+    }
+}
+
+// export function runFilter(mandate) {
+//     const listings = JSON.parse(sessionStorage.getItem(mandate));
+//     const priceResults = filterByPrice(listings);
+//     const bedroomResults = filterByBedrooms(priceResults);
+//     const locationResults = filterByLocation(bedroomResults);
+
+//     // the final list should be the variable 'filtered'
+//     let filtered = locationResults;
+
+//     displayResults(filtered)
+//     const closeIcon = document.getElementById("close-icon");
+//     closeIcon.click();
+// }
 
 function filterByPrice(listings) {
     const maxPrice = document.getElementById("max-price");
