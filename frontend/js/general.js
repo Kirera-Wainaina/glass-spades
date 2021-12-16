@@ -225,7 +225,7 @@ export function runFilter(mandate) {
     const bedrooms = document.getElementById("bedrooms").value;
     const notices = document.querySelectorAll(".filter-notice");
     const closeIcon = document.getElementById("close-icon");
-    let query = "?";
+    const queries = [];
 
     // min is 0 if not input and max is MAX_SAFE_INTEGER if not input
     minPrice = minPrice != "" ? minPrice : 0;
@@ -237,14 +237,15 @@ export function runFilter(mandate) {
     }
 
     if (verifyPrices(maxPrice, minPrice)) {
-	query += `max-price=${maxPrice}&min-price=${minPrice}`;
+	queries.push(`max-price=${maxPrice}`);
+	queries.push(`min-price=${minPrice}`)
     }
     if (verifyBedrooms(bedrooms)) {
-	query += `&bedrooms=${bedrooms}`;
+	queries.push(`bedrooms=${bedrooms}`)
     }
 
     closeIcon.click();
-    handleRedirection(notices, query);
+    handleRedirection(notices, queries);
 }
 
 function verifyPrices(maxPrice, minPrice) {
@@ -263,12 +264,22 @@ function verifyBedrooms(bedrooms) {
     return true
 }
 
-function handleRedirection(filterNotices, query) {
+function handleRedirection(filterNotices, queries) {
+    let query = "";
+    queries.forEach((q, index, array) => {
+	if (index != array.length - 1) {
+	    query += `${q}&`;
+	} else {
+	    // last query doesn't have query separator '&'
+	    query += `${q}`;
+	}
+    });
+    
     for (let i = 0; i < filterNotices.length; i++) {
 	if (filterNotices[i].style.display == "block") {
 	    break
 	} else if (i == filterNotices.length - 1) {
-	    location.href = location.origin + location.pathname + query;
+	    location.href = location.origin + location.pathname + "?"+ query;
 	}
     }
 }
