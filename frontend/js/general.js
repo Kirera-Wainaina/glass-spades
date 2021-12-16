@@ -222,19 +222,52 @@ export function closeFilterBanner() {
 export function runFilter(mandate) {
     const maxPrice = document.getElementById("max-price").value;
     const minPrice = document.getElementById("min-price").value;
-    verifyPrices(maxPrice, minPrice);
+    const bedrooms = document.getElementById("bedrooms").value;
+    const notices = document.querySelectorAll(".filter-notice");
+    let query = "?";
 
-    location.href = location.origin + location.pathname +
-	`?max-price=${maxPrice}&min-price=${minPrice}`;
+    // clear prior notices before checking for any
+    for (let i = 0; i < notices.length; i++) {
+	notices[i].style.display = "none";
+    }
+
+    if (verifyPrices(maxPrice, minPrice)) {
+	query += `max-price=${maxPrice}&min-price=${minPrice}`;
+    }
+    if (verifyBedrooms(bedrooms)) {
+	query += `&bedrooms=${bedrooms}`;
+    }
+
+    handleRedirection(notices);
 }
 
 function verifyPrices(maxPrice, minPrice) {
-    if (minPrice.value == "" || maxPrice.value == "") {
+    if (minPrice == "" || maxPrice == "") {
 	const notice = document.getElementById("no-price-filter");
 	notice.style.display = "block";
-    } else if (maxPrice.value < minPrice.value) {
+	return false
+    } else if (maxPrice < minPrice) {
 	const notice = document.getElementById("wrong-entry");
 	notice.style.display = "block";
+	return false
+    }
+    return true
+}
+
+function verifyBedrooms(bedrooms) {
+    if (bedrooms == "") {
+	return false
+    }
+    return true
+}
+
+function handleRedirection(filterNotices) {
+    for (let i = 0; i < filterNotices.length; i++) {
+	if (filterNotices[i].style.display == "block") {
+	    break
+	} else if (i == filterNotices.length - 1) {
+	    location.href = location.origin + location.pathname + query;
+	}
     }
 }
 
