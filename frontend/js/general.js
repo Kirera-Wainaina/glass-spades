@@ -249,7 +249,7 @@ export function runFilter(mandate) {
 }
 
 function verifyPrices(maxPrice, minPrice) {
-    if (maxPrice < minPrice) {
+    if (Number(maxPrice) < Number(minPrice)) {
 	const notice = document.getElementById("wrong-entry");
 	notice.style.display = "block";
 	return false
