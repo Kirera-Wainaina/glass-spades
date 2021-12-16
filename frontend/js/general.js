@@ -220,12 +220,17 @@ export function closeFilterBanner() {
 }
 
 export function runFilter(mandate) {
-    const maxPrice = document.getElementById("max-price").value;
-    const minPrice = document.getElementById("min-price").value;
+    let maxPrice = document.getElementById("max-price").value;
+    let minPrice = document.getElementById("min-price").value ;
     const bedrooms = document.getElementById("bedrooms").value;
     const notices = document.querySelectorAll(".filter-notice");
+    const closeIcon = document.getElementById("close-icon");
     let query = "?";
 
+    // min is 0 if not input and max is MAX_SAFE_INTEGER if not input
+    minPrice = minPrice != "" ? minPrice : 0;
+    maxPrice = maxPrice != "" ? maxPrice : Number.MAX_SAFE_INTEGER;
+    
     // clear prior notices before checking for any
     for (let i = 0; i < notices.length; i++) {
 	notices[i].style.display = "none";
@@ -238,15 +243,12 @@ export function runFilter(mandate) {
 	query += `&bedrooms=${bedrooms}`;
     }
 
-    handleRedirection(notices);
+    closeIcon.click();
+    handleRedirection(notices, query);
 }
 
 function verifyPrices(maxPrice, minPrice) {
-    if (minPrice == "" || maxPrice == "") {
-	const notice = document.getElementById("no-price-filter");
-	notice.style.display = "block";
-	return false
-    } else if (maxPrice < minPrice) {
+    if (maxPrice < minPrice) {
 	const notice = document.getElementById("wrong-entry");
 	notice.style.display = "block";
 	return false
@@ -261,7 +263,7 @@ function verifyBedrooms(bedrooms) {
     return true
 }
 
-function handleRedirection(filterNotices) {
+function handleRedirection(filterNotices, query) {
     for (let i = 0; i < filterNotices.length; i++) {
 	if (filterNotices[i].style.display == "block") {
 	    break
