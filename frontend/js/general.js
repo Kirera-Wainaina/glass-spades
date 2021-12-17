@@ -223,6 +223,7 @@ export function runFilter(mandate) {
     let maxPrice = document.getElementById("max-price").value;
     let minPrice = document.getElementById("min-price").value ;
     const bedrooms = document.getElementById("bedrooms").value;
+    const location = document.getElementById("locations").value;
     const notices = document.querySelectorAll(".filter-notice");
     const closeIcon = document.getElementById("close-icon");
     const queries = [];
@@ -238,10 +239,13 @@ export function runFilter(mandate) {
 
     if (verifyPrices(maxPrice, minPrice)) {
 	queries.push(`max-price=${maxPrice}`);
-	queries.push(`min-price=${minPrice}`)
+	queries.push(`min-price=${minPrice}`);
     }
-    if (verifyBedrooms(bedrooms)) {
-	queries.push(`bedrooms=${bedrooms}`)
+    if (verifyValue(bedrooms)) {
+	queries.push(`bedrooms=${bedrooms}`);
+    }
+    if (verifyValue(location)) {
+	queries.push(`location=${location}`);
     }
 
     closeIcon.click();
@@ -257,8 +261,8 @@ function verifyPrices(maxPrice, minPrice) {
     return true
 }
 
-function verifyBedrooms(bedrooms) {
-    if (bedrooms == "") {
+function verifyValue(value) {
+    if (value == "") {
 	return false
     }
     return true
