@@ -33,8 +33,8 @@ server.on("request", async (request, response) => {
     } else if (indexUtils.findTopDir(request.url) == "/api"){
 	// has to come before browser requests
 	try {
-	    const file = require(`${cwd}${path.dirname(request.url)}`);
-	    const execute = path.basename(request.url);
+	    const file = require(`${cwd}${path.dirname(parsed_url.pathname)}`);
+	    const execute = path.basename(parsed_url.pathname);
 	    file[execute](request, response);
 	} catch(error) {
 	    indexUtils.handleError(error, response);
