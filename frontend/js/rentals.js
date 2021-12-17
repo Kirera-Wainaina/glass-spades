@@ -6,7 +6,7 @@ getRentals();
 
 function getRentals() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "/api/rentals/getRentals");
+    xhr.open("GET", `/api/rentals/getRentals${location.search}`);
     xhr.send();
 
     xhr.onreadystatechange = function() {

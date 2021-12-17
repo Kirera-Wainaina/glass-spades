@@ -6,7 +6,7 @@ getSales();
 
 function getSales() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "/api/sales/getSales");
+    xhr.open("GET", `/api/sales/getSales${location.search}`);
     xhr.send();
 
     xhr.onreadystatechange = function() {
