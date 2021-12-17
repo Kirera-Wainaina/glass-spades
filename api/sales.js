@@ -1,40 +1,7 @@
-const db = require("../database/models");
-const respond = require("../utils/respond");
+const utils = require("../utils/general");
 
 async function getSales(request, response) {
-    const sales = await db.Listing.find({ Mandate: "Sale", Archived: false },
-					  {
-					      Heading: 1,
-					      Price: 1,
-					      Bedrooms: 1,
-					      Bathrooms: 1,
-					      Size: 1,
-					      "Unit Type": 1,
-					      Category: 1
-					  });
-    if (sales.length) {
-	const data = await Promise.all(sales.map(sale => {
-	    return new Promise(async (resolve, reject) => {
-		const imageData = await db.Image.findOne({ listingId: sale._id,
-							   position: 0 });
-		// _doc is to bring only the sale properties without the object's
-		resolve({
-		    heading: sale.Heading,
-		    price: sale.Price,
-		    bedrooms: sale.Bedrooms,
-		    bathrooms: sale.Bathrooms,
-		    size: sale.Size,
-		    unitType: sale["Unit Type"],
-		    category: sale.Category,
-		    imageSrc: imageData.link,
-		    id: sale._id
-		});
-	    })
-	}));
-	respond.handleJSONResponse(response, data);
-    } else {
-	respond.handleTextResponse(response, "fail");
-    }
+    utils.getListings(request, response)
 }
 
 exports.getSales = getSales;
