@@ -62,16 +62,19 @@ async function getListings(request, response) {
 
 }
 
-function createQuery(searchParams, mandate) {
+function createQuery(params, mandate) {
     const query = { Mandate: mandate, Archived: false };
-    if (searchParams.has("bedrooms")) {
-	const value = searchParams.get("bedrooms");
+    if (params.has("bedrooms")) {
+	const value = params.get("bedrooms");
 	query["Bedrooms"] = { $eq: value == "Studio" ? value : Number(value) };
     }
-    if (searchParams.has("location")) {
-	query["Location Name"] = searchParams.get("location");
+    if (params.has("location")) {
+	query["Location Name"] = params.get("location");
     }
-    console.log(query)
+    if (params.has("min-price") && params.has("max-price")) {
+	query["Price"] = { $gte: params.get("min-price"),
+			   $lte: params.get("max-price")};
+    }
     return query;
 }
 
