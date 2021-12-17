@@ -12,7 +12,9 @@ function deleteFromRouteCache(page) {
 }
 
 async function getListings(request, response) {
-    const parsed_url = url.parse(request.url);
+    // const parsed_url = url.parse(request.url);
+    const parsed_url = new URL(request.url, "https://ab.c")
+    const searchParams = parsed_url.searchParams;
     const page = path.basename(path.dirname(parsed_url.pathname));
     let mandate;
 
@@ -21,8 +23,10 @@ async function getListings(request, response) {
     } else {
 	mandate = "Rent"
     }
-    
-    const listings = await db.Listing.find({ Mandate: mandate, Archived: false },
+
+    const query = createQuery(searchParams, mandate);
+    // const listings = await db.Listing.find({ Mandate: mandate, Archived: false },
+    const listings = await db.Listing.find(query,
 					  {
 					      Heading: 1,
 					      Price: 1,
@@ -56,6 +60,19 @@ async function getListings(request, response) {
 	respond.handleTextResponse(response, "fail");
     }
 
+}
+
+function createQuery(searchParams, mandate) {
+    const query = { Mandate: mandate, Archived: false };
+    if (searchParams.has("bedrooms")) {
+	const value = searchParams.get("bedrooms");
+	query["Bedrooms"] = { $eq: value == "Studio" ? value : Number(value) };
+    }
+    if (searchParams.has("location")) {
+	query["Location Name"] = searchParams.get("location");
+    }
+    console.log(query)
+    return query;
 }
 
 exports.deleteFromRouteCache = deleteFromRouteCache;
