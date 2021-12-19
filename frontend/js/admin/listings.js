@@ -9,7 +9,6 @@ function getListings() {
     xhr.onreadystatechange = function() {
 	if (this.readyState == 4 && this.response != "fail") {
 	    const listings = JSON.parse(this.response);
-	    console.log(listings)
 	    if (!document.querySelector(".listing-container")) {
 		// dependent on whether it is ssr or not
 		displayListings(listings);
@@ -20,6 +19,8 @@ function getListings() {
 
 	    displayFeaturedListings(listings);
 	    displayArchivedListings(listings);
+
+	    handleStateButtons()
 	}
     }
 }
@@ -91,17 +92,19 @@ function createPrice(price) {
     return p
 }
 
-const stateButtons = document.querySelectorAll(".button-section button");
-stateButtons.forEach(stateButton => {
-    stateButton.addEventListener("click", changeColor)
-    if (stateButton.name == "Featured") {
-	stateButton.addEventListener("click",
-				event => addListingToState(event, "featured"));
-    } else {
-	stateButton.addEventListener("click",
-				event => addListingToState(event, "archived"))
-    }
-})
+function handleStateButtons() {
+    const stateButtons = document.querySelectorAll(".button-section button");
+    stateButtons.forEach(stateButton => {
+	stateButton.addEventListener("click", changeColor)
+	if (stateButton.name == "Featured") {
+	    stateButton.addEventListener(
+		"click",event => addListingToState(event, "featured"));
+	} else {
+	    stateButton.addEventListener(
+		"click", event => addListingToState(event, "archived"))
+	}
+    })
+}
 
 function changeColor(event) {
     const el = event.target;
