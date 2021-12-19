@@ -1,6 +1,6 @@
 let marker, map;
 
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
     if (navigator.userAgent != "glassspades-headless-chromium") {
 	appendMapsScript();
     }
@@ -74,6 +74,7 @@ document.addEventListener("coords", () => {
     const lat = Number(sessionStorage.getItem("Latitude"));
     const lng = Number(sessionStorage.getItem("Longitude"));
     const latLng = { lat: lat, lng: lng };
+    console.log("Event called")
     marker.setPosition(latLng);
     map.setCenter(latLng);
 })
