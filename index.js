@@ -131,7 +131,8 @@ async function serverSideRender(request, response) {
 
 function createCacheUrl(request) {
     let cacheUrl;
-    const parsed_url = url.parse(request.url);
+    const parsed_url = new URL(`https://ab.c${request.url}`);
+    const params = parsed_url.searchParams;
     const filePath = indexUtils.createFilePath(request.url);
     const fileExists = fs.existsSync(filePath);
 
@@ -143,6 +144,11 @@ function createCacheUrl(request) {
 	    // saved again under a different name
 	    const id = query.id;
 	    cacheUrl = `${parsed_url.pathname}-${id}`;
+	} else if (parsed_url.pathname == "/sales" || parsed_url.pathname == "rentals") {
+	    cacheUrl = `${parsed_url.pathname}-\
+${params.get("min-price")}-${params.get("max-price")}-\
+${params.has("bedrooms") ? params.get("bedrooms") : 0}-\
+${params.has("location") ? params.get("location") : "none"}`;
 	} else {
 	    cacheUrl = parsed_url.pathname;
 	}
