@@ -184,7 +184,7 @@ export function hideLoadingPage() {
 ///////////////////// Filter Functionality //////////////////////////////
 if (location.pathname == "/sales" || location.pathname == "/rentals") {
     const locationElement = document.getElementById("locations");
-    if (locationElement.childElementCount) {
+    if (!locationElement.childElementCount) {
 	(function (){
 	    // Get Locations
 	    const xhr = new XMLHttpRequest();
