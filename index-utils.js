@@ -28,7 +28,7 @@ function readFileAndRespond(filePath, response, statusCode=null) {
 		response.writeHead(statusCode || 200, {
 		    "content-type": mime,
 		    "content-encoding": "gzip",
-		    "cache-control": "max-age=86400"
+		    // "cache-control": "max-age=86400"
 		})
 		
 		fs.createReadStream(filePath)
