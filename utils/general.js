@@ -66,7 +66,7 @@ function createQuery(params, mandate) {
     const query = { Mandate: mandate, Archived: false };
     if (params.has("bedrooms")) {
 	const value = params.get("bedrooms");
-	query["Bedrooms"] = { $eq: value == "Studio" ? value : Number(value) };
+	query["Bedrooms"] = value == "Studio" ? { $eq: value } : value;
     }
     if (params.has("location")) {
 	query["Location Name"] = params.get("location");
