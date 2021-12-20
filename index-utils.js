@@ -77,7 +77,10 @@ function createFilePath(urlPath) {
 	filePath = `${cwd}/frontend/html/home.html`;
     } else if (!path.extname(parsed_url.pathname) ){
 	// browser paths
-	filePath = `${cwd}/frontend/html${parsed_url.pathname}.html`;
+	const dir = path.basename(path.dirname(parsed_url.pathname));
+	// check for listing page and serve listing html file
+	filePath = `${cwd}/frontend/html\
+${dir == "listing" ? "/listing" : parsed_url.pathname}.html`;
     } else {
 	// etc files e.g favicon
 	filePath = `${cwd}${parsed_url.pathname}`;

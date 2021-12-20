@@ -101,7 +101,9 @@ export function displayHouseDetails(houseDetails) {
 
 function createHouseCard(houseDetail) {
     const houseCard = document.createElement("a");
-    houseCard.href = `/listing?id=${houseDetail.id}`;
+    const listingUrl = houseDetail.heading.replaceAll(" ", "-")
+	  .replaceAll(".", "-").toLowerCase();
+    houseCard.href = `/listing/${listingUrl}?id=${houseDetail.id}`;
     houseCard.classList.add("house-card");
 
     const overviewImg = handleImage(houseDetail.imageSrc);
