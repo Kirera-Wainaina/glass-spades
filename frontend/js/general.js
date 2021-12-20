@@ -183,28 +183,30 @@ export function hideLoadingPage() {
 /////////////////////////////////////////////////////////////////////////
 ///////////////////// Filter Functionality //////////////////////////////
 if (location.pathname == "/sales" || location.pathname == "/rentals") {
-    (function (){
-	// Get Locations
-	const xhr = new XMLHttpRequest();
-	xhr.open("GET", "/api/admin/upload/sendModelData");
-	xhr.send()
+    const locationElement = document.getElementById("locations");
+    if (locationElement.childElementCount) {
+	(function (){
+	    // Get Locations
+	    const xhr = new XMLHttpRequest();
+	    xhr.open("GET", "/api/admin/upload/sendModelData");
+	    xhr.send()
 
-	xhr.onreadystatechange = function() {
-	    if (this.readyState == 4) {
-		const model = JSON.parse(this.response);
-		const locationNames = model["Location Name"];
-		const locationElement = document.getElementById("locations");
-		const fragment = new DocumentFragment();
-		locationNames.forEach(locationName => {
-		    const option = document.createElement("option");
-		    option.value = locationName;
-		    option.textContent = locationName;
-		    fragment.append(option)
-		})
-		locationElement.appendChild(fragment);
+	    xhr.onreadystatechange = function() {
+		if (this.readyState == 4) {
+		    const model = JSON.parse(this.response);
+		    const locationNames = model["Location Name"];
+		    const fragment = new DocumentFragment();
+		    locationNames.forEach(locationName => {
+			const option = document.createElement("option");
+			option.value = locationName;
+			option.textContent = locationName;
+			fragment.append(option)
+		    })
+		    locationElement.appendChild(fragment);
+		}
 	    }
-	}
-    })()
+	})()
+    }
 }
 
 export function displayFilterBanner() {
