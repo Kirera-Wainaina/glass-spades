@@ -4,6 +4,7 @@ import {
 } from "./general.js"
 
 getRentals();
+replaceTitle();
 
 function getRentals() {
     const xhr = new XMLHttpRequest();
