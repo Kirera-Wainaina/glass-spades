@@ -1,5 +1,6 @@
 import {
-    displayHouseDetails, displayFilterBanner, closeFilterBanner, runFilter
+    displayHouseDetails, displayFilterBanner, closeFilterBanner, runFilter,
+    generateTitle
 } from "./general.js"
 
 getRentals();
@@ -18,7 +19,7 @@ function getRentals() {
 		displayHouseDetails(rentalDetails);
 	    } else {
 		const noListings = document.getElementById("no-listings");
-		noListings.style.display = "block";
+		nnoListings.style.display = "block";
 	    }
 	}
     }
@@ -32,3 +33,11 @@ closeIcon.addEventListener("click", closeFilterBanner)
 
 const filterButton = document.getElementById("filter-button");
 filterButton.addEventListener("click", () => runFilter("rentals"))
+
+function replaceTitle() {
+    const title = generateTitle();
+    if (title) {
+	const titleEl = document.querySelector("h2");
+	titleEl.textContent = title;
+    }
+}

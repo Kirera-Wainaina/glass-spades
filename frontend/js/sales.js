@@ -1,8 +1,10 @@
 import {
-    displayHouseDetails, displayFilterBanner, closeFilterBanner, runFilter
+    displayHouseDetails, displayFilterBanner, closeFilterBanner, runFilter,
+    generateTitle
 } from "./general.js"
 
 getSales();
+replaceTitle()
 
 function getSales() {
     const xhr = new XMLHttpRequest();
@@ -32,3 +34,11 @@ closeIcon.addEventListener("click", closeFilterBanner)
 
 const filterButton = document.getElementById("filter-button");
 filterButton.addEventListener("click", () => runFilter("sales"))
+
+function replaceTitle() {
+    const title = generateTitle();
+    if (title) {
+	const titleEl = document.querySelector("h2");
+	titleEl.textContent = title;
+    }
+}

@@ -292,5 +292,41 @@ function handleRedirection(filterNotices, queries) {
     }
 }
 
-function generateTitle() {
+export function generateTitle() {
+    let title = "";
+    if (location.search) {
+	const params = new URLSearchParams(location.search);
+	const maxPrice = params.get("max-price");
+	const minPrice = params.get("min-price");
+	if (params.has("bedrooms")) {
+	    const bedrooms = params.get("bedrooms");
+	    console.log(bedrooms)
+	    if (bedrooms == "Studio") {
+		title += `${bedrooms} `;
+	    } else {
+		title += `${bedrooms} bedroom `;
+	    }
+	}
+	title += "Houses ";
+	const mandate = location.pathname.replace("/", "");
+	if (mandate == "sales") {
+	    title += `for sale `;
+	} else {
+	    title += `for rent `;
+	}
+
+	if (params.has("location")) title += `in ${params.get("location")} `;
+
+	// title += "with price "
+
+	// if (minPrice && maxPrice == Number.MAX_SAFE_INTEGER) {
+	//     title += `above ${minPrice} `;
+	// } else if (!minPrice && maxPrice != Number.MAX_SAFE_INTEGER) {
+	//     title += `below ${maxPrice} `;
+	// } else if (minPrice && maxPrice != Number.MAX_SAFE_INTEGER) {
+	//     title += `between ${minPrice} and ${maxPrice}`;
+	// }
+    }
+    console.log(title)
+    return title
 }
