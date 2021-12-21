@@ -19,7 +19,7 @@ function getRentals() {
 		displayHouseDetails(rentalDetails);
 	    } else {
 		const noListings = document.getElementById("no-listings");
-		nnoListings.style.display = "block";
+		noListings.style.display = "block";
 	    }
 	}
     }
