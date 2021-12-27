@@ -112,13 +112,15 @@ section {
 }
 
 #whatsapp {
-    grid-column: 4 / 10;
-    height: 3em;
+    height: 4em;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #25D366;
-    margin-top: 2em;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    border-radius: 50%;
 }
 
 #whatsapp img {
@@ -275,9 +277,8 @@ form input[type="submit"] {
     }
 
     #whatsapp {
-	grid-column: 1 / 6;
-	margin: 1em;
-	margin-top: 2em;
+	height: 3em;
+	width: 3em;
     }
 
     #whatsapp img {
