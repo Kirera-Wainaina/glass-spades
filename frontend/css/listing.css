@@ -112,7 +112,8 @@ section {
 }
 
 #whatsapp {
-    height: 4em;
+    height: 3.5em;
+    width: 3.5em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,6 +122,10 @@ section {
     bottom: 1em;
     right: 1em;
     border-radius: 50%;
+}
+
+#whatsapp:hover {
+    box-shadow: 0px 0px 5px lightgrey;
 }
 
 #whatsapp img {
