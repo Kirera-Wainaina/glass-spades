@@ -8,6 +8,7 @@ const images = require("../../utils/images.js");
 const respond = require("../../utils/respond.js");
 const general = require("../../utils/general");
 const db = require("../../database/models.js");
+const indexUtils = require("../../index-utils");
 
 class Emitter extends EventEmitter {};
 const emitter = new Emitter();
@@ -75,11 +76,14 @@ async function uploadListing(request, response) {
 	listing["Location"] = {
 	    coordinates: [ listing.Longitude, listing.Latitude ]
 	};
-	await listing.save()
 
-	general.deleteFromRouteCache("/");
-	general.deleteFromRouteCache("/sales");
-	general.deleteFromRouteCache("/rentals");
+	// delete sales, rentals and filter pages from cache
+	for (key of indexUtils.routeCache.keys()) {
+	    if (key.includes("/sales") || key.includes("/rentals")) {
+		indexUtils.routeCache.delete(key);
+	    }
+	}
+	await listing.save()
 
 	respond.handleTextResponse(response, "success");
     })
