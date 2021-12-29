@@ -92,7 +92,14 @@ function updateListing(request, response) {
 	listing["Location"] = {
 	    coordinates: [ listing.Longitude, listing.Latitude ]
 	};
+	// delete listing page from cache
 	indexUtils.routeCache.delete(`/listing-${listing.id}`)
+	// delete sales, rentals and filter pages from cache
+	for (key of indexUtils.routeCache.keys()) {
+	    if (key.includes("/sales") || key.includes("/rentals")) {
+		indexUtils.routeCache.delete(key);
+	    }
+	}
 	await db.Listing.updateOne({ _id: listing.id}, listing);
 	
 	respond.handleTextResponse(response, "success");
