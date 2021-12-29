@@ -50,11 +50,22 @@ div#listings {
 }
 
 #save-featured {
-    grid-column: 1 / 7;
+    grid-column: 1 / 5;
 }
 
 #save-archived {
-    grid-column: 7 / 13;
+    grid-column: 5 / 9;
+}
+
+#show-archived {
+    background-color: white;
+    color: black;
+    grid-column: 9 / 13;
+}
+
+#show-archived.clicked {
+    background-color: black;
+    color: white;
 }
 
 @media (max-width: 500px) {
@@ -62,15 +73,9 @@ div#listings {
 	width: 99vw;
     }
 
-    .save {
+    #save-featured, #save-archived, #show-archived {
 	margin-top: 0.5em;
+	grid-column: 1 / 6;
     }
     
-    #save-featured {
-	grid-column: 1 / 6;
-    }
-
-    #save-archived {
-	grid-column: 1 / 6;
-    }
 }

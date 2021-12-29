@@ -9,9 +9,11 @@ function getListings() {
     xhr.onreadystatechange = function() {
 	if (this.readyState == 4 && this.response != "fail") {
 	    const listings = JSON.parse(this.response);
+	    const unArchived = listings.filter(listing => listing.archived == false)
 	    if (!document.querySelector(".listing-container")) {
 		// dependent on whether it is ssr or not
-		displayListings(listings);
+		// displayListings(listings);
+		displayListings(unArchived)
 	    }
 	    // whether ssr or not, the below functions have to run
 	    storeFeaturedListings(listings);
@@ -191,3 +193,9 @@ function saveState(state, url) {
 	}
     }
 }
+
+const showArchived = document.getElementById("show-archived");
+showArchived.addEventListener("click", event => {
+    console.log("clicked");
+    event.target.classList.toggle("clicked")
+});
