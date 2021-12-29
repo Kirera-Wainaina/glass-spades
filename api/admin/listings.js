@@ -3,6 +3,7 @@ const Busboy = require("busboy");
 const respond = require("../../utils/respond");
 const general = require("../../utils/general");
 const db = require("../../database/models");
+const indexUtils = require("../../index-utils");
 
 async function getListings(request, response) {
     try {
@@ -46,6 +47,7 @@ function saveFeatured(request, response) {
     let featuredIds;
 
     general.deleteFromRouteCache("/");
+    general.deleteFromRouteCache("/admin/listings");
     
     busboy.on("field", (fieldname, value) => {
 	featuredIds = JSON.parse(value);
@@ -78,9 +80,13 @@ function saveArchived(request, response) {
     const busboy = new Busboy({ headers: request.headers });
     let archivedIds
 
-    general.deleteFromRouteCache("/rentals");
     general.deleteFromRouteCache("/");
-    general.deleteFromRouteCache("/sales");
+    general.deleteFromRouteCache("/admin/listings");
+    for (key of indexUtils.routeCache.keys()) {
+	if (key.includes("/sales") || key.includes("/rentals")) {
+	    indexUtils.routeCache.delete(key);
+	}
+    }
     
     busboy.on("field", (fieldname, value) => {
 	archivedIds = JSON.parse(value);
