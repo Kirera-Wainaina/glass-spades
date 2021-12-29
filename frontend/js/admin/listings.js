@@ -9,6 +9,7 @@ function getListings() {
     xhr.onreadystatechange = function() {
 	if (this.readyState == 4 && this.response != "fail") {
 	    const listings = JSON.parse(this.response);
+	    sessionStorage.setItem("listings", this.response);
 	    const unArchived = listings.filter(listing => listing.archived == false)
 	    if (!document.querySelector(".listing-container")) {
 		// dependent on whether it is ssr or not
@@ -30,7 +31,7 @@ function getListings() {
 function displayListings(listings) {
     const listingsEl = document.getElementById("listings");
     listings.forEach(listing => {
-	listingsEl.append(createHouseSection(listing));
+	listingsEl.appendChild(createHouseSection(listing));
     });
 }
 
@@ -196,6 +197,25 @@ function saveState(state, url) {
 
 const showArchived = document.getElementById("show-archived");
 showArchived.addEventListener("click", event => {
-    console.log("clicked");
-    event.target.classList.toggle("clicked")
+    const el = event.target;
+    el.classList.toggle("clicked")
+    const containers = document.querySelectorAll(".listing-container");
+    for (let i = 0; i < containers.length; i++) {
+	containers[i].parentNode.removeChild(containers[i]);
+    }
+    displayListings(filterArchived())
+    displayArchivedListings(filterArchived());
+    displayFeaturedListings(filterArchived());
 });
+
+function filterArchived() {
+    const listings = JSON.parse(sessionStorage.getItem("listings"));
+    let filtered;
+    if (showArchived.classList.contains("clicked")) {
+	filtered = listings.filter(listing => listing.archived);
+    } else {
+	filtered = listings.filter(listing => !listing.archived);
+    }
+
+    return filtered
+}
