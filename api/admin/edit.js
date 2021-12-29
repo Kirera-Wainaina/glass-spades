@@ -7,6 +7,7 @@ const Busboy = require("busboy");
 const db = require("../../database/models");
 const respond = require("../../utils/respond");
 const images = require("../../utils/images");
+const indexUtils = require("../../index-utils");
 
 function retrieveListing(request, response) {
     let listingId;
@@ -91,6 +92,7 @@ function updateListing(request, response) {
 	listing["Location"] = {
 	    coordinates: [ listing.Longitude, listing.Latitude ]
 	};
+	indexUtils.routeCache.delete(`/listing-${listing.id}`)
 	await db.Listing.updateOne({ _id: listing.id}, listing);
 	
 	respond.handleTextResponse(response, "success");
