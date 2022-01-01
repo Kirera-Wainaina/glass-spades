@@ -137,7 +137,7 @@ function createCacheUrl(request) {
     const fileExists = fs.existsSync(filePath);
 
     if (fileExists) {
-	if (parsed_url.pathname == "/listing") {
+	if (path.dirname(parsed_url.pathname) == "/listing") {
 	    const query = qs.parse(parsed_url.query);
 	    // don't save path because when google ads their query parameters,
 	    // the request may seem like it's different and would end up being
