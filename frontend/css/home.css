@@ -356,7 +356,7 @@ footer a, footer p {
 
     .house-card {
 	width: 96vw;
-	grid-template-rows: 15vw 72vw 10vw;
+	grid-template-rows: 20vw 72vw 15vw;
 	margin-bottom: 1em;
 	margin-left: 0;
     }
