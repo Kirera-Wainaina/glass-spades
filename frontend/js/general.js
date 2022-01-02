@@ -110,28 +110,22 @@ function createHouseCard(houseDetail) {
 
     houseCard.append(createHeading(houseDetail.heading));
     houseCard.append(overviewImg);
-    // houseCard.append(inputPrice(houseDetail.price));
-    // if (houseDetail.category == "Land") {
-    // 	houseCard.append(createIcon(houseDetail.size,
-    // 				    "/frontend/images/size-icon.svg"))
-    // } else {
-    // 	houseCard.append(createIcon(houseDetail.bedrooms,
-    // 				    "/frontend/images/bed-icon.svg"))
-    // 	houseCard.append(createIcon(houseDetail.bathrooms,
-    // 				    "/frontend/images/bath-icon.svg"))
-    // }
     houseCard.append(createOverviewDetails(houseDetail))
     return houseCard
 }
 
 function handleImage(imageSrc) {
+    const imgContainer = document.createElement("div");
+    imgContainer.id = "overview-img-container"
+
     const overviewImg = document.createElement("img");
     overviewImg.dataset.imageSrc = imageSrc;
     overviewImg.src = "/frontend/images/GS-icon.webp";
     overviewImg.alt = "Glass Spades Houses";
     overviewImg.classList.add("overview");
-
-    return overviewImg;
+    imgContainer.append(overviewImg);
+    // return overviewImg;
+    return imgContainer
 }
 
 function createHeading(heading) {
