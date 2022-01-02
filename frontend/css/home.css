@@ -138,7 +138,7 @@ div#listings {
 .house-card {
     display: grid;
     /* grid-template-columns: repeat(4, 1fr); */
-    grid-template-rows: 2fr 30vw 1fr;
+    grid-template-rows: 4vw 30vw 4vw;
     grid-auto-columns: 100%;
     
     border: 1px solid lightgrey;
@@ -169,6 +169,8 @@ div#listings {
 .house-card #overview-details {
     grid-row: 3 / 4;
     display: flex;
+    align-items: center;
+    background-color: white;
 }
 
 .house-card .card-details {
@@ -202,10 +204,10 @@ div#listings {
 /*     grid-column: 4 / 5; */
 /* } */
 
-.card-details img {
-    margin-right: 1em;
-    margin-left: 1em;
-}
+/* .card-details img { */
+/*     margin-right: 1em; */
+/*     margin-left: 1em; */
+/* } */
 
 .card-details p {
     color: black;
