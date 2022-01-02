@@ -264,23 +264,13 @@ footer a, footer p {
 }
 
 @media (orientation: portrait) {
+    .house-card {
+	grid-template-rows: 8vw 30vw 8vw;
+    }
+    
     .house-card .heading {
 	padding-left: 0;
 	padding-right: 0;
-    }
-
-    .house-card div:nth-of-type(1) p {
-	font-size: 1em;
-    }
-
-    .card-details img {
-	margin-right: 0;
-	margin-left: 0;
-	width: 1.5em;
-    }
-
-    .card-details p {
-	margin-left: 0.5em;
     }
 }
 
@@ -350,7 +340,8 @@ footer a, footer p {
     }
 
     .house-card {
-	width: 99vw;
+	width: 96vw;
+	grid-template-rows: 15vw 72vw 10vw;
 	margin-bottom: 1em;
 	margin-left: 0;
     }
@@ -360,7 +351,5 @@ footer a, footer p {
 	left: 5vw;
 	width: 80vw;
     }
-
-
 }
 
