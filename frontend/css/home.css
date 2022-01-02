@@ -126,7 +126,7 @@ div#offer-container {
 
 div#listings {
     grid-column: 1 / 13;
-    width: 95vw;
+    width: 98vw;
 
     display: flex;
     flex-direction: row;
@@ -137,19 +137,24 @@ div#listings {
 
 .house-card {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    /* grid-template-columns: repeat(4, 1fr); */
+    grid-template-rows: 2fr 30vw 1fr;
+    grid-auto-columns: 100%;
     
     border: 1px solid lightgrey;
     margin-left: 2em;
     margin-bottom: 1em;
     width: 40vw;
+    color: black;
+    overflow: hidden;
 }
 
 .house-card .heading {
-    grid-column: 1 / 5;
+    /* grid-column: 1 / 5; */
+    grid-row: 1 / 2;
     color: black;
     text-align: center;
-    height: 3em;
+    /* height: 3em; */
     display: flex;
     align-items: center;
     padding-right: 1em;
@@ -157,35 +162,45 @@ div#listings {
 }
 
 .house-card img {
-    grid-column: 1 / 5;
+    /* grid-column: 1 / 5; */
+    grid-row: 2 / 3;
+}
+
+.house-card #overview-details {
+    grid-row: 3 / 4;
+    display: flex;
 }
 
 .house-card .card-details {
     display: flex;
     flex-direction: row;
     border-left: .5px solid lightgrey;
-    padding: 0.5em;
+    padding-right: 0.5em;
 }
 
-.house-card div:nth-of-type(1) {
-    grid-column: 1 / 3;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+.overview-price {
+    flex: 3;
 }
 
-.house-card div:nth-of-type(1) p {
-    color: black;
-}
+/* .house-card div:nth-of-type(1) { */
+/*     grid-column: 1 / 3; */
+/*     display: flex; */
+/*     flex-direction: row; */
+/*     align-items: center; */
+/*     justify-content: center; */
+/* } */
 
-.house-card div:nth-of-type(2) {
-    grid-column: 3 / 4;
-}
+/* .house-card div:nth-of-type(1) p { */
+/*     color: black; */
+/* } */
 
-.house-card div:last-child {
-    grid-column: 4 / 5;
-}
+/* .house-card div:nth-of-type(2) { */
+/*     grid-column: 3 / 4; */
+/* } */
+
+/* .house-card div:last-child { */
+/*     grid-column: 4 / 5; */
+/* } */
 
 .card-details img {
     margin-right: 1em;

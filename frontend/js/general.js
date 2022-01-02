@@ -110,17 +110,17 @@ function createHouseCard(houseDetail) {
 
     houseCard.append(createHeading(houseDetail.heading));
     houseCard.append(overviewImg);
-    houseCard.append(inputPrice(houseDetail.price));
-    if (houseDetail.category == "Land") {
-	houseCard.append(createIcon(houseDetail.size,
-				    "/frontend/images/size-icon.svg"))
-    } else {
-	houseCard.append(createIcon(houseDetail.bedrooms,
-				    "/frontend/images/bed-icon.svg"))
-	houseCard.append(createIcon(houseDetail.bathrooms,
-				    "/frontend/images/bath-icon.svg"))
-    }
-
+    // houseCard.append(inputPrice(houseDetail.price));
+    // if (houseDetail.category == "Land") {
+    // 	houseCard.append(createIcon(houseDetail.size,
+    // 				    "/frontend/images/size-icon.svg"))
+    // } else {
+    // 	houseCard.append(createIcon(houseDetail.bedrooms,
+    // 				    "/frontend/images/bed-icon.svg"))
+    // 	houseCard.append(createIcon(houseDetail.bathrooms,
+    // 				    "/frontend/images/bath-icon.svg"))
+    // }
+    houseCard.append(createOverviewDetails(houseDetail))
     return houseCard
 }
 
@@ -143,6 +143,7 @@ function createHeading(heading) {
 
 function inputPrice(price) {
     const divEl = document.createElement("div");
+    divEl.classList.add("overview-price");
     const pEl = document.createElement("p");
     const formatPrice = new Intl
 	  .NumberFormat("sw-ke", { style: "currency", currency: "Kes"})
@@ -151,6 +152,22 @@ function inputPrice(price) {
     pEl.textContent = `${formatPrice}`;
     divEl.append(pEl);
     return divEl
+}
+
+function createOverviewDetails(houseDetail) {
+    const container = document.createElement("div");
+    container.id = "overview-details";
+    container.append(inputPrice(houseDetail.price));
+    if (houseDetail.category == "Land") {
+	container.append(createIcon(houseDetail.size,
+				    "/frontend/images/size-icon.svg"))
+    } else {
+	container.append(createIcon(houseDetail.bedrooms,
+				    "/frontend/images/bed-icon.svg"))
+	container.append(createIcon(houseDetail.bathrooms,
+				    "/frontend/images/bath-icon.svg"))
+    }
+    return container
 }
 
 function createIcon(value, icon) {
