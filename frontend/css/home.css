@@ -158,8 +158,7 @@ div#listings {
     padding-left: 1em;
 }
 
-/* .house-card img { */
-#overview-img-container {
+.house-card img {
     grid-row: 2 / 3;
 }
 

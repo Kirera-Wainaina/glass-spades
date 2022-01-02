@@ -115,17 +115,12 @@ function createHouseCard(houseDetail) {
 }
 
 function handleImage(imageSrc) {
-    const imgContainer = document.createElement("div");
-    imgContainer.id = "overview-img-container"
-
     const overviewImg = document.createElement("img");
     overviewImg.dataset.imageSrc = imageSrc;
     overviewImg.src = "/frontend/images/GS-icon.webp";
     overviewImg.alt = "Glass Spades Houses";
     overviewImg.classList.add("overview");
-    imgContainer.append(overviewImg);
-    // return overviewImg;
-    return imgContainer
+    return overviewImg;
 }
 
 function createHeading(heading) {
