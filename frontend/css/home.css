@@ -273,6 +273,20 @@ footer a, footer p {
 	padding-left: 0;
 	padding-right: 0;
     }
+
+    .overview-price {
+	padding-left: 0;
+	text-align: center;
+    }
+
+    .house-card .card-details {
+	padding-left: .5em;
+	padding-right: .5em;
+    }
+
+    .card-details img {
+	margin-right: .75em;
+    }
 }
 
 @media (max-width: 500px) {
