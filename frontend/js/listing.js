@@ -78,20 +78,18 @@ const forwardArrow = document.querySelector("div#images div:nth-of-type(2)");
 forwardArrow.addEventListener("click", displayOverlay);
 backArrow.addEventListener("click", displayOverlay);
 
-function displayOverlay() {
+function displayOverlay(event) {
     const imageEl = document.getElementById("images");
-    if (imageEl.classList.contains("overlay")) {
-	console.log("overlaid")
-    } else {
+    if (!imageEl.classList.contains("overlay")) {
 	imageEl.classList.add("overlay");
     }
 }
-// forwardArrow.addEventListener("click", () => forwardPhoto(
-//     document.getElementById("main-photo")));
-// forwardArrow.addEventListener("click", () => forwardPhoto(
-//     document.getElementById("display-photo-1")));
-// forwardArrow.addEventListener("click", () => forwardPhoto(
-//     document.getElementById("display-photo-2")));
+forwardArrow.addEventListener("click", () => forwardPhoto(
+    document.getElementById("main-photo")));
+forwardArrow.addEventListener("click", () => forwardPhoto(
+    document.getElementById("display-photo-1")));
+forwardArrow.addEventListener("click", () => forwardPhoto(
+    document.getElementById("display-photo-2")));
 
 let images, largestPosition;
 
