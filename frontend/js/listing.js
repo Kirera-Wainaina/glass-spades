@@ -82,6 +82,8 @@ function displayOverlay(event) {
     const imageEl = document.getElementById("images");
     if (!imageEl.classList.contains("overlay")) {
 	imageEl.classList.add("overlay");
+	const closeIcon = document.getElementById("close-icon");
+	closeIcon.style.display = "block";
     }
 }
 forwardArrow.addEventListener("click", () => forwardPhoto(

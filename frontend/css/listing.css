@@ -73,6 +73,15 @@ h1#heading {
     font-size: 1.8em;
 }
 
+#close-icon {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    height: 2em;
+}
+
 p.description {
     grid-column: 3 / 11;
     margin-top: .5em;
