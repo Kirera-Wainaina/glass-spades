@@ -82,8 +82,14 @@ function displayOverlay(event) {
     const imageEl = document.getElementById("images");
     if (!imageEl.classList.contains("overlay")) {
 	imageEl.classList.add("overlay");
+
 	const closeIcon = document.getElementById("close-icon");
 	closeIcon.style.display = "block";
+
+	const next1 = document.getElementById("display-photo-1");
+	const next2 = document.getElementById("display-photo-2");
+	next1.style.display = "none";
+	next2.style.display = "none";
     }
 }
 forwardArrow.addEventListener("click", () => forwardPhoto(
@@ -366,5 +372,10 @@ closeIcon.addEventListener("click", () => {
     if (imageEl.classList.contains("overlay")) {
 	imageEl.classList.remove("overlay");
 	closeIcon.style.display = "none";
+
+	const next1 = document.getElementById("display-photo-1");
+	const next2 = document.getElementById("display-photo-2");
+	next1.style.display = "block";
+	next2.style.display = "block";
     }
 })
