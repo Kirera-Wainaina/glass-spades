@@ -75,14 +75,17 @@ function displayFirstImages(images) {
 const backArrow = document.querySelector("div#images div:nth-of-type(1)");
 const forwardArrow = document.querySelector("div#images div:nth-of-type(2)");
 
-forwardArrow.addEventListener("click", () => {
+forwardArrow.addEventListener("click", displayOverlay);
+backArrow.addEventListener("click", displayOverlay);
+
+function displayOverlay() {
     const imageEl = document.getElementById("images");
     if (imageEl.classList.contains("overlay")) {
 	console.log("overlaid")
     } else {
 	imageEl.classList.add("overlay");
     }
-});
+}
 // forwardArrow.addEventListener("click", () => forwardPhoto(
 //     document.getElementById("main-photo")));
 // forwardArrow.addEventListener("click", () => forwardPhoto(
