@@ -7,6 +7,15 @@ div#images {
     grid-template-columns: repeat(12, 1fr);
 }
 
+#images.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: grey;
+    width: 100vw;
+    height: 100vh;
+}
+
 div#images img {
     width: 100%;
 }
