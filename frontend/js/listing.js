@@ -359,3 +359,12 @@ function setImage() {
     const [ overview ] = allImages.filter(imageObj => imageObj.position == 0);
     image.content = overview.link;
 }
+
+const closeIcon = document.getElementById("close-icon");
+closeIcon.addEventListener("click", () => {
+    const imageEl = document.getElementById("images");
+    if (imageEl.classList.contains("overlay")) {
+	imageEl.classList.remove("overlay");
+	closeIcon.style.display = "none";
+    }
+})
