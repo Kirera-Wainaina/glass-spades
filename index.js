@@ -143,7 +143,7 @@ function createCacheUrl(request) {
 	    // the request may seem like it's different and would end up being
 	    // saved again under a different name
 	    const id = query.id;
-	    cacheUrl = `${parsed_url.pathname}-${id}`;
+	    cacheUrl = `/listing-${id}`;
 	} else if (parsed_url.pathname == "/sales" || parsed_url.pathname == "/rentals") {
 	    cacheUrl = `${parsed_url.pathname}-\
 ${params.get("min-price")}-${params.get("max-price")}-\
