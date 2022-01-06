@@ -138,11 +138,10 @@ function createCacheUrl(request) {
 
     if (fileExists) {
 	if (path.dirname(parsed_url.pathname) == "/listing") {
-	    const query = qs.parse(parsed_url.query);
 	    // don't save path because when google ads their query parameters,
 	    // the request may seem like it's different and would end up being
 	    // saved again under a different name
-	    const id = query.id;
+	    const id = params.get("id");
 	    cacheUrl = `/listing-${id}`;
 	} else if (parsed_url.pathname == "/sales" || parsed_url.pathname == "/rentals") {
 	    cacheUrl = `${parsed_url.pathname}-\
