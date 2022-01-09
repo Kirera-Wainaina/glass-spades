@@ -19,6 +19,12 @@
     height: 30%;
 }
 
+form button {
+    background-color: black;
+    color: white;
+    height: 6vh;
+}
+
 @media (max-width: 500px) {
     #sitemap-container {
 	grid-column: 1 / 6;
