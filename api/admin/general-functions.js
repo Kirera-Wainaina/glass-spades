@@ -16,7 +16,6 @@ function uploadSitemap(request, response) {
     })
 
     busboy.on("finish", () => {
-	console.log("called")
 	respond.handleTextResponse(response, "success");
     })
 
