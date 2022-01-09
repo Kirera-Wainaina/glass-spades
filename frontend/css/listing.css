@@ -11,7 +11,7 @@ div#images {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: grey;
+    background-color: white;
     width: 100vw;
     height: 100vh;
 }
@@ -102,6 +102,7 @@ h1#heading {
     right: 0;
     z-index: 2;
     height: 2em;
+    margin: 1em;
 }
 
 p.description {
