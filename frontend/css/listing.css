@@ -83,6 +83,10 @@ div#images img.arrow {
     width: 2em;
 }
 
+.arrow {
+    background-color: white;
+    border-radius: 50%;
+}
 
 h1#heading {
     grid-column: 5 / 9;
