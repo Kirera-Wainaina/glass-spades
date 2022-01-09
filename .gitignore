@@ -6,6 +6,7 @@ node_modules/
 
 # ignore the .env file
 .env
+cloud-env-file.txt
 
 # ignore the current house wallpapers
 house-vert.jpg
