@@ -5,6 +5,7 @@ const Busboy = require("busboy");
 const dotenv = require("dotenv");
 
 const respond = require("../../utils/respond.js");
+const indexUtils = require("../../index-utils");
 dotenv.config()
 
 function uploadSitemap(request, response) {
@@ -16,6 +17,7 @@ function uploadSitemap(request, response) {
     })
 
     busboy.on("finish", () => {
+	indexUtils.routeCache.delete(`/sitemap.xml`)
 	respond.handleTextResponse(response, "success");
     })
 
