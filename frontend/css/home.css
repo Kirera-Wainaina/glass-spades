@@ -256,16 +256,17 @@ footer #social-media {
     z-index: 1;
     width: 30vw;
     height: 10vh;
-    background: white;
+    background-color: #11e414;
     box-shadow: 0 0 10px lightgrey;
     text-align: center;
     padding: 1em;
     display: none;
+    /* display: block; */
 }
 
 .slide {
     animation: slide;
-    animation-duration: 10s;
+    animation-duration: 5s;
     animation-timing-function: ease-out;
 }
 

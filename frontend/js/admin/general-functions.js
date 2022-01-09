@@ -8,7 +8,17 @@ form.addEventListener("submit", event => {
 
     xhr.onreadystatechange = function() {
 	if (this.readyState == 4) {
-	    console.log(this.response)
+	    if (this.responseText == "success") {
+		const snackbar = document.getElementById("sitemap-success");
+		snackbar.addEventListener("animationend", () => {
+		    snackbar.style.display = "none";
+		})
+
+		if (!snackbar.classList.contains("slide")) {
+		    snackbar.style.display = "block";
+		    snackbar.classList.add("slide");
+		}
+	    }
 	}
     }
 });
