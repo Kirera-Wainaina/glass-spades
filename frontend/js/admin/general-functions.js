@@ -12,6 +12,7 @@ form.addEventListener("submit", event => {
 		const snackbar = document.getElementById("sitemap-success");
 		snackbar.addEventListener("animationend", () => {
 		    snackbar.style.display = "none";
+		    snackbar.classList.remove("slide");
 		})
 
 		if (!snackbar.classList.contains("slide")) {
