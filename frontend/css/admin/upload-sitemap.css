@@ -1,0 +1,32 @@
+@import url("../home.css");
+
+#sitemap-container {
+    grid-column: 3 / 11;
+    margin-top: 2em;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#sitemap-container form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    padding: 2em;
+    justify-content: space-between;
+    height: 30%;
+}
+
+@media (max-width: 500px) {
+    #sitemap-container {
+	grid-column: 1 / 6;
+	height: 70vh;
+	margin-top: 1em;
+    }
+
+    #sitemap-container form {
+	width: 70%;
+    }
+}
