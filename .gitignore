@@ -20,3 +20,6 @@ glass-spades-service-account.json
 
 # ignore the yarn error log file
 yarn-error.log
+
+# ignore the sitemap file
+sitemap.xml
