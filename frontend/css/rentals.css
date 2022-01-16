@@ -17,13 +17,15 @@ h3 {
     bottom: 2em;
     right: 2em;
     height: 3em;
-    border-radius: 50%;
-    background-color: grey;
+    /* border-radius: 50%; */
+    border-radius: 10%;
+    /* background-color: lightgrey; */
+    background-color: var(--gs-pinkish);
+    border: 1px solid lightgrey;
 }
 
 #filter-icon:hover {
     box-shadow: 3px 3px 5px lightgrey;
-    border-radius: 50%;
 }
 
 #filter-icon:active {
