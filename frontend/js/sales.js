@@ -1,6 +1,6 @@
 import {
-    displayHouseDetails, displayFilterBanner, closeFilterBanner, runFilter,
-    generateTitle
+    displayHouseDetails, displayFilterBanner, runFilter,
+    generateTitle, closeElements
 } from "./general.js"
 
 getSales();
@@ -30,7 +30,9 @@ const filterIcon = document.getElementById("filter-icon");
 filterIcon.addEventListener("click", displayFilterBanner);
 
 const closeIcon = document.getElementById("close-icon");
-closeIcon.addEventListener("click", closeFilterBanner)
+closeIcon.addEventListener("click", () => closeElements(
+    document.getElementById("filter-container"),
+    document.getElementById("filter-card")));
 
 const filterButton = document.getElementById("filter-button");
 filterButton.addEventListener("click", () => runFilter("sales"))

@@ -1,6 +1,6 @@
 @import url("rentals.css");
 
-#filter-shortcuts {
+#filter-shortcut {
     grid-column: 3 / 11;
     background-color: var(--gs-pinkish);
     color: white;
@@ -10,9 +10,28 @@
     border: 1px solid lightgrey;
 }
 
+#filter-shortcut:active {
+    box-shadow: 0 0 5px lightgrey;
+}
+
+#shortcuts-card {
+    display: none;
+    display: block;
+    position: fixed;
+    top: 15vh;
+    left: 25vw;
+    height: 70vh;
+    width: 50vw;
+    background-color: white;
+    border: 1px solid black;
+}
+
 @media(max-width: 500px) {
-    #filter-shortcuts {
+    #filter-shortcut {
 	grid-column: 1 / 6;
 	margin: .5em;
+    }
+
+    #shortcuts-card {
     }
 }

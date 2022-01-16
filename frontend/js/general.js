@@ -222,11 +222,8 @@ export function displayFilterBanner() {
     filterCard.style.display = "grid";    
 }
 
-export function closeFilterBanner() {
-    const filterContainer = document.getElementById("filter-container");
-    const filterCard = document.getElementById("filter-card");
-    filterContainer.style.display = "none";
-    filterCard.style.display = "none";    
+export function closeElements(...elements) {
+    elements.forEach(element => element.style.display = "none");
 }
 
 export function runFilter(mandate) {
