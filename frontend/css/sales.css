@@ -1,36 +1,24 @@
 @import url("rentals.css");
 
-#filter-shortcut {
-    grid-column: 3 / 11;
-    background-color: var(--gs-pinkish);
-    color: white;
-    text-align: center;
-    padding: .5em;
-    margin-top: 1em;
-    border: 1px solid lightgrey;
-}
-
-#filter-shortcut:active {
-    box-shadow: 0 0 5px lightgrey;
-}
-
 #shortcuts-card {
-    display: none;
-    display: block;
-    position: fixed;
-    top: 15vh;
-    left: 25vw;
-    height: 70vh;
-    width: 50vw;
-    background-color: white;
-    border: 1px solid black;
+    grid-column: 3 / 11;
+    border: 1px solid lightgrey;
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+}
+
+#shortcuts-card a {
+    background-color: lightgrey;
+    color: black;
+    padding: .2em;
+    border-radius: 5%;
+    flex: 30%;
+    flex-grow: unset;
+    text-align: center;
 }
 
 @media(max-width: 500px) {
-    #filter-shortcut {
-	grid-column: 1 / 6;
-	margin: .5em;
-    }
 
     #shortcuts-card {
     }

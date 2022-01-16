@@ -17,10 +17,8 @@ h3 {
     bottom: 2em;
     right: 2em;
     height: 3em;
-    /* border-radius: 50%; */
     border-radius: 10%;
-    /* background-color: lightgrey; */
-    background-color: var(--gs-pinkish);
+    background-color: lightgrey;
     border: 1px solid lightgrey;
 }
 

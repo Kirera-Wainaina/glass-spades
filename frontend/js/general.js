@@ -330,6 +330,5 @@ export function generateTitle() {
 	//     title += `between ${minPrice} and ${maxPrice}`;
 	// }
     }
-    console.log(title)
     return title
 }

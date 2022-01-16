@@ -44,3 +44,5 @@ function replaceTitle() {
 	titleEl.textContent = title;
     }
 }
+
+const shortcuts = document.getElementById("shortcuts-card");
