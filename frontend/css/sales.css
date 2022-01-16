@@ -1,1 +1,18 @@
 @import url("rentals.css");
+
+#filter-shortcuts {
+    grid-column: 3 / 11;
+    background-color: var(--gs-pinkish);
+    color: white;
+    text-align: center;
+    padding: .5em;
+    margin-top: 1em;
+    border: 1px solid lightgrey;
+}
+
+@media(max-width: 500px) {
+    #filter-shortcuts {
+	grid-column: 1 / 6;
+	margin: .5em;
+    }
+}
