@@ -215,13 +215,6 @@ if (location.pathname == "/sales" || location.pathname == "/rentals") {
     }
 }
 
-export function displayFilterBanner() {
-    const filterContainer = document.getElementById("filter-container");
-    const filterCard = document.getElementById("filter-card");
-    filterContainer.style.display = "block";
-    filterCard.style.display = "grid";    
-}
-
 export function closeElements(...elements) {
     elements.forEach(element => element.style.display = "none");
 }
