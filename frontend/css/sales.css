@@ -6,6 +6,7 @@
     display: flex;
     gap: 2px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 #shortcuts-card a {
@@ -18,8 +19,19 @@
     text-align: center;
 }
 
+#shortcuts-card button {
+    display: flex;
+    align-items: center;
+}
+
 @media(max-width: 500px) {
 
     #shortcuts-card {
+	grid-column: 1 / 6;
+	margin: .3em;
+    }
+
+    #shortcuts-card a {
+	flex: 45%;
     }
 }
