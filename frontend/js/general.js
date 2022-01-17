@@ -117,7 +117,7 @@ function createHouseCard(houseDetail) {
 function handleImage(imageSrc) {
     const overviewImg = document.createElement("img");
     overviewImg.dataset.imageSrc = imageSrc;
-    overviewImg.src = "/frontend/images/GS-icon.webp";
+    overviewImg.src = "/frontend/images/GS-tiny-icon.png";
     overviewImg.alt = "Glass Spades Houses";
     overviewImg.classList.add("overview");
     return overviewImg;
