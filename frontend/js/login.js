@@ -17,7 +17,7 @@ function loginUser(formdata) {
 	if (this.readyState == 4 && this.response == "error") {
 	    showError()
 	} else if (this.readyState == 4 && this.response == "success") {
-	    location.reload();
+	    location.href = "/admin/home"
 	}
     }
 
