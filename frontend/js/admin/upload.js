@@ -402,6 +402,7 @@ document.addEventListener("click", event => {
 	internalFeatures.style.display = "none";
 	size.style.display = "grid";
 	unitType.style.display = "grid";
+	development.style.display = "none";
     } else if (value == "Townhouse" || value == "Villa" || value == "Apartment") {
 	bedrooms.style.display = "grid";
 	bathrooms.style.display = "grid";
@@ -409,9 +410,11 @@ document.addEventListener("click", event => {
 	if (value == "Apartment") {
 	    size.style.display = "grid";
 	    unitType.style.display = "grid";
+	    development.style.display = "grid";
 	} else {
 	    size.style.display = "none";
 	    unitType.style.display = "none";
+	    development.style.display = "none";
 	}
     }
 });
