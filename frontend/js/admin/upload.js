@@ -43,16 +43,20 @@ function createContainers(model) {
 	div.id = `${key}-container`.replaceAll(" ", "-");
 	div.classList.add("container");
 	div.appendChild(createLabel(key));
-	if (key != "Size" && key != "Unit Type") {
-	    div.appendChild(createButtons(key, model[key]));
-	} else {
+	if (key == "Size" || key == "Unit Type") {
 	    if (key == "Unit Type") {
 	    div.appendChild(createButtons(key, model[key]));
 	    } else {
-		div.appendChild(createInput(key));
+		div.appendChild(createInput("number", "Size"));
 	    }
 	    div.style.display = "none";
+	} else if (key == "Development") {
+	    div.appendChild(createInput("text", "Development"));
+	    div.style.display = "none";
+	} else {
+	    div.appendChild(createButtons(key, model[key]));
 	}
+
 	fragment.append(div)
     })
     return fragment
@@ -79,10 +83,10 @@ function createButtons(key, data) {
     return fragment
 }
 
-function createInput(key) {
+function createInput(type, name) {
     const input = document.createElement("input");
-    input.type = "number";
-    input.name = "Size";
+    input.type = type;
+    input.name = name;
     return input
 }
 
@@ -389,6 +393,8 @@ document.addEventListener("click", event => {
 	  .getElementById("Internal-Features-container");
     const size = document.getElementById("Size-container");
     const unitType = document.getElementById("Unit-Type-container");
+    const development = document.getElementById("Development-container");
+
 
     if (value == "Land") {
 	bedrooms.style.display = "none";
