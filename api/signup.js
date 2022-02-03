@@ -95,18 +95,5 @@ function saveUser(doc, response) {
 	})
 }
 
-function checkLogin(request, response) {
-    if (request.headers.cookie) {
-	const cookies = querystring.parse(request.headers.cookie, "; ");
-	if (cookies.auth) {
-	    respond.handleTextResponse(response, "verified")
-	} else {
-	    respond.handleTextResponse(response, "fail")
-	}
-    } else {
-	respond.handleTextResponse(response, "fail");
-    }
-}
 
 exports.createUser = createUser;
-exports.checkLogin = checkLogin;
