@@ -303,7 +303,6 @@ export function generateTitle() {
 	const minPrice = params.get("min-price");
 	if (params.has("bedrooms")) {
 	    const bedrooms = params.get("bedrooms");
-	    console.log(bedrooms)
 	    if (bedrooms == "Studio") {
 		title += `${bedrooms} `;
 	    } else {
@@ -331,4 +330,17 @@ export function generateTitle() {
 	// }
     }
     return title
+}
+
+export function checkLogin() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/api/login/checkLogin");
+    xhr.send()
+
+    xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4 && xhr.response == "fail") {
+	    location.href = "/login"
+	}
+
+    }
 }
