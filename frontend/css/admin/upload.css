@@ -35,7 +35,7 @@ button {
     color: white;
 }
 
-input[name="Heading"] {
+input[name="Heading"], input[name="Development"] {
     grid-column: 1 / 4;
 }
 
