@@ -1,7 +1,9 @@
 import { startImageDrag, dragOverImage,
 	 dropImage, setData,
 	 getImages, confirmValues } from "./upload.js";
-import { showLoadingPage } from "../general.js";
+import { showLoadingPage, checkLogin } from "../general.js";
+
+checkLogin();
 
 let listingData;
 window.addEventListener("DOMContentLoaded", retrieveListing);

@@ -1,4 +1,6 @@
-import { showLoadingPage } from "../general.js";
+import { showLoadingPage, checkLogin } from "../general.js";
+
+checkLogin();
 
 getListings();
 function getListings() {

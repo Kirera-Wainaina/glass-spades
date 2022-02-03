@@ -1,4 +1,6 @@
-import { showLoadingPage, hideLoadingPage } from "../general.js"
+import { showLoadingPage, hideLoadingPage, checkLogin } from "../general.js"
+
+checkLogin();
 
 var houseInfo = {};
 
