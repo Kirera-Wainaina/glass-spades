@@ -5,10 +5,11 @@ import { showLoadingPage, checkLogin } from "../general.js";
 
 if (navigator.userAgent != "glassspades-headless-chromium") {
     checkLogin();
+    window.addEventListener("DOMContentLoaded", retrieveListing);
 }
 
 let listingData;
-window.addEventListener("DOMContentLoaded", retrieveListing);
+// window.addEventListener("DOMContentLoaded", retrieveListing);
 
 function retrieveListing() {
     const url = new URL(location);
