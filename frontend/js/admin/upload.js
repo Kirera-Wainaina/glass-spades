@@ -242,13 +242,17 @@ export async function setData(event) {
     const description = document.querySelector("textarea");
     const price = document.querySelector("input[name='Price']");
     const size = document.querySelector("input[name='Size']");
+    const development = document.querySelector("input[name='Development']");
 
     houseInfo[heading.name] = heading.value;
     houseInfo[description.name] = description.value;
     houseInfo[price.name] = price.value;
 
-    if (houseInfo.Category == "Land" || houseInfo.Category == "Apartment") {
+    if (houseInfo.Category == "Land") {
 	houseInfo[size.name] = size.value;
+    } else if (houseInfo.Category == "Apartment") {
+	houseInfo[size.name] = size.value;
+	houseInfo[development.name] = development.value;
     }
 
     if (sessionStorage.getItem("Latitude")) {
@@ -359,13 +363,18 @@ function reviseKeys(allKeys, category) {
 	    return (key != "Internal Features" && key != "Bedrooms"
 		    && key != "Bathrooms")
 	})
-    } else {
+    } else if (category == "Townhouse" || category == "Villa"){
 	// for houses, don't check presence of land features
 	allKeys = allKeys.filter(key => {
 	    return (key != "Size" && key != "Unit Type")
 	})
     }
 
+    if (category != "Apartment") {
+	// this if statement is separate so that it can also check the categories
+	// in the above 2 if statements
+	allKeys = allKeys.filter(key => key != "Development")
+    }
     return allKeys
 }
 
