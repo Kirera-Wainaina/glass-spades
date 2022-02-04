@@ -36,7 +36,7 @@ function handleListing(listing) {
 	} else if (Array.isArray(listing[key])) {
 	    enterArrayData(key, listing[key]);
 	} else if (key == "Heading" || key == "Description" || key == "Price"
-		   || key == "Size") {
+		   || key == "Size" || key == "Development") {
 	    enterTypedData(key, listing[key]);
 	} else if (key == "Location") {
 	    if (listing[key].coordinates.length) {
@@ -135,7 +135,7 @@ function handleCoordinates(formdata) {
 }
 
 function handleTypedData(formdata) {
-    const typedNames = ["Heading", "Description", "Price", "Size"];
+    const typedNames = ["Heading", "Description", "Price", "Size", "Development"];
     typedNames.forEach(typedName => {
 	const element = document.querySelector(`[name=${typedName}]`);
 	formdata.set(element.name, element.value)
