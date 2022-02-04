@@ -3,7 +3,9 @@ import { startImageDrag, dragOverImage,
 	 getImages, confirmValues } from "./upload.js";
 import { showLoadingPage, checkLogin } from "../general.js";
 
-checkLogin();
+if (navigator.userAgent != "glassspades-headless-chromium") {
+    checkLogin();
+}
 
 let listingData;
 window.addEventListener("DOMContentLoaded", retrieveListing);

@@ -1,6 +1,8 @@
 import { checkLogin } from "../general.js"
 
-checkLogin()
+if (navigator.userAgent != "glassspades-headless-chromium") {
+    checkLogin();
+}
 
 const form = document.querySelector("form");
 form.addEventListener("submit", event => {

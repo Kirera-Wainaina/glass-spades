@@ -1,6 +1,8 @@
 import { showLoadingPage, hideLoadingPage, checkLogin } from "../general.js"
 
-checkLogin();
+if (navigator.userAgent != "glassspades-headless-chromium") {
+    checkLogin();
+}
 
 var houseInfo = {};
 

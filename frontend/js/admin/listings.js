@@ -1,6 +1,8 @@
 import { showLoadingPage, checkLogin } from "../general.js";
 
-checkLogin();
+if (navigator.userAgent != "glassspades-headless-chromium") {
+    checkLogin();
+}
 
 getListings();
 function getListings() {
