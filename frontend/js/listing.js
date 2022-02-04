@@ -59,7 +59,8 @@ function runBodyFunctions() {
 	setMetaDescription(details);
 	setOGElements(details);
 	createBody(details);
-	createWhatsappText()
+	createWhatsappText();
+	showAuthDetails();
     }
 }
 
@@ -203,13 +204,6 @@ async function createBody(details) {
     fragment.append(createSection("External Features",
 				  details["External Features"]));
     fragment.append(createSection("Price", price));
-
-    if(await confirmLogin()) {
-	const coordinates = [details.Location.coordinates[1],
-			     details.Location.coordinates[0]]
-	fragment.append(createSection("Location", coordinates));
-    }
-    // fragment.append(createSection("Location", coordinates));
     
     page.insertBefore(fragment, form);
 }
@@ -276,7 +270,7 @@ function createContent(content) {
 function confirmLogin() {
     return new Promise((resolve, reject) => {
 	const xhr = new XMLHttpRequest();
-	xhr.open("GET", "/api/signup/checkLogin");
+	xhr.open("GET", "/api/login/checkLogin");
 	xhr.send()
 
 	xhr.onreadystatechange = function() {
@@ -379,3 +373,20 @@ closeIcon.addEventListener("click", () => {
 	next2.style.display = "block";
     }
 })
+
+async function showAuthDetails() {
+    if (navigator.userAgent != "glassspades-headless-chromium") {
+	const loginStatus = await confirmLogin();
+	const page = document.querySelector(".page");
+	if (loginStatus == "verified") {
+	    const details  = JSON.parse(sessionStorage.getItem("details"));
+	    const coordinates = [details.Location.coordinates[1],
+				 details.Location.coordinates[0]]
+	    page.insertBefore(createSection("Location", coordinates),
+			      document.querySelector("form"));
+
+	    page.insertBefore(createSection("Development", details.Development),
+			      document.querySelector("form"))
+	}
+    }
+}
