@@ -23,6 +23,7 @@ function retrieveListing() {
 		listingData = data.listing;
 		handleListing(data.listing);
 		displayImages(data.listingImages);
+		processCategory(data.listing);
 	    }
 	}
     }
@@ -68,6 +69,17 @@ function enterArrayData(key, values) {
 	const element = document.querySelector(`[name="${key}"][value="${value}"]`);
 	element.classList.add("clicked-button");
     })
+}
+
+function processCategory(listing) {
+    if (listing.Category == "Apartment") {
+	const description = document.getElementById("Development-container");
+	const size = document.getElementById("Size-container");
+	const unitType = document.getElementById("Unit-Type-container");
+	description.style.display = "grid";
+	size.style.display = "grid";
+	unitType.style.display = "grid";
+    }
 }
 
 function displayImages(listingImages) {
