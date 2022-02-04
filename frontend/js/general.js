@@ -341,6 +341,5 @@ export function checkLogin() {
 	if (xhr.readyState == 4 && xhr.response == "fail") {
 	    location.href = "/login"
 	}
-
     }
 }
