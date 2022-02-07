@@ -83,6 +83,7 @@ async function uploadListing(request, response) {
 		indexUtils.routeCache.delete(key);
 	    }
 	}
+	indexUtils.routeCache.delete("/admin/listings");
 	await listing.save()
 
 	respond.handleTextResponse(response, "success");
