@@ -60,8 +60,9 @@ function runBodyFunctions() {
 	setOGElements(details);
 	createBody(details);
 	createWhatsappText();
-	showAuthDetails();
     }
+    // to run even if there is a description
+    showAuthDetails();
 }
 
 function displayFirstImages(images) {
@@ -281,9 +282,6 @@ function confirmLogin() {
     })
 }
 
-window.addEventListener("load", () => {
-    console.log("DOM loaded")
-});
 const form = document.querySelector("form");
 form.addEventListener("submit", handleForm)
 
