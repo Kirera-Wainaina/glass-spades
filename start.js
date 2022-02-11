@@ -3,6 +3,7 @@ const qs = require("querystring");
 const path = require("path");
 
 // setInterval(checkStatus, 120000);
+const webServerPID = startWebServer();
 checkStatus();
 
 function checkStatus() {
@@ -14,9 +15,10 @@ function checkWebServer() {
     pgrep.stdout.on("data", data => {
 	const str = String(data)
 	const parsed = qs.parse(str, "\n", " ");
-	if (Object.keys(parsed).length == 1) {
-	    // with only 1 node process, it's the server that isn't running
-	    startWebServer();
+	console.log(`Web server PID: ${webServerPID}`)
+	if (!Object.keys(parsed).includes(String(webServerPID))) {
+	    // the web server is down, reboot
+	    console.log("The webserver is down")
 	}
 	console.log(parsed);
     });
@@ -26,10 +28,10 @@ function checkWebServer() {
 
 function startWebServer() {
     const indexPath = path.join(__dirname, "index2.js");
-    // const webServer = spawn("nohup", ["node", indexPath, "&"]);
     const webServer = spawn("node", [indexPath]);
     console.log(webServer.pid);
     webServer.stdout.on("data", data => console.log(String(data)))
     webServer.stderr.on("data", data => console.log(String(data)));
-    webServer.on("close", code => console.log("Web server closed"))
+    webServer.on("close", code => console.log("Web server closed"));
+    return webServer.pid
 }
