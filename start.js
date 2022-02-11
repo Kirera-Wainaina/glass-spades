@@ -1,10 +1,9 @@
-const { spawn } = require("child_process");
+const { spawn, exec } = require("child_process");
 const qs = require("querystring");
 const path = require("path");
 
-// setInterval(checkStatus, 120000);
+setInterval(checkStatus, 120000);
 const webServerPID = startWebServer();
-checkStatus();
 
 function checkStatus() {
     checkWebServer();
@@ -19,6 +18,7 @@ function checkWebServer() {
 	if (!Object.keys(parsed).includes(String(webServerPID))) {
 	    // the web server is down, reboot
 	    console.log("The webserver is down")
+	    // exec("reboot")
 	}
 	console.log(parsed);
     });
