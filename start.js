@@ -1,6 +1,7 @@
 const { spawn, exec } = require("child_process");
 const qs = require("querystring");
 const path = require("path");
+const fs = require("fs");
 
 setInterval(checkStatus, 120000);
 const webServerPID = startWebServer();
@@ -37,4 +38,9 @@ function startWebServer() {
 
 function checkRebootRequired() {
     // check for existence of file that requires reboot
+    const rebootFilePath = path.join("/var/run", "reboot-required");
+    fs.access(rebootFilePath, fs.constants.F_OK, error => {
+	// file exists and reboot is required
+	if (!error) exec("reboot");
+    })
 }
