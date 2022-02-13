@@ -1,4 +1,4 @@
-const { spawn, exec } = require("child_process");
+const { spawn, exec, fork } = require("child_process");
 const qs = require("querystring");
 const path = require("path");
 const fs = require("fs");
@@ -29,9 +29,7 @@ function checkWebServer() {
 
 function startWebServer() {
     const indexPath = path.join(__dirname, "index.js");
-    const webServer = spawn("node", [indexPath]);
-    webServer.stdout.on("data", data => console.log(String(data)))
-    webServer.stderr.on("data", data => console.log(String(data)));
+    const webServer = fork(indexPath)
     webServer.on("close", code => console.log("Web server closed"));
     return webServer.pid
 }
