@@ -19,16 +19,16 @@ function checkWebServer() {
 	if (!Object.keys(parsed).includes(String(webServerPID))) {
 	    // the web server is down, reboot
 	    console.log("The webserver is down")
-	    // exec("reboot")
+	    exec("reboot")
 	}
-	// console.log(parsed);
+
     });
     pgrep.stderr.on("data", data => console.log(String(data)));
     pgrep.on("close", code => console.log("Pgrep just ran"));
 }
 
 function startWebServer() {
-    const indexPath = path.join(__dirname, "index2.js");
+    const indexPath = path.join(__dirname, "index.js");
     const webServer = spawn("node", [indexPath]);
     webServer.stdout.on("data", data => console.log(String(data)))
     webServer.stderr.on("data", data => console.log(String(data)));
