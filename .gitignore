@@ -23,3 +23,6 @@ yarn-error.log
 
 # ignore the sitemap file
 sitemap.xml
+
+# cron.log
+cron.log
