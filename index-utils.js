@@ -11,6 +11,7 @@ const MIMES = require("./utils/MIMETypes.js");
 function readFileAndRespond(filePath, response, statusCode=null) {
     fs.stat(filePath, (error, stats) => {
 	if (error) {
+	    console.log(error)
 	    handleError(error, response)
 	} else {
 	    const mime = MIMES.findMIMETypeFromExtension(path.extname(filePath));
@@ -74,16 +75,15 @@ function createFilePath(urlPath) {
     let filePath;
 
     if (parsed_url.pathname == "/") {
-	filePath = `${cwd}/frontend/html/home.html`;
+	filePath = path.join(__dirname, "frontend/html/home.html")
     } else if (!path.extname(parsed_url.pathname) ){
 	// browser paths
 	const dir = path.basename(path.dirname(parsed_url.pathname));
 	// check for listing page and serve listing html file
-	filePath = `${cwd}/frontend/html\
-${dir == "listing" ? "/listing" : parsed_url.pathname}.html`;
+	filePath = path.join(__dirname, `frontend/html/${dir == "listing" ? "/listing" : parsed_url.pathname}.html`)
     } else {
 	// etc files e.g favicon
-	filePath = `${cwd}${parsed_url.pathname}`;
+	filePath = path.join(__dirname, parsed_url.pathname);
     }
 
     return filePath
