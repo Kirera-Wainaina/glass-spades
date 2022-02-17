@@ -44,12 +44,12 @@ function readFileAndRespond(filePath, response, statusCode=null) {
 
 function handleError(error, response) {
     if (error.code == "ENOENT") {
-	const filePath = "./frontend/html/error.html";
+	const filePath = path.join(__dirname, "frontend/html/error.html")
 	const errorCode = 404;
 	readFileAndRespond(filePath, response, errorCode)
     } else {
 	console.log(error);
-	const filePath = "./frontend/html/error.html";
+	const filePath = path.join(__dirname, "frontend/html/error.html")
 	const errorCode = 404;
 	readFileAndRespond(filePath, response, errorCode)
     }
