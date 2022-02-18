@@ -8,11 +8,19 @@ const { Schema } = mongoose;
 dotenv.config()
 
 const uri = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/glass-spades`;
+
 mongoose.connect(uri,
 		 {
 		     useNewUrlParser: true,
 		     useUnifiedTopology: true
-		 });
+		 })
+    .then(() => console.log("database connected"))
+    .catch(error => {
+	console.log("There was an error connecting");
+	console.log(error)
+    })
+
+
 mongoose.set("useFindAndModify", false);
 
 const userSchema = new Schema({
