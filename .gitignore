@@ -26,3 +26,6 @@ sitemap.xml
 
 # cron.log
 cron.log
+
+# scripts folder
+scripts/
