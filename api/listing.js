@@ -68,6 +68,18 @@ function handleLeadInfo(request, response) {
     request.pipe(busboy);
 }
 
+function getRelatedListings(request, response) {
+    request.on("data", data => {
+	try {
+	    const listingInfo = JSON.parse(data);
+	    console.log(listingInfo)
+	} catch (error) {
+	    console.log(error);
+	}
+    })
+}
+
 exports.getListingDetails = getListingDetails;
 exports.getListingImages = getListingImages;
 exports.handleLeadInfo = handleLeadInfo;
+exports.getRelatedListings = getRelatedListings;
