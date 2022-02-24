@@ -12,6 +12,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 window.dataLayer = window.dataLayer || [];
 getListingDetails();
 getListingImages();
+getRelatedListings();
 
 function retrieveListingId() {
     const url = new URL(location);
@@ -387,4 +388,10 @@ async function showAuthDetails() {
 			      document.querySelector("form"))
 	}
     }
+}
+
+function getRelatedListings() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/listing/getRelatedListings")
+    xhr.send(JSON.stringify({ id: retrieveListingId() }))
 }
