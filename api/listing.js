@@ -73,7 +73,11 @@ function getRelatedListings(request, response) {
 	try {
 	    const info = JSON.parse(data);
 	    const currentListing = await db.Listing.findById(info.id);
-	    console.log(currentListing)
+	    const relatedListings = await db.Listing.find({
+		Bedrooms: currentListing.Bedrooms,
+		Mandate: currentListing.Mandate
+	    }, { Heading: 1, Bedrooms: 1, Bathrooms: 1 })
+	    console.log(relatedListings)
 	} catch (error) {
 	    console.log(error);
 	}
