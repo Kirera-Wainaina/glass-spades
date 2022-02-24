@@ -69,10 +69,11 @@ function handleLeadInfo(request, response) {
 }
 
 function getRelatedListings(request, response) {
-    request.on("data", data => {
+    request.on("data", async data => {
 	try {
-	    const listingInfo = JSON.parse(data);
-	    console.log(listingInfo)
+	    const info = JSON.parse(data);
+	    const currentListing = await db.Listing.findById(info.id);
+	    console.log(currentListing)
 	} catch (error) {
 	    console.log(error);
 	}
