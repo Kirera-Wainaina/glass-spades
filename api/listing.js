@@ -77,7 +77,7 @@ function getRelatedListings(request, response) {
 		Bedrooms: currentListing.Bedrooms,
 		Mandate: currentListing.Mandate
 	    }, { Heading: 1, Bedrooms: 1, Bathrooms: 1 })
-	    console.log(relatedListings)
+	    respond.handleJSONResponse(response, relatedListings)
 	} catch (error) {
 	    console.log(error);
 	}
