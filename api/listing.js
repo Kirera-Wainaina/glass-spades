@@ -76,8 +76,33 @@ function getRelatedListings(request, response) {
 	    const relatedListings = await db.Listing.find({
 		Bedrooms: currentListing.Bedrooms,
 		Mandate: currentListing.Mandate
-	    }, { Heading: 1, Bedrooms: 1, Bathrooms: 1 })
-	    respond.handleJSONResponse(response, relatedListings)
+	    }, { Heading: 1, Bedrooms: 1, Bathrooms: 1,
+		 Price: 1, Size: 1, "Unit Type": 1, Category: 1 });
+
+	    if (relatedListings.length) {
+		const data = await Promise.all(relatedListings.map(listing => {
+		    return new Promise((resolve, reject) => {
+			const imageData = db.Image.findOne({
+			    listingId: listing._id, position: 0 });
+
+			resolve({
+			    heading: listing.Heading,
+			    price: listing.Price,
+			    bedrooms: listing.Bedrooms,
+			    bathrooms: listing.Bathrooms,
+			    size: listing.Size,
+			    unitType: listing["Unit Type"],
+			    category: listing.Category,
+			    imageSrc: imageData.link,
+			    id: listing._id
+			});
+
+		    })
+		}))
+		respond.handleJSONResponse(response, data)
+	    } else {
+		respond.handleTextResponse(response, "fail")
+	    }
 	} catch (error) {
 	    console.log(error);
 	}
