@@ -6,6 +6,7 @@ const Busboy = require("busboy");
 const db = require("../database/models");
 const email = require("../utils/email");
 const respond = require("../utils/respond");
+const general = require("../utils/general");
 
 function getListingDetails(request, response) {
     request.on("data", async (data) => {
@@ -80,25 +81,7 @@ function getRelatedListings(request, response) {
 		 Price: 1, Size: 1, "Unit Type": 1, Category: 1 });
 
 	    if (relatedListings.length) {
-		const data = await Promise.all(relatedListings.map(listing => {
-		    return new Promise((resolve, reject) => {
-			const imageData = db.Image.findOne({
-			    listingId: listing._id, position: 0 });
-
-			resolve({
-			    heading: listing.Heading,
-			    price: listing.Price,
-			    bedrooms: listing.Bedrooms,
-			    bathrooms: listing.Bathrooms,
-			    size: listing.Size,
-			    unitType: listing["Unit Type"],
-			    category: listing.Category,
-			    imageSrc: imageData.link,
-			    id: listing._id
-			});
-
-		    })
-		}))
+		const data = await general.getDetailsForHouseCard(relatedListings);
 		respond.handleJSONResponse(response, data)
 	    } else {
 		respond.handleTextResponse(response, "fail")
