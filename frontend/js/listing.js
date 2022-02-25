@@ -1,3 +1,5 @@
+import { displayHouseDetails } from "./general.js";
+
 // <!-- Google Tag Manager -->
 if (location.origin == "https://glassspades.com"
     && navigator.userAgent != "glassspades-headless-chromium") {
@@ -392,12 +394,17 @@ async function showAuthDetails() {
 
 function getRelatedListings() {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/listing/getRelatedListings")
-    xhr.send(JSON.stringify({ id: retrieveListingId() }))
+    xhr.open("POST", "/api/listing/getRelatedListings");
+    xhr.send(JSON.stringify({ id: retrieveListingId() }));
 
     xhr.onreadystatechange = function() {
 	if (this.readyState == 4) {
-	    console.log(this.response)
+	    if (this.response != "fail") {
+		// if there are related listings
+		const relatedListings = JSON.parse(this.response);
+		console.log(relatedListings);
+		displayHouseDetails(relatedListings)
+	    }
 	}
     }
 }
