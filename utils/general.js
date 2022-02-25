@@ -37,24 +37,7 @@ async function getListings(request, response) {
 					      Category: 1
 					  });
     if (listings.length) {
-	const data = await Promise.all(listings.map(listing => {
-	    return new Promise(async (resolve, reject) => {
-		const imageData = await db.Image.findOne({ listingId: listing._id,
-							   position: 0 });
-		// _doc is to bring only the listing properties without the object's
-		resolve({
-		    heading: listing.Heading,
-		    price: listing.Price,
-		    bedrooms: listing.Bedrooms,
-		    bathrooms: listing.Bathrooms,
-		    size: listing.Size,
-		    unitType: listing["Unit Type"],
-		    category: listing.Category,
-		    imageSrc: imageData.link,
-		    id: listing._id
-		});
-	    })
-	}));
+	const data = await getDetailsForHouseCard(listings)
 	respond.handleJSONResponse(response, data);
     } else {
 	respond.handleTextResponse(response, "fail");
@@ -78,5 +61,28 @@ function createQuery(params, mandate) {
     return query;
 }
 
+function getDetailsForHouseCard(listings) {
+    const data = Promise.all(listings.map(listing => {
+	return new Promise(async (resolve, reject) => {
+	    const imageData = await db.Image.findOne({ listingId: listing._id,
+						       position: 0 });
+	    // _doc is to bring only the listing properties without the object's
+	    resolve({
+		heading: listing.Heading,
+		price: listing.Price,
+		bedrooms: listing.Bedrooms,
+		bathrooms: listing.Bathrooms,
+		size: listing.Size,
+		unitType: listing["Unit Type"],
+		category: listing.Category,
+		imageSrc: imageData.link,
+		id: listing._id
+	    });
+	})
+    }));
+    return data
+}
+
 exports.deleteFromRouteCache = deleteFromRouteCache;
 exports.getListings = getListings;
+exports.getDetailsForHouseCard = getDetailsForHouseCard;
