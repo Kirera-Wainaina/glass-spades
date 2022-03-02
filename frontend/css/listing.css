@@ -217,6 +217,25 @@ form input[type="submit"] {
     height: 3em;
 }
 
+div#listings {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    border: 1px solid black;
+    width: 97vw;
+    justify-self: center;
+}
+
+.house-card {
+    /* width: 50vw; */
+    height: 80vh;
+    overflow: unset;
+    grid-template-rows: unset;
+}
+
+.overview-price {
+    padding-left: 0;
+}
+
 @media(orientation: portrait) {
     div#images > img:nth-of-type(1) {
 	grid-column: 2 / 12;
