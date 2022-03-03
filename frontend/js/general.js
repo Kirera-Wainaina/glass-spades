@@ -77,10 +77,10 @@ function handleIntersect(entries) {
     })
 }
 
-export function displayHouseDetails(houseDetails) {
+export function displayHouseDetails(houseDetails, containerId="listings") {
     if (!document.querySelector(".house-card")) {
 	// before or without ssr
-	const listings = document.getElementById("listings");
+	const listings = document.getElementById(containerId);
 	const fragment = new DocumentFragment();
 
 	houseDetails.forEach(houseDetail => {

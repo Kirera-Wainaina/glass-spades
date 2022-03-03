@@ -403,7 +403,7 @@ function getRelatedListings() {
 		// if there are related listings
 		const relatedListings = JSON.parse(this.response);
 		console.log(relatedListings);
-		displayHouseDetails(relatedListings)
+		displayHouseDetails(relatedListings, "related")
 	    }
 	}
     }
