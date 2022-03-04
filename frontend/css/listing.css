@@ -231,7 +231,7 @@ div#related {
 
 .house-card {
     /* flex: 1; */
-    width: 50vw;
+    width: 30vw;
     height: 80vh;
     /* overflow: unset; */
     /* grid-template-rows: unset; */
@@ -243,6 +243,12 @@ div#related {
     height: 20%;
     padding-left: 0;
     padding-right: 0;
+}
+
+.house-card img {
+    height: 70%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .overview-price {
