@@ -243,6 +243,7 @@ div#related {
     height: 20%;
     padding-left: 0;
     padding-right: 0;
+    white-space: normal;
 }
 
 .house-card img {
