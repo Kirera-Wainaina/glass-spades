@@ -306,8 +306,12 @@ div#related {
     form input {
 	width: 90%;
     }
-}
 
+    .house-card {
+	width: 40vw;
+	height: 50vh;
+    }
+}
 
 @media(max-width: 500px) {
     div#images {
