@@ -221,10 +221,16 @@ div#related {
     grid-column: 1 / 13;
     overflow: auto;
     white-space: nowrap;
-    border: 1px solid black;
     width: 97vw;
     justify-self: center;
     margin-top: 2em;
+}
+
+#related-heading {
+    grid-column: 1 / 13;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 1em;
 }
 
 .house-card {
@@ -392,5 +398,9 @@ div#related {
 	width: 80vw;
 	height: 70vh;
 	margin-left: 5vw;
+    }
+
+    #related-heading {
+	grid-column: 1 / 6;
     }
 }
