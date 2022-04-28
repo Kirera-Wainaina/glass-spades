@@ -79,6 +79,10 @@ p#info {
     margin-top: 1em;
 }
 
+.images.clicked {
+    border: 2px solid #f108aa;
+}
+
 div#map {
     grid-column: 2 / 12;
     height: 75vh;

@@ -210,6 +210,7 @@ function displayImage(image) {
     img.addEventListener("dragstart", startImageDrag);
     img.addEventListener("dragover", dragOverImage);
     img.addEventListener("drop", dropImage);
+    img.addEventListener("click", highlightImage);
 
     return img
 }
@@ -231,6 +232,16 @@ export function dropImage(event) {
 
     dropImg.insertAdjacentElement("beforebegin", draggedImgElement);
 }
+
+function highlightImage(event) {
+    const el = event.target;
+    if (el.classList.contains("clicked")) {
+	el.classList.remove("clicked");
+    } else {
+	el.classList.add("clicked");
+    }
+}
+
 
 window.addEventListener("DOMContentLoaded", () => {
     const submit = document.getElementById("submit");
