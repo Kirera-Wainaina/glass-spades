@@ -5,6 +5,7 @@ if (navigator.userAgent != "glassspades-headless-chromium") {
 }
 
 var houseInfo = {};
+var highlightedImages = [];
 
 (async function() {
     const model = await getModelData();
@@ -237,9 +238,13 @@ function highlightImage(event) {
     const el = event.target;
     if (el.classList.contains("clicked")) {
 	el.classList.remove("clicked");
+	const index = highlightedImages.indexOf(el.id);
+	highlightedImages.splice(index, 1);
     } else {
 	el.classList.add("clicked");
+	highlightedImages.push(el.id)
     }
+    console.log(highlightedImages)
 }
 
 
