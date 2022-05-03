@@ -234,7 +234,7 @@ export function dropImage(event) {
     dropImg.insertAdjacentElement("beforebegin", draggedImgElement);
 }
 
-function highlightImage(event) {
+export function highlightImage(event) {
     const el = event.target;
     if (el.classList.contains("clicked")) {
 	el.classList.remove("clicked");

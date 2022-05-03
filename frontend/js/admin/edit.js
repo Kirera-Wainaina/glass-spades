@@ -1,6 +1,6 @@
 import { startImageDrag, dragOverImage,
 	 dropImage, setData,
-	 getImages, confirmValues } from "./upload.js";
+	 getImages, confirmValues, highlightImage } from "./upload.js";
 import { showLoadingPage, checkLogin } from "../general.js";
 
 if (navigator.userAgent != "glassspades-headless-chromium") {
@@ -113,6 +113,7 @@ function displayImage(image) {
     img.addEventListener("dragstart", startImageDrag);
     img.addEventListener("dragover", dragOverImage);
     img.addEventListener("drop", dropImage);
+    img.addEventListener("click", highlightImage);
 
     return img
 }
