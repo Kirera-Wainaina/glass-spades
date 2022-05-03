@@ -67,7 +67,7 @@ div#drop-zone, div#portrait-drop-zone {
     overflow-y: auto;
 }
 
-p#info {
+p.info {
     grid-column: 2 / 12;
     font-size: 0.9em;
 }
@@ -176,7 +176,7 @@ p#empty-error {
 	width: 98%;
     }
 
-    p#info {
+    p.info {
 	grid-column: 1 / 6;
 	font-size: 0.6em;
     }
