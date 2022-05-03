@@ -246,10 +246,13 @@ function highlightImage(event) {
 	// add to highlighted images
 	highlightedImages.push(el.id)
     }
+
     if (highlightedImages.length) {
 	// hide or display the delete button
+	document.getElementById("delete-icon").style.display = "block";
+    } else {
+	document.getElementById("delete-icon").style.display = "none";
     }
-    console.log(highlightedImages)
 }
 
 
@@ -455,4 +458,5 @@ const deleteIcon = document.getElementById("delete-icon");
 deleteIcon.addEventListener("click", event => {
     highlightedImages.forEach(imageId => document.getElementById(imageId).remove())
     highlightedImages = [];
+    event.target.style.display = "none";
 })

@@ -124,6 +124,7 @@ p#empty-error {
     position: fixed;
     bottom: 5vh;
     right: 0;
+    display: none;
 }
 
 @media (orientation: portrait) {
