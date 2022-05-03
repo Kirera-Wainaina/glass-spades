@@ -457,6 +457,18 @@ document.addEventListener("click", event => {
 const deleteIcon = document.getElementById("delete-icon");
 deleteIcon.addEventListener("click", event => {
     highlightedImages.forEach(imageId => document.getElementById(imageId).remove())
+    if (location.pathname == "/admin/edit") {
+	// the pictures in the edit page will need to be deleted in the db
+	deleteImagesInDB(highlightedImages)
+    }
     highlightedImages = [];
     event.target.style.display = "none";
 })
+
+function deleteImagesInDB(imageIds) {
+    const formdata = new FormData();
+    imageIds.forEach(imageId => formdata.append("imageIds", imageId))
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/admin/upload/deleteImagesInDB")
+    xhr.send(formdata)
+}
