@@ -120,7 +120,7 @@ p#empty-error {
     display: none;
 }
 
-#delete {
+#delete-icon {
     position: fixed;
     bottom: 5vh;
     right: 0;

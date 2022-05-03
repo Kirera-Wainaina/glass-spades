@@ -246,6 +246,9 @@ function highlightImage(event) {
 	// add to highlighted images
 	highlightedImages.push(el.id)
     }
+    if (highlightedImages.length) {
+	// hide or display the delete button
+    }
     console.log(highlightedImages)
 }
 
@@ -447,3 +450,9 @@ document.addEventListener("click", event => {
 	}
     }
 });
+
+const deleteIcon = document.getElementById("delete-icon");
+deleteIcon.addEventListener("click", event => {
+    console.log(highlightedImages)
+    console.log("Delete Icon clicked")
+})
