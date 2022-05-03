@@ -474,7 +474,8 @@ function deleteImagesInDB(imageIds) {
 
     xhr.onreadystatechange = function() {
 	if (this.readyState == 4 && this.responseText == "success") {
-	    location.reload();
+	    const submit = document.getElementById("submit");
+	    submit.click();
 	}
     }
 }
