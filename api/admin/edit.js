@@ -70,6 +70,7 @@ function updateListing(request, response) {
 			};
 
 			// From the promise, only the first result is needed.
+			console.log(listing.fileId)
 			const [ metadata ] = await Promise.all([
 			    saveFiles(fileNames),
 			    updateExistingFiles(listing.fileId),
@@ -109,20 +110,23 @@ function updateListing(request, response) {
 }
 
 function updateExistingFiles(filedata) {
-	
-    return Promise.all(filedata.map(data => {
-	return new Promise((resolve, reject) => {
-	    const dataObj = qs.parse(data);
-	    db.Image.updateOne(
-		{ _id: dataObj.name },
-		{ position: dataObj.position},
-		(error, result) => {
-		    if (error) console.log(`${filename} not exist`);
-		    console.log("Updated existing images")
-		    resolve(result)
-		})
-	})
-    }))
+    if (filedata && filedata.length) {
+	return Promise.all(filedata.map(data => {
+	    return new Promise((resolve, reject) => {
+		const dataObj = qs.parse(data);
+		db.Image.updateOne(
+		    { _id: dataObj.name },
+		    { position: dataObj.position},
+		    (error, result) => {
+			if (error) console.log(`${filename} not exist`);
+			console.log("Updated existing images")
+			resolve(result)
+		    })
+	    })
+	}))
+    } else {
+	return ;
+    }
 }
 
 async function saveFiles(fileNames) {
