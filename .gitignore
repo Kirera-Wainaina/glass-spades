@@ -29,3 +29,6 @@ cron.log
 
 # scripts folder
 scripts/
+
+#local host certificates
+localhost-certs/
