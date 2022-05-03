@@ -91,5 +91,18 @@ async function uploadListing(request, response) {
 
     request.pipe(busboy)
 }
+
+function deleteImagesInDB(request, response) {
+    const imageIds = [];
+    const busboy = new Busboy({ headers: request.headers });
+
+    busboy.on("field", (name, value) => {
+	console.log(`${name}: ${value}`)
+    });
+
+    request.pipe(busboy);
+}
+
 exports.sendModelData = sendModelData;
 exports.uploadListing = uploadListing;
+exports.deleteImagesInDB = deleteImagesInDB;
