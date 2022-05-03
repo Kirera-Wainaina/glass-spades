@@ -471,4 +471,10 @@ function deleteImagesInDB(imageIds) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/api/admin/upload/deleteImagesInDB")
     xhr.send(formdata)
+
+    xhr.onreadystatechange = function() {
+	if (this.readyState == 4 && this.responseText == "success") {
+	    location.reload();
+	}
+    }
 }

@@ -97,8 +97,14 @@ function deleteImagesInDB(request, response) {
     const busboy = new Busboy({ headers: request.headers });
 
     busboy.on("field", (name, value) => {
-	console.log(`${name}: ${value}`)
+	imageIds.push(value)
     });
+
+    busboy.on("finish", async () => {
+	await Promise.all(imageIds.map(
+	    imageId => db.Image.deleteOne({_id: imageId})));
+	respond.handleTextResponse(response, "success");
+    })
 
     request.pipe(busboy);
 }
