@@ -239,9 +239,11 @@ function highlightImage(event) {
     if (el.classList.contains("clicked")) {
 	el.classList.remove("clicked");
 	const index = highlightedImages.indexOf(el.id);
+	// remove from highlighted images
 	highlightedImages.splice(index, 1);
     } else {
 	el.classList.add("clicked");
+	// add to highlighted images
 	highlightedImages.push(el.id)
     }
     console.log(highlightedImages)
