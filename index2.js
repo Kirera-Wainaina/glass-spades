@@ -15,9 +15,16 @@ const port = 443;
 const options = {
     key: fs.readFileSync(`${process.env.CERTPATH}/privkey.pem`, "utf8"),
     cert: fs.readFileSync(`${process.env.CERTPATH}/fullchain.pem`, "utf8"),
-    ca: fs.readFileSync(`${process.env.CERTPATH}/chain.pem`, "utf8"),
     allowHTTP1: true
 };
+
+fs.readFile(`${process.env.CERTPATH}/chain.pem`, "utf8", (error, data) => {
+    if (error) {
+	console.log("Chain file does not exist")
+    } else {	
+	options["ca"] = data;
+    }
+})
 
 
 const server = http2.createSecureServer(options);
