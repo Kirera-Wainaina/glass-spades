@@ -120,6 +120,12 @@ p#empty-error {
     display: none;
 }
 
+#delete {
+    position: fixed;
+    bottom: 5vh;
+    right: 0;
+}
+
 @media (orientation: portrait) {
     .container {
 	grid-column: 2 / 12;
