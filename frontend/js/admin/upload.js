@@ -453,6 +453,6 @@ document.addEventListener("click", event => {
 
 const deleteIcon = document.getElementById("delete-icon");
 deleteIcon.addEventListener("click", event => {
-    console.log(highlightedImages)
-    console.log("Delete Icon clicked")
+    highlightedImages.forEach(imageId => document.getElementById(imageId).remove())
+    highlightedImages = [];
 })
