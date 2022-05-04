@@ -62,25 +62,34 @@ function createQuery(params, mandate) {
 }
 
 function getDetailsForHouseCard(listings) {
-    const data = Promise.all(listings.map(listing => {
-	return new Promise(async (resolve, reject) => {
-	    const imageData = await db.Image.findOne({ listingId: listing._id,
-						       position: 0 });
-	    // _doc is to bring only the listing properties without the object's
-	    resolve({
-		heading: listing.Heading,
-		price: listing.Price,
-		bedrooms: listing.Bedrooms,
-		bathrooms: listing.Bathrooms,
-		size: listing.Size,
-		unitType: listing["Unit Type"],
-		category: listing.Category,
-		imageSrc: imageData.link,
-		id: listing._id
-	    });
-	})
-    }));
-    return data
+    return Promise.all(listings.map(listing => compileHouseCardDetails(listing)));
+}
+
+function compileHouseCardDetails(listing, position=0) {
+    return new Promise(async (resolve, reject) => {
+	const imageData = await findFirstImage(listing._id)
+	resolve({
+	    heading: listing.Heading,
+	    price: listing.Price,
+	    bedrooms: listing.Bedrooms,
+	    bathrooms: listing.Bathrooms,
+	    size: listing.Size,
+	    unitType: listing["Unit Type"],
+	    category: listing.Category,
+	    imageSrc: imageData.link,
+	    id: listing._id
+	});
+    })
+}
+
+async function findFirstImage(listingId, position=0) {
+    let imageData = await db.Image.findOne({ listingId, position });
+    if (imageData == null) {
+	return findFirstImage(listingId, position + 1);
+    } else {
+
+	return imageData
+    }
 }
 
 exports.deleteFromRouteCache = deleteFromRouteCache;
