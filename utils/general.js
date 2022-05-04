@@ -95,3 +95,4 @@ async function findFirstImage(listingId, position=0) {
 exports.deleteFromRouteCache = deleteFromRouteCache;
 exports.getListings = getListings;
 exports.getDetailsForHouseCard = getDetailsForHouseCard;
+module.exports.findFirstImage = findFirstImage;
