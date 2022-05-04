@@ -1,5 +1,6 @@
 const db = require("../database/models");
 const respond = require("../utils/respond");
+const general = require("../utils/general");
 
 async function getListings(request, response) {
     const featuredListings = await db.Listing.find({ Featured: true ,
@@ -7,8 +8,7 @@ async function getListings(request, response) {
 
     const details = await Promise.all(featuredListings.map(listing => {
 	return new Promise(async (resolve, reject) => {
-	    const overview = await db.Image.findOne({ listingId: listing._id,
-						      position: 0 });
+	    const overview = await general.findFirstImage(listing._id)
 	    resolve({
 		    "imageSrc": overview.link,
 		    "bedrooms": listing.Bedrooms,
