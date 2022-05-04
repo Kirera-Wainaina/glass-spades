@@ -101,13 +101,10 @@ function deleteImagesInDB(request, response) {
     });
 
     busboy.on("finish", async () => {
-	// await Promise.all(imageIds.map(
-	//     imageId => db.Image.deleteOne({_id: imageId})));
-	console.log(imageIds)
 	Promise.all(imageIds
 		    .map(imageId => db.Image.findOneAndDelete({ _id: String(imageId)})))
-	    .then(documents => console.log(documents))
-	// respond.handleTextResponse(response, "success");
+	    .then(documents => Promise.all(documents.map(document => images.deleteImageFromCloud(document.name))))
+	    .then(apiResponses => respond.handleTextResponse(response, "success"))
     })
 
     request.pipe(busboy);
