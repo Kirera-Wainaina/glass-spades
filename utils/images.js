@@ -48,6 +48,19 @@ function getFileMetadata(filePath) {
     return file.getMetadata()
 }
 
+function deleteImageFromCloud(name) {
+    return new Promise((resolve, reject) => {
+	const storage = new Storage();
+	const bucket = storage.bucket("glass-spades-images");
+	const file = bucket.file(name);
+	file.delete((error, apiResponse) => {
+	    if (error) reject(error);
+	    resolve(apiResponse)
+	});
+    })
+}
+
 exports.minifyImage = minifyImage;
 exports.saveImage = saveImage;
 exports.getFileMetadata = getFileMetadata;
+exports.deleteImageFromCloud = deleteImageFromCloud;
