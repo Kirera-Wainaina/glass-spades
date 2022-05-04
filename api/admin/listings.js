@@ -20,11 +20,16 @@ async function getListings(request, response) {
     }
 }
 
-function getListingOverviewImage(listingId) {
+function getListingOverviewImage(listingId, position=0) {
     return new Promise((resolve, reject) => {
-	db.Image.findOne({ listingId, position: 0 }, (error, docs) => {
-	    if (error) reject(error);
-	    resolve(docs);
+	db.Image.findOne({ listingId, position }, (error, docs) => {
+	    if (error) {
+		reject(error)
+	    } else if (docs == null) {
+		resolve(getListingOverviewImage(listingId, position + 1))
+	    } else {
+		resolve(docs);
+	    }
 	})
     })
 }
