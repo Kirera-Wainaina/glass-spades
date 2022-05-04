@@ -101,9 +101,13 @@ function deleteImagesInDB(request, response) {
     });
 
     busboy.on("finish", async () => {
-	await Promise.all(imageIds.map(
-	    imageId => db.Image.deleteOne({_id: imageId})));
-	respond.handleTextResponse(response, "success");
+	// await Promise.all(imageIds.map(
+	//     imageId => db.Image.deleteOne({_id: imageId})));
+	console.log(imageIds)
+	Promise.all(imageIds
+		    .map(imageId => db.Image.findOneAndDelete({ _id: String(imageId)})))
+	    .then(documents => console.log(documents))
+	// respond.handleTextResponse(response, "success");
     })
 
     request.pipe(busboy);
