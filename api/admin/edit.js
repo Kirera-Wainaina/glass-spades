@@ -70,7 +70,6 @@ function updateListing(request, response) {
 			};
 
 			// From the promise, only the first result is needed.
-			console.log(listing.fileId)
 			const [ metadata ] = await Promise.all([
 			    saveFiles(fileNames),
 			    updateExistingFiles(listing.fileId),
@@ -90,6 +89,13 @@ function updateListing(request, response) {
 
     busboy.on("finish", async () => {
 	console.log("All data received")
+
+	if (counter == 0) {
+	    // if no files have been received, then existing files have not yet
+	    // been updated
+	    updateExistingFiles(listing.fileId)
+	}
+	
 	listing["Location"] = {
 	    coordinates: [ listing.Longitude, listing.Latitude ]
 	};
