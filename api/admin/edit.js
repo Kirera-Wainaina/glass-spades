@@ -102,8 +102,10 @@ function updateListing(request, response) {
 	// delete listing page from cache
 	indexUtils.routeCache.delete(`/listing-${listing.id}`)
 	// delete sales, rentals and filter pages from cache
+	// delete admin/listings page
 	for (key of indexUtils.routeCache.keys()) {
-	    if (key.includes("/sales") || key.includes("/rentals")) {
+	    if (key.includes("/sales") || key.includes("/rentals")
+		|| key.includes("/admin/listings") || key.includes("/")) {
 		indexUtils.routeCache.delete(key);
 	    }
 	}
