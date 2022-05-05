@@ -105,7 +105,8 @@ function updateListing(request, response) {
 	// delete admin/listings page
 	for (key of indexUtils.routeCache.keys()) {
 	    if (key.includes("/sales") || key.includes("/rentals")
-		|| key.includes("/admin/listings") || key.includes("/")) {
+		|| key.includes("/admin") || key.includes("/") ||
+		key.includes("/listings")) {
 		indexUtils.routeCache.delete(key);
 	    }
 	}
