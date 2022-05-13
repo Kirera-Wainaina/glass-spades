@@ -179,14 +179,6 @@ function displayArchivedListings(listings) {
     })
 }
 
-const saveFeatured = document.getElementById("save-featured");
-saveFeatured.addEventListener("click",() => saveState(
-    "featured", "/api/admin/listings/saveFeatured"))
-
-const saveArchived = document.getElementById("save-archived");
-saveArchived.addEventListener("click",() => saveState(
-    "archived", "/api/admin/listings/saveArchived"))
-
 function saveState(state, url) {
     showLoadingPage();
     const stateIds = sessionStorage.getItem(state);

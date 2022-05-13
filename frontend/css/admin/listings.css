@@ -49,14 +49,6 @@ div#listings {
     color: black;
 }
 
-#save-featured {
-    grid-column: 1 / 5;
-}
-
-#save-archived {
-    grid-column: 5 / 9;
-}
-
 #show-archived {
     background-color: white;
     color: black;
