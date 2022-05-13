@@ -94,4 +94,8 @@ div#listings {
 	grid-column: 1 / 6;
     }
     
+    #save-icon {
+	bottom: 1em;
+	right: 1em;
+    }
 }
