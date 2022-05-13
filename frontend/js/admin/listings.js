@@ -102,7 +102,12 @@ function createPrice(price) {
 function handleStateButtons() {
     const stateButtons = document.querySelectorAll(".button-section button");
     stateButtons.forEach(stateButton => {
-	stateButton.addEventListener("click", changeColor)
+	stateButton.addEventListener("click", changeColor);
+	// Display the save icon
+	stateButton.addEventListener(
+	    "click",
+	    () => document.getElementById("save-icon").style.display = "block");
+
 	if (stateButton.name == "Featured") {
 	    stateButton.addEventListener(
 		"click",event => addListingToState(event, "featured"));
