@@ -228,3 +228,9 @@ function filterArchived() {
 
     return filtered
 }
+
+const saveIcon = document.getElementById("save-icon");
+saveIcon.addEventListener("click", () => {
+    saveState("featured", "/api/admin/listings/saveFeatured")
+    saveState("archived", "/api/admin/listings/saveArchived")
+})
