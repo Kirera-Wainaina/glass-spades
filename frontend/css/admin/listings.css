@@ -68,6 +68,22 @@ div#listings {
     color: white;
 }
 
+#save-icon {
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    height: 3em;
+    border-radius: 10%;
+}
+
+#save-icon:hover {
+    box-shadow: 3px 3px 5px lightgrey;
+}
+
+#save-icon:active {
+    background-color: lightgrey;
+}
+
 @media (max-width: 500px) {
     .house-card {
 	width: 99vw;
