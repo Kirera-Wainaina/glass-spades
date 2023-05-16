@@ -18,5 +18,8 @@
     "mongoose": "^5.12.7",
     "nodemailer": "^6.6.2",
     "puppeteer": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
