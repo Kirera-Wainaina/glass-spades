@@ -20,9 +20,9 @@ const options = {
 
 fs.readFile(`${process.env.CERTPATH}/chain.pem`, "utf8", (error, data) => {
     if (error) {
-	console.log("Chain file does not exist")
+		console.log("Chain file does not exist")
     } else {	
-	options["ca"] = data;
+		options["ca"] = data;
     }
 })
 
@@ -35,8 +35,8 @@ server.on("request", async (request, response) => {
     const cwd = ".";
 
     if (request.url == "/") {
-	const filePath = indexUtils.createFilePath(request.url);
-	indexUtils.readFileAndRespond(filePath, response);
+		const filePath = indexUtils.createFilePath(request.url);
+		indexUtils.readFileAndRespond(filePath, response);
     } else if (indexUtils.findTopDir(request.url) == "/api"){
 	// has to come before browser requests
 	try {
@@ -80,5 +80,3 @@ httpServer.listen(httpPort, () =>
 httpServer.on("error", error => {
     console.log(error);
 })
-
-
