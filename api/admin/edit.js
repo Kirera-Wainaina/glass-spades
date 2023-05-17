@@ -36,7 +36,7 @@ async function updateListing(request, response) {
 	
 		if (files.length) {
 			const metadata = await saveImagesToCloud(files);
-			await saveImagesToDB(fields, metadata, imageNamesAndPositions);
+			await saveImagesToDB(fields.id, metadata, imageNamesAndPositions);
 		}
 		await updateExistingFiles(fields.fileId)
 		await db.Listing.updateOne({ _id: fields.id}, fields);
@@ -69,13 +69,13 @@ function updateExistingFiles(filedata) {
     }
 }
 
-function saveImagesToDB(listing, metadata, imageNamesAndPositions) {
+function saveImagesToDB(listingId, metadata, imageNamesAndPositions) {
     return Promise.all(metadata.map(imageMeta => {
 		const position = imageNamesAndPositions.filter(
 		    data => `${data.name}.webp` == imageMeta.name
 		)[0].position;
 		const imageModel = new db.Image({
-		    listingId: listing.id,
+		    listingId,
 		    position,
 		    googleId: imageMeta.id,
 		    link: imageMeta.mediaLink,
