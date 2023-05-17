@@ -57,7 +57,8 @@ function handleError(error, response) {
 
 function findTopDir(route) {
 	const reg = /^\/.+?(?=\/.+)/;
-	return route.match(reg)[0];
+	const match = route.match(reg);
+	return match ? match[0] : match
 }
 
 
