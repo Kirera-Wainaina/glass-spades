@@ -104,6 +104,16 @@ function saveImagesToDB(listing, metadata, imageNamesAndPositions) {
 		return imageModel.save();
     }))
 }
+
+function urlifySentence(sentence) {
+    return sentence
+        .toLowerCase()
+        .trim()
+        .replace(/ /g, '-')
+  	    .replace(/[^A-Za-z-]/g, '')
+}
+
     
 exports.retrieveListing = retrieveListing;
 exports.updateListing = updateListing;
+exports.urlifySentence = urlifySentence;
