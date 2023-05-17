@@ -81,8 +81,31 @@ function createFilePath(urlPath) {
     return filePath
 }
 
+function createStaticFilePath(urlPath) {
+	const parsed_url = new URL(urlPath, process.env.URL);
+	const pathname = parsed_url.pathname;
+	const dir = path.basename(path.dirname(parsed_url.pathname));
+	let filePath;
+
+	if (pathname == '/') {
+		filePath = path.join(__dirname, "static/home.html");
+	} else if (pathname == '/rentals' || pathname == 'sales') {
+		filePath = path.join(__dirname, `static${pathname}.html`);
+	} else if (dir == 'listing') {
+		const listingId = parsed_url.searchParams.get('id');
+		filePath = path.join(__dirname, `static/listings/${listingId}.html`)
+	} else if (!path.extname(pathname)) {
+		// other browser paths
+		filePath = path.join(__dirname, `frontend/html/${pathname}.html`);
+	} else {
+		// etc files e.g favicon.ico, /frontend/js/home.js
+		filePath = path.join(__dirname, parsed_url.pathname);
+	}
+}
+
 exports.readFileAndRespond = readFileAndRespond;
 exports.createFilePath = createFilePath;
+exports.createStaticFilePath = createStaticFilePath;
 exports.handleError = handleError;
 exports.findTopDir = findTopDir;
 exports.routeCache = new Map();
