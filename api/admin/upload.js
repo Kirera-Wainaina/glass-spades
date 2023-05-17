@@ -106,6 +106,8 @@ async function uploadListing(request, response) {
 		const listingId = listing._id;
 
 		const cloudMetadata = await saveImagesToCloud(filePaths);
+		await saveImagesToDB(listingId, cloudMetadata, imageNamesAndPositions);
+
 
 		console.log(fields, files, imageNamesAndPositions);
 	} catch (error) {
