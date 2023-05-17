@@ -5,7 +5,7 @@ const db = require("../../database/models");
 const respond = require("../../utils/respond");
 const FormDataHandler = require("../../utils/formDataHandler");
 const serverRender = require("../../utils/serverRender");
-const { saveImagesToCloud } = require('./upload');
+const { saveImagesToCloud, saveImagesToDB } = require('./upload');
 
 function retrieveListing(request, response) {
     let listingId;
@@ -68,25 +68,6 @@ function updateExistingFiles(filedata) {
 		return ;
     }
 }
-
-function saveImagesToDB(listingId, metadata, imageNamesAndPositions) {
-    return Promise.all(metadata.map(imageMeta => {
-		const position = imageNamesAndPositions.filter(
-		    data => `${data.name}.webp` == imageMeta.name
-		)[0].position;
-		const imageModel = new db.Image({
-		    listingId,
-		    position,
-		    googleId: imageMeta.id,
-		    link: imageMeta.mediaLink,
-		    name: imageMeta.name,
-		    contentType: imageMeta.contentType
-		});
-
-		console.log("saved updates to db")
-		return imageModel.save();
-    }))
-}
-    
+   
 exports.retrieveListing = retrieveListing;
 exports.updateListing = updateListing;
