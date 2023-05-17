@@ -1,6 +1,5 @@
 const http2 = require("http2");
 const http = require("http");
-const url = require("url");
 const path = require("path");
 const fs = require("fs");
 
@@ -24,7 +23,7 @@ const server = http2.createSecureServer(options);
 
 server.on("request", async (request, response) => {
     console.log(`Date: ${new Date()}, Path: ${request.url} http: ${request.httpVersion}`)
-    const parsed_url = url.parse(request.url);
+	const parsed_url = new URL(request.url, process.env.URL);
     const cwd = ".";
 
     if (request.url == "/") {
