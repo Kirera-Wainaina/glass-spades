@@ -21,9 +21,15 @@ const options = {
 
 const server = http2.createSecureServer(options);
 
+server.on("request",
+	(request, response) => console.log(
+		`Date: ${new Date()}, Path: ${request.url} http: ${request.httpVersion}`
+	)
+)
+
 server.on("request", async (request, response) => {
-    console.log(`Date: ${new Date()}, Path: ${request.url} http: ${request.httpVersion}`)
 	const parsed_url = new URL(request.url, process.env.URL);
+	console.log(parsed_url)
     const cwd = ".";
 
     if (request.url == "/") {
