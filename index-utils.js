@@ -101,6 +101,7 @@ function createStaticFilePath(urlPath) {
 		// etc files e.g favicon.ico, /frontend/js/home.js
 		filePath = path.join(__dirname, parsed_url.pathname);
 	}
+	return filePath
 }
 
 exports.readFileAndRespond = readFileAndRespond;
