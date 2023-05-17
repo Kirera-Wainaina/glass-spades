@@ -105,7 +105,8 @@ async function uploadListing(request, response) {
 		let listing = await new db.Listing();
 		const listingId = listing._id;
 
-		await saveFiles(filePaths);
+		const cloudMetadata = await saveImagesToCloud(filePaths);
+
 		console.log(fields, files, imageNamesAndPositions);
 	} catch (error) {
 		console.log(error)
@@ -132,6 +133,25 @@ async function saveImagesToCloud(filePaths) {
 	return cloudFileMetadata
 }
 
+function saveImagesToDB(listingId, metadata, imageNamesAndPositions) {
+    return Promise.all(metadata.map(imageMeta => {
+		const position = imageNamesAndPositions.filter(
+		    data => `${data.name}.webp` == imageMeta.name
+		)[0].position;
+		const imageModel = new db.Image({
+		    listingId,
+		    position,
+		    googleId: imageMeta.id,
+		    link: imageMeta.mediaLink,
+		    name: imageMeta.name,
+		    contentType: imageMeta.contentType
+		});
+
+		console.log("saved updates to db")
+		return imageModel.save();
+    }))
+}
+ 
 function deleteImagesInDB(request, response) {
     const imageIds = [];
     const busboy = new Busboy({ headers: request.headers });
@@ -154,3 +174,4 @@ exports.sendModelData = sendModelData;
 exports.uploadListing = uploadListing;
 exports.deleteImagesInDB = deleteImagesInDB;
 exports.saveImagesToCloud = saveImagesToCloud;
+exports.saveImagesToDB = saveImagesToDB;
