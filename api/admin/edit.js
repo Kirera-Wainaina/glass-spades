@@ -1,14 +1,9 @@
-const fs = require("fs");
 const fsPromises = require('fs/promises');
-const path = require("path");
 const qs = require("querystring");
-
-const Busboy = require("busboy");
 
 const db = require("../../database/models");
 const respond = require("../../utils/respond");
 const images = require("../../utils/images");
-const indexUtils = require("../../index-utils");
 const FormDataHandler = require("../../utils/formDataHandler");
 
 function retrieveListing(request, response) {
