@@ -84,7 +84,7 @@ function updateListing_(request, response) {
 						]);
 
 						if (metadata && metadata.length) {
-						    await saveToDB(listing, metadata, fileNames);
+						    await saveImagesToDB(listing, metadata, fileNames);
 						}
 
 				    } catch (error) {
@@ -130,7 +130,7 @@ function updateListing_(request, response) {
 }
 
 async function updateListing(request, response) {
-	const [fields, files] = await new FormDataHandler(request).run();
+	const [fields, files, imageNamesAndPositions] = await new FormDataHandler(request).run();
 	fields['Location'] = {
 		coordinates: [ fields.Longitude, fields.Latitude ]
 	};
@@ -138,9 +138,13 @@ async function updateListing(request, response) {
 
 	if (files.length) {
 		metadata = await saveFiles(files);
+		// await saveImagesToDB(fields, metadata, imageNamesAndPositions);
+		console.log(imageNamesAndPositions)
 	}
-	// console.log(fields);
-	// console.log(files);
+	// await updateExistingFiles(fields.fileId)
+
+	console.log(fields);
+	console.log(files);
 	console.log(metadata)
 }
 
@@ -182,10 +186,11 @@ async function saveFiles(filePaths) {
 	return cloudFileMetadata
 }
 
-function saveToDB(listing, metadata, extraData) {
+function saveImagesToDB(listing, metadata, imageNamesAndPositions) {
     return Promise.all(metadata.map(imageMeta => {
-		const position = extraData.filter(
-		    data => `${data.name}.webp` == imageMeta.name)[0].position;
+		const position = imageNamesAndPositions.filter(
+		    data => `${data.name}.webp` == imageMeta.name
+		)[0].position;
 		const imageModel = new db.Image({
 		    listingId: listing.id,
 		    position,
