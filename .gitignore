@@ -12,8 +12,13 @@ cloud-env-file.txt
 house-vert.jpg
 house-1920.jpg
 
-# ignore images in the converted folder
-converted/*.webp
+# ignore all files in converted except x
+converted/*
+!converted/x
+
+# ignore all files in uploaeded except x
+uploaded/*
+!uploaded/x
 
 # service account
 glass-spades-service-account.json
