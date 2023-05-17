@@ -8,6 +8,7 @@ const db = require("../../database/models");
 const respond = require("../../utils/respond");
 const images = require("../../utils/images");
 const indexUtils = require("../../index-utils");
+const FormDataHandler = require("../../utils/formDataHandler");
 
 function retrieveListing(request, response) {
     let listingId;
@@ -30,7 +31,7 @@ function retrieveListing(request, response) {
 }
 
 
-function updateListing(request, response) {
+function updateListing_(request, response) {
     const busboy = new Busboy({ headers: request.headers });
     const listing = {};
     const fileNames = [];
@@ -125,6 +126,15 @@ function updateListing(request, response) {
     })
     
     request.pipe(busboy);
+}
+
+async function updateListing(request, response) {
+	const [fields, files] = await new FormDataHandler(request).run();
+	fields['Location'] = {
+		coordinates: [ listing.Longitude, listing.Latitude ]
+	};
+	console.log(fields);
+	console.log(files);
 }
 
 function updateExistingFiles(filedata) {
