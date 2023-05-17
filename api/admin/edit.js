@@ -21,7 +21,7 @@ function retrieveListing(request, response) {
 				db.Listing.findById(listingId, { Featured: 0, Archived: 0 }),
 				db.Image.find({ listingId })
 		    ]);
-		
+
 		    respond.handleJSONResponse(response, { listing, listingImages })
 		} catch (error) {
 		    respond.handleTextResponse(response, "fail");
@@ -129,19 +129,19 @@ function updateListing(request, response) {
 
 function updateExistingFiles(filedata) {
     if (filedata && filedata.length) {
-	return Promise.all(filedata.map(data => {
-	    return new Promise((resolve, reject) => {
-			const dataObj = qs.parse(data);
-			db.Image.updateOne(
-			    { _id: dataObj.name },
-			    { position: dataObj.position},
-			    (error, result) => {
-					if (error) console.log(`${filename} not exist`);
-					console.log("Updated existing images")
-					resolve(result)
-			    })
-	    })
-	}))
+		return Promise.all(filedata.map(data => {
+		    return new Promise((resolve, reject) => {
+				const dataObj = qs.parse(data);
+				db.Image.updateOne(
+				    { _id: dataObj.name },
+				    { position: dataObj.position},
+				    (error, result) => {
+						if (error) console.log(`${filename} not exist`);
+						console.log("Updated existing images")
+						resolve(result)
+				    })
+		    })
+		}))
     } else {
 		return ;
     }
