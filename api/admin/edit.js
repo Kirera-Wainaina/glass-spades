@@ -1,4 +1,5 @@
 const fs = require("fs");
+const fsPromises = require('fs/promises');
 const path = require("path");
 const qs = require("querystring");
 
@@ -198,11 +199,16 @@ async function saveFiles(filePaths) {
 		filePaths.map(filePath => images.minifyImage(filePath))
 	);
 	const cloudFiles = await Promise.all(
-		imageMinMetadata.map(file => images.saveImage(file[0].destinationPath))
+		imageMinMetadata.flat().map(file => images.saveImage(file.destinationPath))
 	);
 	const cloudFileMetadata = await Promise.all(
 		cloudFiles.map(file => file.getMetadata().then(data => data[0]))
 	);
+
+	const filesOnDisk = imageMinMetadata.flatMap(
+		data => [data[0].destinationPath, data[0].sourcePath]
+	);
+	await Promise.all(filesOnDisk.map(file => fsPromises.unlink(file)));
 	return cloudFileMetadata
 }
 
