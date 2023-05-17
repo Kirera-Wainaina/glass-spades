@@ -40,3 +40,6 @@ localhost-certs/
 
 # ignore the .cache created by puppeteer
 .cache/
+
+#ignore the static directory
+static/
