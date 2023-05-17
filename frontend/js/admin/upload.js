@@ -275,27 +275,27 @@ export async function setData(event) {
     houseInfo[price.name] = price.value;
 
     if (houseInfo.Category == "Land") {
-	houseInfo[size.name] = size.value;
+		houseInfo[size.name] = size.value;
     } else if (houseInfo.Category == "Apartment") {
-	houseInfo[size.name] = size.value;
-	houseInfo[development.name] = development.value;
+		houseInfo[size.name] = size.value;
+		houseInfo[development.name] = development.value;
     }
 
     if (sessionStorage.getItem("Latitude")) {
-	houseInfo["Latitude"] = sessionStorage.getItem("Latitude");
-	houseInfo["Longitude"] = sessionStorage.getItem("Longitude");
+		houseInfo["Latitude"] = sessionStorage.getItem("Latitude");
+		houseInfo["Longitude"] = sessionStorage.getItem("Longitude");
     }
     
     Object.keys(houseInfo).forEach(key => {
-	if (Array.isArray(houseInfo[key])) {
-	    houseInfo[key].forEach(value => formdata.append(key, value));
-	} else {
-	    formdata.set(key, houseInfo[key])
-	}
+		if (Array.isArray(houseInfo[key])) {
+		    houseInfo[key].forEach(value => formdata.append(key, value));
+		} else {
+		    formdata.set(key, houseInfo[key])
+		}
     })
 
     const images = await getImages();
-    formdata.set("imageNum", images.length);
+    formdata.set("fileNumber", images.length);
     
     images.forEach((image, index) => {
 		let name = `name=${Date.now()}-${Math.trunc(Math.random() * 1e6)}&position=${index}`;
@@ -303,7 +303,7 @@ export async function setData(event) {
     })
 
     if (confirmValues(formdata)) {
-	submitData(formdata);
+		submitData(formdata);
     }
 }
 
