@@ -130,22 +130,25 @@ function updateListing_(request, response) {
 }
 
 async function updateListing(request, response) {
-	const [fields, files, imageNamesAndPositions] = await new FormDataHandler(request).run();
-	fields['Location'] = {
-		coordinates: [ fields.Longitude, fields.Latitude ]
-	};
-	let metadata;
-
-	if (files.length) {
-		metadata = await saveFiles(files);
-		// await saveImagesToDB(fields, metadata, imageNamesAndPositions);
-		console.log(imageNamesAndPositions)
+	try {
+		const [fields, files, imageNamesAndPositions] = await new FormDataHandler(request).run();
+		fields['Location'] = {
+			coordinates: [ fields.Longitude, fields.Latitude ]
+		};
+		let metadata;
+	
+		if (files.length) {
+			metadata = await saveFiles(files);
+			await saveImagesToDB(fields, metadata, imageNamesAndPositions);
+		}
+		await updateExistingFiles(fields.fileId)
+		await db.Listing.updateOne({ _id: fields.id}, fields);
+	
+		respond.handleTextResponse(response, "success");
+	} catch (error) {
+		console.log(error)
+		respond.handleTextResponse(response, "fail");
 	}
-	// await updateExistingFiles(fields.fileId)
-
-	console.log(fields);
-	console.log(files);
-	console.log(metadata)
 }
 
 function updateExistingFiles(filedata) {
