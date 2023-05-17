@@ -37,3 +37,6 @@ scripts/
 
 #local host certificates
 localhost-certs/
+
+# ignore the .cache created by puppeteer
+.cache/
