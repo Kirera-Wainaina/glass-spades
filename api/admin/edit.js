@@ -164,36 +164,6 @@ function updateExistingFiles(filedata) {
     }
 }
 
-async function saveFiles_(fileNames) {
-	if (!fileNames.length) return;
-	
-	const imageFolder = path.join(
-	    path.dirname(path.dirname(__dirname)), 
-		"uploaded"
-	);
-	const files = await Promise.all(
-	    fileNames.map(filename => images.minifyImage(
-			path.join(imageFolder, filename.name))
-		)
-	);
-		
-	const cloudFiles = await Promise.all(files.map(
-	    file => images.saveImage(file[0].destinationPath))
-	);
-	const googleMetadata = await Promise.all(files.map(
-	    file => images.getFileMetadata(file[0].destinationPath))
-	);
-	files.forEach(file => fs.unlinkSync(file[0].sourcePath));
-	files.forEach(file => fs.unlinkSync(file[0].destinationPath));
-	
-	const metadata = googleMetadata.map((data, index) => {
-	    const [ itemMetadata ] = googleMetadata[index];
-	    return itemMetadata
-	});
-	return metadata
-    
-}
-
 async function saveFiles(filePaths) {
 	const imageMinMetadata = await Promise.all(
 		filePaths.map(filePath => images.minifyImage(filePath))
