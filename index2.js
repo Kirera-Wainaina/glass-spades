@@ -31,19 +31,12 @@ server.on("request", async (request, response) => {
 	const parsed_url = new URL(request.url, process.env.URL);
 	const pathname = parsed_url.pathname;
 	console.log(parsed_url)
-    const cwd = ".";
 
     if (pathname == "/") {
 		handleHomeRoute(pathname, response);
     } else if (indexUtils.findTopDir(pathname) == "/api"){
 	// has to come before browser requests
-	try {
-	    const file = require(`${cwd}${path.dirname(parsed_url.pathname)}`);
-	    const execute = path.basename(parsed_url.pathname);
-	    file[execute](request, response);
-	} catch(error) {
-	    indexUtils.handleError(error, response);
-	}
+		handleAPIRoute(request, response);
     } else if (!path.extname(parsed_url.pathname) ){
 	// browser paths
 	const filePath = indexUtils.createFilePath(request.url)
@@ -84,4 +77,18 @@ httpServer.on("error", error => {
 function handleHomeRoute(pathname, response) {
 	const filePath = indexUtils.createFilePath(pathname);
 	indexUtils.readFileAndRespond(filePath, response);
+}
+
+function handleAPIRoute(request, response) {
+	try {
+		const parsed_url = new URL(request.url, process.env.URL);
+		const pathname = parsed_url.pathname;
+		const cwd = '.';
+	    const file = require(`${cwd}${path.dirname(pathname)}`);
+		const execute = path.basename(pathname);
+
+	    file[execute](request, response);
+	} catch (error) {
+	    indexUtils.handleError(error, response);
+	}
 }
