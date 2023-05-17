@@ -8,6 +8,7 @@ const images = require("../../utils/images.js");
 const respond = require("../../utils/respond.js");
 const db = require("../../database/models.js");
 const FormDataHandler = require("../../utils/formDataHandler.js");
+const serverRender = require('../../utils/serverRender.js');
 
 function sendModelData(request, response) {
     const modelPath = `${path.dirname(path.dirname(__dirname))}/utils/model.json`;
@@ -35,6 +36,7 @@ async function uploadListing(request, response) {
 
 		listing = Object.assign(listing, fields);
 		await listing.save();
+		await serverRender.renderListingRelatedPages(listingId, fields.Heading, fields.Mandate);
 		respond.handleTextResponse(response, "success");
 	} catch (error) {
 		console.log(error)
