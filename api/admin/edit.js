@@ -158,35 +158,33 @@ function updateExistingFiles(filedata) {
 }
 
 async function saveFiles(fileNames) {
-
-    if (fileNames.length) {
-		const imageFolder = path.join(
-		    path.dirname(path.dirname(__dirname)), 
-			"uploaded"
-		);
-		const files = await Promise.all(
-		    fileNames.map(filename => images.minifyImage(
-				path.join(imageFolder, filename.name))
-			)
-		);
-			
-		const cloudFiles = await Promise.all(files.map(
-		    file => images.saveImage(file[0].destinationPath))
-		);
-
-		const googleMetadata = await Promise.all(files.map(
-		    file => images.getFileMetadata(file[0].destinationPath))
-		);
-
-		files.forEach(file => fs.unlinkSync(file[0].sourcePath));
-		files.forEach(file => fs.unlinkSync(file[0].destinationPath));
+	if (!fileNames.length) return;
+	
+	const imageFolder = path.join(
+	    path.dirname(path.dirname(__dirname)), 
+		"uploaded"
+	);
+	const files = await Promise.all(
+	    fileNames.map(filename => images.minifyImage(
+			path.join(imageFolder, filename.name))
+		)
+	);
 		
-		const metadata = googleMetadata.map((data, index) => {
-		    const [ itemMetadata ] = googleMetadata[index];
-		    return itemMetadata
-		});
-		return metadata
-    }
+	const cloudFiles = await Promise.all(files.map(
+	    file => images.saveImage(file[0].destinationPath))
+	);
+	const googleMetadata = await Promise.all(files.map(
+	    file => images.getFileMetadata(file[0].destinationPath))
+	);
+	files.forEach(file => fs.unlinkSync(file[0].sourcePath));
+	files.forEach(file => fs.unlinkSync(file[0].destinationPath));
+	
+	const metadata = googleMetadata.map((data, index) => {
+	    const [ itemMetadata ] = googleMetadata[index];
+	    return itemMetadata
+	});
+	return metadata
+    
 }
 
 function saveToDB(listing, metadata, extraData) {
