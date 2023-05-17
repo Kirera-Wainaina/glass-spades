@@ -298,8 +298,8 @@ export async function setData(event) {
     formdata.set("imageNum", images.length);
     
     images.forEach((image, index) => {
-	let name = `${Date.now()}-${Math.trunc(Math.random() * 1e6)}-`;
-	formdata.set(name + index, image)
+		let name = `name=${Date.now()}-${Math.trunc(Math.random() * 1e6)}&position=${index}`;
+		formdata.set(name, image)
     })
 
     if (confirmValues(formdata)) {
