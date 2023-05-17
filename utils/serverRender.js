@@ -69,3 +69,19 @@ function urlifySentence(sentence) {
         .replace(/ /g, '-')
   	    .replace(/[^A-Za-z-]/g, '')
 }
+
+function writeHTMLToFile(content, staticFilePath) {
+    const filePath = path.join(__dirname, '..', 'static', staticFilePath);
+    return fsPromises.writeFile(filePath, content)
+}
+
+function createFileNameFromUrl(url) {
+    const parsedUrl = new URL(url);
+    if (parsedUrl.pathname == '/') {
+        return 'home.html'
+    } else if (parsedUrl.pathname == 'sales' || parsedUrl.pathname == 'rentals') {
+        return `${parsedUrl.pathname}.html`
+    } else {
+        return `/listings/${parsedUrl.searchParams.get('id')}.html`
+    }
+}
