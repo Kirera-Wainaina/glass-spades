@@ -5,6 +5,7 @@ const db = require("../../database/models");
 const respond = require("../../utils/respond");
 const images = require("../../utils/images");
 const FormDataHandler = require("../../utils/formDataHandler");
+const serverRender = require("../../utils/serverRender");
 
 function retrieveListing(request, response) {
     let listingId;
@@ -40,6 +41,7 @@ async function updateListing(request, response) {
 		}
 		await updateExistingFiles(fields.fileId)
 		await db.Listing.updateOne({ _id: fields.id}, fields);
+		await serverRender.renderListingRelatedPages(fields.id, fields.Heading, fields.Mandate);
 	
 		respond.handleTextResponse(response, "success");
 	} catch (error) {
@@ -104,16 +106,6 @@ function saveImagesToDB(listing, metadata, imageNamesAndPositions) {
 		return imageModel.save();
     }))
 }
-
-function urlifySentence(sentence) {
-    return sentence
-        .toLowerCase()
-        .trim()
-        .replace(/ /g, '-')
-  	    .replace(/[^A-Za-z-]/g, '')
-}
-
     
 exports.retrieveListing = retrieveListing;
 exports.updateListing = updateListing;
-exports.urlifySentence = urlifySentence;
