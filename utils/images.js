@@ -54,7 +54,6 @@ function getFileMetadata(name) {
 
 function deleteImageFromCloud(name) {
     return new Promise((resolve, reject) => {
-	const storage = new Storage();
 	const bucket = storage.bucket("glass-spades-images");
 	const file = bucket.file(name);
 	file.delete((error, apiResponse) => {
