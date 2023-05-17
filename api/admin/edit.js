@@ -131,10 +131,16 @@ function updateListing_(request, response) {
 async function updateListing(request, response) {
 	const [fields, files] = await new FormDataHandler(request).run();
 	fields['Location'] = {
-		coordinates: [ listing.Longitude, listing.Latitude ]
+		coordinates: [ fields.Longitude, fields.Latitude ]
 	};
-	console.log(fields);
-	console.log(files);
+	let metadata;
+
+	if (files.length) {
+		[ metadata ] = await saveFiles(files);
+	}
+	// console.log(fields);
+	// console.log(files);
+	console.log(metadata)
 }
 
 function updateExistingFiles(filedata) {
@@ -157,7 +163,7 @@ function updateExistingFiles(filedata) {
     }
 }
 
-async function saveFiles(fileNames) {
+async function saveFiles_(fileNames) {
 	if (!fileNames.length) return;
 	
 	const imageFolder = path.join(
@@ -185,6 +191,13 @@ async function saveFiles(fileNames) {
 	});
 	return metadata
     
+}
+
+async function saveFiles(filePaths) {
+	const imageMinMetadata = await Promise.all(
+		filePaths.map(filePath => images.minifyImage(filePath))
+	);
+	return imageMinMetadata
 }
 
 function saveToDB(listing, metadata, extraData) {
