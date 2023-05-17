@@ -136,7 +136,7 @@ async function updateListing(request, response) {
 	let metadata;
 
 	if (files.length) {
-		[ metadata ] = await saveFiles(files);
+		metadata = await saveFiles(files);
 	}
 	// console.log(fields);
 	// console.log(files);
@@ -197,7 +197,13 @@ async function saveFiles(filePaths) {
 	const imageMinMetadata = await Promise.all(
 		filePaths.map(filePath => images.minifyImage(filePath))
 	);
-	return imageMinMetadata
+	const cloudFiles = await Promise.all(
+		imageMinMetadata.map(file => images.saveImage(file[0].destinationPath))
+	);
+	const cloudFileMetadata = await Promise.all(
+		cloudFiles.map(file => file.getMetadata().then(data => data[0]))
+	);
+	return cloudFileMetadata
 }
 
 function saveToDB(listing, metadata, extraData) {
