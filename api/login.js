@@ -1,20 +1,20 @@
 const querystring = require("querystring");
 
-const Busboy = require("busboy");
+const busboy = require("busboy");
 const bcrypt = require("bcrypt")
 
 const database = require("../database/models");
 const respond = require("../utils/respond");
 
 function loginUser(request, response) {
-    const busboy = new Busboy({ headers: request.headers });
+    const bb = busboy({ headers: request.headers });
     const credentials = {};
 
-    busboy.on("field", (fieldname, value) => {
+    bb.on("field", (fieldname, value) => {
 	credentials[fieldname] = value;
     })
 
-    busboy.on("finish", () => {
+    bb.on("finish", () => {
 	database.User.find({ "email": credentials["email"] })
 	    .then(doc => {
 		if (doc[0]) {
@@ -26,7 +26,7 @@ function loginUser(request, response) {
 	    .catch(error => console.error())
     });
 
-    request.pipe(busboy)
+    request.pipe(bb)
 }
 
 function confirmPassword(loginPassword, user, response) {
