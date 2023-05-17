@@ -4,6 +4,12 @@ const fs = require("fs");
 const imagemin = require("imagemin");
 const imageminWebp = require("imagemin-webp");
 const { Storage } = require("@google-cloud/storage");
+const dotenv = require('dotenv');
+dotenv.config()
+
+const storage = new Storage({
+	keyFilename: process.env.SERVICE_ACCOUNT_PATH
+});
 
 function minifyImage(filename) {
     const destination = path.join(path.dirname(__dirname), "converted");
@@ -19,7 +25,6 @@ function minifyImage(filename) {
 }
 
 function saveImage(filepath) {
-    const storage = new Storage();
     const bucket = storage.bucket("glass-spades-images");
     const filename = path.basename(filepath)
     const file = bucket.file(filename);
@@ -41,7 +46,6 @@ function saveImage(filepath) {
 }
 
 function getFileMetadata(name) {
-    const storage = new Storage();
     const bucket = storage.bucket("glass-spades-images");
     const filename = path.basename(name);
     const file = bucket.file(filename);
