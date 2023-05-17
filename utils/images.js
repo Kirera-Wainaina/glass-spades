@@ -40,10 +40,10 @@ function saveImage(filepath) {
     })
 }
 
-function getFileMetadata(filePath) {
+function getFileMetadata(filename) {
     const storage = new Storage();
     const bucket = storage.bucket("glass-spades-images");
-    const filename = path.basename(filePath);
+    const filename = path.basename(filename);
     const file = bucket.file(filename);
     return file.getMetadata()
 }
