@@ -34,26 +34,27 @@ server.on("request", async (request, response) => {
 	const parsed_url = new URL(request.url, process.env.URL);
 	const pathname = parsed_url.pathname;
 
-    if (pathname == "/") {
-		const filePath = indexUtils.createFilePath(pathname);
-		indexUtils.readFileAndRespond(filePath, response);
-    } else if (indexUtils.findTopDir(pathname) == "/api"){
-		// has to come before browser requests
+	if (indexUtils.findTopDir(pathname) == "/api") {
 		handleAPIRoute(request, response);
-    } else if (!path.extname(parsed_url.pathname) ){
-		// browser paths
-		const filePath = indexUtils.createFilePath(request.url)
-		indexUtils.readFileAndRespond(filePath, response);
-    } else {
+	} else {
 		const filePath = indexUtils.createFilePath(request.url);
 		indexUtils.readFileAndRespond(filePath, response);
-    }
+	}
 });
 
 server.on('request', (request, response) => {
 	// headless chromium should be able to access the rest of the code
 	if (request.headers['user-agent'] == 'glassspades-headless-chromium') return;
 
+	const parsed_url = new URL(request.url, process.env.URL);
+	const pathname = parsed_url.pathname;
+
+	if (indexUtils.findTopDir(pathname) == "/api") {
+		handleAPIRoute(request, response);
+	} else {
+		const filePath = indexUtils.createStaticFilePath(request.url);
+		indexUtils.readFileAndRespond(filePath, response);
+	}
 })
 
 server.listen(port, () => {
