@@ -9,6 +9,7 @@ const respond = require("../../utils/respond.js");
 const general = require("../../utils/general");
 const db = require("../../database/models.js");
 const indexUtils = require("../../index-utils");
+const FormDataHandler = require("../../utils/formDataHandler.js");
 
 class Emitter extends EventEmitter {};
 const emitter = new Emitter();
@@ -24,7 +25,7 @@ function sendModelData(request, response) {
 	.pipe(response)
 }
 
-async function uploadListing(request, response) {
+async function uploadListing_(request, response) {
     const busboy = new Busboy({ headers: request.headers });
     let listing = await new db.Listing();
     const listingId = listing._id;
@@ -56,7 +57,8 @@ async function uploadListing(request, response) {
 				const convertedFile = await images.minifyImage(route);
 				await images.saveImage(convertedFile[0].destinationPath);
 				const [ metadata ] = await images.getFileMetadata(
-				    convertedFile[0].destinationPath);
+				    convertedFile[0].destinationPath
+				);
 				fs.unlinkSync(convertedFile[0].destinationPath);
 				fs.unlinkSync(convertedFile[0].sourcePath);
 				const imageModel = new db.Image({
@@ -90,6 +92,20 @@ async function uploadListing(request, response) {
     })
 
     request.pipe(busboy)
+}
+
+async function uploadListing(request, response) {
+	try {
+		const [fields, files, imageNamesAndPositions] = await new FormDataHandler(request).run();
+		let listing = await new db.Listing();
+		const listingId = listing._id;
+		
+		console.log(fields, files, imageNamesAndPositions);
+	} catch (error) {
+		console.log(error)
+		respond.handleTextResponse(response, "fail");
+	}
+
 }
 
 function deleteImagesInDB(request, response) {
