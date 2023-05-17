@@ -30,20 +30,20 @@ server.on("request",
 server.on("request", async (request, response) => {
 	const parsed_url = new URL(request.url, process.env.URL);
 	const pathname = parsed_url.pathname;
-	console.log(parsed_url)
 
     if (pathname == "/") {
-		handleHomeRoute(pathname, response);
+		const filePath = indexUtils.createFilePath(pathname);
+		indexUtils.readFileAndRespond(filePath, response);
     } else if (indexUtils.findTopDir(pathname) == "/api"){
-	// has to come before browser requests
+		// has to come before browser requests
 		handleAPIRoute(request, response);
     } else if (!path.extname(parsed_url.pathname) ){
-	// browser paths
-	const filePath = indexUtils.createFilePath(request.url)
-	indexUtils.readFileAndRespond(filePath, response);
+		// browser paths
+		const filePath = indexUtils.createFilePath(request.url)
+		indexUtils.readFileAndRespond(filePath, response);
     } else {
-	const filePath = indexUtils.createFilePath(request.url);
-	indexUtils.readFileAndRespond(filePath, response);
+		const filePath = indexUtils.createFilePath(request.url);
+		indexUtils.readFileAndRespond(filePath, response);
     }
 });
 
@@ -73,11 +73,6 @@ httpServer.on("error", error => {
 })
 
 /////////////////////////////////////////////////////////////////////////
-
-function handleHomeRoute(pathname, response) {
-	const filePath = indexUtils.createFilePath(pathname);
-	indexUtils.readFileAndRespond(filePath, response);
-}
 
 function handleAPIRoute(request, response) {
 	try {
