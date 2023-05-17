@@ -12,8 +12,10 @@ exports.renderListingRelatedPages = async function (id, listingHeading, mandate)
 
     const contentAndUrl = await Promise.all([listingUrl, mandatePage]
         .map(url => renderPage(url)));
-    console.log(contentAndUrl)
 
+    await Promise.all(contentAndUrl.map(
+        data => writeHTMLToFile(data.content, createFileNameFromUrl(data.url))
+    ))
 }
 
 async function renderPage(url) {
@@ -79,7 +81,7 @@ function createFileNameFromUrl(url) {
     const parsedUrl = new URL(url);
     if (parsedUrl.pathname == '/') {
         return 'home.html'
-    } else if (parsedUrl.pathname == 'sales' || parsedUrl.pathname == 'rentals') {
+    } else if (parsedUrl.pathname == '/sales' || parsedUrl.pathname == '/rentals') {
         return `${parsedUrl.pathname}.html`
     } else {
         return `/listings/${parsedUrl.searchParams.get('id')}.html`
