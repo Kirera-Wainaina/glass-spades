@@ -7,7 +7,6 @@ const Busboy = require("busboy");
 const images = require("../../utils/images.js");
 const respond = require("../../utils/respond.js");
 const db = require("../../database/models.js");
-const indexUtils = require("../../index-utils");
 const FormDataHandler = require("../../utils/formDataHandler.js");
 
 function sendModelData(request, response) {
@@ -83,7 +82,7 @@ function saveImagesToDB(listingId, metadata, imageNamesAndPositions) {
  
 function deleteImagesInDB(request, response) {
     const imageIds = [];
-    const busboy = new Busboy({ headers: request.headers });
+    const busboy = Busboy({ headers: request.headers });
 
     busboy.on("field", (name, value) => {
 		imageIds.push(value)
