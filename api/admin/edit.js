@@ -3,9 +3,9 @@ const qs = require("querystring");
 
 const db = require("../../database/models");
 const respond = require("../../utils/respond");
-const images = require("../../utils/images");
 const FormDataHandler = require("../../utils/formDataHandler");
 const serverRender = require("../../utils/serverRender");
+const { saveImagesToCloud } = require('./upload');
 
 function retrieveListing(request, response) {
     let listingId;
@@ -33,10 +33,9 @@ async function updateListing(request, response) {
 		fields['Location'] = {
 			coordinates: [ fields.Longitude, fields.Latitude ]
 		};
-		let metadata;
 	
 		if (files.length) {
-			metadata = await saveFiles(files);
+			const metadata = await saveImagesToCloud(files);
 			await saveImagesToDB(fields, metadata, imageNamesAndPositions);
 		}
 		await updateExistingFiles(fields.fileId)
@@ -68,24 +67,6 @@ function updateExistingFiles(filedata) {
     } else {
 		return ;
     }
-}
-
-async function saveFiles(filePaths) {
-	const imageMinMetadata = await Promise.all(
-		filePaths.map(filePath => images.minifyImage(filePath))
-	);
-	const cloudFiles = await Promise.all(
-		imageMinMetadata.flat().map(file => images.saveImage(file.destinationPath))
-	);
-	const cloudFileMetadata = await Promise.all(
-		cloudFiles.map(file => file.getMetadata().then(data => data[0]))
-	);
-
-	const filesOnDisk = imageMinMetadata.flatMap(
-		data => [data[0].destinationPath, data[0].sourcePath]
-	);
-	await Promise.all(filesOnDisk.map(file => fsPromises.unlink(file)));
-	return cloudFileMetadata
 }
 
 function saveImagesToDB(listing, metadata, imageNamesAndPositions) {

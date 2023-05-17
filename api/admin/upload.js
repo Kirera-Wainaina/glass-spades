@@ -10,6 +10,7 @@ const general = require("../../utils/general");
 const db = require("../../database/models.js");
 const indexUtils = require("../../index-utils");
 const FormDataHandler = require("../../utils/formDataHandler.js");
+const images = require("../../utils/images");
 
 class Emitter extends EventEmitter {};
 const emitter = new Emitter();
@@ -96,16 +97,39 @@ async function uploadListing_(request, response) {
 
 async function uploadListing(request, response) {
 	try {
-		const [fields, files, imageNamesAndPositions] = await new FormDataHandler(request).run();
+		const [fields, filePaths, imageNamesAndPositions] = await new FormDataHandler(request).run();
+		fields['Location'] = {
+			coordinates: [ fields.Longitude, fields.Latitude ]
+		};
+
 		let listing = await new db.Listing();
 		const listingId = listing._id;
-		
+
+		await saveFiles(filePaths);
 		console.log(fields, files, imageNamesAndPositions);
 	} catch (error) {
 		console.log(error)
 		respond.handleTextResponse(response, "fail");
 	}
 
+}
+
+async function saveImagesToCloud(filePaths) {
+	const imageMinMetadata = await Promise.all(
+		filePaths.map(filePath => images.minifyImage(filePath))
+	);
+	const cloudFiles = await Promise.all(
+		imageMinMetadata.flat().map(file => images.saveImage(file.destinationPath))
+	);
+	const cloudFileMetadata = await Promise.all(
+		cloudFiles.map(file => file.getMetadata().then(data => data[0]))
+	);
+
+	const filesOnDisk = imageMinMetadata.flatMap(
+		data => [data[0].destinationPath, data[0].sourcePath]
+	);
+	await Promise.all(filesOnDisk.map(file => fsPromises.unlink(file)));
+	return cloudFileMetadata
 }
 
 function deleteImagesInDB(request, response) {
@@ -129,3 +153,4 @@ function deleteImagesInDB(request, response) {
 exports.sendModelData = sendModelData;
 exports.uploadListing = uploadListing;
 exports.deleteImagesInDB = deleteImagesInDB;
+exports.saveImagesToCloud = saveImagesToCloud;
