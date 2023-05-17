@@ -68,28 +68,28 @@ function updateListing(request, response) {
 				console.log(error);
 		    })
 		    .on("finish", async () => {
-			counter++
-			if (counter == listing.imageNum) {
-			    try {
-					listing["Location"] = {
-					    coordinates: [ listing.Longitude, listing.Latitude ]
-					};
+				counter++
+				if (counter == listing.imageNum) {
+				    try {
+						listing["Location"] = {
+						    coordinates: [ listing.Longitude, listing.Latitude ]
+						};
 
-					// From the promise, only the first result is needed.
-					const [ metadata ] = await Promise.all([
-					    saveFiles(fileNames),
-					    updateExistingFiles(listing.fileId),
-					]);
+						// From the promise, only the first result is needed.
+						const [ metadata ] = await Promise.all([
+						    saveFiles(fileNames),
+						    updateExistingFiles(listing.fileId),
+						]);
 
-					if (metadata && metadata.length) {
-					    await saveToDB(listing, metadata, fileNames);
-					}
+						if (metadata && metadata.length) {
+						    await saveToDB(listing, metadata, fileNames);
+						}
 
-			    } catch (error) {
-					console.log(error)
-					respond.handleTextResponse(response, "fail");
-			    }
-			}
+				    } catch (error) {
+						console.log(error)
+						respond.handleTextResponse(response, "fail");
+				    }
+				}
 		    })
     })
 
