@@ -29,13 +29,13 @@ server.on("request",
 
 server.on("request", async (request, response) => {
 	const parsed_url = new URL(request.url, process.env.URL);
+	const pathname = parsed_url.pathname;
 	console.log(parsed_url)
     const cwd = ".";
 
-    if (request.url == "/") {
-		const filePath = indexUtils.createFilePath(request.url);
-		indexUtils.readFileAndRespond(filePath, response);
-    } else if (indexUtils.findTopDir(request.url) == "/api"){
+    if (pathname == "/") {
+		handleHomeRoute(pathname, response);
+    } else if (indexUtils.findTopDir(pathname) == "/api"){
 	// has to come before browser requests
 	try {
 	    const file = require(`${cwd}${path.dirname(parsed_url.pathname)}`);
@@ -78,3 +78,10 @@ httpServer.listen(httpPort, () =>
 httpServer.on("error", error => {
     console.log(error);
 })
+
+/////////////////////////////////////////////////////////////////////////
+
+function handleHomeRoute(pathname, response) {
+	const filePath = indexUtils.createFilePath(pathname);
+	indexUtils.readFileAndRespond(filePath, response);
+}
