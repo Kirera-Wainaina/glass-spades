@@ -1,19 +1,14 @@
 const fs = require("fs");
+const fsPromises = require('fs/promises');
 const path = require("path");
-const EventEmitter = require("events");
 
 const Busboy = require("busboy");
 
 const images = require("../../utils/images.js");
 const respond = require("../../utils/respond.js");
-const general = require("../../utils/general");
 const db = require("../../database/models.js");
 const indexUtils = require("../../index-utils");
 const FormDataHandler = require("../../utils/formDataHandler.js");
-const images = require("../../utils/images");
-
-class Emitter extends EventEmitter {};
-const emitter = new Emitter();
 
 function sendModelData(request, response) {
     const modelPath = `${path.dirname(path.dirname(__dirname))}/utils/model.json`;
@@ -108,8 +103,9 @@ async function uploadListing(request, response) {
 		const cloudMetadata = await saveImagesToCloud(filePaths);
 		await saveImagesToDB(listingId, cloudMetadata, imageNamesAndPositions);
 
-
-		console.log(fields, files, imageNamesAndPositions);
+		listing = Object.assign(listing, fields);
+		await listing.save();
+		respond.handleTextResponse(response, "success");
 	} catch (error) {
 		console.log(error)
 		respond.handleTextResponse(response, "fail");
