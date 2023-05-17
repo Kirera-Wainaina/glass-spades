@@ -343,3 +343,11 @@ export function checkLogin() {
 	}
     }
 }
+
+export function urlifySentence(sentence) {
+    return sentence
+        .toLowerCase()
+        .trim()
+        .replace(/ /g, '-')
+  	    .replace(/[^A-Za-z-]/g, '')
+}
