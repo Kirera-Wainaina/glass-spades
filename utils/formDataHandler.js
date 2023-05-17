@@ -8,9 +8,10 @@ class FormDataHandler {
     constructor(request) {
         this.request = request;
         this.fields = {};
-        this.uploadedFiles = []
+        this.uploadedFiles = [];
         this.thereIsFile = false;
         this.fileNumber = 0;
+        this.imageNamesAndPositions = []
     }
 
     retrieveDetails() {
@@ -44,6 +45,7 @@ class FormDataHandler {
 
     handleFile(name, file, info, resolve) {
         const imageInfo = qs.parse(name);
+        this.imageNamesAndPositions.push(imageInfo);
         const fileName = imageInfo.name ?? name;
         this.thereIsFile = true;
         const ext = mimes.findExtensionFromMIMEType(info.mimeType);
@@ -72,7 +74,11 @@ class FormDataHandler {
     run() {
         return new Promise((resolve, reject) => {
             this.retrieveDetails()
-                .then(() => resolve([this.fields, this.uploadedFiles]))
+                .then(() => resolve([
+                    this.fields, 
+                    this.uploadedFiles, 
+                    this.imageNamesAndPositions
+                ]))
                 .catch(error => reject(error))
         })
     }
