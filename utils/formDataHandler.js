@@ -26,7 +26,19 @@ class FormDataHandler {
     }
 
     handleField(name, value) {
-        this.fields[name] = value;
+        if (
+			name == "External Features" || 
+			name == "Internal Features" ||
+		    name == "fileId"
+		) {
+		    if (this.fields[name]) {
+				this.fields[name].push(value);
+		    } else {
+				this.fields[name] = [value];
+		    }
+		} else {
+		    this.fields[name] = value;
+		}
     }
 
     handleFile(name, file, info, resolve) {
