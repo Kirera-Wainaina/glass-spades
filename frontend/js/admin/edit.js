@@ -189,7 +189,7 @@ async function handleFiles(formdata) {
     const files = await Promise.all(filesInfo.map(info => createFileObject(info)));
     files.forEach(file => formdata.set(file.name, file.data));
 
-    formdata.set("imageNum", files.length)
+    formdata.set("fileNumber", files.length)
 
     return formdata
 }
