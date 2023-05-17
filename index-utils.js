@@ -1,8 +1,6 @@
 const fs = require("fs")
 const zlib = require("zlib");
 const path = require("path");
-const url = require("url");
-const qs = require("querystring");
 
 const MIMES = require("./utils/MIMETypes.js");
 
@@ -109,4 +107,3 @@ exports.createFilePath = createFilePath;
 exports.createStaticFilePath = createStaticFilePath;
 exports.handleError = handleError;
 exports.findTopDir = findTopDir;
-exports.routeCache = new Map();
