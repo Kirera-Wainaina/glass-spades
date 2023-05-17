@@ -10,48 +10,48 @@ const MIMES = require("./utils/MIMETypes.js");
 
 function readFileAndRespond(filePath, response, statusCode=null) {
     fs.stat(filePath, (error, stats) => {
-	if (error) {
-	    console.log(error)
-	    handleError(error, response)
-	} else {
-	    const mime = MIMES.findMIMETypeFromExtension(path.extname(filePath));
-
-	    if (mime.split("/")[0] == "image") {
-		// images should not be compressed
-		response.writeHead(statusCode || 200, {
-		    "content-type": mime,
-		    "cache-control": "max-age=604800"
-		})
-
-		fs.createReadStream(filePath)
-		    .pipe(response)
-	    } else {
-		response.writeHead(statusCode || 200, {
-		    "content-type": mime,
-		    "content-encoding": "gzip",
-		    // "cache-control": "max-age=86400"
-		})
+		if (error) {
+		    console.log(error)
+		    handleError(error, response)
+		} else {
+		    const mime = MIMES.findMIMETypeFromExtension(path.extname(filePath));
 		
-		fs.createReadStream(filePath)
-		    .pipe(zlib.createGzip())
-		    .pipe(response)
-	    }
+		    if (mime.split("/")[0] == "image") {
+				// images should not be compressed
+				response.writeHead(statusCode || 200, {
+				    "content-type": mime,
+				    "cache-control": "max-age=604800"
+				})
+			
+				fs.createReadStream(filePath)
+				    .pipe(response)
+		    } else {
+				response.writeHead(statusCode || 200, {
+				    "content-type": mime,
+				    "content-encoding": "gzip",
+				    // "cache-control": "max-age=86400"
+				})
 
-	}
+				fs.createReadStream(filePath)
+				    .pipe(zlib.createGzip())
+				    .pipe(response)
+		    }
+		
+		}
     })
     
 }
 
 function handleError(error, response) {
     if (error.code == "ENOENT") {
-	const filePath = path.join(__dirname, "frontend/html/error.html")
-	const errorCode = 404;
-	readFileAndRespond(filePath, response, errorCode)
+		const filePath = path.join(__dirname, "frontend/html/error.html")
+		const errorCode = 404;
+		readFileAndRespond(filePath, response, errorCode)
     } else {
-	console.log(error);
-	const filePath = path.join(__dirname, "frontend/html/error.html")
-	const errorCode = 404;
-	readFileAndRespond(filePath, response, errorCode)
+		console.log(error);
+		const filePath = path.join(__dirname, "frontend/html/error.html")
+		const errorCode = 404;
+		readFileAndRespond(filePath, response, errorCode)
     }
 }
 
