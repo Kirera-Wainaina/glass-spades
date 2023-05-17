@@ -2,6 +2,7 @@ const busboy = require('busboy');
 const mimes = require('./MIMETypes');
 const path = require('path');
 const fs = require('fs');
+const qs = require('querystring');
 
 class FormDataHandler {
     constructor(request) {
@@ -42,9 +43,11 @@ class FormDataHandler {
     }
 
     handleFile(name, file, info, resolve) {
+        const imageInfo = qs.parse(name);
+        const fileName = imageInfo.name ?? name;
         this.thereIsFile = true;
         const ext = mimes.findExtensionFromMIMEType(info.mimeType);
-        const filePath = path.join(path.dirname(__dirname), 'uploaded', `${name}${ext}`);
+        const filePath = path.join(__dirname, '..', 'uploaded', `${fileName}${ext}`);
 
         file.pipe(fs.createWriteStream(filePath))
             .on('finish', () => this.handleFileSaved(name, filePath, resolve))
