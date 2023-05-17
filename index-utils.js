@@ -55,17 +55,9 @@ function handleError(error, response) {
     }
 }
 
-
 function findTopDir(route) {
-    let dir = route;
-    let top;
-    while (dir != "/") {
-	if (path.dirname(dir) == "/") {
-	    top = dir;
-	}
-	dir = path.dirname(dir);
-    }
-    return top
+	const reg = /^\/.+?(?=\/.+)/;
+	return route.match(reg)[0];
 }
 
 
