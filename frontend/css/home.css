@@ -161,6 +161,8 @@ div#listings {
 
 .house-card img {
     grid-row: 2 / 3;
+    width: 100%;
+    height: auto;
 }
 
 .house-card #overview-details {

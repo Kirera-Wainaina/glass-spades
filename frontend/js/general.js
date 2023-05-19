@@ -119,6 +119,8 @@ function handleImage(imageSrc) {
     overviewImg.dataset.imageSrc = imageSrc;
     overviewImg.src = "/frontend/images/GS-tiny-icon.png";
     overviewImg.alt = "Glass Spades Houses";
+    overviewImg.width = "1623";
+    overviewImg.height = "1080";
     overviewImg.classList.add("overview");
     return overviewImg;
 }
