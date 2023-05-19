@@ -112,15 +112,15 @@ div#offer-container {
 
 @keyframes offer-slide {
     0% {
-	opacity: 0;
+	    opacity: 0;
     }
 
     50% {
-	opacity: 1;
+	    opacity: 1;
     }
 
     100% {
-	opacity: 0;
+	    opacity: 0;
     }
 }
 
@@ -277,134 +277,134 @@ footer #social-media {
 
 @keyframes slide {
     0% {
-	bottom: 0;
-	opacity: 0 
+	    bottom: 0;
+	    opacity: 0 
     }
 
     50% {
-	bottom: 20vh;
-	opacity: 1;
+	    bottom: 20vh;
+	    opacity: 1;
     }
 
     100% {
-	bottom: 0;
-	opacity: 0;
+	    bottom: 0;
+	    opacity: 0;
     }
 }
 
 @media (orientation: portrait) {
     .house-card {
-	grid-template-rows: 8vw 30vw 8vw;
+	    grid-template-rows: 8vw 30vw 8vw;
     }
     
     .house-card .heading {
-	padding-left: 0;
-	padding-right: 0;
+	    padding-left: 0;
+	    padding-right: 0;
     }
 
     .overview-price {
-	padding-left: 0;
-	text-align: center;
+	    padding-left: 0;
+	    text-align: center;
     }
 
     .house-card .card-details {
-	padding-left: .5em;
-	padding-right: .5em;
+	    padding-left: .5em;
+	    padding-right: .5em;
     }
 
     .card-details img {
-	margin-right: .75em;
+	    margin-right: .75em;
     }
 }
 
 @media (max-width: 500px) {
     .page {
-	grid-template-columns: repeat(5, 1fr);
+	    grid-template-columns: repeat(5, 1fr);
     }
     
     header {
-	grid-column: 1 / 6;
-	grid-template-columns: repeat(5, 1fr);
+	    grid-column: 1 / 6;
+	    grid-template-columns: repeat(5, 1fr);
     }
 
     header > a {
-	grid-column: 1 / 5;
+	    grid-column: 1 / 5;
     }
 
     header #menu-button {
-	grid-column: 5 / 6;
-	height: 50%;
-	padding: 20%;
+	    grid-column: 5 / 6;
+	    height: 50%;
+	    padding: 20%;
     }
 
     header #menu.phone-menu {
-	box-shadow: 0 0 5px lightgrey;
-	position: fixed;
-	left: 0;
-	top: 0;
-	z-index: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	background-color: white;
-	width: 50vw;
-	height: 100vh;
-	align-items: center;
+	    box-shadow: 0 0 5px lightgrey;
+	    position: fixed;
+	    left: 0;
+	    top: 0;
+	    z-index: 1;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: flex-start;
+	    background-color: white;
+	    width: 50vw;
+	    height: 100vh;
+	    align-items: center;
     }
 
     .offer {
-	font-size: 1.5em;
-	margin-left: 1em;
-	margin-right: 1em;
+	    font-size: 1.5em;
+	    margin-left: 1em;
+	    margin-right: 1em;
     }
 
     header #menu a {
-	width: 90%;
-	border: 1px solid lightgrey;
-	display: flex;
-	margin-top: 0.5em;
+	    width: 90%;
+	    border: 1px solid lightgrey;
+	    display: flex;
+	    margin-top: 0.5em;
     }
 
     header #menu a:active {
-	background: black;
-	color: white;
+	    background: black;
+	    color: white;
     }
 
     header #menu button {
-	border: none;
-	width: 100%;
+	    border: none;
+	    width: 100%;
     }
 
     div#listings {
-	grid-column: 1 / 6;
-	flex-direction: column;
-	align-items: center;
-	width: 100vw;
+	    grid-column: 1 / 6;
+	    flex-direction: column;
+	    align-items: center;
+	    width: 100vw;
     }
 
     .house-card {
-	width: 96vw;
-	grid-template-rows: 12vh 36vh 10vh;
-	margin-bottom: 1em;
-	margin-left: 0;
+	    width: 96vw;
+	    grid-template-rows: 12vh 36vh 10vh;
+	    margin-bottom: 1em;
+	    margin-left: 0;
     }
     
     #snackbar {
-	bottom: 5vh;
-	left: 5vw;
-	width: 80vw;
+	    bottom: 5vh;
+	    left: 5vw;
+	    width: 80vw;
     }
 
     footer a, footer p {
-	font-size: 1em
+	    font-size: 1em
     }
 
     footer img {
-	height: 2.4em;
+	    height: 2.4em;
     }
     
     footer #social-media {
-	width: 30vw;
+	    width: 30vw;
     }
 
 }
