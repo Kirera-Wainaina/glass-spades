@@ -18,6 +18,11 @@ exports.renderListingRelatedPages = async function (id, listingHeading, mandate)
     ))
 }
 
+async function renderAndSaveHTMLToFile(url) {
+    const { content } = await renderPage(url);
+    return writeHTMLToFile(content, createFileNameFromUrl(url));
+}
+
 async function renderPage(url) {
     const browser = await setUpBrowser();
     const page = await browser.newPage();
@@ -89,3 +94,4 @@ function createFileNameFromUrl(url) {
 }
 
 exports.renderPage = renderPage;
+exports.renderAndSaveHTMLToFile = renderAndSaveHTMLToFile;
