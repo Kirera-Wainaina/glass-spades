@@ -87,7 +87,7 @@ function createStaticFilePath(urlPath) {
 
 	if (pathname == '/') {
 		filePath = path.join(__dirname, "static/home.html");
-	} else if (pathname == '/rentals' || pathname == 'sales') {
+	} else if (pathname == '/rentals' || pathname == '/sales') {
 		filePath = path.join(__dirname, `static${pathname}.html`);
 	} else if (dir == 'listing') {
 		const listingId = parsed_url.searchParams.get('id');

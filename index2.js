@@ -43,7 +43,7 @@ server.on("request", async (request, response) => {
 });
 
 server.on('request', (request, response) => {
-	// headless chromium should be able to access the rest of the code
+	// headless chromium should not be able to access the rest of the code
 	if (request.headers['user-agent'] == 'glassspades-headless-chromium') return;
 
 	const parsed_url = new URL(request.url, process.env.URL);
