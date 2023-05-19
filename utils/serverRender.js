@@ -87,3 +87,5 @@ function createFileNameFromUrl(url) {
         return `/listings/${parsedUrl.searchParams.get('id')}.html`
     }
 }
+
+exports.renderPage = renderPage;
