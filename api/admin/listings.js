@@ -1,9 +1,9 @@
 const Busboy = require("busboy");
 
 const respond = require("../../utils/respond");
-const general = require("../../utils/general");
 const db = require("../../database/models");
 const indexUtils = require("../../index-utils");
+const { renderAndSaveHTMLToFile } = require("../../utils/serverRender");
 
 async function getListings(request, response) {
     try {
@@ -50,12 +50,9 @@ function compileListingData(listing, image) {
 }
 
 function saveFeatured(request, response) {
-    const busboy = new Busboy({ headers: request.headers });
+    const busboy = Busboy({ headers: request.headers });
     let featuredIds;
 
-    general.deleteFromRouteCache("/");
-    general.deleteFromRouteCache("/admin/listings");
-    
     busboy.on("field", (fieldname, value) => {
 		featuredIds = JSON.parse(value);
     });
@@ -77,6 +74,8 @@ function saveFeatured(request, response) {
 					return db.Listing.findByIdAndUpdate(id, { Featured: true });
 		    	})
 			);
+
+			renderAndSaveHTMLToFile(`${process.env.URL}/`)
 		    respond.handleTextResponse(response, "success")
 		} catch (error) {
 		    console.log(error);
@@ -88,11 +87,9 @@ function saveFeatured(request, response) {
 }
 
 function saveArchived(request, response) {
-    const busboy = new Busboy({ headers: request.headers });
+    const busboy = Busboy({ headers: request.headers });
     let archivedIds
 
-    general.deleteFromRouteCache("/");
-    general.deleteFromRouteCache("/admin/listings");
     for (key of indexUtils.routeCache.keys()) {
 		if (key.includes("/sales") || key.includes("/rentals")) {
 		    indexUtils.routeCache.delete(key);
