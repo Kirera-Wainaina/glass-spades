@@ -88,7 +88,13 @@ function createStaticFilePath(urlPath) {
 	if (pathname == '/') {
 		filePath = path.join(__dirname, "static/home.html");
 	} else if (pathname == '/rentals' || pathname == '/sales') {
-		filePath = path.join(__dirname, `static${pathname}.html`);
+		console.log(parsed_url.searchParams);
+		if (parsed_url.searchParams) {
+			// search params means someone is filtering so give the dynamic file
+			filePath = path.join(__dirname, `frontend/html/${pathname}.html`)
+		} else {
+			filePath = path.join(__dirname, `static${pathname}.html`);
+		}
 	} else if (dir == 'listing') {
 		const listingId = parsed_url.searchParams.get('id');
 		filePath = path.join(__dirname, `static/listings/${listingId}.html`)
