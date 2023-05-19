@@ -137,7 +137,7 @@ div#listings {
 
 .house-card {
     display: grid;
-    grid-template-rows: 4vw 30vw 4vw;
+    grid-template-rows: 4vw 27vw 4vw;
     grid-auto-columns: 100%;
     
     border: 1px solid lightgrey;
@@ -161,8 +161,6 @@ div#listings {
 
 .house-card img {
     grid-row: 2 / 3;
-    width: 100%;
-    height: auto;
 }
 
 .house-card #overview-details {
@@ -170,6 +168,11 @@ div#listings {
     display: flex;
     align-items: center;
     background-color: white;
+}
+
+img.overview {
+    width: 100%;
+    height: auto;
 }
 
 .house-card .card-details {
