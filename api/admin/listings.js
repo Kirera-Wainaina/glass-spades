@@ -2,7 +2,6 @@ const Busboy = require("busboy");
 
 const respond = require("../../utils/respond");
 const db = require("../../database/models");
-const indexUtils = require("../../index-utils");
 const { renderAndSaveHTMLToFile } = require("../../utils/serverRender");
 
 async function getListings(request, response) {
@@ -90,12 +89,6 @@ function saveArchived(request, response) {
     const busboy = Busboy({ headers: request.headers });
     let archivedIds
 
-    for (key of indexUtils.routeCache.keys()) {
-		if (key.includes("/sales") || key.includes("/rentals")) {
-		    indexUtils.routeCache.delete(key);
-		}
-    }
-    
     busboy.on("field", (fieldname, value) => {
 		archivedIds = JSON.parse(value);
     })
