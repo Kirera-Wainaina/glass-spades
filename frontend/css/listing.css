@@ -256,10 +256,11 @@ div#related {
 
 @media(orientation: portrait) {
     div#images > img:nth-of-type(1) {
-	grid-column: 2 / 12;
-	justify-self: center;
-	height: 60vh;
-	width: auto;
+	    grid-column: 2 / 12;
+	    justify-self: center;
+	    height: 60vh;
+	    width: auto;
+        object-fit: contain;
     }
 
     #images.overlay > img:nth-of-type(1) {
