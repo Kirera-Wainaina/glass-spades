@@ -76,7 +76,7 @@ function saveFeatured(request, response) {
 					})
 				);
 	
-				renderAndSaveHTMLToFile(`${process.env.URL}/`)
+				await renderAndSaveHTMLToFile(`${process.env.URL}/`)
 			}
 		    respond.handleTextResponse(response, "success")
 		} catch (error) {
