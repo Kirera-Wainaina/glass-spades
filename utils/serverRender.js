@@ -27,7 +27,10 @@ async function renderAndSaveHTMLsToFiles(urls) {
     return Promise.all(urls.map(url => renderPage(url)))
         .then(contentAndUrls => Promise.all(
             contentAndUrls.map(
-                contentAndUrl => writeHTMLToFile(contentAndUrl.content, contentAndUrl.url)
+                contentAndUrl => writeHTMLToFile(
+                    contentAndUrl.content, 
+                    createFileNameFromUrl(contentAndUrl.url)
+                )
             )
         ))
 }
