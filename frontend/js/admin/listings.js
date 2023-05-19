@@ -221,5 +221,6 @@ saveIcon.addEventListener("click", async () => {
     showLoadingPage()
     await saveState("featured", "/api/admin/listings/saveFeatured");
     await saveState("archived", "/api/admin/listings/saveArchived");
-    hideLoadingPage()
+    hideLoadingPage();
+    location.reload();
 })
