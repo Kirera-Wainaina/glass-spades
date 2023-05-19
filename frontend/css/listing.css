@@ -81,6 +81,7 @@ div#images div:nth-of-type(2) {
 
 div#images img.arrow {
     width: 2em;
+    height: auto;
 }
 
 .arrow {
