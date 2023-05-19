@@ -4,7 +4,8 @@ if (navigator.userAgent != "glassspades-headless-chromium") {
     checkLogin();
 }
 
-getListings();
+document.addEventListener('DOMContentLoaded', getListings);
+
 function getListings() {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/api/admin/listings/getListings");
@@ -15,12 +16,8 @@ function getListings() {
 	        const listings = JSON.parse(this.response);
 	        sessionStorage.setItem("listings", this.response);
 	        const unArchived = listings.filter(listing => listing.archived == false)
-	        if (!document.querySelector(".listing-container")) {
-	    	    // dependent on whether it is ssr or not
-	    	    // displayListings(listings);
-	    	    displayListings(unArchived)
-	        }
-	        // whether ssr or not, the below functions have to run
+            
+            displayListings(unArchived);
 	        storeFeaturedListings(listings);
 	        storeArchivedListings(listings);
 
