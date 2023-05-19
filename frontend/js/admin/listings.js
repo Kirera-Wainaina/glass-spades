@@ -11,31 +11,31 @@ function getListings() {
     xhr.send();
 
     xhr.onreadystatechange = function() {
-	if (this.readyState == 4 && this.response != "fail") {
-	    const listings = JSON.parse(this.response);
-	    sessionStorage.setItem("listings", this.response);
-	    const unArchived = listings.filter(listing => listing.archived == false)
-	    if (!document.querySelector(".listing-container")) {
-		// dependent on whether it is ssr or not
-		// displayListings(listings);
-		displayListings(unArchived)
+	    if (this.readyState == 4 && this.response != "fail") {
+	        const listings = JSON.parse(this.response);
+	        sessionStorage.setItem("listings", this.response);
+	        const unArchived = listings.filter(listing => listing.archived == false)
+	        if (!document.querySelector(".listing-container")) {
+	    	    // dependent on whether it is ssr or not
+	    	    // displayListings(listings);
+	    	    displayListings(unArchived)
+	        }
+	        // whether ssr or not, the below functions have to run
+	        storeFeaturedListings(listings);
+	        storeArchivedListings(listings);
+
+	        displayFeaturedListings(listings);
+	        displayArchivedListings(listings);
+
+	        handleStateButtons()
 	    }
-	    // whether ssr or not, the below functions have to run
-	    storeFeaturedListings(listings);
-	    storeArchivedListings(listings);
-
-	    displayFeaturedListings(listings);
-	    displayArchivedListings(listings);
-
-	    handleStateButtons()
-	}
     }
 }
 
 function displayListings(listings) {
     const listingsEl = document.getElementById("listings");
     listings.forEach(listing => {
-	listingsEl.appendChild(createHouseSection(listing));
+	    listingsEl.appendChild(createHouseSection(listing));
     });
 }
 
@@ -92,8 +92,13 @@ function createImage(link) {
 
 function createPrice(price) {
     const p = document.createElement("p");
-    const formattedPrice = new Intl.NumberFormat("sw-ke", { style: "currency",
-							    currency: "Kes" })
+    const formattedPrice = new Intl.NumberFormat(
+        "sw-ke", 
+        {
+            style: "currency",
+			currency: "Kes" 
+        }
+    )
 	.format(price);
     p.textContent = `Price: ${formattedPrice}`;
     return p
@@ -102,28 +107,30 @@ function createPrice(price) {
 function handleStateButtons() {
     const stateButtons = document.querySelectorAll(".button-section button");
     stateButtons.forEach(stateButton => {
-	stateButton.addEventListener("click", changeColor);
-	// Display the save icon
-	stateButton.addEventListener(
-	    "click",
-	    () => document.getElementById("save-icon").style.display = "block");
+	    stateButton.addEventListener("click", changeColor);
+	    // Display the save icon
+	    stateButton.addEventListener(
+	        "click",
+	        () => document.getElementById("save-icon").style.display = "block");
 
-	if (stateButton.name == "Featured") {
-	    stateButton.addEventListener(
-		"click",event => addListingToState(event, "featured"));
-	} else {
-	    stateButton.addEventListener(
-		"click", event => addListingToState(event, "archived"))
-	}
+	    if (stateButton.name == "Featured") {
+	        stateButton.addEventListener(
+	    	    "click",
+                event => addListingToState(event, "featured")
+            );
+	    } else {
+	        stateButton.addEventListener(
+	    	"click", event => addListingToState(event, "archived"))
+	    }
     })
 }
 
 function changeColor(event) {
     const el = event.target;
     if (!el.classList.contains("clicked")) {
-	el.classList.add("clicked");
+	    el.classList.add("clicked");
     } else {
-	el.classList.remove("clicked")
+	    el.classList.remove("clicked")
     }
 }
 
@@ -133,10 +140,10 @@ function addListingToState(event, state) {
     const listingId = el.dataset.listingId;
     
     if (stateIds.includes(listingId)) {
-	const index = stateIds.findIndex(el => el == listingId);
-	stateIds.splice(index, 1);
+	    const index = stateIds.findIndex(el => el == listingId);
+	    stateIds.splice(index, 1);
     } else {
-	stateIds.push(listingId);
+	    stateIds.push(listingId);
     }
     sessionStorage.setItem(state, JSON.stringify(stateIds))
 }
@@ -159,11 +166,11 @@ function displayFeaturedListings(listings) {
     const featuredListings = listings.filter(listing => listing.featured == true)
     const featuredButtons = document.querySelectorAll("button[name='Featured']");
     featuredListings.forEach(listing => {
-	featuredButtons.forEach(button => {
-	    if (button.dataset.listingId == listing.id) {
-		button.classList.add("clicked");
-	    }
-	});
+	    featuredButtons.forEach(button => {
+	        if (button.dataset.listingId == listing.id) {
+	    	    button.classList.add("clicked");
+	        }
+	    });
     })
 }
 
@@ -171,11 +178,11 @@ function displayArchivedListings(listings) {
     const archivedListings = listings.filter(listing => listing.archived == true)
     const archivedButtons = document.querySelectorAll("button[name='Archived']");
     archivedListings.forEach(listing => {
-	archivedButtons.forEach(button => {
-	    if (button.dataset.listingId == listing.id) {
-		button.classList.add("clicked");
-	    }
-	});
+	    archivedButtons.forEach(button => {
+	        if (button.dataset.listingId == listing.id) {
+	    	    button.classList.add("clicked");
+	        }
+	    });
     })
 }
 
@@ -190,9 +197,9 @@ function saveState(state, url) {
     xhr.send(formdata);
 
     xhr.onreadystatechange = function() {
-	if (this.readyState == 4 && this.response != "fail") {
-	    location.reload();
-	}
+	    if (this.readyState == 4 && this.response != "fail") {
+	        location.reload();
+	    }
     }
 }
 
@@ -202,7 +209,7 @@ showArchived.addEventListener("click", event => {
     el.classList.toggle("clicked")
     const containers = document.querySelectorAll(".listing-container");
     for (let i = 0; i < containers.length; i++) {
-	containers[i].parentNode.removeChild(containers[i]);
+	    containers[i].parentNode.removeChild(containers[i]);
     }
     displayListings(filterArchived())
     displayArchivedListings(filterArchived());
@@ -213,9 +220,9 @@ function filterArchived() {
     const listings = JSON.parse(sessionStorage.getItem("listings"));
     let filtered;
     if (showArchived.classList.contains("clicked")) {
-	filtered = listings.filter(listing => listing.archived);
+	    filtered = listings.filter(listing => listing.archived);
     } else {
-	filtered = listings.filter(listing => !listing.archived);
+	    filtered = listings.filter(listing => !listing.archived);
     }
 
     return filtered
