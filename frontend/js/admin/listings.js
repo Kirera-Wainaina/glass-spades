@@ -213,9 +213,11 @@ showArchived.addEventListener("click", event => {
     const parentContainer = document.getElementById('listings');
     parentContainer.replaceChildren();
 
-    displayListings(filterArchived())
-    displayArchivedListings(filterArchived());
-    displayFeaturedListings(filterArchived());
+    const listings = filterArchived()
+
+    displayListings(listings)
+    displayArchivedListings(listings);
+    displayFeaturedListings(listings);
 });
 
 function filterArchived() {
