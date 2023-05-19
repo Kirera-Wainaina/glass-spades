@@ -12,17 +12,17 @@ function getSales() {
     xhr.send();
 
     xhr.onreadystatechange = function() {
-	if (this.readyState == 4) {
-	    if (this.response != "fail") {
-	    // if (this.response == "fail") {
-		const salesDetails = JSON.parse(this.response);
-		sessionStorage.setItem("sales", this.response);
-		displayHouseDetails(salesDetails);
-	    } else {
-		const noListings = document.getElementById("no-listings");
-		noListings.style.display = "block";
-	    }
-	}
+		if (this.readyState == 4) {
+		    if (this.response != "fail") {
+		    	// if (this.response == "fail") {
+				const salesDetails = JSON.parse(this.response);
+				sessionStorage.setItem("sales", this.response);
+				displayHouseDetails(salesDetails);
+		    } else {
+				const noListings = document.getElementById("no-listings");
+				noListings.style.display = "block";
+		    }
+		}
     }
 }
 
@@ -35,7 +35,8 @@ filterShortcut.addEventListener("click", displayFilterBanner);
 const closeIcon = document.getElementById("close-icon");
 closeIcon.addEventListener("click", () => closeElements(
     document.getElementById("filter-container"),
-    document.getElementById("filter-card")));
+    document.getElementById("filter-card"))
+);
 
 const filterButton = document.getElementById("filter-button");
 filterButton.addEventListener("click", () => runFilter("sales"))
@@ -43,8 +44,8 @@ filterButton.addEventListener("click", () => runFilter("sales"))
 function replaceTitle() {
     const title = generateTitle();
     if (title) {
-	const titleEl = document.querySelector("h2");
-	titleEl.textContent = title;
+		const titleEl = document.querySelector("h2");
+		titleEl.textContent = title;
     }
 }
 
