@@ -2,7 +2,9 @@ const Busboy = require("busboy");
 
 const respond = require("../../utils/respond");
 const db = require("../../database/models");
-const { renderAndSaveHTMLToFile } = require("../../utils/serverRender");
+const { renderAndSaveHTMLToFile, renderPage, renderAndSaveHTMLsToFiles } = require("../../utils/serverRender");
+const dotenv = require('dotenv');
+dotenv.config()
 
 async function getListings(request, response) {
     try {
@@ -108,6 +110,13 @@ function saveArchived(request, response) {
 				archivedIds.map(id => {
 					return db.Listing.findByIdAndUpdate(id, { Archived: true });
 		    	})
+			)
+			await renderAndSaveHTMLsToFiles(
+				[
+					`${process.env.URL}/`,
+					`${process.env.URL}/sales`,
+					`${process.env.URL}/rentals`
+				]
 			)
 		    respond.handleTextResponse(response, "success");
 		} catch (error) {
