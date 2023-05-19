@@ -209,10 +209,10 @@ const showArchived = document.getElementById("show-archived");
 showArchived.addEventListener("click", event => {
     const el = event.target;
     el.classList.toggle("clicked")
-    const containers = document.querySelectorAll(".listing-container");
-    for (let i = 0; i < containers.length; i++) {
-	    containers[i].parentNode.removeChild(containers[i]);
-    }
+
+    const parentContainer = document.getElementById('listings');
+    parentContainer.replaceChildren();
+
     displayListings(filterArchived())
     displayArchivedListings(filterArchived());
     displayFeaturedListings(filterArchived());
