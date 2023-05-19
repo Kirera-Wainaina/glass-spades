@@ -249,7 +249,7 @@ export function runFilter(mandate) {
     
     // clear prior notices before checking for any
     for (let i = 0; i < notices.length; i++) {
-	notices[i].style.display = "none";
+	    notices[i].style.display = "none";
     }
 
     if (verifyPrices(maxPrice, minPrice)) {
