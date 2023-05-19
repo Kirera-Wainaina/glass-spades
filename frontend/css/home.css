@@ -72,6 +72,7 @@ header #menu button:active {
 header img {
     width: 11vw;
     height: auto;
+    margin-left: 3vw;
 }
 
 picture {
@@ -340,7 +341,8 @@ footer #social-media {
 
     header img {
         height: auto;
-        width: 40vw;
+        width: 43vw;
+        margin-left: 1vw;
     }
 
     header #menu.phone-menu {
