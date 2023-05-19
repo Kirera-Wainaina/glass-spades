@@ -1,4 +1,4 @@
-import { showLoadingPage, checkLogin } from "../general.js";
+import { showLoadingPage, checkLogin, hideLoadingPage } from "../general.js";
 
 if (navigator.userAgent != "glassspades-headless-chromium") {
     checkLogin();
@@ -187,20 +187,22 @@ function displayArchivedListings(listings) {
 }
 
 function saveState(state, url) {
-    showLoadingPage();
-    const stateIds = sessionStorage.getItem(state);
-    const formdata = new FormData();
-    formdata.set(state, stateIds);
-
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", url);
-    xhr.send(formdata);
-
-    xhr.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.response != "fail") {
-	        location.reload();
-	    }
-    }
+    return new Promise((resolve, reject) => {
+        const stateIds = sessionStorage.getItem(state);
+        const formdata = new FormData();
+        formdata.set(state, stateIds);
+    
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.send(formdata);
+    
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.response != "fail") {
+                // location.reload();
+                resolve()
+            }
+        }            
+    })
 }
 
 const showArchived = document.getElementById("show-archived");
@@ -229,7 +231,9 @@ function filterArchived() {
 }
 
 const saveIcon = document.getElementById("save-icon");
-saveIcon.addEventListener("click", () => {
-    saveState("featured", "/api/admin/listings/saveFeatured")
-    saveState("archived", "/api/admin/listings/saveArchived")
+saveIcon.addEventListener("click", async () => {
+    showLoadingPage()
+    await saveState("featured", "/api/admin/listings/saveFeatured");
+    await saveState("archived", "/api/admin/listings/saveArchived");
+    hideLoadingPage()
 })
