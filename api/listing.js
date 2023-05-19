@@ -10,37 +10,37 @@ const general = require("../utils/general");
 
 function getListingDetails(request, response) {
     request.on("data", async (data) => {
-	try {
-	    const info = JSON.parse(String(data));
-	    const listing = await db.Listing.findById(info.id)
-	    response.writeHead(200, {
-		"content-type": "application/json"
-	    })
-		.end(JSON.stringify(listing));
-	} catch (error) {
-	    console.error();
-	}
+		try {
+		    const info = JSON.parse(String(data));
+		    const listing = await db.Listing.findById(info.id)
+		    response.writeHead(200, {
+				"content-type": "application/json"
+		    })
+			.end(JSON.stringify(listing));
+		} catch (error) {
+		    console.error();
+		}
     })
 }
 
 function getListingImages(request, response) {
     request.on("data", async (data) => {
-	try {
-	    const info = JSON.parse(String(data));
-	    const images = await db.Image.find({ listingId: info.id });
-	    const imageLinks = images.map(imageDetails => {
-		return {
-		    link: imageDetails.link,
-		    position: imageDetails.position
+		try {
+		    const info = JSON.parse(String(data));
+		    const images = await db.Image.find({ listingId: info.id });
+		    const imageLinks = images.map(imageDetails => {
+				return {
+				    link: imageDetails.link,
+				    position: imageDetails.position
+				}
+		    });
+		    response.writeHead(200, {
+				"content-type": "application/json"
+		    })
+			.end(JSON.stringify(imageLinks));
+		} catch (error) {
+		    console.error()
 		}
-	    });
-	    response.writeHead(200, {
-		"content-type": "application/json"
-	    })
-		.end(JSON.stringify(imageLinks));
-	} catch (error) {
-	    console.error()
-	}
     })
 }
 
@@ -49,21 +49,22 @@ function handleLeadInfo(request, response) {
     const busboy  = new Busboy({ headers: request.headers });
     const leadDetails = {};
     busboy.on("field", (fieldname, value) => {
-	leadDetails[fieldname] = value;
+		leadDetails[fieldname] = value;
     });
 
     busboy.on("finish", async () => {
-	const query = qs.parse(url.parse(leadDetails.link).query)
-	leadDetails["listingId"] = query.id;
-	const lead = new db.Lead(leadDetails)
-	const [ emailStatus, savedLead ] = await Promise.all(
-	    [email.emailLead(leadDetails), lead.save()]);
-	
-	if (emailStatus.accepted.length && savedLead) {
-	    respond.handleTextResponse(response, "success");
-	} else {
-	    respond.handleTextResponse(response, "fail");
-	}
+		const query = qs.parse(url.parse(leadDetails.link).query)
+		leadDetails["listingId"] = query.id;
+		const lead = new db.Lead(leadDetails)
+		const [ emailStatus, savedLead ] = await Promise.all(
+		    [email.emailLead(leadDetails), lead.save()]
+		);
+		
+		if (emailStatus.accepted.length && savedLead) {
+		    respond.handleTextResponse(response, "success");
+		} else {
+		    respond.handleTextResponse(response, "fail");
+		}
     })
 
     request.pipe(busboy);
@@ -71,24 +72,34 @@ function handleLeadInfo(request, response) {
 
 function getRelatedListings(request, response) {
     request.on("data", async data => {
-	try {
-	    const info = JSON.parse(data);
-	    const currentListing = await db.Listing.findById(info.id);
-	    const relatedListings = await db.Listing.find({
-		Bedrooms: currentListing.Bedrooms,
-		Mandate: currentListing.Mandate
-	    }, { Heading: 1, Bedrooms: 1, Bathrooms: 1,
-		 Price: 1, Size: 1, "Unit Type": 1, Category: 1 });
+		try {
+		    const info = JSON.parse(data);
+		    const currentListing = await db.Listing.findById(info.id);
+		    const relatedListings = await db.Listing.find(
+				{
+					Bedrooms: currentListing.Bedrooms,
+					Mandate: currentListing.Mandate
+		    	}, 
+				{ 
+					Heading: 1, 
+					Bedrooms: 1, 
+					Bathrooms: 1,
+			 		Price: 1,
+					Size: 1, 
+					"Unit Type": 1, 
+					Category: 1 
+				}
+			);
 
-	    if (relatedListings.length) {
-		const data = await general.getDetailsForHouseCard(relatedListings);
-		respond.handleJSONResponse(response, data)
-	    } else {
-		respond.handleTextResponse(response, "fail")
-	    }
-	} catch (error) {
-	    console.log(error);
-	}
+		    if (relatedListings.length) {
+				const data = await general.getDetailsForHouseCard(relatedListings);
+				respond.handleJSONResponse(response, data)
+		    } else {
+				respond.handleTextResponse(response, "fail")
+		    }
+		} catch (error) {
+		    console.log(error);
+		}
     })
 }
 
