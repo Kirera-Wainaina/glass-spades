@@ -61,22 +61,23 @@ function saveFeatured(request, response) {
     busboy.on("finish", async () => {
 		try {
 		    const existingFeatured = await db.Listing.find({ Featured: true });
-
-		    if (existingFeatured.length) {
+			if (featuredIds.length) {
+				if (existingFeatured.length) {
+					await Promise.all(
+						existingFeatured.map(existing => {
+							existing.Featured = false;
+							return existing.save()
+						})
+					)
+				}
 				await Promise.all(
-					existingFeatured.map(existing => {
-					    existing.Featured = false;
-					    return existing.save()
+					featuredIds.map(id => {
+						return db.Listing.findByIdAndUpdate(id, { Featured: true });
 					})
-				)
-		    }
-		    await Promise.all(
-				featuredIds.map(id => {
-					return db.Listing.findByIdAndUpdate(id, { Featured: true });
-		    	})
-			);
-
-			renderAndSaveHTMLToFile(`${process.env.URL}/`)
+				);
+	
+				renderAndSaveHTMLToFile(`${process.env.URL}/`)
+			}
 		    respond.handleTextResponse(response, "success")
 		} catch (error) {
 		    console.log(error);
@@ -98,26 +99,29 @@ function saveArchived(request, response) {
     busboy.on("finish", async () => {
 		try {
 		    const existingArchived = await db.Listing.find({ Archived: true});
-		    if (existingArchived.length) {
+
+			if (archivedIds.length) {
+				if (existingArchived.length) {
+					await Promise.all(
+						existingArchived.map(existing => {
+							existing.Archived = false;
+							return existing.save();
+						})
+					)
+				}
 				await Promise.all(
-					existingArchived.map(existing => {
-					    existing.Archived = false;
-					    return existing.save();
+					archivedIds.map(id => {
+						return db.Listing.findByIdAndUpdate(id, { Archived: true });
 					})
 				)
-		    }
-		    await Promise.all(
-				archivedIds.map(id => {
-					return db.Listing.findByIdAndUpdate(id, { Archived: true });
-		    	})
-			)
-			await renderAndSaveHTMLsToFiles(
-				[
-					`${process.env.URL}/`,
-					`${process.env.URL}/sales`,
-					`${process.env.URL}/rentals`
-				]
-			)
+				await renderAndSaveHTMLsToFiles(
+					[
+						`${process.env.URL}/`,
+						`${process.env.URL}/sales`,
+						`${process.env.URL}/rentals`
+					]
+				)	
+			}
 		    respond.handleTextResponse(response, "success");
 		} catch (error) {
 		    console.log(error);
