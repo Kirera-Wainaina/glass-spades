@@ -26,8 +26,6 @@ function getListings() {
 
 	        displayFeaturedListings(listings);
 	        displayArchivedListings(listings);
-
-	        handleStateButtons()
 	    }
     }
 }
@@ -62,6 +60,18 @@ function createButton(value, listingId) {
     button.name = value;
     button.type = "button";
     button.setAttribute("data-listing-id", listingId);
+
+    button.addEventListener("click", () => {
+        changeColor(button);
+        document.getElementById("save-icon").style.display = "block";
+
+        if (value == 'Featured') {
+            addListingToState(button, 'featured');
+        } else {
+            addListingToState(button, 'archived');
+        }
+    });
+
     return button
 }
 
@@ -104,43 +114,20 @@ function createPrice(price) {
     return p
 }
 
-function handleStateButtons() {
-    const stateButtons = document.querySelectorAll(".button-section button");
-    stateButtons.forEach(stateButton => {
-	    stateButton.addEventListener("click", changeColor);
-	    // Display the save icon
-	    stateButton.addEventListener(
-	        "click",
-	        () => document.getElementById("save-icon").style.display = "block");
-
-	    if (stateButton.name == "Featured") {
-	        stateButton.addEventListener(
-	    	    "click",
-                event => addListingToState(event, "featured")
-            );
-	    } else {
-	        stateButton.addEventListener(
-	    	"click", event => addListingToState(event, "archived"))
-	    }
-    })
-}
-
-function changeColor(event) {
-    const el = event.target;
-    if (!el.classList.contains("clicked")) {
-	    el.classList.add("clicked");
+function changeColor(element) {
+    if (!element.classList.contains("clicked")) {
+	    element.classList.add("clicked");
     } else {
-	    el.classList.remove("clicked")
+	    element.classList.remove("clicked")
     }
 }
 
-function addListingToState(event, state) {
-    const el = event.target;
+function addListingToState(element, state) {
     const stateIds = JSON.parse(sessionStorage.getItem(state));
-    const listingId = el.dataset.listingId;
+    const listingId = element.dataset.listingId;
     
     if (stateIds.includes(listingId)) {
-	    const index = stateIds.findIndex(el => el == listingId);
+	    const index = stateIds.findIndex(element => element == listingId);
 	    stateIds.splice(index, 1);
     } else {
 	    stateIds.push(listingId);
