@@ -384,7 +384,7 @@ footer #social-media {
 
     .house-card {
 	width: 96vw;
-	grid-template-rows: 20vw 72vw 15vw;
+	grid-template-rows: 12vh 36vh 10vh;
 	margin-bottom: 1em;
 	margin-left: 0;
     }
