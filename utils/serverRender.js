@@ -23,6 +23,15 @@ async function renderAndSaveHTMLToFile(url) {
     return writeHTMLToFile(content, createFileNameFromUrl(url));
 }
 
+async function renderAndSaveHTMLsToFiles(urls) {
+    return Promise.all(urls.map(url => renderPage(url)))
+        .then(contentAndUrls => Promise.all(
+            contentAndUrls.map(
+                contentAndUrl => writeHTMLToFile(contentAndUrl.content, contentAndUrl.url)
+            )
+        ))
+}
+
 async function renderPage(url) {
     const browser = await setUpBrowser();
     const page = await browser.newPage();
@@ -95,3 +104,4 @@ function createFileNameFromUrl(url) {
 
 exports.renderPage = renderPage;
 exports.renderAndSaveHTMLToFile = renderAndSaveHTMLToFile;
+exports.renderAndSaveHTMLsToFiles = renderAndSaveHTMLsToFiles;
