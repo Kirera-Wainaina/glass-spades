@@ -70,7 +70,8 @@ header #menu button:active {
 }
 
 header img {
-    height: 90%;
+    width: 11vw;
+    height: auto;
 }
 
 picture {
@@ -335,6 +336,11 @@ footer #social-media {
 	    grid-column: 5 / 6;
 	    height: 50%;
 	    padding: 20%;
+    }
+
+    header img {
+        height: auto;
+        width: 40vw;
     }
 
     header #menu.phone-menu {
