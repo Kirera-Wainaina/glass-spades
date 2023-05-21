@@ -43,17 +43,23 @@ server.on("request", async (request, response) => {
 });
 
 server.on('request', (request, response) => {
-	// headless chromium should not be able to access the rest of the code
-	if (request.headers['user-agent'] == 'glassspades-headless-chromium') return;
+	try {
+		// headless chromium should not be able to access the rest of the code
+		if (request.headers['user-agent'] == 'glassspades-headless-chromium') return;
 
-	const parsed_url = new URL(request.url, process.env.URL);
-	const pathname = parsed_url.pathname;
+		const parsed_url = new URL(request.url, process.env.URL);
+		const pathname = parsed_url.pathname;
 
-	if (indexUtils.findTopDir(pathname) == "/api") {
-		handleAPIRoute(request, response);
-	} else {
-		const filePath = indexUtils.createStaticFilePath(request.url);
-		indexUtils.readFileAndRespond(filePath, response);
+		if (indexUtils.findTopDir(pathname) == "/api") {
+			handleAPIRoute(request, response);
+		} else {
+			const filePath = indexUtils.createStaticFilePath(request.url);
+			indexUtils.readFileAndRespond(filePath, response);
+		}
+		
+	} catch (error) {
+		console.log(error);
+		indexUtils.handleError(error, response)
 	}
 })
 
@@ -97,3 +103,5 @@ function handleAPIRoute(request, response) {
 	    indexUtils.handleError(error, response);
 	}
 }
+
+process.on('uncaughtException', error => console.log(error))
