@@ -28,17 +28,22 @@ server.on("request",
 )
 
 server.on("request", async (request, response) => {
-	// only headless chromium should access this to generate static files
-	if (request.headers['user-agent'] != 'glassspades-headless-chromium') return;
-
-	const parsed_url = new URL(request.url, process.env.URL);
-	const pathname = parsed_url.pathname;
-
-	if (indexUtils.findTopDir(pathname) == "/api") {
-		handleAPIRoute(request, response);
-	} else {
-		const filePath = indexUtils.createFilePath(request.url);
-		indexUtils.readFileAndRespond(filePath, response);
+	try {
+		// only headless chromium should access this to generate static files
+		if (request.headers['user-agent'] != 'glassspades-headless-chromium') return;
+		
+		const parsed_url = new URL(request.url, process.env.URL);
+		const pathname = parsed_url.pathname;
+		
+		if (indexUtils.findTopDir(pathname) == "/api") {
+			handleAPIRoute(request, response);
+		} else {
+			const filePath = indexUtils.createFilePath(request.url);
+			indexUtils.readFileAndRespond(filePath, response);
+		}		
+	} catch (error) {
+		console.log(error);
+		indexUtils.handleError(error, response)
 	}
 });
 
