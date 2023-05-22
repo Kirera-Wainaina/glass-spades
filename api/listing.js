@@ -78,7 +78,8 @@ function getRelatedListings(request, response) {
 		    const relatedListings = await db.Listing.find(
 				{
 					Bedrooms: currentListing.Bedrooms,
-					Mandate: currentListing.Mandate
+					Mandate: currentListing.Mandate,
+					Archived: false
 		    	}, 
 				{ 
 					Heading: 1, 
