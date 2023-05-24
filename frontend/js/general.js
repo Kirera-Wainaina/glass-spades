@@ -90,6 +90,7 @@ export function displayHouseDetails(houseDetails, containerId="listings") {
 
 	    if (listings) listings.appendChild(fragment);
 	    // dispatch event after the images are in dom
+        // for lazy loading. see line 58
 	    if (navigator.userAgent != "glassspades-headless-chromium") {
 	        // dont dispatch for ssr
 	        document.dispatchEvent(exists);
