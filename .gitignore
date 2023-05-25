@@ -42,4 +42,19 @@ localhost-certs/
 .cache/
 
 #ignore the static directory
-static/
+static/*
+!static/x
+
+!static/listings/
+static/listings/*
+!static/listings/x
+
+!static/rentals-filters/
+static/rentals-filters/*
+!static/rentals-filters/x
+
+!static/sales-filters/
+static/sales-filters/*
+!static/sales-filters/x
+
+# !static/{listings,rentals-filters,sales-filters}/x
