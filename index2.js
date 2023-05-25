@@ -47,7 +47,7 @@ server.on("request", async (request, response) => {
 	}
 });
 
-server.on('request', (request, response) => {
+server.on('request', async(request, response) => {
 	try {
 		// headless chromium should not be able to access the rest of the code
 		if (request.headers['user-agent'] == 'glassspades-headless-chromium') return;
@@ -58,7 +58,7 @@ server.on('request', (request, response) => {
 		if (indexUtils.findTopDir(pathname) == "/api") {
 			handleAPIRoute(request, response);
 		} else {
-			const filePath = indexUtils.createStaticFilePath(request.url);
+			const filePath = await indexUtils.createStaticFilePath(request.url);
 			indexUtils.readFileAndRespond(filePath, response);
 		}
 		
