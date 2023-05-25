@@ -92,15 +92,7 @@ async function createStaticFilePath(urlPath) {
 	} else if (pathname == '/rentals' || pathname == '/sales') {
 		if (parsed_url.searchParams.toString()) {
 			// search params means someone is filtering so check if file is rendered
-			const fileName = parsed_url.search.replace('?', '');
-			const parentDir = pathname == '/rentals' ? "rentals-filters" : "sales-filters";
-			filePath = path.join(__dirname, 'static', parentDir, `${fileName}.html`);
-			const fileExistsResult = await fileExists(filePath);
-			if (!fileExistsResult) {
-				const { content } = await renderPage(parsed_url.href);
-                await fsPromises.writeFile(filePath, content);
-			}
-	
+			filePath = await handleFilterPage(parsed_url);
 		} else {
 			filePath = path.join(__dirname, `static${pathname}.html`);
 		}
@@ -130,6 +122,19 @@ async function fileExists(filePath) {
             }
         });
     return fileExists
+}
+
+async function handleFilterPage(parsed_url) {
+	const pathname = parsed_url.pathname;
+	const fileName = parsed_url.search.replace('?', '');
+	const parentDir = pathname == '/rentals' ? "rentals-filters" : "sales-filters";
+	filePath = path.join(__dirname, 'static', parentDir, `${fileName}.html`);
+	const fileExistsResult = await fileExists(filePath);
+	if (!fileExistsResult) {
+		const { content } = await renderPage(parsed_url.href);
+		await fsPromises.writeFile(filePath, content);
+	}
+	return filePath
 }
 
 exports.readFileAndRespond = readFileAndRespond;
