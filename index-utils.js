@@ -1,8 +1,10 @@
 const fs = require("fs")
 const zlib = require("zlib");
 const path = require("path");
+const fsPromises = require("fs/promises");
 
 const MIMES = require("./utils/MIMETypes.js");
+const { renderPage } = require("./utils/serverRender.js");
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -79,7 +81,7 @@ function createFilePath(urlPath) {
     return filePath
 }
 
-function createStaticFilePath(urlPath) {
+async function createStaticFilePath(urlPath) {
 	const parsed_url = new URL(urlPath, process.env.URL);
 	const pathname = parsed_url.pathname;
 	const dir = path.basename(path.dirname(parsed_url.pathname));
@@ -89,8 +91,16 @@ function createStaticFilePath(urlPath) {
 		filePath = path.join(__dirname, "static/home.html");
 	} else if (pathname == '/rentals' || pathname == '/sales') {
 		if (parsed_url.searchParams.toString()) {
-			// search params means someone is filtering so give the dynamic file
-			filePath = path.join(__dirname, `frontend/html/${pathname}.html`)
+			// search params means someone is filtering so check if file is rendered
+			const fileName = parsed_url.search.replace('?', '');
+			const parentDir = pathname == '/rentals' ? "rentals-filters" : "sales-filters";
+			filePath = path.join(__dirname, 'static', parentDir, `${fileName}.html`);
+			const fileExistsResult = await fileExists(filePath);
+			if (!fileExistsResult) {
+				const { content } = await renderPage(parsed_url.href);
+                await fsPromises.writeFile(filePath, content);
+			}
+	
 		} else {
 			filePath = path.join(__dirname, `static${pathname}.html`);
 		}
@@ -105,6 +115,21 @@ function createStaticFilePath(urlPath) {
 		filePath = path.join(__dirname, parsed_url.pathname);
 	}
 	return filePath
+}
+
+async function fileExists(filePath) {
+    let fileExists = null;
+    await fsPromises.open(filePath)
+        .then(fileHandle => {
+            if (fileHandle) fileExists = true;
+            fileHandle.close();
+        })
+        .catch(error => {
+            if (error.code == 'ENOENT') {
+                fileExists = false;
+            }
+        });
+    return fileExists
 }
 
 exports.readFileAndRespond = readFileAndRespond;
