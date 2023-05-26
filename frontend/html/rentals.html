@@ -36,97 +36,112 @@
     <noscript>You need to enable Javascript to run this app</noscript>
     <div class="page">
       <header>
-	<a href="/"><img src="/frontend/images/GS-logo.webp" width="783" height="263"/></a>
-	<input type="image"
-	       src="/frontend/images/menu-button.svg"
-	       id="menu-button" />
-	<div id="menu">
-	  <a href="/rentals"><button>Rentals</button></a>
-	  <a href="/sales"><button>Sales</button></a>
-	  <a href="/contacts"><button>Contact Us</button></a>
-	  <a href="/about"><button>About Us</button></a>
-	</div>
+				<a href="/"><img src="/frontend/images/GS-logo.webp" width="783" height="263"/></a>
+				<input type="image"
+				       src="/frontend/images/menu-button.svg"
+				       id="menu-button" />
+				<div id="menu">
+				  <a href="/rentals"><button>Rentals</button></a>
+				  <a href="/sales"><button>Sales</button></a>
+				  <a href="/contacts"><button>Contact Us</button></a>
+				  <a href="/about"><button>About Us</button></a>
+				</div>
       </header>
 
-      <input type="image"
-	     src="/frontend/images/black-filter.svg" id="filter-icon"/>
+      <input 
+				type="image"
+	    	src="/frontend/images/black-filter.svg"
+				id="filter-icon"
+			/>
 
       <div id="filter-container">
-	<input type="image"
-	       src="/frontend/images/white-close.svg"
-	       id="close-icon"/>
+				<input
+					type="image"
+	      	src="/frontend/images/white-close.svg"
+	      	id="close-icon"
+				/>
       </div>
       <div id="filter-card">
-	<p>Filter Rental Properties</p>
-	<p class="filter-category">By Price(Kes):</p>
-	<select id="min-price">
-	  <option value="">Minimum Price</option>
-	  <option value="100000">100,000</option>
-	  <option value="200000">200,000</option>
-	  <option value="300000">300,000</option>
-	  <option value="400000">400,000</option>
-	</select>
-	<select id="max-price">
-	  <option value="">Maximum Price</option>
-	  <option value="200000">200,000</option>
-	  <option value="300000">300,000</option>
-	  <option value="400000">400,000</option>
-	  <option value="4000000">Above 400,000</option>
-	</select>
+				<p>Filter Rental Properties</p>
+				<p class="filter-category">By Price(Kes):</p>
+				<select id="min-price">
+				  <option value="">Minimum Price</option>
+				  <option value="100000">100,000</option>
+				  <option value="200000">200,000</option>
+				  <option value="300000">300,000</option>
+				  <option value="400000">400,000</option>
+				</select>
+				<select id="max-price">
+				  <option value="">Maximum Price</option>
+				  <option value="200000">200,000</option>
+				  <option value="300000">300,000</option>
+				  <option value="400000">400,000</option>
+				  <option value="4000000">Above 400,000</option>
+				</select>
 
-	<p class="filter-category">By Bedrooms:</p>
-	<select id="bedrooms">
-	  <option value="">Bedrooms</option>
-	  <option value="1">1</option>
-	  <option value="2">2</option>
-	  <option value="3">3</option>
-	  <option value="4">4</option>
-	  <option value="5">5</option>
-	  <option value="20">+5</option>
-	</select>
+				<p class="filter-category">By Bedrooms:</p>
+				<select id="bedrooms">
+				  <option value="">Bedrooms</option>
+				  <option value="1">1</option>
+				  <option value="2">2</option>
+				  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>
+				  <option value="20">+5</option>
+				</select>
 
-	<p class="filter-category">By Location:</p>
-	<select id="locations">
-	  <option value="">Locations</option>
-	</select>
+				<p class="filter-category">By Location:</p>
+				<select id="locations">
+				  <option value="">Locations</option>
+				</select>
 
-	<button id="filter-button">Show Results</button>
+				<button id="filter-button">Show Results</button>
       </div>
       
       <h2>Houses for Rent</h2>
       
       <p class="filter-notice" id="no-price-filter">
-	  For us to filter using prices, you need to choose both a
-	minimum price and a maximum price. We did not filter using
-	prices.
+	  		For us to filter using prices, you need to choose both a
+				minimum price and a maximum price. We did not filter using
+				prices.
       </p>
 
       <p class="filter-notice" id="wrong-entry">
-	The maximum price should not be less than the minimum
-	price. We could not filter because of prices.
+				The maximum price should not be less than the minimum
+				price. We could not filter because of prices.
       </p>
 
       <div id="listings">
       </div>
 
       <h3 id="no-listings">
-	There are currently no rentals matching your criteria
+				There are currently no rentals matching your criteria
       </h3>
 
       <footer>
-	  <p>Follow us for more updates:</p>
-	<div id="social-media">
-	  <a href="https://www.facebook.com/glassspades">
-	    <img src="/frontend/images/facebook-icon.webp" alt="facebook"/>
-	  </a>
-	  <a href="https://www.instagram.com/glassspades/">
-	    <img src="/frontend/images/instagram-icon.svg" alt="instagram"/>
-	  </a>
-	</div>
-	  <a href="/terms">Terms of service</a>
-	  <a href="/privacy-policy">Privacy Policy</a>
-	  <a href="/contacts">Contact Us</a>
-	  <p>&copy Glass Spades. All rights reserved.</p>
+	  		<p>Follow us for more updates:</p>
+				<div id="social-media">
+	        <a href="https://www.facebook.com/glassspades">
+	          <img 
+              src="/frontend/images/facebook-icon.webp"
+              alt="facebook icon"
+              height="512"
+              width="512"
+            />
+	        </a>
+	        <a href="https://www.instagram.com/glassspades/">
+	          <img
+              src="/frontend/images/instagram-icon.svg"
+              alt="instagram icon"
+              height="1000"
+              width="1000"
+            />
+	        </a>
+	      </div>
+ 				<a href="/terms">Terms of service</a>
+	  		<a href="/privacy-policy">Privacy Policy</a>
+	  		<a href="/contacts">Contact Us</a>
+	  		<p>&copy Glass Spades. All rights reserved.</p>
       </footer>
     </div>
 
