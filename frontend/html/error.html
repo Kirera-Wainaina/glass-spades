@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <meta name="author" content="Kirera-Wainaina">
     <meta name="description"
-	  content="Glass spades error page in case of a search that no
-	  longer exists">
+	    content="The listing you are looking for is currently unavailable">
+    <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/frontend/images/GS-tiny-icon.png">    
     <link rel="apple-touch-icon" href="/frontend/images/GS-tiny-icon.png">
-    <link rel="stylesheet" href="/frontend/css/home.css">
+    <link rel="stylesheet" href="/frontend/css/listing-unavailable.css">
     <script type="module" async="async" src="/frontend/js/home.js"></script>
     <script type="module" async="async" src="/frontend/js/general.js"></script>
-    <title>Error Page | Glass Spades</title>
+    <title>Listing Unavailable | Glass Spades</title>
   </head>
 
   <body>
@@ -27,34 +27,45 @@
     <noscript>You need to enable Javascript to run this app</noscript>
     <div class="page">
       <header>
-	<a href="/"><img src="/frontend/images/GS-logo.webp" width="783" height="263"/></a>
-	<input type="image"
-	       src="/frontend/images/menu-button.svg"
-	       id="menu-button" />
-	<div id="menu">
-	  <a href="/rentals"><button>Rentals</button></a>
-	  <a href="/sales"><button>Sales</button></a>
-	  <a href="/contacts"><button>Contact Us</button></a>
-	  <a href="/about"><button>About Us</button></a>
-	</div>
+	      <a href="/"><img src="/frontend/images/GS-logo.webp" width="783" height="263"/></a>
+	      <input type="image"
+	             src="/frontend/images/menu-button.svg"
+	             id="menu-button" />
+	      <div id="menu">
+	        <a href="/rentals"><button>Rentals</button></a>
+	        <a href="/sales"><button>Sales</button></a>
+	        <a href="/contacts"><button>Contact Us</button></a>
+	        <a href="/about"><button>About Us</button></a>
+	      </div>
       </header>
 
-      <p>Sorry! It seems the page you are looking for does not exist.</p>
+      <h1>Listing Unavailable</h1>
+
+      <p>Hey! Thank you for choosing Glass Spades. Unfortunately, this house is no longer available.</p>
+
+      <p>The good ones don't stay too long!</p>
+
+      <p>Check out our current listings on our <a href="/sales">sales</a> or <a href="/rentals">rentals</a> page</p>
+
+      <div id="button-container">
+        <a href="/sales">Sales</a>
+        <a href="/rentals">Rentals</a>
+      </div>
 
       <footer>
-	  <p>Follow us for more updates:</p>
-	<div id="social-media">
-	  <a href="https://www.facebook.com/glassspades">
-	    <img src="/frontend/images/facebook-icon.webp" alt="facebook"/>
-	  </a>
-	  <a href="https://www.instagram.com/glassspades/">
-	    <img src="/frontend/images/instagram-icon.svg" alt="instagram"/>
-	  </a>
-	</div>
-	  <a href="/terms">Terms of service</a>
-	  <a href="/privacy-policy">Privacy Policy</a>
-	  <a href="/contacts">Contact Us</a>
-	  <p>&copy Glass Spades. All rights reserved.</p>
+	      <p>Follow us for more updates:</p>
+	      <div id="social-media">
+	        <a href="https://www.facebook.com/glassspades">
+	          <img src="/frontend/images/facebook-icon.webp" alt="facebook"/>
+	        </a>
+	        <a href="https://www.instagram.com/glassspades/">
+	          <img src="/frontend/images/instagram-icon.svg" alt="instagram"/>
+	        </a>
+	      </div>
+	      <a href="/terms">Terms of service</a>
+	      <a href="/privacy-policy">Privacy Policy</a>
+	      <a href="/contacts">Contact Us</a>
+	      <p>&copy Glass Spades. All rights reserved.</p>
       </footer>
     </div>
 
