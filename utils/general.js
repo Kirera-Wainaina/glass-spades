@@ -95,8 +95,28 @@ async function findFirstImage(listingId, position=0) {
     }
 }
 
-function deleteFilterPages() {
+async function deleteFilterPages() {
+	const staticDir = path.join(__dirname, '..', 'static');
+	const rentalsFiltersDir = path.join(staticDir, 'rentals-filters');
+	const salesFiltersDir = path.join(staticDir, 'sales-filters');
 
+	await Promise.all([
+		fsPromises.rm(rentalsFiltersDir, { recursive: true }),
+		fsPromises.rm(salesFiltersDir, { recursive: true })
+	]).then(() => {
+		return Promise.all([
+			fsPromises.mkdir(rentalsFiltersDir),
+			fsPromises.mkdir(salesFiltersDir)
+		])
+	}).then(() => {
+		// create the file x so the folders are not empty
+		const rentalsFiltersFilePath = path.join(rentalsFiltersDir, 'x');
+		const salesFiltersFilePath = path.join(salesFiltersDir, 'x');
+		return Promise.all([
+			fsPromises.writeFile(rentalsFiltersFilePath, ''),
+			fsPromises.writeFile(salesFiltersFilePath, '')
+		])
+	})
 }
 
 exports.deleteFromRouteCache = deleteFromRouteCache;
