@@ -1,4 +1,3 @@
-const fsPromises = require('fs/promises');
 const qs = require("querystring");
 
 const db = require("../../database/models");
@@ -6,6 +5,7 @@ const respond = require("../../utils/respond");
 const FormDataHandler = require("../../utils/formDataHandler");
 const serverRender = require("../../utils/serverRender");
 const { saveImagesToCloud, saveImagesToDB } = require('./upload');
+const { deleteFilterPages } = require('../../utils/general');
 
 function retrieveListing(request, response) {
     let listingId;
@@ -41,6 +41,7 @@ async function updateListing(request, response) {
 		await updateExistingFiles(fields.fileId)
 		await db.Listing.updateOne({ _id: fields.id}, fields);
 		await serverRender.renderListingRelatedPages(fields.id, fields.Heading, fields.Mandate);
+		await deleteFilterPages()
 	
 		respond.handleTextResponse(response, "success");
 	} catch (error) {
