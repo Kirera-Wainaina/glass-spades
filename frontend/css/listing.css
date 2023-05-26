@@ -264,145 +264,145 @@ div#related {
     }
 
     #images.overlay > img:nth-of-type(1) {
-	grid-column: 1 / 13;
-	align-self: center;
-	width: auto;
-	height: auto;
+	    grid-column: 1 / 13;
+	    align-self: center;
+	    width: auto;
+	    height: auto;
     }
 
     div#images > img:nth-of-type(2) {
-	grid-column: 4 / 7;
-	height: 20vh;
+	    grid-column: 4 / 7;
+	    height: 20vh;
     }
 
     div#images > img:nth-of-type(3) {
-	grid-column: 7 / 10;
-	height: 20vh;
+	    grid-column: 7 / 10;
+	    height: 20vh;
     }
 
     div#images div:nth-of-type(1) {
-	top: 25vh;
-	left: 0;
-	width: 20vw;
-	height: 50vh;
+	    top: 25vh;
+	    left: 0;
+	    width: 20vw;
+	    height: 50vh;
     }
 
     div#images div:nth-of-type(2) {
-	top: 25vh;
-	right: 0;
-	width: 20vw;
-	height: 50vh;
+	    top: 25vh;
+	    right: 0;
+	    width: 20vw;
+	    height: 50vh;
     }
 
     h2#heading {
-	grid-column: 3 / 11;
+	    grid-column: 3 / 11;
     }
 
     form p {
-	text-align: left;
+	    text-align: left;
     }
 
     form input {
-	width: 90%;
+	    width: 90%;
     }
 
     .house-card {
-	width: 40vw;
-	height: 50vh;
+	    width: 40vw;
+	    height: 50vh;
     }
 }
 
 @media(max-width: 500px) {
     div#images {
-	grid-column: 1 / 6;
+	    grid-column: 1 / 6;
     }
 
     div#images img:nth-of-type(1) {
-	grid-column: 1 / 13;
+	    grid-column: 1 / 13;
     }
 
     div#images img:nth-of-type(2) {
-	grid-column: 2 / 7;
+	    grid-column: 2 / 7;
     }
 
     div#images img:nth-of-type(3) {
-	grid-column: 7 / 12;
+	    grid-column: 7 / 12;
     }
 
     div#images div:nth-of-type(1) {
-	top: 20vh;
-	left: 0;
-	width: 20vw;
-	height: 80vh;
+	    top: 20vh;
+	    left: 0;
+	    width: 20vw;
+	    height: 80vh;
     }
 
     div#images div:nth-of-type(2) {
-	top: 20vh;
-	right: 0;
-	width: 20vw;
-	height: 80vh;
+	    top: 20vh;
+	    right: 0;
+	    width: 20vw;
+	    height: 80vh;
     }
 
     div#images img.arrow {
-	width: 1.5em;
+	    width: 1.5em;
     }
 
     h1#heading {
-	grid-column: 1 / 6;
-	margin-left: .5em;
-	margin-right: .5em;
+	    grid-column: 1 / 6;
+	    margin-left: .5em;
+	    margin-right: .5em;
     }
 
     p.description {
-	grid-column: 1 / 6;
-	margin-top: .8em;
-	margin-left: .3em;
-	margin-right: .3em;
+	    grid-column: 1 / 6;
+	    margin-top: .8em;
+	    margin-left: .3em;
+	    margin-right: .3em;
     }
 
     section {
-	grid-column: 1 / 6;
-	margin-left: 1em;
-	margin-right: 1em;
-	padding-left: 0;
+	    grid-column: 1 / 6;
+	    margin-left: 1em;
+	    margin-right: 1em;
+	    padding-left: 0;
     }
 
     h3.subheading {
-	flex: 1;
+	    flex: 1;
     }
 
     p.content {
-	padding-left: 0;
-	flex: 1.5;
+	    padding-left: 0;
+	    flex: 1.5;
     }
 
     #whatsapp {
-	height: 3em;
-	width: 3em;
+	    height: 3em;
+	    width: 3em;
     }
 
     #whatsapp img {
-	height: 2em;
+	    height: 2em;
     }
     
     form {
-	grid-column: 1 / 6;
-	margin: 1em;
+	    grid-column: 1 / 6;
+	    margin: 1em;
     }
 
     form input {
-	height: 2em;
-	width: 100%;
-	margin-bottom: .5em;
+	    height: 2em;
+	    width: 100%;
+	    margin-bottom: .5em;
     }
 
     .house-card {
-	width: 80vw;
-	height: 70vh;
-	margin-left: 5vw;
+	    width: 80vw;
+	    height: 70vh;
+	    margin-left: 5vw;
     }
 
     #related-heading {
-	grid-column: 1 / 6;
+	    grid-column: 1 / 6;
     }
 }
