@@ -211,16 +211,14 @@ footer {
 
 footer > a, footer p {
     margin-bottom: 1em;
-    font-size: 0.7em;
+    font-size: 1em;
     width: 80vw;
-    /* border: 1px solid black; */
     text-align: center;
 }
 
 footer p:first-child {
     font-size: 1.3em;
     margin-bottom: 0;
-    /* border: 1px solid black; */
 }
 
 footer img {
@@ -232,7 +230,6 @@ footer #social-media {
     margin: 1em;
     width: 10vw;
     justify-content: space-around;
-    /* border: 1px solid black; */
 }
 
 #loading-page {
