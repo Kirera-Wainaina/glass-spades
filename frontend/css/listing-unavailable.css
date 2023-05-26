@@ -18,6 +18,24 @@ a {
     font-size: 1em;
 }
 
+#button-container {
+    grid-column: 4 / 10;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+#button-container a {
+    border: 1px solid grey;
+    width: 30%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+}
+
 @media (orientation: portrait) {
     h1 {
         grid-column: 1 / 7;
@@ -27,5 +45,9 @@ a {
         grid-column: 1 / 7;
         margin-right: 1em;
         margin-left: 1em;
+    }
+
+    #button-container {
+        flex-direction: column;
     }
 }
