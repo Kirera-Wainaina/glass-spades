@@ -1,5 +1,5 @@
-const url = require("url");
 const path = require("path");
+const fsPromises = require("fs/promises");
 
 const db = require("../database/models");
 const indexUtils = require("../index-utils");
@@ -92,7 +92,12 @@ async function findFirstImage(listingId, position=0) {
     }
 }
 
+function deleteFilterPages() {
+
+}
+
 exports.deleteFromRouteCache = deleteFromRouteCache;
 exports.getListings = getListings;
 exports.getDetailsForHouseCard = getDetailsForHouseCard;
 module.exports.findFirstImage = findFirstImage;
+exports.deleteFilterPages = deleteFilterPages;
