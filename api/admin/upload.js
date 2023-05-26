@@ -6,6 +6,7 @@ const Busboy = require("busboy");
 
 const images = require("../../utils/images.js");
 const respond = require("../../utils/respond.js");
+const { deleteFilterPages } = require("../../utils/general.js");
 const db = require("../../database/models.js");
 const FormDataHandler = require("../../utils/formDataHandler.js");
 const serverRender = require('../../utils/serverRender.js');
@@ -37,6 +38,7 @@ async function uploadListing(request, response) {
 		listing = Object.assign(listing, fields);
 		await listing.save();
 		await serverRender.renderListingRelatedPages(listingId, fields.Heading, fields.Mandate);
+		await deleteFilterPages()
 		respond.handleTextResponse(response, "success");
 	} catch (error) {
 		console.log(error)
