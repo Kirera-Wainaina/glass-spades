@@ -4,6 +4,7 @@ const respond = require("../../utils/respond");
 const db = require("../../database/models");
 const { renderAndSaveHTMLToFile, renderPage, renderAndSaveHTMLsToFiles } = require("../../utils/serverRender");
 const dotenv = require('dotenv');
+const { deleteFilterPages } = require("../../utils/general");
 dotenv.config()
 
 async function getListings(request, response) {
@@ -120,7 +121,8 @@ function saveArchived(request, response) {
 						`${process.env.URL}/sales`,
 						`${process.env.URL}/rentals`
 					]
-				)	
+				)
+				await deleteFilterPages()
 			}
 		    respond.handleTextResponse(response, "success");
 		} catch (error) {
