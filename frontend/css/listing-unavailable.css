@@ -36,6 +36,11 @@ a {
     font-size: 1.3em;
 }
 
+#button-container a:hover,
+#button-container a:active {
+    background-color: lightgrey;
+}
+
 @media (orientation: portrait) {
     h1 {
         grid-column: 1 / 7;
@@ -48,6 +53,15 @@ a {
     }
 
     #button-container {
+        grid-column: 1 / 7;
         flex-direction: column;
+        margin-right: 1em;
+        margin-left: 1em;
+        gap: 3vh;
+        align-items: center;
+    }
+
+    #button-container a {
+        width: 90%;
     }
 }
