@@ -175,6 +175,8 @@ function createIcon(value, icon) {
     const img = document.createElement("img");
     img.alt = `icon`;
     img.src = icon;
+    img.height = "24";
+    img.width = "24";
     div.append(img);
 
     const p = document.createElement("p");
