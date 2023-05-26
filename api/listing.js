@@ -13,10 +13,15 @@ function getListingDetails(request, response) {
 		try {
 		    const info = JSON.parse(String(data));
 		    const listing = await db.Listing.findById(info.id)
-		    response.writeHead(200, {
-				"content-type": "application/json"
-		    })
-			.end(JSON.stringify(listing));
+			if (listing.Archived) {
+				response.writeHead(301, { 'location': '/listing-unavailable'})
+				response.end()
+			} else {
+		    	response.writeHead(200, {
+					"content-type": "application/json"
+		    	})
+				.end(JSON.stringify(listing));
+			}
 		} catch (error) {
 		    console.error();
 		}
