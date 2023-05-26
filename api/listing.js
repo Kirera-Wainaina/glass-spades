@@ -14,8 +14,8 @@ function getListingDetails(request, response) {
 		    const info = JSON.parse(String(data));
 		    const listing = await db.Listing.findById(info.id)
 			if (listing.Archived) {
-				response.writeHead(301, { 'location': '/listing-unavailable'})
-				response.end()
+				response.writeHead(200, { 'content-type': 'text/html' })
+				response.end('redirect');
 			} else {
 		    	response.writeHead(200, {
 					"content-type": "application/json"

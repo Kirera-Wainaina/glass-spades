@@ -28,11 +28,15 @@ function getListingDetails() {
     xhr.send(JSON.stringify({ id: retrieveListingId() }));
 
     xhr.onreadystatechange = function() {
-	if (xhr.readyState == 4) {
-	    sessionStorage.setItem("details", this.response);
+		if (xhr.readyState == 4) {
+			if (this.responseText == 'redirect') {
+				location.href = '/listing-unavailable';
+				return ;
+			}
+		    sessionStorage.setItem("details", this.response);
 
-	    runBodyFunctions()
-	}
+		    runBodyFunctions()
+		}
     }
 }
 
