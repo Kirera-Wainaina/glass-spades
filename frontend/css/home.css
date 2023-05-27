@@ -223,6 +223,7 @@ footer p:first-child {
 
 footer img {
     height: 2em;
+    object-fit: contain;
 }
 
 footer #social-media {
