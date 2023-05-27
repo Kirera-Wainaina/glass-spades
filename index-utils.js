@@ -20,7 +20,7 @@ function readFileAndRespond(filePath, response, statusCode=null) {
 				// images should not be compressed
 				response.writeHead(statusCode || 200, {
 				    "content-type": mime,
-				    "cache-control": "max-age=604800"
+				    "cache-control": "max-age=2419200"
 				})
 			
 				fs.createReadStream(filePath)
@@ -29,7 +29,7 @@ function readFileAndRespond(filePath, response, statusCode=null) {
 				response.writeHead(statusCode || 200, {
 				    "content-type": mime,
 				    "content-encoding": "gzip",
-				    "cache-control": "max-age=86400"
+				    "cache-control": "max-age=1209600"
 				})
 
 				fs.createReadStream(filePath)
