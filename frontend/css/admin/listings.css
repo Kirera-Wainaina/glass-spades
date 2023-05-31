@@ -13,11 +13,15 @@ div#listings {
     width: 27vw;
 }
 
-.house-card p {
+.house-details-card {
+    border: 1px solid lightgrey;
+}
+
+/* .house-card p {
     grid-column: 1 / 5;
     padding: .7em;
     color: black;
-}
+} */
 
 .button-section {
     display: flex;
