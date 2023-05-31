@@ -15,9 +15,6 @@ div#listings {
     color: black;
 }
 
-.listing-container {
-}
-
 .button-section {
     display: flex;
     justify-content: flex-start;

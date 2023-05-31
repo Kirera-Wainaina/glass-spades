@@ -78,6 +78,7 @@ function createHouse(listing) {
     a.href = `/admin/edit?id=${listing.id}`;
 
     a.append(createHeading(listing.heading));
+    a.append(createDevelopmentName(listing.development));
     a.append(createImage(listing.link));
     a.append(createPrice(listing.price));
     return a
@@ -87,6 +88,17 @@ function createHeading(heading) {
     const p = document.createElement("p");
     p.classList.add("heading");
     p.textContent = heading;
+    return p
+}
+
+function createDevelopmentName(name) {
+    const p = document.createElement('p');
+    p.classList.add('development-name');
+    if (name) {
+        p.textContent = `Development Name: ${name}`;
+    } else {
+        p.textContent = 'Development Name: N/A'
+    }
     return p
 }
 
