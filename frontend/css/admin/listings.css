@@ -4,9 +4,13 @@ div#listings {
     justify-content: space-around;
 }
 
-.house-card {
+/* .house-details-card {
     width: 27vw;
     margin-left: 0;
+} */
+
+.listing-container {
+    width: 27vw;
 }
 
 .house-card p {
@@ -75,8 +79,11 @@ div#listings {
 }
 
 @media (max-width: 500px) {
-    .house-card {
+    /* .house-card {
 	width: 99vw;
+    } */
+    .listing-container {
+        width: 99vw;
     }
 
     #save-featured, #save-archived, #show-archived {

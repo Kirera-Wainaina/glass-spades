@@ -74,7 +74,7 @@ function createButton(value, listingId) {
 
 function createHouse(listing) {
     const a = document.createElement("a");
-    a.classList.add("house-card");
+    a.classList.add("house-details-card");
     a.href = `/admin/edit?id=${listing.id}`;
 
     a.append(createHeading(listing.heading));
