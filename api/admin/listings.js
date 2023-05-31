@@ -10,7 +10,7 @@ dotenv.config()
 async function getListings(request, response) {
     try {
 			const listings = await db.Listing.find({ });
-
+			
 			const listingsData = await Promise.all(
 				listings.map(async listing => {
 				    const image = await getListingOverviewImage(listing._id);
@@ -28,11 +28,11 @@ function getListingOverviewImage(listingId, position=0) {
     return new Promise((resolve, reject) => {
 			db.Image.findOne({ listingId, position }, (error, docs) => {
 			    if (error) {
-					reject(error)
+						reject(error)
 			    } else if (docs == null) {
-					resolve(getListingOverviewImage(listingId, position + 1))
+						resolve(getListingOverviewImage(listingId, position + 1))
 			    } else {
-					resolve(docs);
+						resolve(docs);
 			    }
 			})
     })
@@ -46,7 +46,8 @@ function compileListingData(listing, image) {
 			    price: listing.Price,
 			    link: image.link,
 			    featured: listing.Featured,
-			    archived: listing.Archived
+			    archived: listing.Archived,
+					development: listing.Development
 			})
     })
 }
@@ -100,7 +101,7 @@ function saveArchived(request, response) {
     busboy.on("finish", async () => {
 			try {
 			    const existingArchived = await db.Listing.find({ Archived: true});
-			
+
 				if (archivedIds.length) {
 					if (existingArchived.length) {
 						await Promise.all(
