@@ -86,7 +86,7 @@ function createHouse(listing) {
 
 function createHeading(heading) {
     const p = document.createElement("p");
-    p.classList.add("heading");
+    p.classList.add("listing-heading");
     p.textContent = heading;
     return p
 }
