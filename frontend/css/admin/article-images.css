@@ -7,6 +7,14 @@ h1 {
   margin-top: 1em;
 }
 
+#cloud-upload-icon {
+  position: fixed;
+  bottom: 5vh;
+  right: 3vw;
+  height: 2.5em;
+  padding: .3em;
+}
+
 @media (orientation: portrait) {
   h1 {
     grid-column: 1 / 6;
