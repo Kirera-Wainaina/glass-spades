@@ -11,10 +11,13 @@ div#listings {
 
 .listing-container {
     width: 27vw;
+    margin-bottom: 2em;
 }
 
 .house-details-card {
     border: 1px solid lightgrey;
+    display: flex;
+    flex-direction: column;
 }
 
 /* .house-card p {
