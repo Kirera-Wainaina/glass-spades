@@ -83,12 +83,20 @@ const leadSchema = new Schema({
     createdDate: Date
 });
 
+const articleImageSchema = new Schema({
+    createTime: Number,
+    link: String,
+    name: String
+})
+
 const User = mongoose.model("user", userSchema);
 const Listing = mongoose.model("listing", listingSchema);
 const Image = mongoose.model("image", imageSchema);
 const Lead = mongoose.model("lead", leadSchema);
+const ArticleImage = mongoose.model("articleImage", articleImageSchema);
 
 exports.User = User;
 exports.Listing = Listing;
 exports.Image = Image;
 exports.Lead = Lead;
+exports.ArticleImage = ArticleImage;
