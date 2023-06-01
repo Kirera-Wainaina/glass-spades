@@ -121,6 +121,11 @@ h1 {
   color: white;
 }
 
+#image-upload-error {
+  background-color: pink;
+  color: red;
+}
+
 @media (orientation: portrait) {
   h1 {
     grid-column: 1 / 6;
