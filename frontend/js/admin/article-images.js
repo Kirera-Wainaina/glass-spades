@@ -74,7 +74,8 @@ async function handleImageUpload(event) {
   fetch('/api/admin/article-images/uploadImages', {
     method: 'POST',
     body: formdata
-  }).then(response => console.log(response));
+  }).then(response => response.text())
+    .then(handleImageUploadResponse)
 }
 
 async function enterImagesIntoFormData() {
@@ -89,4 +90,17 @@ async function enterImagesIntoFormData() {
     }))
     formdata.append('fileNumber', imageElements.length)
     return formdata
+}
+
+function handleImageUploadResponse(text) {
+  if (text == 'success') {
+    location.reload()
+  } else {
+    const snackbar = document.getElementById("image-upload-error");
+    snackbar.classList.toggle('slide');
+    snackbar.addEventListener(
+      "animationend", 
+      () => snackbar.classList.toggle('slide')
+    )
+  }
 }
