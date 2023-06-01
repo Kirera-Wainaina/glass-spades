@@ -77,7 +77,7 @@ h1 {
   margin-top: 1em;
   padding: 5px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   padding-top: 10px;
   overflow: scroll;
@@ -102,6 +102,15 @@ h1 {
 .preview {
   width: 27%;
   margin-bottom: 2em;
+  position: relative;
+}
+
+.remove-preview {
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: -9px;
 }
 
 @media (orientation: portrait) {
