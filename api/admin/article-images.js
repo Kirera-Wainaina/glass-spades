@@ -45,4 +45,17 @@ async function uploadImages(request, response) {
   
 }
 
+async function retrieveUploadedImages(request, response) {
+  try {
+    const data = await db.ArticleImage.find({});
+    response.writeHead(200, {'content-type': 'application/json'});
+    response.end(JSON.stringify(data))
+  } catch (error) {
+    console.log(error);
+    response.writeHead(500, { 'content-type': 'text/plain'});
+    response.end('error');
+  }
+}
+
 exports.uploadImages = uploadImages;
+exports.retrieveUploadedImages = retrieveUploadedImages;
