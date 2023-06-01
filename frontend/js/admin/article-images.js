@@ -9,7 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
   uploadButton.addEventListener('click', clickFileInput);
 
   const fileInput = document.querySelector('form input[type="file"]');
-  fileInput.addEventListener('change', previewImagesToUpload)
+  fileInput.addEventListener('change', previewImagesToUpload);
+
+  const uploadImagesForm = document.getElementById("upload-images-form")
+  uploadImagesForm.addEventListener('submit', handleImageUpload);
 })
 
 function toggleImageUploadModal() {
@@ -62,4 +65,26 @@ function removePreviewImage(event) {
   
   URL.revokeObjectURL(img.src);
   preview.remove();
+}
+
+async function handleImageUpload(event) {
+  event.preventDefault();
+  const formdata = await enterImagesIntoFormData();
+  
+  for (const values of formdata.keys()) {
+    console.log(values);
+  }
+}
+
+async function enterImagesIntoFormData() {
+    const imageElements = Array.from(document.querySelectorAll('.preview img'));
+    const formdata = new FormData();
+  
+    await Promise.all(imageElements.map(element => {
+      const name = `${Date.now()}-${Math.trunc(Math.random() * 1e6)}`;
+      return fetch(element.src)
+        .then(response => response.blob())
+        .then(blob => formdata.append(name, blob))
+    }))
+    return formdata
 }
