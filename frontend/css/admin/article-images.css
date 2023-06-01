@@ -33,6 +33,16 @@ h1 {
   background-color: lightgrey;
 }
 
+#image-upload-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 @media (orientation: portrait) {
   h1 {
     grid-column: 1 / 6;
