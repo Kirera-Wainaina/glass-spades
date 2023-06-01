@@ -69,6 +69,10 @@ function removePreviewImage(event) {
 
 async function handleImageUpload(event) {
   event.preventDefault();
+  
+  const loadingPage = document.getElementById('loading-page');
+  loadingPage.style.display = 'flex';
+  
   const formdata = await enterImagesIntoFormData();
   
   fetch('/api/admin/article-images/uploadImages', {
