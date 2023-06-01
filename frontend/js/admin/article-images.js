@@ -52,5 +52,14 @@ function createRemovePreviewIcon() {
   closeIcon.src = '/frontend/images/white-close.svg';
   closeIcon.alt = 'remove image';
   closeIcon.classList.add('remove-preview');
+  closeIcon.addEventListener('click', removePreviewImage);
   return closeIcon  
+}
+
+function removePreviewImage(event) {
+  const preview = event.target.parentElement;
+  const img = preview.querySelector('img');
+  
+  URL.revokeObjectURL(img.src);
+  preview.remove();
 }
