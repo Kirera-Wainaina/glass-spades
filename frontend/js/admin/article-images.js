@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function toggleImageUploadModal() {
   const imageUploadModal = document.getElementById('image-upload-modal');
-  imageUploadModal.classList.toggle('flex');
+  imageUploadModal.classList.toggle('hide');
 }
 
 function clickFileInput() {
