@@ -71,9 +71,10 @@ async function handleImageUpload(event) {
   event.preventDefault();
   const formdata = await enterImagesIntoFormData();
   
-  for (const values of formdata.keys()) {
-    console.log(values);
-  }
+  fetch('/api/article-images/uploadImages', {
+    method: 'POST',
+    body: formdata
+  }).then(response => console.log(response));
 }
 
 async function enterImagesIntoFormData() {
