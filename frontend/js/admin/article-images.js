@@ -71,7 +71,7 @@ async function handleImageUpload(event) {
   event.preventDefault();
   const formdata = await enterImagesIntoFormData();
   
-  fetch('/api/article-images/uploadImages', {
+  fetch('/api/admin/article-images/uploadImages', {
     method: 'POST',
     body: formdata
   }).then(response => console.log(response));
@@ -87,5 +87,6 @@ async function enterImagesIntoFormData() {
         .then(response => response.blob())
         .then(blob => formdata.append(name, blob))
     }))
+    formdata.append('fileNumber', imageElements.length)
     return formdata
 }
