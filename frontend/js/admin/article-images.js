@@ -118,5 +118,55 @@ function handleImageUploadResponse(text) {
 function retrieveUploadedImages() {
   fetch('/api/admin/article-images/retrieveUploadedImages')
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => displayUploadedImages(data))
+}
+
+function displayUploadedImages(uploadedImages) {
+  const imageContainer = document.getElementById("uploaded-images");
+  const fragment = new DocumentFragment();
+
+  uploadedImages.forEach(imageData => {
+    fragment.append(createUploadedImageContainer(imageData));
+  })
+
+  imageContainer.appendChild(fragment);
+}
+
+function createUploadedImageContainer(imageData) {
+  const div = document.createElement('div');
+
+  const img = document.createElement('img');
+  img.src = imageData.link;
+  img.dataset.name = imageData.name;
+
+  div.append(createDeleteIcon());
+  div.append(img);
+  div.append(createLinkContainer(imageData.link))
+  div.classList.add('uploaded-image')
+  return div;
+}
+
+function createDeleteIcon() {
+  const deleteIcon = document.createElement('input');
+  deleteIcon.type = 'image';
+  deleteIcon.src = '/frontend/images/delete.svg';
+  deleteIcon.alt = 'set image for deletion'
+  deleteIcon.classList.add('delete-uploaded-image');
+  return deleteIcon
+}
+
+function createLinkContainer(link) {
+  const div = document.createElement('div');
+
+  const p = document.createElement('p');
+  p.textContent = link;
+
+  const linkIcon = document.createElement('input');
+  linkIcon.type = 'image';
+  linkIcon.src = '/frontend/images/link.svg';
+  linkIcon.alt = 'copy link';
+
+  div.append(p);
+  div.append(linkIcon)
+  return div;
 }
