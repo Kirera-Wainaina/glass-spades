@@ -70,6 +70,13 @@ h1 {
   display: none;
 }
 
+#image-preview-container {
+  width: 90%;
+  height: 70vh;
+  border: 2px dotted lightgrey;
+  margin-top: 1em;
+}
+
 #close-upload-modal {
   height: 2em;
   position: fixed;
