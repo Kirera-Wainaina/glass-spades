@@ -46,10 +46,16 @@ h1 {
   align-items: center;
 }
 
-#image-upload-modal form {
+#upload-images-form {
   background-color: white;
   height: 95vh;
   width: 70vw;
+}
+
+#upload-images-form h2 {
+  font-size: 2em;
+  text-align: center;
+  margin-top: .5em;
 }
 
 #close-upload-modal {
@@ -73,7 +79,7 @@ h1 {
     grid-column: 1 / 6;
   }
 
-  #image-upload-modal form {
+  #upload-images-form {
     margin-top: 4.5em;
     width: 90vw;
   }
