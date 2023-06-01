@@ -14,13 +14,13 @@ const storage = new Storage({
 function minifyImage(filename) {
     const destination = path.join(path.dirname(__dirname), "converted");
     return imagemin(
-	[filename],
-	{
-	    destination,
-	    plugins: [imageminWebp({
-		quality: 70,
-	    })]
-	}
+			[filename],
+			{
+			  destination,
+			  plugins: [imageminWebp({
+					quality: 70,
+			  })]
+			}
     );
 }
 
@@ -30,17 +30,19 @@ function saveImage(filepath) {
     const file = bucket.file(filename);
     // The options will prevent a socket hangup error
     // The error occurs when uploading a lot of files at the same time
-    const gcsStream = file.createWriteStream({ resumable: false,
-					       validation: false });
+    const gcsStream = file.createWriteStream({ 
+			resumable: false,
+			validation: false 
+		});
 
     return new Promise((resolve, reject) => {
-	fs.createReadStream(filepath)
+			fs.createReadStream(filepath)
 	    // .pipe(file.createWriteStream())
 	    .pipe(gcsStream)
 	    .on("error", error => reject(error))
 	    .on("finish", () => {
-		console.log("Finished uploading to google")
-		resolve(file)
+				console.log("Finished uploading to google")
+				resolve(file)
 	    })
     })
 }
@@ -54,12 +56,12 @@ function getFileMetadata(name) {
 
 function deleteImageFromCloud(name) {
     return new Promise((resolve, reject) => {
-	const bucket = storage.bucket("glass-spades-images");
-	const file = bucket.file(name);
-	file.delete((error, apiResponse) => {
-	    if (error) reject(error);
-	    resolve(apiResponse)
-	});
+		const bucket = storage.bucket("glass-spades-images");
+		const file = bucket.file(name);
+		file.delete((error, apiResponse) => {
+		    if (error) reject(error);
+		    resolve(apiResponse)
+		});
     })
 }
 
