@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const uploadImagesForm = document.getElementById("upload-images-form")
   uploadImagesForm.addEventListener('submit', handleImageUpload);
+
+  retrieveUploadedImages()
 })
 
 function toggleImageUploadModal() {
@@ -111,4 +113,10 @@ function handleImageUploadResponse(text) {
       }
     )
   }
+}
+
+function retrieveUploadedImages() {
+  fetch('/api/admin/article-images/retrieveUploadedImages')
+    .then(response => response.json())
+    .then(data => console.log(data))
 }
