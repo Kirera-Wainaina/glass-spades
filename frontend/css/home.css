@@ -292,8 +292,8 @@ footer #social-media {
     }
 }
 
-.flex {
-    display: flex !important;
+.hide {
+    display: none !important;
 }
 
 @media (orientation: portrait) {
