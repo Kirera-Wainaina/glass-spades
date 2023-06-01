@@ -41,6 +41,7 @@ h1 {
   height: 100vh;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
 @media (orientation: portrait) {
