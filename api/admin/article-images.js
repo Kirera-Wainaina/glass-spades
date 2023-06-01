@@ -1,5 +1,7 @@
 const FormDataHandler = require("../../utils/formDataHandler");
 const { minifyImage, saveImage } = require("../../utils/images");
+const db = require('../../database/models');
+const fsPromises = require('fs/promises')
 
 async function uploadImages(request, response) {
   const [fields, files] = await new FormDataHandler(request).run();
@@ -18,7 +20,18 @@ async function uploadImages(request, response) {
         .then(data => data[0])
     })
   );
-  console.log(cloudMetadata);
+
+  const dataToSave = cloudMetadata.map(metadata => ({
+    createTime: Date.now(),
+    link: metadata.mediaLink,
+    name: metadata.name
+  }))
+
+  await db.ArticleImage.insertMany(dataToSave);
+  const filePaths = convertedFileMetadata.flatMap(
+    metadata => [metadata.sourcePath, metadata.destinationPath]
+  );
+  await Promise.all(filePaths.map(filePath => fsPromises.unlink(filePath)));
 }
 
 exports.uploadImages = uploadImages;
