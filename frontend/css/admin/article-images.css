@@ -61,7 +61,7 @@ h1 {
   margin-top: .5em;
 }
 
-#upload-images-form button[type="button"] {
+#upload-button {
   margin-top: .5em;
   width: 90%;
 }
