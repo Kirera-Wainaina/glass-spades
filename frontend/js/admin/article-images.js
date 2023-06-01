@@ -40,14 +40,17 @@ function createImagePreview(file) {
   const img = document.createElement('img');
   img.src = url;
 
+  div.classList.add('preview');
+  div.appendChild(createRemovePreviewIcon());
+  div.appendChild(img);
+  return div;
+}
+
+function createRemovePreviewIcon() {
   const closeIcon = document.createElement('input');
   closeIcon.type = 'image';
   closeIcon.src = '/frontend/images/white-close.svg';
   closeIcon.alt = 'remove image';
   closeIcon.classList.add('remove-preview');
-  
-  div.classList.add('preview');
-  div.appendChild(closeIcon);
-  div.appendChild(img);
-  return div;
+  return closeIcon  
 }
