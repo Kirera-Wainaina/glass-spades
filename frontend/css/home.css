@@ -405,6 +405,10 @@ footer #social-media {
 	    width: 80vw;
     }
 
+    footer {
+        grid-column: 1 / 6;
+    }
+
     footer a, footer p {
 	    font-size: 1em
     }
