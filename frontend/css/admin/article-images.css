@@ -72,4 +72,10 @@ h1 {
   h1 {
     grid-column: 1 / 6;
   }
+
+  #image-upload-modal form {
+    margin-top: 4.5em;
+    width: 90vw;
+  }
+
 }
