@@ -292,6 +292,10 @@ footer #social-media {
     }
 }
 
+.flex {
+    display: flex !important;
+}
+
 @media (orientation: portrait) {
     .house-card {
 	    grid-template-rows: 8vw 30vw 8vw;
