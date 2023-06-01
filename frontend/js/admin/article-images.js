@@ -98,9 +98,13 @@ function handleImageUploadResponse(text) {
   } else {
     const snackbar = document.getElementById("image-upload-error");
     snackbar.classList.toggle('slide');
+    snackbar.style.display = 'block';
     snackbar.addEventListener(
       "animationend", 
-      () => snackbar.classList.toggle('slide')
+      () => {
+        snackbar.classList.toggle('slide')
+        snackbar.style.display = 'none';
+      }
     )
   }
 }
