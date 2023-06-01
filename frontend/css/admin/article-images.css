@@ -130,11 +130,24 @@ h1 {
   grid-column: 1 / 13;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+  z-index: -1;
+  gap: 3%;
 }
 
 .uploaded-image {
   width: 27%;
+  position: relative;
+}
+
+.delete-uploaded-image {
+  height: 1.3em;
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  background-color: whitesmoke;
+  border-radius: 50%;
+  padding: 3px;
 }
 
 @media (orientation: portrait) {
