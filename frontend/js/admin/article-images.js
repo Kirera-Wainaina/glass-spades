@@ -141,7 +141,7 @@ function createUploadedImageContainer(imageData) {
 
   div.append(createDeleteIcon());
   div.append(img);
-  div.append(createLinkContainer(imageData.link))
+  div.append(createLinkButton(imageData.link))
   div.classList.add('uploaded-image')
   return div;
 }
@@ -155,18 +155,11 @@ function createDeleteIcon() {
   return deleteIcon
 }
 
-function createLinkContainer(link) {
-  const div = document.createElement('div');
-
-  const p = document.createElement('p');
-  p.textContent = link;
-
-  const linkIcon = document.createElement('input');
-  linkIcon.type = 'image';
-  linkIcon.src = '/frontend/images/link.svg';
-  linkIcon.alt = 'copy link';
-
-  div.append(p);
-  div.append(linkIcon)
-  return div;
+function createLinkButton(link) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.dataset.link = link;
+  button.textContent = 'Copy Link';
+  button.classList.add('link-button');
+  return button
 }

@@ -133,11 +133,13 @@ h1 {
   justify-content: center;
   z-index: -1;
   gap: 3%;
+  height: max-content;
 }
 
 .uploaded-image {
   width: 27%;
   position: relative;
+  margin-bottom: 1em;
 }
 
 .delete-uploaded-image {
@@ -148,6 +150,10 @@ h1 {
   background-color: whitesmoke;
   border-radius: 50%;
   padding: 3px;
+}
+
+.link-button {
+  width: 100%;
 }
 
 @media (orientation: portrait) {
@@ -176,9 +182,11 @@ h1 {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
+    justify-content: flex-start;
   }
 
   .uploaded-image {
     width: 90%;
+    margin-bottom: 2em;
   }
 }
