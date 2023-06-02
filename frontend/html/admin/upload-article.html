@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="author" content="Kirera-Wainaina">
     <meta name="description"
-	  content=" ">
+	    content="Upload Glass Spades articles">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/frontend/images/GS-tiny-icon.png">    
     <link rel="apple-touch-icon" href="/frontend/images/GS-tiny-icon.png">
     <link rel="stylesheet" href="/frontend/css/home.css">
     <script type="module" async="async" src="/frontend/js/home.js"></script>
     <script type="module" async="async" src="/frontend/js/general.js"></script>
-    <title> | Glass Spades</title>
+    <title>Upload Article | Glass Spades</title>
   </head>
 
   <body>
@@ -44,8 +44,100 @@
 	      </nav>
       </header>
 
-      Welcome to the homepage
-
+      <button id="check-preview">Check Preview</button>
+      <button id="exit-preview" class="hide">Exit Preview</button>
+      
+      <div id="upload-parent-container">
+  
+        <div class="slider hide" id="article-upload-error">
+          <p>An Error occurred while uploading the article.</p>
+        </div>
+  
+        <div class="slider hide" id="existing-title-error">
+          <p>An article of the same title exists. Please change it.</p>
+        </div>
+  
+        <h1>Upload Article</h1>
+  
+        <form id="upload-form">
+          <label>
+            Title:
+            <input type="text" name="title" maxlength="80" required/>
+          </label>
+    
+          <label>
+            Category:
+            <select name="category" required>
+              <option value="business">Business</option>
+              <option value="tech">Tech</option>
+            </select>
+          </label>
+    
+          <label>
+            Landscape Wall Image URL:
+            <input type="url" name="landscapeImage" required />
+          </label>
+    
+          <label>
+            Landscape Wall Image Alt Text:
+            <input type="text" name="landscapeImageText" required />
+          </label>
+    
+          <label>
+            Portrait Wall Image URL:
+            <input type="url" name="portraitImage" required />
+          </label>
+    
+          <label>
+            Portrait Wall Image Alt Text:
+            <input type="text" name="portraitImageText" required />
+          </label>
+    
+          <label>
+            Square Thumbnail URL:
+            <input type="url" name="squareThumbnail" required />
+          </label>
+    
+          <label>
+            Square Thumbnail Alt Text:
+            <input type="text" name="squareThumbnailText" required />
+          </label>
+    
+          <label>
+            Description:
+            <input name="description" type="text" maxlength="200" required />
+          </label>
+  
+          <label>
+            Author Name:
+            <select name="authorId" required>
+              <option value="">-- Please choose author name --</option>
+            </select>
+          </label>
+    
+          <label>
+            Content:
+            <textarea name="content" required id="content"></textarea>
+          </label>
+  
+          <label>
+            Related Article Link 1:
+            <input name="relatedArticle1" type="url" maxlength="200" />
+          </label>
+  
+          <label>
+            Related Article Link 2:
+            <input name="relatedArticle2" type="url" maxlength="200" />
+          </label>
+  
+          <button type="submit">Submit Article</button>
+        </form>
+      </div>
+      
+  
+      <div id="preview" class="hide render">
+      </div>
+  
       <footer>
 	      <p>Follow us for more updates:</p>
         <div id="social-media">
