@@ -1,5 +1,5 @@
 const FormDataHandler = require("../../utils/formDataHandler");
-const { minifyImage, saveImage } = require("../../utils/images");
+const { minifyImage, saveImage, deleteImageFromCloud } = require("../../utils/images");
 const db = require('../../database/models');
 const fsPromises = require('fs/promises');
 const { handleTextResponse } = require("../../utils/respond");
@@ -57,5 +57,23 @@ async function retrieveUploadedImages(request, response) {
   }
 }
 
+async function deleteImages(request, response) {
+  try {
+    const [fields, files] = await new FormDataHandler(request).run();
+    const imageNames = fields.imageNames;
+
+    await Promise.all(imageNames.map(name => deleteImageFromCloud(name)));
+    await Promise.all(imageNames.map(name => db.ArticleImage.deleteOne({ name })));
+
+    console.log('successfully deleted images');
+    handleTextResponse(response, 'success')
+  } catch (error) {
+    console.log(error);
+    response.writeHead(500, { 'content-type': 'text/plain'});
+    response.end('error');
+  }
+}
+
 exports.uploadImages = uploadImages;
 exports.retrieveUploadedImages = retrieveUploadedImages;
+exports.deleteImages = deleteImages;
