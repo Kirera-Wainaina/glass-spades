@@ -265,8 +265,7 @@ footer #social-media {
     box-shadow: 0 0 10px lightgrey;
     text-align: center;
     padding: 1em;
-    display: none;
-    /* display: block; */
+    display: block;
 }
 
 .slide {
