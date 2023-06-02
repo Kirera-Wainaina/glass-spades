@@ -276,18 +276,18 @@ footer #social-media {
 
 @keyframes slide {
     0% {
-	    bottom: 0;
-	    opacity: 0 
+	    opacity: 0;
+        transform: translateY(20vh);
     }
 
     50% {
-	    bottom: 20vh;
 	    opacity: 1;
+        transform: translateY(0);
     }
 
     100% {
-	    bottom: 0;
 	    opacity: 0;
+        transform: translateY(20vh);
     }
 }
 
