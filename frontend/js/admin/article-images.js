@@ -107,16 +107,7 @@ function handleImageUploadResponse(text) {
   if (text == 'success') {
     location.reload()
   } else {
-    const snackbar = document.getElementById("image-upload-error");
-    snackbar.classList.toggle('slide');
-    snackbar.classList.remove('hide');
-    snackbar.addEventListener(
-      "animationend", 
-      () => {
-        snackbar.classList.toggle('slide')
-        snackbar.classList.add('hide');
-      }
-    )
+    displaySnackbar("image-upload-error")
   }
 }
 
