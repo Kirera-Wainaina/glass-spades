@@ -123,7 +123,8 @@ h1 {
   color: white;
 }
 
-#image-upload-error {
+#image-upload-error,
+#image-delete-error {
   background-color: pink;
   color: red;
 }
