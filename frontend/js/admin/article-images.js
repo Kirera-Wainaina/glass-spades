@@ -182,4 +182,12 @@ function copyLinkToClipboard(event) {
 function handleSingleImageDelete(event) {
   const parentElement = event.target.parentElement;
   parentElement.classList.toggle('selected-for-deletion')
+
+  const selected = document.querySelectorAll('.selected-for-deletion');
+  const deleteAllIcon = document.getElementById('delete-icon');
+  if (selected.length) {
+    deleteAllIcon.classList.remove('hide')
+  } else {
+    deleteAllIcon.classList.add('hide')
+  }
 }
