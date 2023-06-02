@@ -76,9 +76,7 @@ function removePreviewImage(event) {
 
 async function handleImageUpload(event) {
   event.preventDefault();
-  
-  const loadingPage = document.getElementById('loading-page');
-  loadingPage.style.display = 'flex';
+  showLoadingPage()
   
   const formdata = await enterImagesIntoFormData();
   
