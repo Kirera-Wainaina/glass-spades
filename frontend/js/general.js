@@ -352,3 +352,13 @@ export function urlifySentence(sentence) {
         .replace(/ /g, '-')
   	    .replace(/[^A-Za-z-]/g, '')
 }
+
+export function displaySnackbar(snackbarId) {
+    const snackbar = document.getElementById(snackbarId);
+    snackbar.addEventListener('animationend', () => {
+        snackbar.classList.remove('slide');
+        snackbar.classList.add('hide')
+    })
+    snackbar.classList.add('slide');
+    snackbar.classList.remove('hide');
+}

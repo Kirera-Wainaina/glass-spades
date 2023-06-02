@@ -1,3 +1,5 @@
+import { displaySnackbar } from "../general.js";
+
 document.addEventListener('DOMContentLoaded', () => {
   const cloudUploadIcon = document.getElementById('cloud-upload-icon');
   cloudUploadIcon.addEventListener('click', toggleImageUploadModal);
@@ -173,13 +175,7 @@ function copyLinkToClipboard(event) {
   const link = event.target.dataset.link;
   navigator.clipboard.writeText(link);
 
-  const snackbar = document.getElementById('link-copied-snackbar');
-  snackbar.addEventListener('animationend', () => {
-      snackbar.classList.remove('slide');
-      snackbar.classList.add('hide')
-  })
-  snackbar.classList.add('slide');
-  snackbar.classList.remove('hide');
+  displaySnackbar('link-copied-snackbar')
 }
 
 function handleSingleImageDelete(event) {
@@ -204,5 +200,13 @@ function deleteSelectedImages() {
     method: "post",
     body: formdata
   }).then(response => response.text())
-    .then(data => console.log(data))
+    .then(handleDeleteImagesResponse)
+}
+
+function handleDeleteImagesResponse(responseText) {
+  if (responseText == 'success') {
+    location.reload();
+  } else {
+
+  }
 }
