@@ -104,12 +104,12 @@ function handleImageUploadResponse(text) {
   } else {
     const snackbar = document.getElementById("image-upload-error");
     snackbar.classList.toggle('slide');
-    snackbar.style.display = 'block';
+    snackbar.classList.remove('hide');
     snackbar.addEventListener(
       "animationend", 
       () => {
         snackbar.classList.toggle('slide')
-        snackbar.style.display = 'none';
+        snackbar.classList.add('hide');
       }
     )
   }
@@ -170,9 +170,10 @@ function copyLinkToClipboard(event) {
   navigator.clipboard.writeText(link);
 
   const snackbar = document.getElementById('link-copied-snackbar');
-  // snackbar.addEventListener(
-  //   'animationend', 
-  //   () => snackbar.classList.remove('slide')
-  // )
+  snackbar.addEventListener('animationend', () => {
+      snackbar.classList.remove('slide');
+      snackbar.classList.add('hide')
+  })
   snackbar.classList.add('slide');
+  snackbar.classList.remove('hide');
 }
