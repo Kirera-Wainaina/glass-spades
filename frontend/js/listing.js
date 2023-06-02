@@ -1,4 +1,4 @@
-import { displayHouseDetails } from "./general.js";
+import { displayHouseDetails, displaySnackbar, hideLoadingPage, showLoadingPage } from "./general.js";
 
 // <!-- Google Tag Manager -->
 if (location.origin == "https://glassspades.com"
@@ -308,21 +308,10 @@ function handleForm(event) {
 	xhr.onreadystatechange = function() {
 		if (this.readyState == 4) {
 		  if (this.response == "success") {
-				const loadingPage = document.getElementById("loading-page");
-				loadingPage.style.display = "none";
-				const snackbar = document.getElementById("snackbar-success");
-				snackbar.classList.remove('hide');
-				snackbar.classList.add("slide");
-				snackbar.addEventListener("animationend", (event) => {
-						event.target.classList.add('hide')
-				})
+				hideLoadingPage();
+				displaySnackbar("snackbar-success");
 		  } else {
-				const snackbar = document.getElementById("snackbar-error");
-				snackbar.classList.remove('hide');
-				snackbar.classList.add("slide");
-				snackbar.addEventListener("animationend", (event) => {
-						event.target.classList.add('hide')
-				})
+				displaySnackbar("snackbar-error");
 		  }
 		}
   }

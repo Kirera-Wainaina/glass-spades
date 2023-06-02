@@ -1,4 +1,4 @@
-import { checkLogin } from "../general.js"
+import { checkLogin, displaySnackbar } from "../general.js"
 
 if (navigator.userAgent != "glassspades-headless-chromium") {
     checkLogin();
@@ -15,16 +15,7 @@ form.addEventListener("submit", event => {
   xhr.onreadystatechange = function() {
 			if (this.readyState == 4) {
 			  if (this.responseText == "success") {
-					const snackbar = document.getElementById("sitemap-success");
-					snackbar.addEventListener("animationend", () => {
-					    snackbar.classList.remove("slide");
-							snackbar.classList.add('hide');
-					})
-				
-					if (!snackbar.classList.contains("slide")) {
-					    snackbar.classList.add("slide");
-							snackbar.classList.remove('hide');
-					}
+					displaySnackbar('sitemap-success');
 			  }
 			}
     }
