@@ -31,7 +31,8 @@ class FormDataHandler {
         if (
 			name == "External Features" || 
 			name == "Internal Features" ||
-		    name == "fileId"
+		    name == "fileId" ||
+            name == "imageNames"
 		) {
 		    if (this.fields[name]) {
 				this.fields[name].push(value);
