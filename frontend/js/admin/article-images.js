@@ -161,5 +161,11 @@ function createLinkButton(link) {
   button.dataset.link = link;
   button.textContent = 'Copy Link';
   button.classList.add('link-button');
+  button.addEventListener('click', copyLinkToClipboard);
   return button
+}
+
+function copyLinkToClipboard(event) {
+  const link = event.target.dataset.link;
+  navigator.clipboard.writeText(link);
 }
