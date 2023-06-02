@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const uploadImagesForm = document.getElementById("upload-images-form")
   uploadImagesForm.addEventListener('submit', handleImageUpload);
 
+  const mainDeleteIcon = document.getElementById('delete-icon');
+  mainDeleteIcon.addEventListener('click', deleteSelectedImages)
+
   retrieveUploadedImages()
 })
 
@@ -190,4 +193,16 @@ function handleSingleImageDelete(event) {
   } else {
     deleteAllIcon.classList.add('hide')
   }
+}
+
+function deleteSelectedImages() {
+  const selected = document.querySelectorAll('.selected-for-deletion img');
+  const formdata = new FormData();
+
+  selected.forEach(img => formdata.append("imageNames", img.dataset.name));
+  fetch('/api/admin/article-images/deleteImages', {
+    method: "post",
+    body: formdata
+  }).then(response => response.text())
+    .then(data => console.log(data))
 }
