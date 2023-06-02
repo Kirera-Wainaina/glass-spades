@@ -131,7 +131,6 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  z-index: -1;
   gap: 3%;
   height: max-content;
 }
@@ -152,8 +151,20 @@ h1 {
   padding: 3px;
 }
 
+.delete-uploaded-image:hover {
+  background-color: grey;
+}
+
+.delete-uploaded-image:active {
+  box-shadow: 0 0 5px 5px lightgray;
+}
+
 .link-button {
   width: 100%;
+}
+
+.link-button:hover {
+  background-color: lightgrey;
 }
 
 @media (orientation: portrait) {
