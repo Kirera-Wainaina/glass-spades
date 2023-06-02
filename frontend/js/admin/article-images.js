@@ -152,6 +152,7 @@ function createDeleteIcon() {
   deleteIcon.src = '/frontend/images/delete.svg';
   deleteIcon.alt = 'set image for deletion'
   deleteIcon.classList.add('delete-uploaded-image');
+  deleteIcon.addEventListener('click', handleSingleImageDelete)
   return deleteIcon
 }
 
@@ -176,4 +177,9 @@ function copyLinkToClipboard(event) {
   })
   snackbar.classList.add('slide');
   snackbar.classList.remove('hide');
+}
+
+function handleSingleImageDelete(event) {
+  const parentElement = event.target.parentElement;
+  parentElement.classList.toggle('selected-for-deletion')
 }

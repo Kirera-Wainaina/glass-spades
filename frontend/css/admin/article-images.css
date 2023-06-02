@@ -169,6 +169,10 @@ h1 {
   background-color: lightgrey;
 }
 
+.selected-for-deletion {
+  border: 3px double red;
+}
+
 @media (orientation: portrait) {
   h1 {
     grid-column: 1 / 6;
