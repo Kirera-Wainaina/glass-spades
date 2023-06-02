@@ -1,4 +1,4 @@
-import { displaySnackbar } from "../general.js";
+import { displaySnackbar, hideLoadingPage, showLoadingPage } from "../general.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   const cloudUploadIcon = document.getElementById('cloud-upload-icon');
@@ -192,6 +192,7 @@ function handleSingleImageDelete(event) {
 }
 
 function deleteSelectedImages() {
+  showLoadingPage()
   const selected = document.querySelectorAll('.selected-for-deletion img');
   const formdata = new FormData();
 
@@ -207,6 +208,7 @@ function handleDeleteImagesResponse(responseText) {
   if (responseText == 'success') {
     location.reload();
   } else {
-
+    hideLoadingPage()
+    displaySnackbar('image-delete-error');
   }
 }
