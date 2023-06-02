@@ -168,4 +168,11 @@ function createLinkButton(link) {
 function copyLinkToClipboard(event) {
   const link = event.target.dataset.link;
   navigator.clipboard.writeText(link);
+
+  const snackbar = document.getElementById('link-copied-snackbar');
+  // snackbar.addEventListener(
+  //   'animationend', 
+  //   () => snackbar.classList.remove('slide')
+  // )
+  snackbar.classList.add('slide');
 }
