@@ -1,4 +1,4 @@
-import { showLoadingPage, generateRandomName, displaySnackbar } from "../general.js";
+import { showLoadingPage, generateRandomName, displaySnackbar, hideLoadingPage } from "../general.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   attachListenerToFileButton();
@@ -62,6 +62,7 @@ function giveImageRandomName(formdata) {
 }
 
 export function handleResponse(responseText) {
+  hideLoadingPage();
   if (responseText == 'success') {
     location.href = '/admin/manage-authors';
   } else if (responseText == 'forbidden-error') {
