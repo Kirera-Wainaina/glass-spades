@@ -1,4 +1,4 @@
-@import url('../home.css');
+@import url("../home.css");
 
 h1 {
     grid-column: 1 / 13;
@@ -40,7 +40,7 @@ button[type="submit"] {
 }
 
 input {
-    width: 100%;
+    width: inherit;
     font-size: 1.2em;
     margin-top: .5em;
 }
@@ -55,6 +55,8 @@ textarea {
 label {
     font-size: 1.2em;
     margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
 }
 
 #profile-image-preview {
@@ -87,11 +89,11 @@ label {
 
 @media (orientation: portrait) {
     h1 {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
     }
 
     form {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
         margin: 1em;
     }
 
@@ -106,5 +108,4 @@ label {
         width: 8vh;
         box-shadow: var(--shadow);
     }
-
 }
