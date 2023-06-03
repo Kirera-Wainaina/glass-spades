@@ -1,0 +1,53 @@
+@import url('../home.css');
+
+h1 {
+  grid-column: 1 / 13;
+  text-align: center;
+  color: var(--primary);
+  margin-top: .5em;
+  font-size: 2em;
+}
+
+#author-list {
+  grid-column: 5 / 9;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 2em;
+}
+
+.author-details {
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  height: 15vh;
+  gap: 2em;
+  padding: .5em;
+}
+
+.author-details:active {
+  background-color: var(--active-color);
+}
+
+.author-details:hover {
+  background-color: var(--hover-color);
+}
+
+.author-details img {
+  height: 10vh;
+  width: 10vh;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media (orientation: portrait) {
+  h1 {
+      grid-column: 1 / 7;
+  }
+
+  #author-list {
+      grid-column: 1 / 7;
+      margin-left: 1em;
+      margin-right: 1em;
+  }
+}
