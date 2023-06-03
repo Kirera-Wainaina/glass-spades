@@ -47,7 +47,7 @@ async function submitAuthor(event) {
   const formdata = new FormData(event.target);
   giveImageRandomName(formdata);
   formdata.append('fileNumber', 1);
-  fetch('/api/admin/add-author.js', {
+  fetch('/api/admin/add-author/saveAuthor', {
       method: 'POST',
       body: formdata
   })
