@@ -1,7 +1,8 @@
 const db = require("../../database/models");
 const FormDataHandler = require('../../utils/formDataHandler');
 const bcrypt = require('bcrypt')
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+const { minifyImage, saveImage } = require("../../utils/images");
 dotenv.config()
 
 exports.retrieveAuthor = async function (request, response) {
@@ -26,7 +27,19 @@ exports.updateAuthor = async function (request, response) {
     if (result) {
       // admin password is verified
       if (files.length) {
+        console.log(files, fields);
+        const [convertedFileMetadata] = await minifyImage(files[0]);
+        const cloudFile = await saveImage(convertedFileMetadata.destinationPath);
+        const [cloudMetadata] = await cloudFile.getMetadata();
+        console.log(cloudMetadata);
 
+        await db.Author.findByIdAndUpdate(fields.id, {
+          ...fields,
+          profileImageLink: cloudMetadata.mediaLink,
+          profileImageName: cloudMetadata.name
+        })
+        response.writeHead(200, {"content-type": "text/plain"})
+        response.end("success");
       } else {
         await db.Author.findByIdAndUpdate(fields.id, fields);
         response.writeHead(200, {"content-type": "text/plain"});
