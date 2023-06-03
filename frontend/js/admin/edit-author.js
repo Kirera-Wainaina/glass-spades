@@ -52,7 +52,7 @@ function editAuthor(event) {
     const formdata = new FormData(event.target);
     changeImageName(formdata);
     formdata.append('id', id);
-    fetch('/api/admin/edit-author', {
+    fetch('/api/admin/edit-author/updateAuthor', {
         method: 'POST',
         body: formdata
     })
