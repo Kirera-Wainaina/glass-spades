@@ -57,7 +57,7 @@ function editAuthor(event) {
         body: formdata
     })
     .then(response => response.text())
-    .then(text => handleResponse(text, 'SAVE AUTHOR', '/admin/manage-authors'))
+    .then(handleResponse)
 }
 
 function setProfileImageName(name) {
