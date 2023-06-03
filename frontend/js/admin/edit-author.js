@@ -2,7 +2,7 @@ import { createImagePreview, handleResponse } from "./add-authors.js";
 import { showLoadingPage } from "../general.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const [ authorDetails ] = await retrieveAuthorData();
+    const authorDetails = await retrieveAuthorData();
     displayAuthorDetails(authorDetails);
 
     const editForm = document.getElementById('edit-form');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function retrieveAuthorData() {
     const params = new URLSearchParams(location.search);
-    return fetch(`/api/authors?id=${params.get('id')}`)
+    return fetch(`/api/admin/edit-author/retrieveAuthor?id=${params.get('id')}`)
     .then(response => response.json())
 }
 
@@ -88,18 +88,10 @@ function displayDeleteForm() {
 
 function deleteAuthor(event) {
     event.preventDefault();
-    showLoadingPage()
+    showLoadingPage();
+    const authorId = new URLSearchParams(location.search).get("id");
 
-    const formdata = new FormData(event.target);
-    formdata.append(
-      'authorId', 
-      new URLSearchParams(location.search).get("id")
-    );
-
-    fetch('/api/admin/delete-author', {
-        method: 'POST',
-        body: formdata
-    })
+    fetch(`/api/admin/edit-author/deleteAuthor?id=${authorId}`)
     .then(response => response.text())
-    .then(text => handleResponse(text, 'DELETE AUTHOR', '/admin/manage-authors'))
+    .then(handleResponse)
 }
