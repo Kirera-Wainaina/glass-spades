@@ -123,12 +123,6 @@ h1 {
   color: white;
 }
 
-#image-upload-error,
-#image-delete-error {
-  background-color: pink;
-  color: red;
-}
-
 #uploaded-images {
   grid-column: 1 / 13;
   display: flex;
