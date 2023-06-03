@@ -89,14 +89,24 @@ const articleImageSchema = new Schema({
     name: String
 })
 
+const authorSchema = new Schema({
+    authorName: String,
+    bio: String,
+    profileImageLink: String,
+    profileImageName: String,
+    url: String
+})
+
 const User = mongoose.model("user", userSchema);
 const Listing = mongoose.model("listing", listingSchema);
 const Image = mongoose.model("image", imageSchema);
 const Lead = mongoose.model("lead", leadSchema);
 const ArticleImage = mongoose.model("articleImage", articleImageSchema);
+const Author = mongoose.model("author", authorSchema);
 
 exports.User = User;
 exports.Listing = Listing;
 exports.Image = Image;
 exports.Lead = Lead;
 exports.ArticleImage = ArticleImage;
+exports.Author = Author;
