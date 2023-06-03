@@ -40,7 +40,7 @@ export function createImagePreview(url) {
   profileImageLabel.insertAdjacentElement('afterend', img)    
 }
 
-async function submitAuthor(event) {
+function submitAuthor(event) {
   event.preventDefault();
   showLoadingPage()
 
