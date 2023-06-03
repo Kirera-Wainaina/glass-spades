@@ -2,7 +2,7 @@ const db = require("../../database/models");
 const FormDataHandler = require('../../utils/formDataHandler');
 const bcrypt = require('bcrypt')
 const dotenv = require('dotenv');
-const { minifyImage, saveImage } = require("../../utils/images");
+const { minifyImage, saveImage, deleteImageFromCloud } = require("../../utils/images");
 dotenv.config()
 
 exports.retrieveAuthor = async function (request, response) {
@@ -31,7 +31,6 @@ exports.updateAuthor = async function (request, response) {
         const [convertedFileMetadata] = await minifyImage(files[0]);
         const cloudFile = await saveImage(convertedFileMetadata.destinationPath);
         const [cloudMetadata] = await cloudFile.getMetadata();
-        console.log(cloudMetadata);
 
         await db.Author.findByIdAndUpdate(fields.id, {
           ...fields,
@@ -45,6 +44,29 @@ exports.updateAuthor = async function (request, response) {
         response.writeHead(200, {"content-type": "text/plain"});
         response.end("success");
       }
+    } else {
+      response.writeHead(401, {'content-type': "text/plain"});
+      response.end("forbidden-error");
+    }
+  } catch (error) {
+    console.log(error);
+    response.writeHead(500, {"content-type": "text/plain"});
+    response.end("server-error");
+  }
+}
+
+exports.deleteAuthor = async function (request, response) {
+  try {
+    const [fields] = await new FormDataHandler(request).run();
+    const result = await bcrypt.compare(fields.adminPassword, process.env.ENCRYPTED_ADMIN_PASSWORD);
+
+    if (result) {
+      const docs = await db.Author.findById(fields.id);
+      await deleteImageFromCloud(docs.profileImageName);
+      await db.Author.findByIdAndDelete(docs._id);
+      console.log("successfully deleted author");
+      response.writeHead(200, {"content-type": "text/plain"});
+      response.end("success");
     } else {
       response.writeHead(401, {'content-type': "text/plain"});
       response.end("forbidden-error");

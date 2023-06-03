@@ -90,8 +90,13 @@ function deleteAuthor(event) {
     event.preventDefault();
     showLoadingPage();
     const authorId = new URLSearchParams(location.search).get("id");
+    const formdata = new FormData(event.target);
+    formdata.append("id", authorId)
 
-    fetch(`/api/admin/edit-author/deleteAuthor?id=${authorId}`)
+    fetch(`/api/admin/edit-author/deleteAuthor`, {
+      method: "POST",
+      body: formdata
+    })
     .then(response => response.text())
     .then(handleResponse)
 }
