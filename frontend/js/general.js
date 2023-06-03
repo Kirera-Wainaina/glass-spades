@@ -362,3 +362,9 @@ export function displaySnackbar(snackbarId) {
     snackbar.classList.add('slide');
     snackbar.classList.remove('hide');
 }
+
+export function generateRandomName() {
+    const number = Math.trunc(Math.random()*1e6);
+    const date = Date.now();
+    return `${number}-${date}`
+}
