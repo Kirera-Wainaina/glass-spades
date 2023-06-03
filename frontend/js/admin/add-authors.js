@@ -61,7 +61,7 @@ function giveImageRandomName(formdata) {
   formdata.delete('profilePhoto');
 }
 
-function handleResponse(responseText) {
+export function handleResponse(responseText) {
   if (responseText == 'success') {
     location.href = '/admin/manage-authors';
   } else if (responseText == 'forbidden-error') {
