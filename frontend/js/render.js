@@ -208,14 +208,18 @@ function createRelatedArticleContainer(url) {
 }
 
 function fetchRelatedArticleData(id, urlTitle) {
-    return fetch(`/api/articles?field=title&field=description&field=landscapeImage\
-&field=landscapeImageText&field=publishedDate&id=${id}&urlTitle=${urlTitle}`)
-    .then(response => response.json());
+  return fetch(`/api/render/fetchRelatedArticleData?id=${id}&urlTitle${urlTitle}`)
+    .then(response => response.json())
+//     return fetch(`/api/articles?field=title&field=description&field=landscapeImage\
+// &field=landscapeImageText&field=publishedDate&id=${id}&urlTitle=${urlTitle}`)
+//     .then(response => response.json());
 }
 
 function fetchAuthor(authorId) {
-    return fetch(`/api/authors?field=authorName&field=bio&field=profileImageLink&id=${authorId}`)
-        .then(response => response.json())
+  return fetch(`/api/render/fetchAuthor?id=${authorId}`)
+    .then(response => response.json());
+    // return fetch(`/api/authors?field=authorName&field=bio&field=profileImageLink&id=${authorId}`)
+    //     .then(response => response.json())
 }
 
 async function createAuthor(authorId) {
