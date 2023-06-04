@@ -17,9 +17,11 @@ document.addEventListener("contextmenu", event => {
   if (event.target.tagName == "IMG") event.preventDefault();
 });
 
-const mediaQueryResult = window.matchMedia("(max-width: 500px)");
-mediaQueryResult.addEventListener("change", handleMenu);
-handleMenu(mediaQueryResult);
+document.addEventListener('DOMContentLoaded', () => {
+  const mediaQueryResult = window.matchMedia("(max-width: 500px)");
+  mediaQueryResult.addEventListener("change", handleMenu);
+  handleMenu(mediaQueryResult);  
+})
 
 function handleMenu(mediaQueryResult) {
     const menu = document.getElementById("menu");
