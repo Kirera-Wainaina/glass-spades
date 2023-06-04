@@ -1,3 +1,9 @@
+const { checkLogin } = require("../general.js");
+
+if (navigator.userAgent != "glassspades-headless-chromium") {
+    checkLogin();
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     const authorDetailsContainer = document.querySelector('#author-list');
     const data = await retrieveAuthorDetails();

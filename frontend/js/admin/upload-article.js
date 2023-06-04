@@ -4,8 +4,13 @@ import {
   showLoadingPage, 
   hideLoadingPage, 
   urlifySentence, 
-  displaySnackbar 
+  displaySnackbar, 
+  checkLogin
 } from '../general.js';
+
+if (navigator.userAgent != "glassspades-headless-chromium") {
+  checkLogin();
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const checkPreviewButton = document.getElementById('check-preview');

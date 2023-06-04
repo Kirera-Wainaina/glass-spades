@@ -1,4 +1,8 @@
-import { showLoadingPage, generateRandomName, displaySnackbar, hideLoadingPage } from "../general.js";
+import { showLoadingPage, generateRandomName, displaySnackbar, hideLoadingPage, checkLogin } from "../general.js";
+
+if (navigator.userAgent != "glassspades-headless-chromium") {
+  checkLogin();
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   attachListenerToFileButton();

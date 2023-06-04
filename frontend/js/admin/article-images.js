@@ -1,4 +1,8 @@
-import { displaySnackbar, hideLoadingPage, showLoadingPage } from "../general.js";
+import { checkLogin, displaySnackbar, hideLoadingPage, showLoadingPage } from "../general.js";
+
+if (navigator.userAgent != "glassspades-headless-chromium") {
+  checkLogin();
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const cloudUploadIcon = document.getElementById('cloud-upload-icon');

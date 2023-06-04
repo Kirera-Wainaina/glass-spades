@@ -1,5 +1,9 @@
 import { createImagePreview, handleResponse } from "./add-authors.js";
-import { showLoadingPage } from "../general.js";
+import { checkLogin, showLoadingPage } from "../general.js";
+
+if (navigator.userAgent != "glassspades-headless-chromium") {
+    checkLogin();
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
     const authorDetails = await retrieveAuthorData();
