@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 export function createPreviewData() {
     return {
         title: document.querySelector('input[name="title"]').value,
-        category: document.querySelector('select[name="category"]').value,
         landscapeImage: document.querySelector('input[name="landscapeImage"]').value,
         landscapeImageText: document.querySelector('input[name="landscapeImageText"]').value,
         portraitImage: document.querySelector('input[name="portraitImage"]').value,
