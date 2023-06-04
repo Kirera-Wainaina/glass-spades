@@ -17,7 +17,7 @@ var highlightedImages = [];
 
 function getModelData() {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/admin/upload/sendModelData");
+    xhr.open("POST", "/api/admin/upload-listing/sendModelData");
     xhr.send();
 
     return new Promise((resolve, reject) => {
@@ -309,7 +309,7 @@ export async function setData(event) {
 
 function submitData(formdata) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/admin/upload/uploadListing");
+    xhr.open("POST", "/api/admin/upload-listing/uploadListing");
     xhr.send(formdata);
 
     xhr.onreadystatechange = function() {
@@ -469,7 +469,7 @@ function deleteImagesInDB(imageIds) {
     const formdata = new FormData();
     imageIds.forEach(imageId => formdata.append("imageIds", imageId))
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/admin/upload/deleteImagesInDB")
+    xhr.open("POST", "/api/admin/upload-listing/deleteImagesInDB")
     xhr.send(formdata)
 
     xhr.onreadystatechange = function() {
