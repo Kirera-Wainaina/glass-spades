@@ -51,29 +51,29 @@ header #menu {
     flex-direction: row;
     align-items: center;
     margin-right: 1em;
+    gap: 5px;
  }
 
-header #menu a {
+ #menu a {
     width: 100%;
-}
-
-header #menu button {
-    font-size: .8em;
-    width: 80%;
-    height: 2.3em;
     border: 1px solid lightgrey;
-    background-color: white;
+    font-size: 1em;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
 }
 
-header #menu button:hover {
-    background-color: lightgrey;
+#menu a:hover {
+    background-color: var(--hover-color);
     color: white;
-    box-shadow: 0 0 5px lightgrey;
+    box-shadow: var(--shadow);
     border: 0;
 }
 
-header #menu button:active {
-    background: black;
+#menu a:active {
+    background: var(--active-color);
     color: white;
 }
 
