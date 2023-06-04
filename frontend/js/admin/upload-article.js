@@ -1,6 +1,6 @@
 import { render } from '../render.js';
 import { toggleElementClass, showLoadingPage, hideLoadingPage, 
-    urlifySentence, displaySliderAnimation } from '../general.js';
+    urlifySentence, displaySnackbar } from '../general.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const checkPreviewButton = document.getElementById('check-preview');
@@ -100,11 +100,11 @@ async function handleResponse(response) {
         location.href = '/admin/home';
     } else {
         if (text == 'url-exists') {
-            displaySliderAnimation('existing-title-error');
+            displaySnackbar('existing-title-error');
         } else {
-            displaySliderAnimation('article-upload-error')
+            displaySnackbar('article-upload-error')
         }
-        hideLoadingPage('Submit Article');
+        hideLoadingPage();
     }
 }
 
