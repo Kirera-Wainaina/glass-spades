@@ -1,4 +1,4 @@
-const { checkLogin } = require("../general.js");
+import { checkLogin } from "../general.js";
 
 if (navigator.userAgent != "glassspades-headless-chromium") {
     checkLogin();
