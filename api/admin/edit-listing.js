@@ -4,7 +4,7 @@ const db = require("../../database/models");
 const respond = require("../../utils/respond");
 const FormDataHandler = require("../../utils/formDataHandler");
 const serverRender = require("../../utils/serverRender");
-const { saveImagesToCloud, saveImagesToDB } = require('./upload');
+const { saveImagesToCloud, saveImagesToDB } = require('./upload-listing');
 const { deleteFilterPages } = require('../../utils/general');
 
 function retrieveListing(request, response) {

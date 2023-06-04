@@ -19,7 +19,7 @@ function retrieveListing() {
     const url = new URL(location);
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/admin/edit/retrieveListing");
+    xhr.open("POST", "/api/admin/edit-listing/retrieveListing");
     xhr.send(url.searchParams.get("id"));
 
     xhr.onreadystatechange = function() {
@@ -208,7 +208,7 @@ function createFileObject(fileData) {
 }
 function updateListing(formdata) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/admin/edit/updateListing");
+    xhr.open("POST", "/api/admin/edit-listing/updateListing");
     xhr.send(formdata);
 
     xhr.onreadystatechange = function() {
