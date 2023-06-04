@@ -9,11 +9,6 @@ export function hideLoadingPage() {
     loadingPage.style.display = "none";
 }
 
-export function closeElements(...elements) {
-    elements.forEach(element => element.style.display = "none");
-}
-
-
 export function checkLogin() {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/api/login/checkLogin");
