@@ -1,3 +1,6 @@
+import { toggleElementClass } from "./general.js";
+
+
 /////////////////////////////////////////////////////////////////////////
 ///////////////////// Filter Functionality //////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,10 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 export function displayFilterBanner() {
-  const filterContainer = document.getElementById("filter-container");
-  const filterCard = document.getElementById("filter-card");
-  filterContainer.style.display = "block";
-  filterCard.style.display = "grid";    
+  toggleElementClass(document.getElementById("filter-container"), "hide")   
 }
 
 export function runFilter(mandate) {

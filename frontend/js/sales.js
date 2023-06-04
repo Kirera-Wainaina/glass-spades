@@ -1,6 +1,4 @@
-import {
-    closeElements
-} from "./general.js";
+import { toggleElementClass } from "./general.js";
 import { displayHouseDetails } from "./listing-utils.js";
 import { displayFilterBanner, runFilter, generateFilterPageTitle } from "./filter-utils.js";
 
@@ -16,10 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	filterShortcut.addEventListener("click", displayFilterBanner);
 
 	const closeIcon = document.getElementById("close-icon");
-	closeIcon.addEventListener("click", () => closeElements(
-	    document.getElementById("filter-container"),
-	    document.getElementById("filter-card")
-	));
+	closeIcon.addEventListener("click", () => {
+		toggleElementClass(document.getElementById("filter-container"), "hide");
+	})
 
 	const filterButton = document.getElementById("filter-button");
 	filterButton.addEventListener("click", () => runFilter("sales"))

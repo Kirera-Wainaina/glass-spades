@@ -61,55 +61,57 @@
 				alt="icon to open the filter modal"
 			/>
 
-      <div id="filter-container">
+      <div id="filter-container" class="hide">
 				<input 
 					type="image"
     			src="/frontend/images/white-close.svg"
     			id="close-icon"
 					alt="close the filter modal"
 				/>
+
+				<div id="filter-card">
+					<p>Filter Sales Properties</p>
+					<p class="filter-category">By Price(Kes):</p>
+					<select id="min-price">
+						<option value="">Minimum Price</option>
+						<option value="5000000">5,000,000</option>
+						<option value="10000000">10,000,000</option>
+						<option value="20000000">20,000,000</option>
+						<option value="40000000">40,000,000</option>
+						<option value="60000000">60,000,000</option>
+						<option value="80000000">80,000,000</option>
+					</select>
+					<select id="max-price">
+						<option value="">Maximum Price</option>
+						<option value="5000000">5,000,000</option>
+						<option value="10000000">10,000,000</option>
+						<option value="20000000">20,000,000</option>
+						<option value="40000000">40,000,000</option>
+						<option value="60000000">60,000,000</option>
+						<option value="800000000">Above 60,000,000</option>
+					</select>
+				
+					<p class="filter-category">By Bedrooms:</p>
+					<select id="bedrooms">
+						<option value="">Bedrooms</option>
+						<option value="Studio">Studio</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="20">+5</option>
+					</select>
+				
+					<p class="filter-category">By Location:</p>
+					<select id="locations">
+						<option value="">Locations</option>
+					</select>
+				
+					<button id="filter-button">Show Results</button>
+				</div>
       </div>
-      <div id="filter-card">
-				<p>Filter Sales Properties</p>
-				<p class="filter-category">By Price(Kes):</p>
-				<select id="min-price">
-				  <option value="">Minimum Price</option>
-				  <option value="5000000">5,000,000</option>
-				  <option value="10000000">10,000,000</option>
-				  <option value="20000000">20,000,000</option>
-				  <option value="40000000">40,000,000</option>
-				  <option value="60000000">60,000,000</option>
-				  <option value="80000000">80,000,000</option>
-				</select>
-				<select id="max-price">
-				  <option value="">Maximum Price</option>
-				  <option value="5000000">5,000,000</option>
-				  <option value="10000000">10,000,000</option>
-				  <option value="20000000">20,000,000</option>
-				  <option value="40000000">40,000,000</option>
-				  <option value="60000000">60,000,000</option>
-				  <option value="800000000">Above 60,000,000</option>
-				</select>
-			
-				<p class="filter-category">By Bedrooms:</p>
-				<select id="bedrooms">
-				  <option value="">Bedrooms</option>
-				  <option value="Studio">Studio</option>
-				  <option value="1">1</option>
-				  <option value="2">2</option>
-				  <option value="3">3</option>
-				  <option value="4">4</option>
-				  <option value="5">5</option>
-				  <option value="20">+5</option>
-				</select>
-			
-				<p class="filter-category">By Location:</p>
-				<select id="locations">
-				  <option value="">Locations</option>
-				</select>
-			
-				<button id="filter-button">Show Results</button>
-      </div>
+      
       
       <h2>Houses for Sale</h2>
 
