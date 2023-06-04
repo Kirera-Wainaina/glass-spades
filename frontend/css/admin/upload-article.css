@@ -19,6 +19,12 @@ header {
   margin-top: 6vh;
 }
 
+h1 {
+  grid-column: 1 / 13;
+  text-align: center;
+  margin-top: 1em;
+}
+
 #upload-parent-container {
     grid-column: 3 / 11;
     font-size: 1.2em;
