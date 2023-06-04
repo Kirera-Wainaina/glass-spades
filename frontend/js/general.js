@@ -1,6 +1,6 @@
-const exists = new Event("exists");
+const overviewsPresent = new Event("overviews-in-dom");
 
-document.addEventListener("exists", () => {
+document.addEventListener("overviews-in-dom", () => {
     const overviewImages = document.querySelectorAll(".overview");
     const options = {
 	    root: null,
@@ -38,10 +38,10 @@ export function displayHouseDetails(houseDetails, containerId="listings") {
         // for lazy loading. see line 58
 	    if (navigator.userAgent != "glassspades-headless-chromium") {
 	        // dont dispatch for ssr
-	        document.dispatchEvent(exists);
+	        document.dispatchEvent(overviewsPresent);
 	    }
     } else {
-	    document.dispatchEvent(exists);
+	    document.dispatchEvent(overviewsPresent);
     }
 }
 
