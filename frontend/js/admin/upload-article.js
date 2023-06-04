@@ -138,7 +138,7 @@ function createAuthorOptionsFragment(authors) {
 
 function createSingleAuthorOption(author) {
     const option = document.createElement('option');
-    option.value = author.id;
+    option.value = author._id;
     option.textContent = author.authorName;
     return option
 }

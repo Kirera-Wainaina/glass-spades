@@ -223,7 +223,7 @@ function fetchAuthor(authorId) {
 }
 
 async function createAuthor(authorId) {
-    const [ author ] = await fetchAuthor(authorId);
+    const author = await fetchAuthor(authorId);
     const div = document.createElement('div');
     div.id = 'author-section';
     div.append(createImageElement(
