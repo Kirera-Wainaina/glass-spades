@@ -1,8 +1,8 @@
 import {
-    displayFilterBanner, runFilter,
-    generateTitle, closeElements
+  closeElements
 } from "./general.js";
 import { displayHouseDetails } from "./listing-utils.js";
+import { displayFilterBanner, runFilter, generateFilterPageTitle } from "./filter-utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 	getRentals();
@@ -43,9 +43,9 @@ function getRentals() {
 
 
 function replaceTitle() {
-    const title = generateTitle();
+    const title = generateFilterPageTitle();
     if (title) {
-	const titleEl = document.querySelector("h2");
-	titleEl.textContent = title;
+			const titleEl = document.querySelector("h2");
+			titleEl.textContent = title;
     }
 }
