@@ -368,3 +368,7 @@ export function generateRandomName() {
     const date = Date.now();
     return `${number}-${date}`
 }
+
+export function toggleElementClass(element, className) {
+    element.classList.toggle(className)
+}
