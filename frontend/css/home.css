@@ -392,19 +392,10 @@ footer #social-media {
 
     header #menu a {
 	    width: 90%;
+        height: 7%;
 	    border: 1px solid lightgrey;
 	    display: flex;
 	    margin-top: 0.5em;
-    }
-
-    header #menu a:active {
-	    background: black;
-	    color: white;
-    }
-
-    header #menu button {
-	    border: none;
-	    width: 100%;
     }
 
     div#listings {
