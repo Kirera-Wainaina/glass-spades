@@ -3,7 +3,7 @@
 
 #check-preview, #exit-preview {
     color: white;
-    background-color: var(--primary);
+    background-color: black;
     position: fixed;
     top: 0;
     left: 0;
