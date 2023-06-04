@@ -1,4 +1,5 @@
-import { displayHouseDetails, displaySnackbar, hideLoadingPage, showLoadingPage } from "./general.js";
+import { displaySnackbar, hideLoadingPage, showLoadingPage } from "./general.js";
+import { displayHouseDetails } from "./listing-utils.js";
 
 // <!-- Google Tag Manager -->
 if (location.origin == "https://glassspades.com"

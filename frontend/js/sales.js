@@ -1,7 +1,8 @@
 import {
-    displayHouseDetails, displayFilterBanner, runFilter,
+    displayFilterBanner, runFilter,
     generateTitle, closeElements
-} from "./general.js"
+} from "./general.js";
+import { displayHouseDetails } from "./listing-utils.js";
 
 getSales();
 replaceTitle()

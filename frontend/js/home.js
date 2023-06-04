@@ -1,4 +1,4 @@
-import { displayHouseDetails } from "./general.js";
+import { displayHouseDetails } from "./listing-utils.js";
 getListings()
 
 function getListings() {
