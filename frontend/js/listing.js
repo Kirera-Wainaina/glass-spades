@@ -294,6 +294,7 @@ form.addEventListener("submit", handleForm)
 
 function handleForm(event) {
   event.preventDefault();
+	showLoadingPage()
 
   dataLayer.push({ "event": "generate_lead" })
 
