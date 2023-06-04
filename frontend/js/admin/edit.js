@@ -3,8 +3,6 @@ import {
     dragOverImage,
 	dropImage, 
     setData,
-	getImages, 
-    confirmValues, 
     highlightImage 
 } from "./upload.js";
 import { showLoadingPage, checkLogin } from "../general.js";
