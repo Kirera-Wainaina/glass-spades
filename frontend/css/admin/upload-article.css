@@ -55,7 +55,7 @@ label {
 button[type='submit'] {
     margin-top: 1em;
     color: white;
-    background-color: var(--secondary);
+    background-color: black;
     border-radius: 5px;
     font-size: 1.1em;
     height: 2em;
