@@ -87,6 +87,14 @@ export function createDateBylineElement(publishedDate, updatedDate) {
   }
 }
 
+export function getNameOfMonth(index) {
+  const MONTHS = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October','November', 'December'
+  ]
+  return MONTHS[index]
+}
+
 export function isOneWeekSincePublishing(publishedDate, updatedDate) {
   const oneWeekInMilliseconds = 7*24*60*60*1000;
   const timeDifference = Number(updatedDate) - Number(publishedDate);
