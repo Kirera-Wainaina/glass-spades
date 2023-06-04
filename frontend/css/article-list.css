@@ -1,0 +1,67 @@
+@import url('./home.css');
+
+#article-list {
+    grid-column: 3 / 11;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.article-card {
+    width: 45%;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    padding-bottom: 1em;
+    margin-bottom: 3%;
+    margin-right: 2%;
+}
+
+.article-card:hover {
+    background-color: var(--hover-color);
+}
+
+.article-card:active {
+    background-color: var(--active-color);
+}
+
+.article-card img {
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+}
+
+.article-card h2 {
+    margin-top: 1em;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.article-card p:first-of-type {
+    margin-top: 1.2em;
+    font-size: 1.2em;
+}
+
+.article-card p:last-of-type {
+    margin-top: .8em;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+@media (orientation: portrait) {
+    #article-list {
+        grid-column: 1 / 6;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .article-card {
+        width: 95vw;
+        margin-right: 0;
+        margin-bottom: 5%;
+    }
+}

@@ -1,5 +1,5 @@
-/* @import url('../render.css'); */
-@import url("../home.css");
+@import url('../render.css');
+/* @import url("../home.css"); */
 
 #check-preview, #exit-preview {
     color: white;
