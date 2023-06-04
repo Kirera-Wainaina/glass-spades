@@ -4,7 +4,7 @@ import {
 	dropImage, 
     setData,
     highlightImage 
-} from "./upload.js";
+} from "./upload-listing.js";
 import { showLoadingPage, checkLogin } from "../general.js";
 
 if (navigator.userAgent != "glassspades-headless-chromium") {
