@@ -1,6 +1,11 @@
 import { render } from '../render.js';
-import { toggleElementClass, showLoadingPage, hideLoadingPage, 
-    urlifySentence, displaySnackbar } from '../general.js';
+import { 
+  toggleElementClass, 
+  showLoadingPage, 
+  hideLoadingPage, 
+  urlifySentence, 
+  displaySnackbar 
+} from '../general.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const checkPreviewButton = document.getElementById('check-preview');
@@ -117,7 +122,7 @@ async function displayAuthors() {
 }
 
 function retrieveAuthors() {
-    return fetch('/api/authors?field=authorName&field=id')
+    return fetch('/api/admin/upload-article/getAuthorNames')
         .then(response => response.json())
 }
 
