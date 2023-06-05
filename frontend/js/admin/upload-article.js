@@ -144,11 +144,11 @@ function createSingleAuthorOption(author) {
 }
 
 function hideNav() {
-    const nav = document.querySelector('nav');
+    const nav = document.querySelector('header');
     nav.classList.add('hide');
 }
 
 function showNav() {
-    const nav = document.querySelector('nav');
+    const nav = document.querySelector('header');
     nav.classList.remove('hide');
 }
