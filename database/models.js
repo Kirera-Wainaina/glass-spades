@@ -97,12 +97,31 @@ const authorSchema = new Schema({
     url: String
 })
 
+const articleSchema = new Schema({
+    authorId: mongoose.ObjectId,
+    content: String,
+    description: String,
+    landscapeImage: String,
+    landscapeImageText: String,
+    portraitImage: String,
+    portraitImageText: String,
+    publishedDate: String,
+    relatedArticle1: String,
+    relatedArticle2: String,
+    squareThumbnail: String,
+    squareThumbnailText: String,
+    title: String,
+    updatedDate: String,
+    urlTitle: String
+})
+
 const User = mongoose.model("user", userSchema);
 const Listing = mongoose.model("listing", listingSchema);
 const Image = mongoose.model("image", imageSchema);
 const Lead = mongoose.model("lead", leadSchema);
 const ArticleImage = mongoose.model("articleImage", articleImageSchema);
 const Author = mongoose.model("author", authorSchema);
+const Article = mongoose.model("article", articleSchema);
 
 exports.User = User;
 exports.Listing = Listing;
@@ -110,3 +129,4 @@ exports.Image = Image;
 exports.Lead = Lead;
 exports.ArticleImage = ArticleImage;
 exports.Author = Author;
+exports.Article = Article;
