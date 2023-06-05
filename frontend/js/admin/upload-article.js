@@ -96,7 +96,7 @@ function createFormData(data) {
 }
 
 function submitArticle(formdata) {
-    fetch('/api/admin/upload-article', {
+    fetch('/api/admin/upload-article/saveArticle', {
         method: 'POST',
         body: formdata
     })
