@@ -1,9 +1,17 @@
-const form = document.querySelector("form");
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+    
+        const formdata = new FormData(form);
+        loginUser(formdata);
+    })    
 
-    const formdata = new FormData(form);
-    loginUser(formdata);
+    const emailInput = document.querySelector("#email");
+    emailInput.addEventListener("focus", toggleEmailError);
+
+    const passwordInput = document.querySelector("#password");
+    passwordInput.addEventListener("focus", toggleEmailError)
 })
 
 function loginUser(formdata) {
@@ -40,23 +48,12 @@ function hideLoadingPage() {
     loadingPage.style.display = "none";
 }
 
-const emailInput = document.querySelector("#email");
-emailInput.addEventListener("focus", () => {
-    const emailError = document.querySelector("#email-error");
-    if (emailError.classList.contains("show-error")) {
-	emailError.classList.remove("show-error");
-	emailError.classList.add("hide-error");
-	emailInput.value = "";
-    }
-});
 
-const passwordInput = document.querySelector("#password");
-// There's one error in the login page under the id--email-error
-passwordInput.addEventListener("focus", () => {
+function toggleEmailError(event) {
     const emailError = document.querySelector("#email-error");
     if (emailError.classList.contains("show-error")) {
-	emailError.classList.remove("show-error");
-	emailError.classList.add("hide-error");
-	passwordInput.value = "";
-    }
-});
+	    emailError.classList.remove("show-error");
+	    emailError.classList.add("hide-error");
+	    event.target.value = "";
+    }    
+}
