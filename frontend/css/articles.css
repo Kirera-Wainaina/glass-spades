@@ -52,6 +52,13 @@ h1 {
     margin-top: .5em;
 }
 
+h1,
+.description,
+#article-list,
+#page-numbers {
+  background-color: var(--primary-background-color);
+}
+
 @media (orientation: portrait) {
     h1 {
         grid-column: 1 / 6;
