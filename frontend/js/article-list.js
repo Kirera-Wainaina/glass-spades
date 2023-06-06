@@ -23,7 +23,7 @@ export function displayArticleList(element, data, urlFunction) {
     const fragment = new DocumentFragment();
     data.forEach((article, index) => {
         const a = createArticleContainer(article, index);
-        a.href = urlFunction(article.urlTitle, article.id);
+        a.href = urlFunction(article.urlTitle, article._id);
         fragment.append(a);
     })
     element.appendChild(fragment);
