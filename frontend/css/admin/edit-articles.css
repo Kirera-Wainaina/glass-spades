@@ -1,0 +1,14 @@
+@import url('../article-list.css');
+
+h1 {
+    grid-column: 1 / 13;
+    text-align: center;
+    color: var(--primary);
+    margin-top: 1em;
+}
+
+@media (orientation: portrait) {
+    h1 {
+        grid-column: 1 / 6;
+    }
+}
