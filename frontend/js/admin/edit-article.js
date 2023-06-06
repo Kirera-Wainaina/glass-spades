@@ -1,5 +1,5 @@
 import { displaySnackbar } from "../general.js";
-import { createPreviewData, handleSubmit     } from "./upload-article.js";
+import { createPreviewData, handleSubmit } from "./upload-article.js";
 
 document.addEventListener('DOMContentLoaded', fetchArticleData);
 
@@ -52,7 +52,7 @@ function setCategory(category) {
 }
 
 function submitArticleEdit(formdata) {
-    fetch('/api/admin/edit-article', {
+    fetch('/api/admin/edit-article/editArticle', {
         method: 'POST',
         body: formdata
     }).then(handleEditResponse);
