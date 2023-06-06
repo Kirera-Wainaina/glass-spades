@@ -85,7 +85,7 @@ function setAuthor() {
     const authorId = sessionStorage.getItem('authorId');
     const authorsAvailable = sessionStorage.getItem('authorsAvailable');
     if (authorId && authorsAvailable) {
-        const option = document.querySelector(`option[value=${authorId}]`);
+        const option = document.querySelector(`option[value="${authorId}"]`);
         option.setAttribute('selected', '');
         
         sessionStorage.removeItem('authorId');
