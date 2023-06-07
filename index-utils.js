@@ -63,21 +63,25 @@ function findTopDir(route) {
 
 function createFilePath(urlPath) {
 	const parsed_url = new URL(urlPath, process.env.URL);
-    let filePath;
-
-    if (parsed_url.pathname == "/") {
+  let filePath;
+  if (parsed_url.pathname == "/") {
 		filePath = path.join(__dirname, "frontend/html/home.html")
-    } else if (!path.extname(parsed_url.pathname) ){
-			// browser paths
-			const dir = path.basename(path.dirname(parsed_url.pathname));
-			// check for listing page and serve listing html file
-			filePath = path.join(__dirname, `frontend/html/${dir == "listing" ? "/listing" : parsed_url.pathname}.html`)
-    } else {
-			// etc files e.g favicon
-			filePath = path.join(__dirname, parsed_url.pathname);
-    }
-
-    return filePath
+  } else if (!path.extname(parsed_url.pathname) ){
+		// browser paths
+		const dir = path.basename(path.dirname(parsed_url.pathname));
+		// check for listing or article page and serve their html file
+		if (dir == "listing" || dir == "article") {
+			filePath = path.join(__dirname, `frontend/html/${dir}.html`);
+			console.log(filePath)
+		} else {
+			filePath = path.join(__dirname, `frontend/html${parsed_url.pathname}.html`)
+		}
+  } else {
+		// etc files e.g favicon
+		filePath = path.join(__dirname, parsed_url.pathname);
+  }
+  
+	return filePath
 }
 
 async function createStaticFilePath(urlPath) {
