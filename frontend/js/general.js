@@ -111,6 +111,6 @@ export function getIdFromURL(url=location.href) {
 
 export function getArticleUrlTitle(articleUrl=location.href) {
   const urlObject = new URL(articleUrl);
-  const [ urlTitle ] = urlObject.pathname.match(/(?<=\/articles\/).*/);
+  const [ urlTitle ] = urlObject.pathname.match(/(?<=\/article\/).*/);
   return urlTitle;
 }
