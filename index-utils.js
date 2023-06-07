@@ -9,15 +9,15 @@ const { renderPage } = require("./utils/serverRender.js");
 //////////////////////////////////////////////////////////////////////////
 
 function readFileAndRespond(filePath, response, statusCode=null) {
-    fs.stat(filePath, (error, stats) => {
+  fs.stat(filePath, (error, stats) => {
 		if (error) {
 		    console.log(error)
 		    handleError(error, response)
 		} else {
-		    const mime = MIMES.findMIMETypeFromExtension(path.extname(filePath));
-		
-		    if (mime.split("/")[0] == "image") {
-				// images should not be compressed
+			const mime = MIMES.findMIMETypeFromExtension(path.extname(filePath));
+	
+		  if (mime.split("/")[0] == "image") {
+			// images should not be compressed
 				response.writeHead(statusCode || 200, {
 				    "content-type": mime,
 				    "cache-control": "max-age=2419200"
@@ -25,34 +25,33 @@ function readFileAndRespond(filePath, response, statusCode=null) {
 			
 				fs.createReadStream(filePath)
 				    .pipe(response)
-		    } else {
+		  } else {
 				response.writeHead(statusCode || 200, {
 				    "content-type": mime,
 				    "content-encoding": "gzip",
 				    "cache-control": "max-age=1209600"
 				})
-
 				fs.createReadStream(filePath)
 				    .pipe(zlib.createGzip())
 				    .pipe(response)
-		    }
+		  }
 		
 		}
-    })
+  })
     
 }
 
 function handleError(error, response) {
-    if (error.code == "ENOENT") {
+  if (error.code == "ENOENT") {
 		const filePath = path.join(__dirname, "frontend/html/error.html")
 		const errorCode = 404;
 		readFileAndRespond(filePath, response, errorCode)
-    } else {
+  } else {
 		console.log(error);
 		const filePath = path.join(__dirname, "frontend/html/error.html")
 		const errorCode = 404;
 		readFileAndRespond(filePath, response, errorCode)
-    }
+  }
 }
 
 function findTopDir(route) {
@@ -69,13 +68,13 @@ function createFilePath(urlPath) {
     if (parsed_url.pathname == "/") {
 		filePath = path.join(__dirname, "frontend/html/home.html")
     } else if (!path.extname(parsed_url.pathname) ){
-		// browser paths
-		const dir = path.basename(path.dirname(parsed_url.pathname));
-		// check for listing page and serve listing html file
-		filePath = path.join(__dirname, `frontend/html/${dir == "listing" ? "/listing" : parsed_url.pathname}.html`)
+			// browser paths
+			const dir = path.basename(path.dirname(parsed_url.pathname));
+			// check for listing page and serve listing html file
+			filePath = path.join(__dirname, `frontend/html/${dir == "listing" ? "/listing" : parsed_url.pathname}.html`)
     } else {
-		// etc files e.g favicon
-		filePath = path.join(__dirname, parsed_url.pathname);
+			// etc files e.g favicon
+			filePath = path.join(__dirname, parsed_url.pathname);
     }
 
     return filePath
@@ -112,15 +111,15 @@ async function createStaticFilePath(urlPath) {
 async function fileExists(filePath) {
     let fileExists = null;
     await fsPromises.open(filePath)
-        .then(fileHandle => {
-            if (fileHandle) fileExists = true;
-            fileHandle.close();
-        })
-        .catch(error => {
-            if (error.code == 'ENOENT') {
-                fileExists = false;
-            }
-        });
+      .then(fileHandle => {
+          if (fileHandle) fileExists = true;
+          fileHandle.close();
+      })
+      .catch(error => {
+          if (error.code == 'ENOENT') {
+              fileExists = false;
+          }
+      });
     return fileExists
 }
 
