@@ -2,9 +2,10 @@ import { getIdFromURL, getArticleUrlTitle } from './general.js';
 import { renderOnArticlePage } from './render.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    if (navigator.userAgent != 'thetalkingowl-puppeteer') return;
+    // disabled for development
+    // if (navigator.userAgent != 'glassspades-headless-chromium') return;
     const [ data ] = await retrieveArticle();
-    const [authorData] = await retrieveAuthor(data.authorId);
+    const authorData = await retrieveAuthor(data.authorId);
 
     renderOnArticlePage(data);
     fillStructuredData(data, authorData);
@@ -13,13 +14,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 function retrieveArticle() {
-    return fetch(`/api/articles/retrieveArticle?id=${getIdFromURL()}&urlTitle=${getArticleUrlTitle()}`)
+    return fetch(`/api/article/retrieveArticle?id=${getIdFromURL()}&urlTitle=${getArticleUrlTitle()}`)
         .then(response => response.json())
 
 }
 
 function retrieveAuthor(authorId) {
-    return fetch(`/api/authors/retrieveAuthorNameAndURL?id=${authorId}`)
+    return fetch(`/api/article/retrieveAuthorNameAndURL?id=${authorId}`)
     .then(response => response.json())
 }
 
