@@ -49,7 +49,7 @@ export async function render(parentContainer, data) {
 }
 
 export async function renderOnArticlePage(data) {
-    const parentContainer = document.querySelector('body');
+    const parentContainer = document.querySelector('.page');
     await render(parentContainer, data);
     insertTitle(data.title);
     insertDescription(data.description);
