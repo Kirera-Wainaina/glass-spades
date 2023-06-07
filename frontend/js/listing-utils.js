@@ -4,8 +4,8 @@ document.addEventListener("overviews-in-dom", () => {
     const overviewImages = document.querySelectorAll(".overview");
     const options = {
 	    root: null,
-	    rootMargin: "0px",
-	    threshold: .2
+	    rootMargin: "0px 0px 50px 0px",
+	    threshold: 0
     };
 
     overviewImages.forEach(overview => {
