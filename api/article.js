@@ -38,7 +38,7 @@ exports.retrieveArticle = async function (request, response) {
 exports.retrieveAuthorNameAndURL = async function (request, response) {
   try {
     const parsed_url = new URL(request.url, process.env.URL);
-    const docs = await db.Article.findById(parsed_url.searchParams.get("id"));
+    const docs = await db.Author.findById(parsed_url.searchParams.get("id"));
     response.writeHead(200, {"content-type": "application/json"});
     response.end(JSON.stringify(docs));
   } catch (error) {
