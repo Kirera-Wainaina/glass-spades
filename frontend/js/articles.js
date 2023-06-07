@@ -32,7 +32,7 @@ function retrieveArticleData() {
 }
 
 function createArticleHref(urlTitle, id) {
-  return `/articles/${urlTitle}?id=${id}`
+  return `/article/${urlTitle}?id=${id}`
 }
 
 function retrieveBusinessArticleCount() {
