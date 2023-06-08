@@ -96,12 +96,18 @@ function writeHTMLToFile(content, staticFilePath) {
 
 function createFileNameFromUrl(url) {
     const parsedUrl = new URL(url);
+	const dir = path.basename(path.dirname(parsedUrl.pathname));
+
     if (parsedUrl.pathname == '/') {
         return 'home.html'
     } else if (parsedUrl.pathname == '/sales' || parsedUrl.pathname == '/rentals') {
         return `${parsedUrl.pathname}.html`
-    } else {
-        return `/listings/${parsedUrl.searchParams.get('id')}.html`
+    } else if (dir == "listing" || dir == "article") {
+        return `/${dir}s/${parsedUrl.searchParams.get('id')}.html`
+    } else if (parsedUrl.pathname == "articles") {
+        let page = parsedUrl.searchParams.get("page");
+		if (!page) page = 1;
+        return `/article-lists/${page}.html`
     }
 }
 
