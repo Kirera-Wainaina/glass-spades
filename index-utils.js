@@ -99,6 +99,11 @@ async function createStaticFilePath(urlPath) {
 		} else {
 			filePath = path.join(__dirname, `static${pathname}.html`);
 		}
+	} else if (pathname == "/articles") {
+		// it's an article list
+		let page = parsed_url.searchParams.get("page");
+		if (!page) page = 1;
+		filePath = path.join(__dirname, `static/article-lists/${page}.html`);
 	} else if (dir == 'listing' || dir == "article") {
 		const id = parsed_url.searchParams.get('id');
 		filePath = path.join(__dirname, `static/${dir}/${id}.html`)
