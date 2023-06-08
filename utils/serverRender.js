@@ -1,6 +1,6 @@
 const { default: puppeteer } = require('puppeteer');
 const fsPromises = require('fs/promises');
-// const database = require('./database');
+const db = require('../database/models');
 const path = require('path');
 const dotenv = require('dotenv')
 dotenv.config();
@@ -109,6 +109,26 @@ function createFileNameFromUrl(url) {
 		if (!page) page = 1;
         return `/article-lists/${page}.html`
     }
+}
+
+exports.renderArticleRelatedPages = async function (urlTitle, id) {
+  const urls = await createArticleRelatedUrls(urlTitle, id);
+	const contentAndUrl = await Promise.all(urls.map(url => renderPage(url)));
+
+	await Promise.all(contentAndUrl.map(
+		data => writeHTMLToFile(data.content, createFileNameFromUrl(data.url))
+	))
+}
+  
+async function createArticleRelatedUrls(urlTitle, id) {
+  const articleCount = db.Article.find().estimatedDocumentCount();
+  const pageNumber = Math.ceil(articleCount/10);
+  const urls = [`${process.env.URL}/listing/${urlTitle}?id=${id}`];
+
+  for (let index = 1; index <= pageNumber; index++) {
+    urls.push(`${process.env.URL}/articles/page=${index}`);
+  }
+  return urls
 }
 
 exports.renderPage = renderPage;
