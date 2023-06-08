@@ -1,5 +1,6 @@
 const db = require("../../database/models");
 const FormDataHandler = require("../../utils/formDataHandler");
+const { renderArticleRelatedPages } = require("../../utils/serverRender");
 
 exports.getAuthorNames = async function (request, response) {
   try {
@@ -25,7 +26,8 @@ exports.saveArticle = async function (request, response) {
       response.end("url-exists");
     } else {
       await db.Article.create(fields);
-      console.log("Article saved successfully")
+      await renderArticleRelatedPages(fields.urlTitle, fields._id);
+      console.log("Article saved successfully");
       response.writeHead(200, {"content-type": "text/plain"});
       response.end("success");
     }
