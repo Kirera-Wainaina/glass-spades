@@ -72,7 +72,6 @@ function createFilePath(urlPath) {
 		// check for listing or article page and serve their html file
 		if (dir == "listing" || dir == "article") {
 			filePath = path.join(__dirname, `frontend/html/${dir}.html`);
-			console.log(filePath)
 		} else {
 			filePath = path.join(__dirname, `frontend/html${parsed_url.pathname}.html`)
 		}
@@ -80,7 +79,7 @@ function createFilePath(urlPath) {
 		// etc files e.g favicon
 		filePath = path.join(__dirname, parsed_url.pathname);
   }
-  
+	
 	return filePath
 }
 
