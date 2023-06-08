@@ -25,7 +25,7 @@ exports.editArticle = async function (request, response) {
   try {
     const [fields] = await new FormDataHandler(request).run();
     await db.Article.findByIdAndUpdate(fields.id, fields);
-    await renderArticleRelatedPages(fields.urlTitle, fields._id);
+    await renderArticleRelatedPages(fields.urlTitle, fields.id);
 
     console.log("successfully edited article")
     response.writeHead(200, {"content-type": "text/plain"});
