@@ -57,4 +57,12 @@ static/rentals-filters/*
 static/sales-filters/*
 !static/sales-filters/x
 
+!static/article-lists/
+static/article-lists/*
+!static/article-lists/x
+
+!static/articles/
+static/articles/*
+!static/articles/x
+
 # !static/{listings,rentals-filters,sales-filters}/x
