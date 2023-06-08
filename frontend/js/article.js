@@ -2,8 +2,7 @@ import { getIdFromURL, getArticleUrlTitle } from './general.js';
 import { renderOnArticlePage } from './render.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // disabled for development
-    // if (navigator.userAgent != 'glassspades-headless-chromium') return;
+    if (navigator.userAgent != 'glassspades-headless-chromium') return;
     const [ data ] = await retrieveArticle();
     const authorData = await retrieveAuthor(data.authorId);
 
