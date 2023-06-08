@@ -199,8 +199,8 @@ function createRelatedArticleContainer(url) {
         // use index of five so image can have loading attribute
         fetchRelatedArticleData(id, urlTitle)
             .then(data => {
-                const a = createArticleContainer(data[0], 5);
-                a.href = `/articles/${urlTitle}?id=${id}`;
+                const a = createArticleContainer(data, 5);
+                a.href = `/article/${urlTitle}?id=${id}`;
                 resolve(a);
             })
             .catch(error => reject(error))
@@ -210,16 +210,12 @@ function createRelatedArticleContainer(url) {
 function fetchRelatedArticleData(id, urlTitle) {
   return fetch(`/api/render/fetchRelatedArticleData?id=${id}&urlTitle=${urlTitle}`)
     .then(response => response.json())
-//     return fetch(`/api/articles?field=title&field=description&field=landscapeImage\
-// &field=landscapeImageText&field=publishedDate&id=${id}&urlTitle=${urlTitle}`)
-//     .then(response => response.json());
+
 }
 
 function fetchAuthor(authorId) {
   return fetch(`/api/render/fetchAuthor?id=${authorId}`)
     .then(response => response.json());
-    // return fetch(`/api/authors?field=authorName&field=bio&field=profileImageLink&id=${authorId}`)
-    //     .then(response => response.json())
 }
 
 async function createAuthor(authorId) {
