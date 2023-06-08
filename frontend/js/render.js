@@ -208,7 +208,7 @@ function createRelatedArticleContainer(url) {
 }
 
 function fetchRelatedArticleData(id, urlTitle) {
-  return fetch(`/api/render/fetchRelatedArticleData?id=${id}&urlTitle${urlTitle}`)
+  return fetch(`/api/render/fetchRelatedArticleData?id=${id}&urlTitle=${urlTitle}`)
     .then(response => response.json())
 //     return fetch(`/api/articles?field=title&field=description&field=landscapeImage\
 // &field=landscapeImageText&field=publishedDate&id=${id}&urlTitle=${urlTitle}`)
