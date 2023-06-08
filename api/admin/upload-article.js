@@ -25,8 +25,8 @@ exports.saveArticle = async function (request, response) {
       response.writeHead(500, {"content-type": "text/plain"});
       response.end("url-exists");
     } else {
-      await db.Article.create(fields);
-      await renderArticleRelatedPages(fields.urlTitle, fields._id);
+      const newArticle = await db.Article.create(fields);
+      await renderArticleRelatedPages(newArticle.urlTitle, newArticle._id);
       console.log("Article saved successfully");
       response.writeHead(200, {"content-type": "text/plain"});
       response.end("success");
