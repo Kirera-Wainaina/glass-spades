@@ -105,7 +105,7 @@ async function createStaticFilePath(urlPath) {
 		filePath = path.join(__dirname, `static/article-lists/${page}.html`);
 	} else if (dir == 'listing' || dir == "article") {
 		const id = parsed_url.searchParams.get('id');
-		filePath = path.join(__dirname, `static/${dir}/${id}.html`)
+		filePath = path.join(__dirname, `static/${dir}s/${id}.html`)
 	} else if (!path.extname(pathname)) {
 		// other browser paths
 		filePath = path.join(__dirname, `frontend/html/${pathname}.html`);
