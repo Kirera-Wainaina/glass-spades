@@ -8,7 +8,7 @@ import {
 document.addEventListener('DOMContentLoaded', async () =>{
   if (navigator.userAgent != 'glassspades-headless-chromium') return;
   retrieveArticleData();
-  displayPageNumbers(await retrieveBusinessArticleCount());
+  displayPageNumbers(await retrieveArticleCount());
   setCanonicalLinkTagForPage1('articles');
 })
 
@@ -29,7 +29,7 @@ function createArticleHref(urlTitle, id) {
   return `/article/${urlTitle}?id=${id}`
 }
 
-function retrieveBusinessArticleCount() {
+function retrieveArticleCount() {
   return fetch('/api/articles/countArticles')
       .then(response => response.json())
 }
