@@ -123,8 +123,8 @@ async function createArticleRelatedUrls(urlTitle, id) {
   const articleCount = await db.Article.find().estimatedDocumentCount();
   const pageNumber = Math.ceil(articleCount/10);
   const urls = [`${process.env.URL}/article/${urlTitle}?id=${id}`];
-
-  for (let index = 1; index <= pageNumber; index++) {
+  
+	for (let index = 1; index <= pageNumber; index++) {
     urls.push(`${process.env.URL}/articles?page=${index}`);
   }
   return urls
