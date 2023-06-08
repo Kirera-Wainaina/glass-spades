@@ -95,38 +95,37 @@ function writeHTMLToFile(content, staticFilePath) {
 }
 
 function createFileNameFromUrl(url) {
-    const parsedUrl = new URL(url);
+  const parsedUrl = new URL(url);
 	const dir = path.basename(path.dirname(parsedUrl.pathname));
 
-    if (parsedUrl.pathname == '/') {
-        return 'home.html'
-    } else if (parsedUrl.pathname == '/sales' || parsedUrl.pathname == '/rentals') {
-        return `${parsedUrl.pathname}.html`
-    } else if (dir == "listing" || dir == "article") {
-        return `/${dir}s/${parsedUrl.searchParams.get('id')}.html`
-    } else if (parsedUrl.pathname == "articles") {
-        let page = parsedUrl.searchParams.get("page");
-		if (!page) page = 1;
-        return `/article-lists/${page}.html`
-    }
+  if (parsedUrl.pathname == '/') {
+      return 'home.html'
+  } else if (parsedUrl.pathname == '/sales' || parsedUrl.pathname == '/rentals') {
+      return `${parsedUrl.pathname}.html`
+  } else if (dir == "listing" || dir == "article") {
+      return `/${dir}s/${parsedUrl.searchParams.get('id')}.html`
+  } else if (parsedUrl.pathname == "/articles") {
+      let page = parsedUrl.searchParams.get("page");
+			if (!page) page = 1;
+      return `/article-lists/${page}.html`
+  }
 }
 
 exports.renderArticleRelatedPages = async function (urlTitle, id) {
   const urls = await createArticleRelatedUrls(urlTitle, id);
 	const contentAndUrl = await Promise.all(urls.map(url => renderPage(url)));
-
 	await Promise.all(contentAndUrl.map(
 		data => writeHTMLToFile(data.content, createFileNameFromUrl(data.url))
 	))
 }
   
 async function createArticleRelatedUrls(urlTitle, id) {
-  const articleCount = db.Article.find().estimatedDocumentCount();
+  const articleCount = await db.Article.find().estimatedDocumentCount();
   const pageNumber = Math.ceil(articleCount/10);
-  const urls = [`${process.env.URL}/listing/${urlTitle}?id=${id}`];
+  const urls = [`${process.env.URL}/article/${urlTitle}?id=${id}`];
 
   for (let index = 1; index <= pageNumber; index++) {
-    urls.push(`${process.env.URL}/articles/page=${index}`);
+    urls.push(`${process.env.URL}/articles?page=${index}`);
   }
   return urls
 }
