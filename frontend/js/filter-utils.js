@@ -110,7 +110,7 @@ export function generateFilterPageTitle() {
           title += `${bedrooms} bedroom `;
         }
     }
-    title += "Houses ";
+    title += "Apartments ";
     const mandate = location.pathname.replace("/", "");
     if (mandate == "sales") {
         title += `for sale `;
