@@ -11,6 +11,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 // <!-- End Google Tag Manager -->
 
+window.dataLayer = window.dataLayer || [];
+
 // Prevent the contextmenu from showing when clicked on images
 // Makes it hard to download images
 document.addEventListener("contextmenu", event => {
