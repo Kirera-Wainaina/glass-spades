@@ -65,4 +65,5 @@ static/article-lists/*
 static/articles/*
 !static/articles/x
 
-# !static/{listings,rentals-filters,sales-filters}/x
+# draft html for testing blogging functionality
+lorem-ipsum.html
