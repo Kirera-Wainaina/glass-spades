@@ -23,7 +23,9 @@ function saveSitemap(event) {
 		if (this.readyState == 4) {
 		  if (this.responseText == "success") {
 				displaySnackbar('sitemap-success');
-		  }
+		  } else {
+        displaySnackbar("sitemap-upload-error")
+      }
 		}
   }
 }
