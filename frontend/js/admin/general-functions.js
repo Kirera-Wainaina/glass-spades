@@ -4,19 +4,26 @@ if (navigator.userAgent != "glassspades-headless-chromium") {
     checkLogin();
 }
 
-const form = document.querySelector("form");
-form.addEventListener("submit", event => {
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  form.addEventListener("submit", saveSitemap);
+})
+
+
+function saveSitemap(event) {
   event.preventDefault();
+  const formdata = new FormData(event.target);
+  formdata.append("fileNumber", 1);
 
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "/api/admin/general-functions/uploadSitemap");
-  xhr.send(new FormData(form))
+  xhr.send(formdata)
 
   xhr.onreadystatechange = function() {
-			if (this.readyState == 4) {
-			  if (this.responseText == "success") {
-					displaySnackbar('sitemap-success');
-			  }
-			}
-    }
-});
+		if (this.readyState == 4) {
+		  if (this.responseText == "success") {
+				displaySnackbar('sitemap-success');
+		  }
+		}
+  }
+}
