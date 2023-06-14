@@ -16,7 +16,7 @@ function saveSitemap(event) {
   formdata.append("fileNumber", 1);
 
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "/api/admin/general-functions/uploadSitemap");
+  xhr.open("POST", "/api/admin/upload-sitemap/uploadSitemap");
   xhr.send(formdata)
 
   xhr.onreadystatechange = function() {
