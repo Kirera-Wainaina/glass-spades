@@ -133,3 +133,4 @@ async function createArticleRelatedUrls(urlTitle, id) {
 exports.renderPage = renderPage;
 exports.renderAndSaveHTMLToFile = renderAndSaveHTMLToFile;
 exports.renderAndSaveHTMLsToFiles = renderAndSaveHTMLsToFiles;
+exports.urlifySentence = urlifySentence;
