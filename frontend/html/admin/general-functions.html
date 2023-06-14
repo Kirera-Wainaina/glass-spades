@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/frontend/images/GS-tiny-icon.png">    
     <link rel="apple-touch-icon" href="/frontend/images/GS-tiny-icon.png">
     <link rel="stylesheet" href="/frontend/css/admin/home.css">
-    <script type="module" async="async" src="/frontend/js/admin/home.js"></script>
+    <script type="module" src="/frontend/js/admin/general-functions.js"></script>
     <script src="/frontend/js/base.js"></script>
     <title>Admin Homepage | Glass Spades</title>
   </head>
@@ -35,8 +35,8 @@
 		
     	<div id="category-holder">
 				<a href="/admin/upload-sitemap" class="category">Upload Sitemap</a>
-				<a href="/admin/render-listings" class="category">Render Listings</a>
-				<a href="/admin/render-articles" class="category">Render Articles</a>
+				<button type="button" class="category" id="render-listings">Render Listings</button>
+				<button type="button" class="category" id="render-articles">Render Articles</button>
     	</div>
 		
     	<footer>
