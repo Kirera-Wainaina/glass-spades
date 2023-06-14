@@ -1,5 +1,5 @@
 const db = require("../../database/models");
-const { urlifySentence } = require("../../utils/serverRender");
+const { urlifySentence, renderAndSaveHTMLsToFiles } = require("../../utils/serverRender");
 const dotenv = require("dotenv");
 dotenv.config()
 
@@ -9,8 +9,11 @@ exports.renderListings = async function (request, response) {
     const allUrls = listingUrls.concat(createNonListingUrls());
     const groupedUrls = groupUrls(allUrls);
 
-    
-    console.log(groupedUrls, groupedUrls.length);
+    for (const group of groupedUrls) {
+      await renderAndSaveHTMLsToFiles(group);
+    }
+    response.writeHead(200, {"content-type": "text/plain"});
+    response.end("success")
   } catch (error) {
     console.log(error);
     response.writeHead(500, {"content-type": "text/plain"});
@@ -19,7 +22,7 @@ exports.renderListings = async function (request, response) {
 }
 
 async function generateListingUrls() {
-  const listings = await db.Listing.find({}, { Heading: 1 });
+  const listings = await db.Listing.find({ Archived: false }, { Heading: 1 });
   return listings.map(
     listing => `${process.env.URL}/listing/${urlifySentence(listing.Heading)}?id=${listing._id}`
   );
