@@ -26,7 +26,7 @@ export function urlifySentence(sentence) {
         .toLowerCase()
         .trim()
         .replace(/ /g, '-')
-  	    .replace(/[^A-Za-z-]/g, '')
+  	    .replace(/[^A-Za-z0-9-]/g, '')
 }
 
 export function displaySnackbar(snackbarId) {
