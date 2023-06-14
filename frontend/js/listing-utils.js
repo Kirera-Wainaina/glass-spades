@@ -1,3 +1,5 @@
+import { urlifySentence } from "./general.js";
+
 const overviewsPresent = new Event("overviews-in-dom");
 
 document.addEventListener("overviews-in-dom", () => {
@@ -47,8 +49,7 @@ export function displayHouseDetails(houseDetails, containerId="listings") {
 
 function createHouseCard(houseDetail) {
   const houseCard = document.createElement("a");
-  const listingUrl = houseDetail.heading.replaceAll(" ", "-")
-  .replaceAll(".", "-").toLowerCase();
+  const listingUrl = urlifySentence(houseDetail.heading);
   houseCard.href = `/listing/${listingUrl}?id=${houseDetail.id}`;
   houseCard.classList.add("house-card");
 
