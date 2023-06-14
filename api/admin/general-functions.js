@@ -21,6 +21,24 @@ exports.renderListings = async function (request, response) {
   }
 }
 
+exports.renderArticles = async function (request, response) {
+  try {
+    const articleUrls = await generateArticleUrls();
+    const allUrls = articleUrls.concat(createNonArticleUrls());
+    const groupedUrls = groupUrls(allUrls);
+    
+    for (const group of groupedUrls) {
+      await renderAndSaveHTMLsToFiles(group);
+    }
+    response.writeHead(200, {"content-type": "text/plain"});
+    response.end("success")
+  } catch (error) {
+    console.log(error);
+    response.writeHead(500, {"content-type": "text/plain"});
+    response.end("server-error")
+  }
+}
+
 async function generateListingUrls() {
   const listings = await db.Listing.find({ Archived: false }, { Heading: 1 });
   return listings.map(
@@ -28,10 +46,23 @@ async function generateListingUrls() {
   );
 }
 
+async function generateArticleUrls() {
+  const articles = await db.Article.find({}, { urlTitle: 1 })
+  return articles.map(
+    article => `${process.env.URL}/article/${article.urlTitle}?id=${article._id}`
+  );
+}
 function createNonListingUrls() {
   return [
     `${process.env.URL}/sales`,
     `${process.env.URL}/rentals`,
+    `${process.env.URL}/`
+  ]
+}
+
+function createNonArticleUrls() {
+  return [
+    `${process.env.URL}/articles`,
     `${process.env.URL}/`
   ]
 }
