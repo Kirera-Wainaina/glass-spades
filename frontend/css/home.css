@@ -18,7 +18,7 @@ img {
     max-width: 100%;
 }
 
-p, label, a, h1, h2, h3, h4, h5, h6, input, textarea, button, select {
+p, label, a, h1, h2, h3, h4, h5, h6, input, textarea, button, select, figcaption {
     font-family: "Crimson Text", serif;
     font-size: 1.2em;
 }
