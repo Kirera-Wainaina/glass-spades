@@ -356,8 +356,8 @@ div#related {
     p.description {
 	    grid-column: 1 / 6;
 	    margin-top: .8em;
-	    margin-left: .3em;
-	    margin-right: .3em;
+	    margin-left: 1em;
+	    margin-right: 1em;
     }
 
     section {
