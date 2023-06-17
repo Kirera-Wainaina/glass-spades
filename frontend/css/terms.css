@@ -1,4 +1,4 @@
-@import url("./home.css");
+@import url("./base.css");
 
 h1 {
     grid-column: 1 / 13;
@@ -28,17 +28,17 @@ a.inline {
 
 @media (max-width: 500px) {
     h1 {
-	grid-column: 1 / 6;
+	    grid-column: 1 / 6;
     }
 
     h2 {
-	grid-column: 1 / 6;
-	margin-left: 2em;
+	    grid-column: 1 / 6;
+	    margin-left: 2em;
     }
 
     p {
-	grid-column: 1 / 6;
-	margin-left: 1em;
-	margin-right: 1em;
+	    grid-column: 1 / 6;
+	    margin-left: 1em;
+	    margin-right: 1em;
     }
 }

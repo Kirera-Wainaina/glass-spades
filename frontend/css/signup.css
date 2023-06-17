@@ -1,4 +1,4 @@
-@import url("./home.css");
+@import url("./base.css");
 
 form {
     grid-column: 4 / 10;
