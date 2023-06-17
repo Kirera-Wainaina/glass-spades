@@ -297,17 +297,15 @@ footer {
 
 @media (orientation: portrait) {
     h1 {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
     }
 
     .render {
-        grid-column: 1 / 7;
-    
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
     }
 
     picture {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
     }
 
     .render h1 {
@@ -332,7 +330,7 @@ footer {
     }
 
     article {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
         margin-left: 1em;
         margin-right: 1em;
     }
@@ -343,7 +341,7 @@ footer {
     }
 
     #table-of-contents {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
         border-left: 2px solid var(--primary);
         margin-left: 1em;
     }
@@ -353,12 +351,12 @@ footer {
     }
 
     #related-articles-heading {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
         margin-left: 2em;
     }
 
     #related-articles {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
         margin-left: 2em;
         margin-right: 2em;
         flex-direction: column;
@@ -373,7 +371,7 @@ footer {
     }
 
     #author-section {
-        grid-column: 1 / 7;
+        grid-column: 1 / 6;
         margin-left: 2em;
         margin-right: 2em;
         flex-direction: column;
