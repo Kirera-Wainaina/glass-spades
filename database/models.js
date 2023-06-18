@@ -52,6 +52,8 @@ const listingSchema = new Schema({
     Bedrooms: mongoose.Mixed,
     Bathrooms: Number,
     Size: Number,
+    "Completion Month": String,
+    "Completion Year": Number,
     "Unit Type": String,
     Price: Number,
     "Internal Features": [String],
