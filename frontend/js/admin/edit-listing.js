@@ -79,7 +79,7 @@ function enterTypedData(key, value) {
 function enterArrayData(key, values) {
     values.forEach(value => {
 	    const element = document.querySelector(`[name="${key}"][value="${value}"]`);
-	    element.classList.add("clicked-button");
+        if (element) element.classList.add("clicked-button");
     })
 }
 
