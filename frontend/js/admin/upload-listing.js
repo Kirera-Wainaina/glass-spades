@@ -275,8 +275,8 @@ export async function setData(event) {
   const price = document.querySelector("input[name='Price']");
   const size = document.querySelector("input[name='Size']");
   const development = document.querySelector("input[name='Development']");
-	const completionMonth = document.querySelector("select[name='CompletionMonth']");
-	const completionYear = document.querySelector("input[name='CompletionYear']")
+	const completionMonth = document.querySelector("select[name='Completion Month']");
+	const completionYear = document.querySelector("input[name='Completion Year']")
 
   houseInfo[heading.name] = heading.value;
   houseInfo[description.name] = description.value;
