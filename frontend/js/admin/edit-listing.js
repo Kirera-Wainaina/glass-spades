@@ -44,11 +44,7 @@ function handleListing(listing) {
 	    } else if (Array.isArray(listing[key])) {
 	        enterArrayData(key, listing[key]);
 	    } else if (
-            key == "Heading" || 
-            key == "Description" || 
-            key == "Price" ||
-	    	key == "Size" ||
-            key == "Development"
+            ["Heading", "Description", "Price", "Size", "Development"].includes(key)
         ) {
 	        enterTypedData(key, listing[key]);
 	    } else if (key == "Location") {
