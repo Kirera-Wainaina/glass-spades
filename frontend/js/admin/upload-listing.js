@@ -275,10 +275,14 @@ export async function setData(event) {
   const price = document.querySelector("input[name='Price']");
   const size = document.querySelector("input[name='Size']");
   const development = document.querySelector("input[name='Development']");
+	const completionMonth = document.querySelector("select[name='completionMonth']");
+	const completionYear = document.querySelector("input[name='completionYear']")
 
   houseInfo[heading.name] = heading.value;
   houseInfo[description.name] = description.value;
   houseInfo[price.name] = price.value;
+	houseInfo[completionMonth.name] = completionMonth.value;
+	houseInfo[completionYear.name] = completionYear.value;
 
   if (houseInfo.Category == "Land") {
 		houseInfo[size.name] = size.value;
