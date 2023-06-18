@@ -18,10 +18,26 @@ h2 {
     margin-bottom: 1em;
 }
 
-.container p.label {
+.label {
     grid-column: 1 / 4;
     font-size: 1.3em;
     margin-bottom: 0.4em;
+}
+
+select {
+    font-size: 1em;
+    width: 100%;
+    margin-top: 0.4em;
+}
+
+option {
+    font-size: .9em;
+}
+
+label input {
+    width: 100%;
+    margin-top: 0.4em;
+    font-size: 1em;
 }
 
 button {
