@@ -48,13 +48,10 @@ function createContainers(model) {
 		div.id = `${key}-container`.replaceAll(" ", "-");
 		div.classList.add("container");
 		div.appendChild(createLabel(key));
-		if (key == "Development") {
-		  div.appendChild(createInput("text", "Development"));
-		  div.style.display = "none";
-		} else {
-			if (["Mandate", "Category", "Size", "Unit Type", "Bedrooms", "Bathrooms"].includes(key)) return
-		  div.appendChild(createButtons(key, model[key]));
-		}
+		
+		if (["Mandate", "Category", "Size", "Unit Type", "Bedrooms", "Bathrooms", "Development"].includes(key)) return
+		div.appendChild(createButtons(key, model[key]));
+		
 
 		fragment.append(div)
   })
@@ -430,19 +427,12 @@ document.addEventListener("click", event => {
   const value = event.target.value;
   const internalFeatures = document
 		.getElementById("Internal-Features-container");
-  const development = document.getElementById("Development-container");
-
 
   if (value == "Land") {
 		internalFeatures.style.display = "none";
-		development.style.display = "none";
   } else if (value == "Townhouse" || value == "Villa" || value == "Apartment") {
 		internalFeatures.style.display = "grid";
-		if (value == "Apartment") {
-		  development.style.display = "grid";
-		} else {
-		  development.style.display = "none";
-		}
+		
   }
 });
 
@@ -451,6 +441,8 @@ categoryContainer.addEventListener("click", event => {
   const value = event.target.value;
   const bedrooms = document.getElementById("Bedrooms-container");
   const bathrooms = document.getElementById("Bathrooms-container");
+  const development = document.getElementById("Development-container");
+
 
 	// handle showing of bedrooms and bathrooms
 	if (["Townhouse", "Villa", "Apartment"].includes(value)) {
@@ -459,6 +451,12 @@ categoryContainer.addEventListener("click", event => {
 	} else if (["Office", "Land"].includes(value)) {
 		bedrooms.classList.add("hide");
 		bathrooms.classList.add("hide");
+	}
+
+	if (value == "Apartment") {
+		development.classList.remove("hide");
+	} else {
+		development.classList.add("hide");
 	}
 })
 
