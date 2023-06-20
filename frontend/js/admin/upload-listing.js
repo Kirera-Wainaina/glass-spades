@@ -52,7 +52,7 @@ function createContainers(model) {
 		  div.appendChild(createInput("text", "Development"));
 		  div.style.display = "none";
 		} else {
-			if (["Mandate", "Category", "Size", "Unit Type"].includes(key)) return
+			if (["Mandate", "Category", "Size", "Unit Type", "Bedrooms", "Bathrooms"].includes(key)) return
 		  div.appendChild(createButtons(key, model[key]));
 		}
 
@@ -428,21 +428,15 @@ function displayError(blanks) {
 
 document.addEventListener("click", event => {
   const value = event.target.value;
-  const bedrooms = document.getElementById("Bedrooms-container");
-  const bathrooms = document.getElementById("Bathrooms-container");
   const internalFeatures = document
 		.getElementById("Internal-Features-container");
   const development = document.getElementById("Development-container");
 
 
   if (value == "Land") {
-		bedrooms.style.display = "none";
-		bathrooms.style.display = "none";
 		internalFeatures.style.display = "none";
 		development.style.display = "none";
   } else if (value == "Townhouse" || value == "Villa" || value == "Apartment") {
-		bedrooms.style.display = "grid";
-		bathrooms.style.display = "grid";
 		internalFeatures.style.display = "grid";
 		if (value == "Apartment") {
 		  development.style.display = "grid";
@@ -451,6 +445,22 @@ document.addEventListener("click", event => {
 		}
   }
 });
+
+const categoryContainer = document.getElementById("Category-container");
+categoryContainer.addEventListener("click", event => {
+  const value = event.target.value;
+  const bedrooms = document.getElementById("Bedrooms-container");
+  const bathrooms = document.getElementById("Bathrooms-container");
+
+	// handle showing of bedrooms and bathrooms
+	if (["Townhouse", "Villa", "Apartment"].includes(value)) {
+		bedrooms.classList.remove("hide");
+		bathrooms.classList.remove("hide");
+	} else if (["Office", "Land"].includes(value)) {
+		bedrooms.classList.add("hide");
+		bathrooms.classList.add("hide");
+	}
+})
 
 const deleteIcon = document.getElementById("delete-icon");
 deleteIcon.addEventListener("click", event => {
