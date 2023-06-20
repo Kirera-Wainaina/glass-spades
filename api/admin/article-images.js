@@ -47,7 +47,7 @@ async function uploadImages(request, response) {
 
 async function retrieveUploadedImages(request, response) {
   try {
-    const data = await db.ArticleImage.find({});
+    const data = await db.ArticleImage.find({}).sort({ createTime: "desc" })
     response.writeHead(200, {'content-type': 'application/json'});
     response.end(JSON.stringify(data))
   } catch (error) {
