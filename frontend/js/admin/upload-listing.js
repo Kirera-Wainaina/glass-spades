@@ -10,11 +10,6 @@ var highlightedImages = [];
 (async function() {
   const model = await getModelData();
   sessionStorage.setItem("model", model);
-  // if (!document.getElementById("Mandate-container")) {
-	// 	constructPage(JSON.parse(model));
-  // }
-	// constructPage(JSON.parse(model));
-
 })()
 
 function getModelData() {
@@ -30,60 +25,6 @@ function getModelData() {
     	}
 		}
   })
-}
-
-function constructPage(model) {
-  const containerFragment = createContainers(model);
-  const parentContainer = document.querySelector(".page");
-  const map = document.getElementById("map");
-
-  parentContainer.insertBefore(containerFragment, map);
-}    
-
-function createContainers(model) {
-  const keys = Object.keys(model);
-  const fragment = new DocumentFragment();
-  keys.forEach(key => {
-		const div = document.createElement("div");
-		div.id = `${key}-container`.replaceAll(" ", "-");
-		div.classList.add("container");
-		div.appendChild(createLabel(key));
-		
-		if (["Mandate", "Category", "Size", "Unit Type", "Bedrooms", "Bathrooms", "Development"].includes(key)) return
-		div.appendChild(createButtons(key, model[key]));
-		
-
-		fragment.append(div)
-  })
-  return fragment
-}
-
-function createLabel(key) {
-  const p = document.createElement("p");
-  p.classList.add("label");
-  p.id = `${key}-label`.replaceAll(" ", "-");
-  p.innerText = key;
-  return p
-}
-
-function createButtons(key, data) {
-  const fragment = new DocumentFragment();
-  data.forEach(type => {
-		const button = document.createElement("button");
-		button.value = type;
-		button.type = "button";
-		button.name = key;
-		button.innerText = type
-		fragment.appendChild(button);
-  })
-  return fragment
-}
-
-function createInput(type, name) {
-  const input = document.createElement("input");
-  input.type = type;
-  input.name = name;
-  return input
 }
 
 window.addEventListener("DOMContentLoaded", () => {
