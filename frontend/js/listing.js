@@ -193,6 +193,7 @@ async function createBody(details) {
   fragment.append(createDescription(details.Description));
 
   fragment.append(createSection("Category", details.Category));
+	fragment.append(createCompletionDate(details["Completion Month"], details["Completion Year"]));
   fragment.append(createSection("Mandate", details.Mandate));
   fragment.append(createSection("Location Name", details["Location Name"]));
   if (details.Category == "Land" || details.Category == "Apartment") {
@@ -246,11 +247,19 @@ function createSection(name, value) {
   return fragment
 }
 
+function createCompletionDate(month, year) {
+	const section = document.createElement("section");
+	section.append(createSubheading("Completion Date"));
+	section.append(createContent(`${month} ${year}`));
+	section.id = `completion-date`;
+	return section
+}
+
 function createSubheading(text) {
-  const hEl = document.createElement("h3");
-  hEl.classList.add("subheading");
-  hEl.textContent = text;
-  return hEl
+  const pEl = document.createElement("p");
+  pEl.classList.add("subheading");
+  pEl.textContent = text;
+  return pEl
 }
 
 function createContent(content) {
