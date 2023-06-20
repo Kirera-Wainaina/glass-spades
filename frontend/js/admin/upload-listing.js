@@ -10,9 +10,11 @@ var highlightedImages = [];
 (async function() {
   const model = await getModelData();
   sessionStorage.setItem("model", model);
-  if (!document.getElementById("Mandate-container")) {
-		constructPage(JSON.parse(model));
-  }
+  // if (!document.getElementById("Mandate-container")) {
+	// 	constructPage(JSON.parse(model));
+  // }
+	constructPage(JSON.parse(model));
+
 })()
 
 function getModelData() {
@@ -57,6 +59,7 @@ function createContainers(model) {
 		  div.appendChild(createInput("text", "Development"));
 		  div.style.display = "none";
 		} else {
+			if (key == "Mandate") return
 		  div.appendChild(createButtons(key, model[key]));
 		}
 
