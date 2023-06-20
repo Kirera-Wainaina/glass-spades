@@ -30,7 +30,7 @@ function retrieveListing() {
 	    	    listingData = data.listing;
 	    	    handleListing(data.listing);
 	    	    displayImages(data.listingImages);
-	    	    processCategory(data.listing);
+	    	    processOptionalFields(data.listing);
 	        }
 	    }
     }
@@ -71,7 +71,6 @@ function enterData(key, value) {
 
 function enterTypedData(key, value) {
     const element = document.querySelector(`[name="${key}"]`);
-    // if (!element) return
     element.value = value;
 }
 
@@ -87,10 +86,15 @@ function enterCompletionMonth(value) {
     select.value = value;
 }
 
-function processCategory(listing) {
+function processOptionalFields(listing) {
     if (listing.Category == "Apartment") {
 	    const development = document.getElementById("Development-container");
         development.classList.remove("hide");
+    }
+
+    if (listing["Internal Features"]) {
+        const internalFeatures = document.getElementById("Internal-Features-container");
+        internalFeatures.classList.remove("hide");
     }
 }
 
