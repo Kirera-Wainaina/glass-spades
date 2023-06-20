@@ -13,7 +13,7 @@ var highlightedImages = [];
   // if (!document.getElementById("Mandate-container")) {
 	// 	constructPage(JSON.parse(model));
   // }
-	constructPage(JSON.parse(model));
+	// constructPage(JSON.parse(model));
 
 })()
 
@@ -442,6 +442,7 @@ categoryContainer.addEventListener("click", event => {
   const bedrooms = document.getElementById("Bedrooms-container");
   const bathrooms = document.getElementById("Bathrooms-container");
   const development = document.getElementById("Development-container");
+  const internalFeatures = document.getElementById("Internal-Features-container");
 
 
 	// handle showing of bedrooms and bathrooms
@@ -457,6 +458,12 @@ categoryContainer.addEventListener("click", event => {
 		development.classList.remove("hide");
 	} else {
 		development.classList.add("hide");
+	}
+
+	if (value == "Land") {
+		internalFeatures.classList.add("hide");
+	} else {
+		internalFeatures.classList.remove("hide");
 	}
 })
 
