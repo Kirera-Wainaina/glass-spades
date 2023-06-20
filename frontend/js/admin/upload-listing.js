@@ -439,8 +439,6 @@ document.addEventListener("click", event => {
   const bathrooms = document.getElementById("Bathrooms-container");
   const internalFeatures = document
 		.getElementById("Internal-Features-container");
-  const size = document.getElementById("Size-container");
-  const unitType = document.getElementById("Unit-Type-container");
   const development = document.getElementById("Development-container");
 
 
@@ -448,20 +446,14 @@ document.addEventListener("click", event => {
 		bedrooms.style.display = "none";
 		bathrooms.style.display = "none";
 		internalFeatures.style.display = "none";
-		size.style.display = "grid";
-		unitType.style.display = "grid";
 		development.style.display = "none";
   } else if (value == "Townhouse" || value == "Villa" || value == "Apartment") {
 		bedrooms.style.display = "grid";
 		bathrooms.style.display = "grid";
 		internalFeatures.style.display = "grid";
 		if (value == "Apartment") {
-		  size.style.display = "grid";
-		  unitType.style.display = "grid";
 		  development.style.display = "grid";
 		} else {
-		  size.style.display = "none";
-		  unitType.style.display = "none";
 		  development.style.display = "none";
 		}
   }
