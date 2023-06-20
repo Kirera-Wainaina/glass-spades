@@ -59,7 +59,7 @@ function createContainers(model) {
 		  div.appendChild(createInput("text", "Development"));
 		  div.style.display = "none";
 		} else {
-			if (key == "Mandate") return
+			if (["Mandate", "Category"].includes(key)) return
 		  div.appendChild(createButtons(key, model[key]));
 		}
 
