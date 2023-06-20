@@ -48,18 +48,11 @@ function createContainers(model) {
 		div.id = `${key}-container`.replaceAll(" ", "-");
 		div.classList.add("container");
 		div.appendChild(createLabel(key));
-		if (key == "Size" || key == "Unit Type") {
-		  if (key == "Unit Type") {
-		    div.appendChild(createButtons(key, model[key]));
-		  } else {
-				div.appendChild(createInput("number", "Size"));
-		  }
-		  div.style.display = "none";
-		} else if (key == "Development") {
+		if (key == "Development") {
 		  div.appendChild(createInput("text", "Development"));
 		  div.style.display = "none";
 		} else {
-			if (["Mandate", "Category"].includes(key)) return
+			if (["Mandate", "Category", "Size", "Unit Type"].includes(key)) return
 		  div.appendChild(createButtons(key, model[key]));
 		}
 
