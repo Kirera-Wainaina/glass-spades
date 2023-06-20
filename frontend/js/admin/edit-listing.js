@@ -71,6 +71,7 @@ function enterData(key, value) {
 
 function enterTypedData(key, value) {
     const element = document.querySelector(`[name="${key}"]`);
+    // if (!element) return
     element.value = value;
 }
 
@@ -88,12 +89,8 @@ function enterCompletionMonth(value) {
 
 function processCategory(listing) {
     if (listing.Category == "Apartment") {
-	    const description = document.getElementById("Development-container");
-	    const size = document.getElementById("Size-container");
-	    const unitType = document.getElementById("Unit-Type-container");
-	    description.style.display = "grid";
-	    size.style.display = "grid";
-	    unitType.style.display = "grid";
+	    const development = document.getElementById("Development-container");
+        development.classList.remove("hide");
     }
 }
 
