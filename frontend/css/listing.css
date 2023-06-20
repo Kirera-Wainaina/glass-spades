@@ -111,10 +111,11 @@ p.description {
     margin-top: .5em;
 }
 
-h3.subheading {
+p.subheading {
     font-size: 1.1em;
     margin-top: 0;
     flex: 1;
+    text-align: center;
 }
 
 p.content {
