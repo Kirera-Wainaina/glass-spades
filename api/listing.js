@@ -1,12 +1,11 @@
-const url = require("url");
-const qs = require("querystring");
-
-const Busboy = require("busboy");
-
 const db = require("../database/models");
 const email = require("../utils/email");
 const respond = require("../utils/respond");
 const general = require("../utils/general");
+const FormDataHandler = require("../utils/formDataHandler");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 function getListingDetails(request, response) {
     request.on("data", async (data) => {
@@ -49,30 +48,26 @@ function getListingImages(request, response) {
     })
 }
 
-function handleLeadInfo(request, response) {
-    console.log("Lead request received")
-    const busboy  = new Busboy({ headers: request.headers });
-    const leadDetails = {};
-    busboy.on("field", (fieldname, value) => {
-		leadDetails[fieldname] = value;
-    });
-
-    busboy.on("finish", async () => {
-		const query = qs.parse(url.parse(leadDetails.link).query)
-		leadDetails["listingId"] = query.id;
-		const lead = new db.Lead(leadDetails)
+async function handleLeadInfo(request, response) {
+	try {
+		const [fields] = await new FormDataHandler(request).run();
+		const parsed_url = new URL(fields.link, process.env.URL);
+		fields["listingId"] = parsed_url.searchParams.get("id");
+		const lead = new db.Lead(fields);
 		const [ emailStatus, savedLead ] = await Promise.all(
-		    [email.emailLead(leadDetails), lead.save()]
+			[email.emailLead(fields), lead.save()]
 		);
-		
+	
 		if (emailStatus.accepted.length && savedLead) {
-		    respond.handleTextResponse(response, "success");
+				respond.handleTextResponse(response, "success");
 		} else {
-		    respond.handleTextResponse(response, "fail");
+				throw new Error("Email failed or lead wasn't saved")
 		}
-    })
-
-    request.pipe(busboy);
+	} catch (error) {
+		console.log(error);
+		response.writeHead(500, {"content-type": "text/plain"});
+		response.end("fail")
+	}
 }
 
 function getRelatedListings(request, response) {
