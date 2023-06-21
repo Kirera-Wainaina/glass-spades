@@ -305,7 +305,7 @@ function handleForm(event) {
 
   dataLayer.push({ "event": "generate_lead" })
 
-  const formdata = new FormData(form);
+  const formdata = new FormData(event.target);
   formdata.append("link", location.href);
   formdata.append("createdDate", Date.now());
 
