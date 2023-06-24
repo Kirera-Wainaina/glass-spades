@@ -37,7 +37,9 @@ async function getListings(request, response) {
 			  "Unit Type": 1,
 			  Category: 1
 			}
-		);
+		).sort({
+			Price: "asc"
+		});
     if (listings.length) {
 			const data = await getDetailsForHouseCard(listings)
 			respond.handleJSONResponse(response, data);
