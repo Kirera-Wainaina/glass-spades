@@ -45,7 +45,7 @@ function getSales() {
 function replaceTitle() {
     const title = generateFilterPageTitle();
     if (title) {
-			const titleEl = document.querySelector("h2");
+			const titleEl = document.querySelector("h1");
 			titleEl.textContent = title;
     }
 }

@@ -1,6 +1,6 @@
 @import url("base.css");
 
-h2 {
+h1 {
     grid-column: 1 / 13;
     text-align: center;
     font-size: 2em;
