@@ -19,30 +19,30 @@ async function getListings(request, response) {
     let mandate;
 
     if (page == "sales")  {
-		mandate = "Sale"
+			mandate = "Sale"
     } else {
-		mandate = "Rent"
+			mandate = "Rent"
     }
 
     const query = createQuery(searchParams, mandate);
     // const listings = await db.Listing.find({ Mandate: mandate, Archived: false },
     const listings = await db.Listing.find(
-		query,
-		{
-		    Heading: 1,
-		    Price: 1,
-		    Bedrooms: 1,
-		    Bathrooms: 1,
-		    Size: 1,
-		    "Unit Type": 1,
-		    Category: 1
-		}
-	);
+			query,
+			{
+			  Heading: 1,
+			  Price: 1,
+			  Bedrooms: 1,
+			  Bathrooms: 1,
+			  Size: 1,
+			  "Unit Type": 1,
+			  Category: 1
+			}
+		);
     if (listings.length) {
-		const data = await getDetailsForHouseCard(listings)
-		respond.handleJSONResponse(response, data);
+			const data = await getDetailsForHouseCard(listings)
+			respond.handleJSONResponse(response, data);
     } else {
-		respond.handleTextResponse(response, "fail");
+			respond.handleTextResponse(response, "fail");
     }
 
 }
@@ -50,17 +50,17 @@ async function getListings(request, response) {
 function createQuery(params, mandate) {
     const query = { Mandate: mandate, Archived: false };
     if (params.has("bedrooms")) {
-		const value = params.get("bedrooms");
-		query["Bedrooms"] = value == "Studio" ? { $eq: value } : value;
+			const value = params.get("bedrooms");
+			query["Bedrooms"] = value == "Studio" ? { $eq: value } : value;
     }
     if (params.has("location")) {
-		query["Location Name"] = params.get("location");
+			query["Location Name"] = params.get("location");
     }
     if (params.has("min-price") && params.has("max-price")) {
-		query["Price"] = { 
-			$gte: params.get("min-price"),
-			$lte: params.get("max-price")
-		};
+			query["Price"] = { 
+				$gte: params.get("min-price"),
+				$lte: params.get("max-price")
+			};
     }
     return query;
 }
@@ -71,27 +71,27 @@ function getDetailsForHouseCard(listings) {
 
 function compileHouseCardDetails(listing, position=0) {
     return new Promise(async (resolve, reject) => {
-		const imageData = await findFirstImage(listing._id)
-		resolve({
-		    heading: listing.Heading,
-		    price: listing.Price,
-		    bedrooms: listing.Bedrooms,
-		    bathrooms: listing.Bathrooms,
-		    size: listing.Size,
-		    unitType: listing["Unit Type"],
-		    category: listing.Category,
-		    imageSrc: imageData.link,
-		    id: listing._id
-		});
+			const imageData = await findFirstImage(listing._id)
+			resolve({
+			  heading: listing.Heading,
+			  price: listing.Price,
+			  bedrooms: listing.Bedrooms,
+			  bathrooms: listing.Bathrooms,
+			  size: listing.Size,
+			  unitType: listing["Unit Type"],
+			  category: listing.Category,
+			  imageSrc: imageData.link,
+			  id: listing._id
+			});
     })
 }
 
 async function findFirstImage(listingId, position=0) {
     let imageData = await db.Image.findOne({ listingId, position });
     if (imageData == null) {
-		return findFirstImage(listingId, position + 1);
+			return findFirstImage(listingId, position + 1);
     } else {
-		return imageData
+			return imageData
     }
 }
 
