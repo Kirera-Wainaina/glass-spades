@@ -45,7 +45,9 @@ function getSales() {
 function replaceTitle() {
     const title = generateFilterPageTitle();
     if (title) {
-			const titleEl = document.querySelector("h1");
-			titleEl.textContent = title;
+			const headingEl = document.querySelector("h1");
+			const titleEl = document.querySelector("title");
+			headingEl.textContent = title;
+			titleEl.textContent = `${title} | Glass Spades`
     }
 }
