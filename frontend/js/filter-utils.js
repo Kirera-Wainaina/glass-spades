@@ -107,7 +107,7 @@ export function generateFilterPageTitle() {
         if (bedrooms == "Studio") {
           title += `${bedrooms} `;
         } else {
-          title += `${bedrooms} bedroom `;
+          title += `${bedrooms} Bedroom `;
         }
     }
     title += "Apartments ";
