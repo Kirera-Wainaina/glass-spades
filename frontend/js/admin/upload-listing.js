@@ -303,7 +303,7 @@ function getBlobFromImgSrc(src) {
 export function confirmValues(formdata) {
   const model = JSON.parse(sessionStorage.getItem("model"));
   const keys = Object.keys(model);
-  const otherKeys = ["Heading", "Description", "Price", "Longitude", "fileNumber", "CompletionMonth", "CompletionYear"];
+  const otherKeys = ["Heading", "Description", "Price", "Longitude", "fileNumber", "Completion Month", "Completion Year"];
   let allKeys = keys.concat(otherKeys);
   const blanks = [];
 
